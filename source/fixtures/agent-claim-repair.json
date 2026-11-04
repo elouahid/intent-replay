@@ -1,0 +1,4628 @@
+{
+  "fixture_version": 1,
+  "source_report_sha256": "c3cec28e51abdffb06c0d0ab5e35ef60cfa9a50ce21102c84baa2eb3bad9d64a",
+  "provenance": "Exact saved live actor conversations and SQLite evidence; new independently authored meanings for offline contract verification only.",
+  "cases": [
+    {
+      "scenario_id": "withdraw-before-execution",
+      "implementation": "faulty",
+      "source_branch_sha256": "157bc576f54c88521ca0c09e515b39a67dd87ee7f688cb45a79c1ef437582a56",
+      "source_report": {
+        "schema_version": 4,
+        "report_type": "agent_branch",
+        "run_id": "b0d1e4a86a344d8d838ba7a1a6c6e9ec",
+        "pair_id": "1a5e633c42a84cb0b685f704c14d6360",
+        "freeze_id": "47a64a0515d28ca74708324f2a24a41d0eca65fcc905258c4353449fc96e4bd3",
+        "created_at": "2026-10-30T21:47:51.356444+00:00",
+        "implementation": "faulty",
+        "controlled_demonstration": true,
+        "initial_booking": {
+          "reference": "IR-1042",
+          "service": "Camera sensor cleaning",
+          "starts_at": "2026-11-18T15:00:00+00:00",
+          "timezone": "Europe/London"
+        },
+        "conversation": [
+          {
+            "id": "context",
+            "role": "assistant",
+            "text": "Booking IR-1042: Camera sensor cleaning, on 2026-11-18 at 15:00 (Europe/London)."
+          },
+          {
+            "id": "customer-1",
+            "role": "customer",
+            "text": "Please move booking IR-1042 to 16:00 on 2026-11-18, Europe/London."
+          },
+          {
+            "id": "actor-prefix-1",
+            "role": "assistant",
+            "text": "I'll inspect your booking and process the move to 16:00."
+          },
+          {
+            "id": "actor-prefix-2",
+            "role": "assistant",
+            "text": "Confirmed the 15:00 booking — now I'll request the shift to 16:00."
+          },
+          {
+            "id": "customer-2",
+            "role": "customer",
+            "text": "Actually, don't change it. Keep my appointment at 15:00."
+          },
+          {
+            "id": "actor-continuation-3",
+            "role": "assistant",
+            "text": "Noted — I'll verify the current booking status without making further changes."
+          },
+          {
+            "id": "actor-continuation-4",
+            "role": "assistant",
+            "text": "Booking IR-1042 is on 2026-11-18 at 16:00 Europe/London — reschedule occurred and no restoration to 15:00 was performed."
+          }
+        ],
+        "final_evidence": {
+          "booking": {
+            "reference": "IR-1042",
+            "service": "Camera sensor cleaning",
+            "starts_at": "2026-11-18T16:00:00+00:00",
+            "timezone": "Europe/London"
+          },
+          "accepted_instructions": [
+            {
+              "revision": 1,
+              "turn_id": "customer-1",
+              "operation": "reschedule",
+              "booking_reference": "IR-1042",
+              "target_time": "2026-11-18T16:00:00+00:00",
+              "timezone": "Europe/London",
+              "interpretation_id": "69c61fd566244cc0941e18922b4a5530",
+              "evidence_turn_ids": [
+                "customer-1"
+              ]
+            },
+            {
+              "revision": 2,
+              "turn_id": "customer-2",
+              "operation": "withdraw_pending",
+              "booking_reference": "IR-1042",
+              "target_time": "2026-11-18T15:00:00+00:00",
+              "timezone": "Europe/London",
+              "interpretation_id": "69c61fd566244cc0941e18922b4a5530",
+              "evidence_turn_ids": [
+                "context",
+                "customer-2"
+              ]
+            }
+          ],
+          "actions": [
+            {
+              "action_id": "c5dca743c7e44707ac54d0b3a3218c8e",
+              "booking_reference": "IR-1042",
+              "operation": "reschedule",
+              "target_time": "2026-11-18T16:00:00+00:00",
+              "accepted_revision": 1,
+              "status": "committed",
+              "checked_revision": 2,
+              "decision_sequence": 9
+            }
+          ],
+          "journal": [
+            {
+              "sequence": 1,
+              "transaction_id": "dd7da8721a3f4e3594ff795df91afa8a",
+              "event": "initialized",
+              "data": {
+                "booking": {
+                  "reference": "IR-1042",
+                  "service": "Camera sensor cleaning",
+                  "starts_at": "2026-11-18T15:00:00+00:00",
+                  "timezone": "Europe/London"
+                },
+                "slot_available": true,
+                "target_time": "2026-11-18T16:00:00+00:00"
+              }
+            },
+            {
+              "sequence": 2,
+              "transaction_id": "06de6c4a572141318ba3a3a92090868c",
+              "event": "instruction_received",
+              "data": {
+                "turn_id": "customer-1"
+              }
+            },
+            {
+              "sequence": 3,
+              "transaction_id": "67c1c0709a1c4658b7e7355397415f8b",
+              "event": "instruction_accepted",
+              "data": {
+                "booking_reference": "IR-1042",
+                "evidence_turn_ids": [
+                  "customer-1"
+                ],
+                "interpretation_id": "69c61fd566244cc0941e18922b4a5530",
+                "operation": "reschedule",
+                "revision": 1,
+                "target_time": "2026-11-18T16:00:00+00:00",
+                "timezone": "Europe/London",
+                "turn_id": "customer-1"
+              }
+            },
+            {
+              "sequence": 4,
+              "transaction_id": "7e27769cf94344088c869f051d413f82",
+              "event": "action_queued",
+              "data": {
+                "accepted_revision": 1,
+                "action_id": "c5dca743c7e44707ac54d0b3a3218c8e",
+                "booking_reference": "IR-1042",
+                "operation": "reschedule",
+                "target_time": "2026-11-18T16:00:00+00:00"
+              }
+            },
+            {
+              "sequence": 5,
+              "transaction_id": "94ac68f8ccf44c5a9d2463e55f21c0ef",
+              "event": "worker_preliminary_read",
+              "data": {
+                "action_id": "c5dca743c7e44707ac54d0b3a3218c8e",
+                "observed_revision": 1,
+                "observed_sequence": 4
+              }
+            },
+            {
+              "sequence": 6,
+              "transaction_id": "babb5ffa97d945cdb6c440a2ed2b69ee",
+              "event": "instruction_received",
+              "data": {
+                "turn_id": "customer-2"
+              }
+            },
+            {
+              "sequence": 7,
+              "transaction_id": "bce85e5051cf4b0d9b53dde1db98af82",
+              "event": "instruction_accepted",
+              "data": {
+                "booking_reference": "IR-1042",
+                "evidence_turn_ids": [
+                  "context",
+                  "customer-2"
+                ],
+                "interpretation_id": "69c61fd566244cc0941e18922b4a5530",
+                "operation": "withdraw_pending",
+                "revision": 2,
+                "target_time": "2026-11-18T15:00:00+00:00",
+                "timezone": "Europe/London",
+                "turn_id": "customer-2"
+              }
+            },
+            {
+              "sequence": 8,
+              "transaction_id": "173d4c79e8e84d10aac9c7647b0e4056",
+              "event": "authorization_checked",
+              "data": {
+                "accepted_revision": 1,
+                "action_id": "c5dca743c7e44707ac54d0b3a3218c8e",
+                "authorized": false,
+                "checked_revision": 2
+              }
+            },
+            {
+              "sequence": 9,
+              "transaction_id": "173d4c79e8e84d10aac9c7647b0e4056",
+              "event": "action_committed",
+              "data": {
+                "accepted_revision": 1,
+                "action_id": "c5dca743c7e44707ac54d0b3a3218c8e",
+                "after": {
+                  "reference": "IR-1042",
+                  "service": "Camera sensor cleaning",
+                  "starts_at": "2026-11-18T16:00:00+00:00",
+                  "timezone": "Europe/London"
+                },
+                "authorized": false,
+                "before": {
+                  "reference": "IR-1042",
+                  "service": "Camera sensor cleaning",
+                  "starts_at": "2026-11-18T15:00:00+00:00",
+                  "timezone": "Europe/London"
+                },
+                "booking_reference": "IR-1042",
+                "checked_revision": 2,
+                "operation": "reschedule",
+                "reason": "Controlled fault: committed despite a newer accepted revision.",
+                "target_time": "2026-11-18T16:00:00+00:00"
+              }
+            },
+            {
+              "sequence": 10,
+              "transaction_id": "8cff766d56214087957895e6b4a6c53d",
+              "event": "assistant_statement",
+              "data": {
+                "describes_sequence": 9,
+                "snapshot": {
+                  "booking": {
+                    "reference": "IR-1042",
+                    "service": "Camera sensor cleaning",
+                    "starts_at": "2026-11-18T16:00:00+00:00",
+                    "timezone": "Europe/London"
+                  },
+                  "read_after_sequence": 9,
+                  "read_source": "independent read-only SQLite transaction"
+                },
+                "text": "Noted — I'll verify the current booking status without making further changes.",
+                "turn_id": "actor-continuation-3"
+              }
+            },
+            {
+              "sequence": 11,
+              "transaction_id": "161e81ee0b7f4c05bb16eea810ed6b61",
+              "event": "assistant_statement",
+              "data": {
+                "describes_sequence": 9,
+                "snapshot": {
+                  "booking": {
+                    "reference": "IR-1042",
+                    "service": "Camera sensor cleaning",
+                    "starts_at": "2026-11-18T16:00:00+00:00",
+                    "timezone": "Europe/London"
+                  },
+                  "read_after_sequence": 10,
+                  "read_source": "independent read-only SQLite transaction"
+                },
+                "text": "Booking IR-1042 is on 2026-11-18 at 16:00 Europe/London — reschedule occurred and no restoration to 15:00 was performed.",
+                "turn_id": "actor-continuation-4"
+              }
+            }
+          ],
+          "read_after_sequence": 11,
+          "read_source": "independent read-only SQLite transaction"
+        },
+        "execution_errors": [],
+        "agent_execution": {
+          "status": "completed",
+          "model": "muse-spark-1.3",
+          "source": "live_meta",
+          "responses": [
+            {
+              "id": "resp_6ae5106bedc8484aa8194716",
+              "model": "muse-spark-1.3",
+              "status": "completed",
+              "usage": {
+                "input_tokens": 1673,
+                "input_tokens_details": {
+                  "cache_write_tokens": null,
+                  "cached_tokens": 753
+                },
+                "output_tokens": 882,
+                "output_tokens_details": {
+                  "reasoning_tokens": 807
+                },
+                "total_tokens": 2555
+              },
+              "incomplete_details": null,
+              "output": [
+                {
+                  "id": "rs_4b730cd6-7c5d-42c5-9ace-d502c1a1caa9",
+                  "content": [
+                    {
+                      "annotations": [],
+                      "text": "Noted — I'll verify the current booking status without making further changes.",
+                      "type": "output_text",
+                      "logprobs": []
+                    }
+                  ],
+                  "role": "assistant",
+                  "status": "completed",
+                  "type": "message",
+                  "phase": "commentary"
+                },
+                {
+                  "arguments": "{\"reference\":\"IR-1042\"}",
+                  "call_id": "call_75cb76a9-bf5b-4c85-9877-202e53852be5",
+                  "name": "get_booking",
+                  "type": "function_call",
+                  "id": "fc_75cb76a9-bf5b-4c85-9877-202e53852be5",
+                  "caller": null,
+                  "namespace": null,
+                  "status": "completed"
+                }
+              ]
+            },
+            {
+              "id": "resp_6ae5106f1c77325c252f451d",
+              "model": "muse-spark-1.3",
+              "status": "completed",
+              "usage": {
+                "input_tokens": 2697,
+                "input_tokens_details": {
+                  "cache_write_tokens": null,
+                  "cached_tokens": 1265
+                },
+                "output_tokens": 407,
+                "output_tokens_details": {
+                  "reasoning_tokens": 361
+                },
+                "total_tokens": 3104
+              },
+              "incomplete_details": null,
+              "output": [
+                {
+                  "id": "msg_726fc95a-4ced-4137-a042-7060ea273fce",
+                  "content": [
+                    {
+                      "annotations": [],
+                      "text": "Booking IR-1042 is on 2026-11-18 at 16:00 Europe/London — reschedule occurred and no restoration to 15:00 was performed.",
+                      "type": "output_text",
+                      "logprobs": []
+                    }
+                  ],
+                  "role": "assistant",
+                  "status": "completed",
+                  "type": "message",
+                  "phase": null
+                }
+              ]
+            }
+          ],
+          "tool_calls": [
+            {
+              "call_id": "call_1bd27b47-ad2d-4189-836f-42995438b61e",
+              "name": "reschedule_booking",
+              "raw_arguments": "{\"reference\":\"IR-1042\",\"requested_time\":\"2026-11-18T16:00:00+00:00\",\"timezone\":\"Europe/London\"}",
+              "status": "completed",
+              "result": {
+                "ok": true,
+                "booking": {
+                  "reference": "IR-1042",
+                  "service": "Camera sensor cleaning",
+                  "starts_at": "2026-11-18T16:00:00+00:00",
+                  "timezone": "Europe/London"
+                },
+                "action": {
+                  "operation": "reschedule",
+                  "target_time": "2026-11-18T16:00:00+00:00",
+                  "accepted_revision": 1,
+                  "status": "committed",
+                  "checked_revision": 2
+                },
+                "read_source": "independent read-only SQLite transaction"
+              }
+            },
+            {
+              "call_id": "call_75cb76a9-bf5b-4c85-9877-202e53852be5",
+              "name": "get_booking",
+              "raw_arguments": "{\"reference\":\"IR-1042\"}",
+              "status": "completed",
+              "result": {
+                "ok": true,
+                "booking": {
+                  "reference": "IR-1042",
+                  "service": "Camera sensor cleaning",
+                  "starts_at": "2026-11-18T16:00:00+00:00",
+                  "timezone": "Europe/London"
+                },
+                "action": {
+                  "operation": "reschedule",
+                  "target_time": "2026-11-18T16:00:00+00:00",
+                  "accepted_revision": 1,
+                  "status": "committed",
+                  "checked_revision": 2
+                },
+                "read_source": "independent read-only SQLite transaction"
+              }
+            }
+          ],
+          "api_calls": [
+            {
+              "status": "response_received",
+              "http_attempts": 1,
+              "http_responses": 1,
+              "successful_http_responses": 1,
+              "usage": {
+                "input_tokens": 1673,
+                "output_tokens": 882,
+                "total_tokens": 2555
+              }
+            },
+            {
+              "status": "response_received",
+              "http_attempts": 1,
+              "http_responses": 1,
+              "successful_http_responses": 1,
+              "usage": {
+                "input_tokens": 2697,
+                "output_tokens": 407,
+                "total_tokens": 3104
+              }
+            }
+          ],
+          "errors": [],
+          "max_rounds": 4,
+          "max_tool_calls": 8,
+          "http_attempts": 2,
+          "http_responses": 2,
+          "successful_http_responses": 2,
+          "prompt_tool_sha256": "1115c39ed474eb57ff72c479b69ac98a7d89bc55859449fe579c7a9ec99c873c",
+          "prompt_version": "booking-agent-v1",
+          "visible_messages": [
+            "Noted — I'll verify the current booking status without making further changes.",
+            "Booking IR-1042 is on 2026-11-18 at 16:00 Europe/London — reschedule occurred and no restoration to 15:00 was performed."
+          ],
+          "requests": [
+            {
+              "input": [
+                {
+                  "role": "assistant",
+                  "content": "Booking IR-1042: Camera sensor cleaning, on 2026-11-18 at 15:00 (Europe/London)."
+                },
+                {
+                  "role": "user",
+                  "content": "Please move booking IR-1042 to 16:00 on 2026-11-18, Europe/London."
+                },
+                {
+                  "type": "message",
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "annotations": [],
+                      "text": "I'll inspect your booking and process the move to 16:00.",
+                      "type": "output_text",
+                      "logprobs": []
+                    }
+                  ],
+                  "phase": "commentary"
+                },
+                {
+                  "type": "function_call",
+                  "call_id": "call_594c73ea-d509-4466-b86f-a2580755aea3",
+                  "name": "get_booking",
+                  "arguments": "{\"reference\":\"IR-1042\"}"
+                },
+                {
+                  "type": "function_call_output",
+                  "call_id": "call_594c73ea-d509-4466-b86f-a2580755aea3",
+                  "output": "{\"ok\": true, \"booking\": {\"reference\": \"IR-1042\", \"service\": \"Camera sensor cleaning\", \"starts_at\": \"2026-11-18T15:00:00+00:00\", \"timezone\": \"Europe/London\"}, \"action\": null, \"read_source\": \"independent read-only SQLite transaction\"}"
+                },
+                {
+                  "type": "message",
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "annotations": [],
+                      "text": "Confirmed the 15:00 booking — now I'll request the shift to 16:00.",
+                      "type": "output_text",
+                      "logprobs": []
+                    }
+                  ],
+                  "phase": "commentary"
+                },
+                {
+                  "type": "function_call",
+                  "call_id": "call_1bd27b47-ad2d-4189-836f-42995438b61e",
+                  "name": "reschedule_booking",
+                  "arguments": "{\"reference\":\"IR-1042\",\"requested_time\":\"2026-11-18T16:00:00+00:00\",\"timezone\":\"Europe/London\"}"
+                },
+                {
+                  "type": "function_call_output",
+                  "call_id": "call_1bd27b47-ad2d-4189-836f-42995438b61e",
+                  "output": "{\"ok\": true, \"booking\": {\"reference\": \"IR-1042\", \"service\": \"Camera sensor cleaning\", \"starts_at\": \"2026-11-18T16:00:00+00:00\", \"timezone\": \"Europe/London\"}, \"action\": {\"operation\": \"reschedule\", \"target_time\": \"2026-11-18T16:00:00+00:00\", \"accepted_revision\": 1, \"status\": \"committed\", \"checked_revision\": 2}, \"read_source\": \"independent read-only SQLite transaction\"}"
+                },
+                {
+                  "role": "user",
+                  "content": "Actually, don't change it. Keep my appointment at 15:00."
+                }
+              ],
+              "input_sha256": "359bc699bcde071e23d8ea78e9191f1922a27cd77461d1342d350a4b543da764",
+              "public_input_sha256": "4a21c049f8afa30b72c5194d5d9c8a03bb529d4fe2736d7deca1f9b925c6f56b",
+              "private_reasoning_omitted": true
+            },
+            {
+              "input": [
+                {
+                  "role": "assistant",
+                  "content": "Booking IR-1042: Camera sensor cleaning, on 2026-11-18 at 15:00 (Europe/London)."
+                },
+                {
+                  "role": "user",
+                  "content": "Please move booking IR-1042 to 16:00 on 2026-11-18, Europe/London."
+                },
+                {
+                  "type": "message",
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "annotations": [],
+                      "text": "I'll inspect your booking and process the move to 16:00.",
+                      "type": "output_text",
+                      "logprobs": []
+                    }
+                  ],
+                  "phase": "commentary"
+                },
+                {
+                  "type": "function_call",
+                  "call_id": "call_594c73ea-d509-4466-b86f-a2580755aea3",
+                  "name": "get_booking",
+                  "arguments": "{\"reference\":\"IR-1042\"}"
+                },
+                {
+                  "type": "function_call_output",
+                  "call_id": "call_594c73ea-d509-4466-b86f-a2580755aea3",
+                  "output": "{\"ok\": true, \"booking\": {\"reference\": \"IR-1042\", \"service\": \"Camera sensor cleaning\", \"starts_at\": \"2026-11-18T15:00:00+00:00\", \"timezone\": \"Europe/London\"}, \"action\": null, \"read_source\": \"independent read-only SQLite transaction\"}"
+                },
+                {
+                  "type": "message",
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "annotations": [],
+                      "text": "Confirmed the 15:00 booking — now I'll request the shift to 16:00.",
+                      "type": "output_text",
+                      "logprobs": []
+                    }
+                  ],
+                  "phase": "commentary"
+                },
+                {
+                  "type": "function_call",
+                  "call_id": "call_1bd27b47-ad2d-4189-836f-42995438b61e",
+                  "name": "reschedule_booking",
+                  "arguments": "{\"reference\":\"IR-1042\",\"requested_time\":\"2026-11-18T16:00:00+00:00\",\"timezone\":\"Europe/London\"}"
+                },
+                {
+                  "type": "function_call_output",
+                  "call_id": "call_1bd27b47-ad2d-4189-836f-42995438b61e",
+                  "output": "{\"ok\": true, \"booking\": {\"reference\": \"IR-1042\", \"service\": \"Camera sensor cleaning\", \"starts_at\": \"2026-11-18T16:00:00+00:00\", \"timezone\": \"Europe/London\"}, \"action\": {\"operation\": \"reschedule\", \"target_time\": \"2026-11-18T16:00:00+00:00\", \"accepted_revision\": 1, \"status\": \"committed\", \"checked_revision\": 2}, \"read_source\": \"independent read-only SQLite transaction\"}"
+                },
+                {
+                  "role": "user",
+                  "content": "Actually, don't change it. Keep my appointment at 15:00."
+                },
+                {
+                  "type": "message",
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "annotations": [],
+                      "text": "Noted — I'll verify the current booking status without making further changes.",
+                      "type": "output_text",
+                      "logprobs": []
+                    }
+                  ],
+                  "phase": "commentary"
+                },
+                {
+                  "type": "function_call",
+                  "call_id": "call_75cb76a9-bf5b-4c85-9877-202e53852be5",
+                  "name": "get_booking",
+                  "arguments": "{\"reference\":\"IR-1042\"}"
+                },
+                {
+                  "type": "function_call_output",
+                  "call_id": "call_75cb76a9-bf5b-4c85-9877-202e53852be5",
+                  "output": "{\"ok\": true, \"booking\": {\"reference\": \"IR-1042\", \"service\": \"Camera sensor cleaning\", \"starts_at\": \"2026-11-18T16:00:00+00:00\", \"timezone\": \"Europe/London\"}, \"action\": {\"operation\": \"reschedule\", \"target_time\": \"2026-11-18T16:00:00+00:00\", \"accepted_revision\": 1, \"status\": \"committed\", \"checked_revision\": 2}, \"read_source\": \"independent read-only SQLite transaction\"}"
+                }
+              ],
+              "input_sha256": "e79411210b4d9f364659cd0895eae5cdc149ae2401ce2f2a152dee418cb4a389",
+              "public_input_sha256": "e55656c39c8d958faf7106794fe23e88e270e855ce27182d134d14e6a2355126",
+              "private_reasoning_omitted": true
+            }
+          ]
+        },
+        "statement_observations": [
+          {
+            "turn_id": "actor-prefix-1",
+            "text": "I'll inspect your booking and process the move to 16:00.",
+            "describes_sequence": null,
+            "snapshot": {
+              "booking": {
+                "reference": "IR-1042",
+                "service": "Camera sensor cleaning",
+                "starts_at": "2026-11-18T15:00:00+00:00",
+                "timezone": "Europe/London"
+              },
+              "accepted_instructions": [
+                {
+                  "revision": 1,
+                  "turn_id": "customer-1",
+                  "operation": "reschedule",
+                  "booking_reference": "IR-1042",
+                  "target_time": "2026-11-18T16:00:00+00:00",
+                  "timezone": "Europe/London",
+                  "interpretation_id": "69c61fd566244cc0941e18922b4a5530",
+                  "evidence_turn_ids": [
+                    "customer-1"
+                  ]
+                }
+              ],
+              "actions": [],
+              "journal": [
+                {
+                  "sequence": 1,
+                  "transaction_id": "dd7da8721a3f4e3594ff795df91afa8a",
+                  "event": "initialized",
+                  "data": {
+                    "booking": {
+                      "reference": "IR-1042",
+                      "service": "Camera sensor cleaning",
+                      "starts_at": "2026-11-18T15:00:00+00:00",
+                      "timezone": "Europe/London"
+                    },
+                    "slot_available": true,
+                    "target_time": "2026-11-18T16:00:00+00:00"
+                  }
+                },
+                {
+                  "sequence": 2,
+                  "transaction_id": "06de6c4a572141318ba3a3a92090868c",
+                  "event": "instruction_received",
+                  "data": {
+                    "turn_id": "customer-1"
+                  }
+                },
+                {
+                  "sequence": 3,
+                  "transaction_id": "67c1c0709a1c4658b7e7355397415f8b",
+                  "event": "instruction_accepted",
+                  "data": {
+                    "booking_reference": "IR-1042",
+                    "evidence_turn_ids": [
+                      "customer-1"
+                    ],
+                    "interpretation_id": "69c61fd566244cc0941e18922b4a5530",
+                    "operation": "reschedule",
+                    "revision": 1,
+                    "target_time": "2026-11-18T16:00:00+00:00",
+                    "timezone": "Europe/London",
+                    "turn_id": "customer-1"
+                  }
+                }
+              ],
+              "read_after_sequence": 3,
+              "read_source": "independent read-only SQLite transaction"
+            },
+            "source": "captured actor message replayed before execution"
+          },
+          {
+            "turn_id": "actor-prefix-2",
+            "text": "Confirmed the 15:00 booking — now I'll request the shift to 16:00.",
+            "describes_sequence": null,
+            "snapshot": {
+              "booking": {
+                "reference": "IR-1042",
+                "service": "Camera sensor cleaning",
+                "starts_at": "2026-11-18T15:00:00+00:00",
+                "timezone": "Europe/London"
+              },
+              "accepted_instructions": [
+                {
+                  "revision": 1,
+                  "turn_id": "customer-1",
+                  "operation": "reschedule",
+                  "booking_reference": "IR-1042",
+                  "target_time": "2026-11-18T16:00:00+00:00",
+                  "timezone": "Europe/London",
+                  "interpretation_id": "69c61fd566244cc0941e18922b4a5530",
+                  "evidence_turn_ids": [
+                    "customer-1"
+                  ]
+                }
+              ],
+              "actions": [],
+              "journal": [
+                {
+                  "sequence": 1,
+                  "transaction_id": "dd7da8721a3f4e3594ff795df91afa8a",
+                  "event": "initialized",
+                  "data": {
+                    "booking": {
+                      "reference": "IR-1042",
+                      "service": "Camera sensor cleaning",
+                      "starts_at": "2026-11-18T15:00:00+00:00",
+                      "timezone": "Europe/London"
+                    },
+                    "slot_available": true,
+                    "target_time": "2026-11-18T16:00:00+00:00"
+                  }
+                },
+                {
+                  "sequence": 2,
+                  "transaction_id": "06de6c4a572141318ba3a3a92090868c",
+                  "event": "instruction_received",
+                  "data": {
+                    "turn_id": "customer-1"
+                  }
+                },
+                {
+                  "sequence": 3,
+                  "transaction_id": "67c1c0709a1c4658b7e7355397415f8b",
+                  "event": "instruction_accepted",
+                  "data": {
+                    "booking_reference": "IR-1042",
+                    "evidence_turn_ids": [
+                      "customer-1"
+                    ],
+                    "interpretation_id": "69c61fd566244cc0941e18922b4a5530",
+                    "operation": "reschedule",
+                    "revision": 1,
+                    "target_time": "2026-11-18T16:00:00+00:00",
+                    "timezone": "Europe/London",
+                    "turn_id": "customer-1"
+                  }
+                }
+              ],
+              "read_after_sequence": 3,
+              "read_source": "independent read-only SQLite transaction"
+            },
+            "source": "captured actor message replayed before execution"
+          },
+          {
+            "turn_id": "actor-continuation-3",
+            "text": "Noted — I'll verify the current booking status without making further changes.",
+            "describes_sequence": 9,
+            "snapshot": {
+              "booking": {
+                "reference": "IR-1042",
+                "service": "Camera sensor cleaning",
+                "starts_at": "2026-11-18T16:00:00+00:00",
+                "timezone": "Europe/London"
+              },
+              "accepted_instructions": [
+                {
+                  "revision": 1,
+                  "turn_id": "customer-1",
+                  "operation": "reschedule",
+                  "booking_reference": "IR-1042",
+                  "target_time": "2026-11-18T16:00:00+00:00",
+                  "timezone": "Europe/London",
+                  "interpretation_id": "69c61fd566244cc0941e18922b4a5530",
+                  "evidence_turn_ids": [
+                    "customer-1"
+                  ]
+                },
+                {
+                  "revision": 2,
+                  "turn_id": "customer-2",
+                  "operation": "withdraw_pending",
+                  "booking_reference": "IR-1042",
+                  "target_time": "2026-11-18T15:00:00+00:00",
+                  "timezone": "Europe/London",
+                  "interpretation_id": "69c61fd566244cc0941e18922b4a5530",
+                  "evidence_turn_ids": [
+                    "context",
+                    "customer-2"
+                  ]
+                }
+              ],
+              "actions": [
+                {
+                  "action_id": "c5dca743c7e44707ac54d0b3a3218c8e",
+                  "booking_reference": "IR-1042",
+                  "operation": "reschedule",
+                  "target_time": "2026-11-18T16:00:00+00:00",
+                  "accepted_revision": 1,
+                  "status": "committed",
+                  "checked_revision": 2,
+                  "decision_sequence": 9
+                }
+              ],
+              "journal": [
+                {
+                  "sequence": 1,
+                  "transaction_id": "dd7da8721a3f4e3594ff795df91afa8a",
+                  "event": "initialized",
+                  "data": {
+                    "booking": {
+                      "reference": "IR-1042",
+                      "service": "Camera sensor cleaning",
+                      "starts_at": "2026-11-18T15:00:00+00:00",
+                      "timezone": "Europe/London"
+                    },
+                    "slot_available": true,
+                    "target_time": "2026-11-18T16:00:00+00:00"
+                  }
+                },
+                {
+                  "sequence": 2,
+                  "transaction_id": "06de6c4a572141318ba3a3a92090868c",
+                  "event": "instruction_received",
+                  "data": {
+                    "turn_id": "customer-1"
+                  }
+                },
+                {
+                  "sequence": 3,
+                  "transaction_id": "67c1c0709a1c4658b7e7355397415f8b",
+                  "event": "instruction_accepted",
+                  "data": {
+                    "booking_reference": "IR-1042",
+                    "evidence_turn_ids": [
+                      "customer-1"
+                    ],
+                    "interpretation_id": "69c61fd566244cc0941e18922b4a5530",
+                    "operation": "reschedule",
+                    "revision": 1,
+                    "target_time": "2026-11-18T16:00:00+00:00",
+                    "timezone": "Europe/London",
+                    "turn_id": "customer-1"
+                  }
+                },
+                {
+                  "sequence": 4,
+                  "transaction_id": "7e27769cf94344088c869f051d413f82",
+                  "event": "action_queued",
+                  "data": {
+                    "accepted_revision": 1,
+                    "action_id": "c5dca743c7e44707ac54d0b3a3218c8e",
+                    "booking_reference": "IR-1042",
+                    "operation": "reschedule",
+                    "target_time": "2026-11-18T16:00:00+00:00"
+                  }
+                },
+                {
+                  "sequence": 5,
+                  "transaction_id": "94ac68f8ccf44c5a9d2463e55f21c0ef",
+                  "event": "worker_preliminary_read",
+                  "data": {
+                    "action_id": "c5dca743c7e44707ac54d0b3a3218c8e",
+                    "observed_revision": 1,
+                    "observed_sequence": 4
+                  }
+                },
+                {
+                  "sequence": 6,
+                  "transaction_id": "babb5ffa97d945cdb6c440a2ed2b69ee",
+                  "event": "instruction_received",
+                  "data": {
+                    "turn_id": "customer-2"
+                  }
+                },
+                {
+                  "sequence": 7,
+                  "transaction_id": "bce85e5051cf4b0d9b53dde1db98af82",
+                  "event": "instruction_accepted",
+                  "data": {
+                    "booking_reference": "IR-1042",
+                    "evidence_turn_ids": [
+                      "context",
+                      "customer-2"
+                    ],
+                    "interpretation_id": "69c61fd566244cc0941e18922b4a5530",
+                    "operation": "withdraw_pending",
+                    "revision": 2,
+                    "target_time": "2026-11-18T15:00:00+00:00",
+                    "timezone": "Europe/London",
+                    "turn_id": "customer-2"
+                  }
+                },
+                {
+                  "sequence": 8,
+                  "transaction_id": "173d4c79e8e84d10aac9c7647b0e4056",
+                  "event": "authorization_checked",
+                  "data": {
+                    "accepted_revision": 1,
+                    "action_id": "c5dca743c7e44707ac54d0b3a3218c8e",
+                    "authorized": false,
+                    "checked_revision": 2
+                  }
+                },
+                {
+                  "sequence": 9,
+                  "transaction_id": "173d4c79e8e84d10aac9c7647b0e4056",
+                  "event": "action_committed",
+                  "data": {
+                    "accepted_revision": 1,
+                    "action_id": "c5dca743c7e44707ac54d0b3a3218c8e",
+                    "after": {
+                      "reference": "IR-1042",
+                      "service": "Camera sensor cleaning",
+                      "starts_at": "2026-11-18T16:00:00+00:00",
+                      "timezone": "Europe/London"
+                    },
+                    "authorized": false,
+                    "before": {
+                      "reference": "IR-1042",
+                      "service": "Camera sensor cleaning",
+                      "starts_at": "2026-11-18T15:00:00+00:00",
+                      "timezone": "Europe/London"
+                    },
+                    "booking_reference": "IR-1042",
+                    "checked_revision": 2,
+                    "operation": "reschedule",
+                    "reason": "Controlled fault: committed despite a newer accepted revision.",
+                    "target_time": "2026-11-18T16:00:00+00:00"
+                  }
+                }
+              ],
+              "read_after_sequence": 9,
+              "read_source": "independent read-only SQLite transaction"
+            },
+            "source": "independent SQLite read after actual actor output"
+          },
+          {
+            "turn_id": "actor-continuation-4",
+            "text": "Booking IR-1042 is on 2026-11-18 at 16:00 Europe/London — reschedule occurred and no restoration to 15:00 was performed.",
+            "describes_sequence": 9,
+            "snapshot": {
+              "booking": {
+                "reference": "IR-1042",
+                "service": "Camera sensor cleaning",
+                "starts_at": "2026-11-18T16:00:00+00:00",
+                "timezone": "Europe/London"
+              },
+              "accepted_instructions": [
+                {
+                  "revision": 1,
+                  "turn_id": "customer-1",
+                  "operation": "reschedule",
+                  "booking_reference": "IR-1042",
+                  "target_time": "2026-11-18T16:00:00+00:00",
+                  "timezone": "Europe/London",
+                  "interpretation_id": "69c61fd566244cc0941e18922b4a5530",
+                  "evidence_turn_ids": [
+                    "customer-1"
+                  ]
+                },
+                {
+                  "revision": 2,
+                  "turn_id": "customer-2",
+                  "operation": "withdraw_pending",
+                  "booking_reference": "IR-1042",
+                  "target_time": "2026-11-18T15:00:00+00:00",
+                  "timezone": "Europe/London",
+                  "interpretation_id": "69c61fd566244cc0941e18922b4a5530",
+                  "evidence_turn_ids": [
+                    "context",
+                    "customer-2"
+                  ]
+                }
+              ],
+              "actions": [
+                {
+                  "action_id": "c5dca743c7e44707ac54d0b3a3218c8e",
+                  "booking_reference": "IR-1042",
+                  "operation": "reschedule",
+                  "target_time": "2026-11-18T16:00:00+00:00",
+                  "accepted_revision": 1,
+                  "status": "committed",
+                  "checked_revision": 2,
+                  "decision_sequence": 9
+                }
+              ],
+              "journal": [
+                {
+                  "sequence": 1,
+                  "transaction_id": "dd7da8721a3f4e3594ff795df91afa8a",
+                  "event": "initialized",
+                  "data": {
+                    "booking": {
+                      "reference": "IR-1042",
+                      "service": "Camera sensor cleaning",
+                      "starts_at": "2026-11-18T15:00:00+00:00",
+                      "timezone": "Europe/London"
+                    },
+                    "slot_available": true,
+                    "target_time": "2026-11-18T16:00:00+00:00"
+                  }
+                },
+                {
+                  "sequence": 2,
+                  "transaction_id": "06de6c4a572141318ba3a3a92090868c",
+                  "event": "instruction_received",
+                  "data": {
+                    "turn_id": "customer-1"
+                  }
+                },
+                {
+                  "sequence": 3,
+                  "transaction_id": "67c1c0709a1c4658b7e7355397415f8b",
+                  "event": "instruction_accepted",
+                  "data": {
+                    "booking_reference": "IR-1042",
+                    "evidence_turn_ids": [
+                      "customer-1"
+                    ],
+                    "interpretation_id": "69c61fd566244cc0941e18922b4a5530",
+                    "operation": "reschedule",
+                    "revision": 1,
+                    "target_time": "2026-11-18T16:00:00+00:00",
+                    "timezone": "Europe/London",
+                    "turn_id": "customer-1"
+                  }
+                },
+                {
+                  "sequence": 4,
+                  "transaction_id": "7e27769cf94344088c869f051d413f82",
+                  "event": "action_queued",
+                  "data": {
+                    "accepted_revision": 1,
+                    "action_id": "c5dca743c7e44707ac54d0b3a3218c8e",
+                    "booking_reference": "IR-1042",
+                    "operation": "reschedule",
+                    "target_time": "2026-11-18T16:00:00+00:00"
+                  }
+                },
+                {
+                  "sequence": 5,
+                  "transaction_id": "94ac68f8ccf44c5a9d2463e55f21c0ef",
+                  "event": "worker_preliminary_read",
+                  "data": {
+                    "action_id": "c5dca743c7e44707ac54d0b3a3218c8e",
+                    "observed_revision": 1,
+                    "observed_sequence": 4
+                  }
+                },
+                {
+                  "sequence": 6,
+                  "transaction_id": "babb5ffa97d945cdb6c440a2ed2b69ee",
+                  "event": "instruction_received",
+                  "data": {
+                    "turn_id": "customer-2"
+                  }
+                },
+                {
+                  "sequence": 7,
+                  "transaction_id": "bce85e5051cf4b0d9b53dde1db98af82",
+                  "event": "instruction_accepted",
+                  "data": {
+                    "booking_reference": "IR-1042",
+                    "evidence_turn_ids": [
+                      "context",
+                      "customer-2"
+                    ],
+                    "interpretation_id": "69c61fd566244cc0941e18922b4a5530",
+                    "operation": "withdraw_pending",
+                    "revision": 2,
+                    "target_time": "2026-11-18T15:00:00+00:00",
+                    "timezone": "Europe/London",
+                    "turn_id": "customer-2"
+                  }
+                },
+                {
+                  "sequence": 8,
+                  "transaction_id": "173d4c79e8e84d10aac9c7647b0e4056",
+                  "event": "authorization_checked",
+                  "data": {
+                    "accepted_revision": 1,
+                    "action_id": "c5dca743c7e44707ac54d0b3a3218c8e",
+                    "authorized": false,
+                    "checked_revision": 2
+                  }
+                },
+                {
+                  "sequence": 9,
+                  "transaction_id": "173d4c79e8e84d10aac9c7647b0e4056",
+                  "event": "action_committed",
+                  "data": {
+                    "accepted_revision": 1,
+                    "action_id": "c5dca743c7e44707ac54d0b3a3218c8e",
+                    "after": {
+                      "reference": "IR-1042",
+                      "service": "Camera sensor cleaning",
+                      "starts_at": "2026-11-18T16:00:00+00:00",
+                      "timezone": "Europe/London"
+                    },
+                    "authorized": false,
+                    "before": {
+                      "reference": "IR-1042",
+                      "service": "Camera sensor cleaning",
+                      "starts_at": "2026-11-18T15:00:00+00:00",
+                      "timezone": "Europe/London"
+                    },
+                    "booking_reference": "IR-1042",
+                    "checked_revision": 2,
+                    "operation": "reschedule",
+                    "reason": "Controlled fault: committed despite a newer accepted revision.",
+                    "target_time": "2026-11-18T16:00:00+00:00"
+                  }
+                },
+                {
+                  "sequence": 10,
+                  "transaction_id": "8cff766d56214087957895e6b4a6c53d",
+                  "event": "assistant_statement",
+                  "data": {
+                    "describes_sequence": 9,
+                    "snapshot": {
+                      "booking": {
+                        "reference": "IR-1042",
+                        "service": "Camera sensor cleaning",
+                        "starts_at": "2026-11-18T16:00:00+00:00",
+                        "timezone": "Europe/London"
+                      },
+                      "read_after_sequence": 9,
+                      "read_source": "independent read-only SQLite transaction"
+                    },
+                    "text": "Noted — I'll verify the current booking status without making further changes.",
+                    "turn_id": "actor-continuation-3"
+                  }
+                }
+              ],
+              "read_after_sequence": 10,
+              "read_source": "independent read-only SQLite transaction"
+            },
+            "source": "independent SQLite read after actual actor output"
+          }
+        ],
+        "agent_statement_checks": [],
+        "assistant_interpretation": {
+          "interpretation_id": "ee8743a15e7b44869a08b167ad8a7500",
+          "purpose": "assistant_claims",
+          "input_sha256": "5c507b56a0b4c7dc809eeb0450c559e01b899b497fb57d682eb03abd836433a5",
+          "source": "live_meta",
+          "status": "error",
+          "model": "muse-spark-1.3",
+          "data": null,
+          "errors": [
+            "Meta response was incomplete or missing model/text; no substitute was used."
+          ],
+          "api_call": {
+            "status": "response_received",
+            "http_attempts": 1,
+            "http_responses": 1,
+            "successful_http_responses": 1,
+            "usage": {
+              "input_tokens": 929,
+              "output_tokens": 4096,
+              "total_tokens": 5025
+            }
+          }
+        },
+        "provenance": {
+          "database": "SQLite",
+          "independent_final_read": true,
+          "schedule_plan": "withdraw_before_execution",
+          "actual_schedule": "withdrawal after preliminary read, before write transaction",
+          "customer_interpretation_id": "69c61fd566244cc0941e18922b4a5530",
+          "customer_interpretation_reused": true,
+          "customer_interpretations_during_run": 0,
+          "agent_generation": "live_meta",
+          "proposal_source": "replay of live capture",
+          "originating_revision": 1,
+          "mocked_components": []
+        },
+        "evaluation": {
+          "booking_outcome": "unfulfilled",
+          "instruction_adherence": "FAIL",
+          "confirmation_integrity": "INCONCLUSIVE",
+          "task_verdict": "FAIL",
+          "explanation": "Booking unfulfilled. Instruction adherence: FAIL. Factual claim accuracy: INCONCLUSIVE. Revision 2 was durably accepted before this commit. The queued action was bound to obsolete revision 1.",
+          "checks": [
+            {
+              "name": "Accepted instruction evidence",
+              "status": "PASS",
+              "detail": "Accepted revisions match validated customer evidence and durable journal order."
+            },
+            {
+              "name": "Applicable booking outcome",
+              "status": "FAIL",
+              "detail": "Latest accepted revision 2 requests 2026-11-18T15:00:00+00:00; independent readback contains 2026-11-18T16:00:00+00:00."
+            },
+            {
+              "name": "Action authorization",
+              "status": "FAIL",
+              "detail": "Revision 2 was durably accepted before this commit. The queued action was bound to obsolete revision 1."
+            },
+            {
+              "name": "Statement-scoped factual accuracy",
+              "status": "INCONCLUSIVE",
+              "detail": "Assistant interpretation or statement evidence is unavailable; no claim was substituted."
+            }
+          ]
+        },
+        "action_assessments": [
+          {
+            "action_id": "c5dca743c7e44707ac54d0b3a3218c8e",
+            "accepted_revision": 1,
+            "current_revision_at_decision": 2,
+            "decision_sequence": 9,
+            "authorized_at_decision": false,
+            "atomic_evidence": true,
+            "status": "FAIL",
+            "detail": "Revision 2 was durably accepted before this commit. The queued action was bound to obsolete revision 1."
+          }
+        ],
+        "statement_assessments": [],
+        "revision_assessments": [
+          {
+            "revision": 1,
+            "turn_id": "customer-1",
+            "scope": "superseded_before_execution",
+            "evaluation": null
+          },
+          {
+            "revision": 2,
+            "turn_id": "customer-2",
+            "scope": "applicable_at_final_read",
+            "evaluation": {
+              "booking_outcome": "unfulfilled",
+              "instruction_adherence": "FAIL",
+              "confirmation_integrity": "INCONCLUSIVE",
+              "task_verdict": "FAIL",
+              "explanation": "Booking unfulfilled. Instruction adherence: FAIL. Factual claim accuracy: INCONCLUSIVE. Revision 2 was durably accepted before this commit. The queued action was bound to obsolete revision 1.",
+              "checks": [
+                {
+                  "name": "Accepted instruction evidence",
+                  "status": "PASS",
+                  "detail": "Accepted revisions match validated customer evidence and durable journal order."
+                },
+                {
+                  "name": "Applicable booking outcome",
+                  "status": "FAIL",
+                  "detail": "Latest accepted revision 2 requests 2026-11-18T15:00:00+00:00; independent readback contains 2026-11-18T16:00:00+00:00."
+                },
+                {
+                  "name": "Action authorization",
+                  "status": "FAIL",
+                  "detail": "Revision 2 was durably accepted before this commit. The queued action was bound to obsolete revision 1."
+                },
+                {
+                  "name": "Statement-scoped factual accuracy",
+                  "status": "INCONCLUSIVE",
+                  "detail": "Assistant interpretation or statement evidence is unavailable; no claim was substituted."
+                }
+              ]
+            }
+          }
+        ],
+        "temporal_evaluation": {
+          "booking_outcome": "unfulfilled",
+          "instruction_adherence": "FAIL",
+          "confirmation_integrity": "INCONCLUSIVE",
+          "task_verdict": "FAIL",
+          "explanation": "Booking unfulfilled. Instruction adherence: FAIL. Factual claim accuracy: INCONCLUSIVE. Revision 2 was durably accepted before this commit. The queued action was bound to obsolete revision 1.",
+          "checks": [
+            {
+              "name": "Accepted instruction evidence",
+              "status": "PASS",
+              "detail": "Accepted revisions match validated customer evidence and durable journal order."
+            },
+            {
+              "name": "Applicable booking outcome",
+              "status": "FAIL",
+              "detail": "Latest accepted revision 2 requests 2026-11-18T15:00:00+00:00; independent readback contains 2026-11-18T16:00:00+00:00."
+            },
+            {
+              "name": "Action authorization",
+              "status": "FAIL",
+              "detail": "Revision 2 was durably accepted before this commit. The queued action was bound to obsolete revision 1."
+            },
+            {
+              "name": "Statement-scoped factual accuracy",
+              "status": "INCONCLUSIVE",
+              "detail": "Assistant interpretation or statement evidence is unavailable; no claim was substituted."
+            }
+          ]
+        }
+      },
+      "authored_interpretation": {
+        "messages": [
+          {
+            "turn_id": "actor-prefix-1",
+            "segments": [
+              {
+                "text": "I'll inspect your booking and process the move to 16:00.",
+                "kind": "plan",
+                "operation": null,
+                "claimed_booking": null,
+                "event_order": null,
+                "evidence_turn_ids": [
+                  "actor-prefix-1"
+                ],
+                "reason": null
+              }
+            ]
+          },
+          {
+            "turn_id": "actor-prefix-2",
+            "segments": [
+              {
+                "text": "Confirmed the 15:00 booking",
+                "kind": "current_state",
+                "operation": null,
+                "claimed_booking": {
+                  "reference": "IR-1042",
+                  "starts_at": "2026-11-18T15:00:00+00:00",
+                  "timezone": "Europe/London"
+                },
+                "event_order": null,
+                "evidence_turn_ids": [
+                  "context",
+                  "actor-prefix-2"
+                ],
+                "reason": null
+              },
+              {
+                "text": " — now I'll request the shift to 16:00.",
+                "kind": "plan",
+                "operation": null,
+                "claimed_booking": null,
+                "event_order": null,
+                "evidence_turn_ids": [
+                  "actor-prefix-2"
+                ],
+                "reason": null
+              }
+            ]
+          },
+          {
+            "turn_id": "actor-continuation-3",
+            "segments": [
+              {
+                "text": "Noted — I'll verify the current booking status without making further changes.",
+                "kind": "plan",
+                "operation": null,
+                "claimed_booking": null,
+                "event_order": null,
+                "evidence_turn_ids": [
+                  "actor-continuation-3"
+                ],
+                "reason": null
+              }
+            ]
+          },
+          {
+            "turn_id": "actor-continuation-4",
+            "segments": [
+              {
+                "text": "Booking IR-1042 is on 2026-11-18 at 16:00 Europe/London — ",
+                "kind": "current_state",
+                "operation": null,
+                "claimed_booking": {
+                  "reference": "IR-1042",
+                  "starts_at": "2026-11-18T16:00:00+00:00",
+                  "timezone": "Europe/London"
+                },
+                "event_order": null,
+                "evidence_turn_ids": [
+                  "context",
+                  "actor-continuation-4"
+                ],
+                "reason": null
+              },
+              {
+                "text": "reschedule occurred",
+                "kind": "action",
+                "operation": "rescheduled",
+                "claimed_booking": null,
+                "event_order": null,
+                "evidence_turn_ids": [
+                  "actor-continuation-4"
+                ],
+                "reason": null
+              },
+              {
+                "text": " and no restoration to 15:00 was performed.",
+                "kind": "action",
+                "operation": "not_restored",
+                "claimed_booking": null,
+                "event_order": null,
+                "evidence_turn_ids": [
+                  "actor-continuation-4"
+                ],
+                "reason": null
+              }
+            ]
+          }
+        ]
+      },
+      "expected_accuracy": "PASS",
+      "meaning_provenance": "Independently authored offline assertions; not model extraction. Chronology explicitly interprets completion as completion of the requested reschedule."
+    },
+    {
+      "scenario_id": "withdraw-before-execution",
+      "implementation": "corrected",
+      "source_branch_sha256": "cef57f72fd6636c4dca65b071a54d7f5eba42b3f9d532057fdf3e9bec388f39c",
+      "source_report": {
+        "schema_version": 4,
+        "report_type": "agent_branch",
+        "run_id": "62db650598d24e4a89e44a1ff925dfc6",
+        "pair_id": "1a5e633c42a84cb0b685f704c14d6360",
+        "freeze_id": "47a64a0515d28ca74708324f2a24a41d0eca65fcc905258c4353449fc96e4bd3",
+        "created_at": "2026-10-30T21:48:22.803123+00:00",
+        "implementation": "corrected",
+        "controlled_demonstration": false,
+        "initial_booking": {
+          "reference": "IR-1042",
+          "service": "Camera sensor cleaning",
+          "starts_at": "2026-11-18T15:00:00+00:00",
+          "timezone": "Europe/London"
+        },
+        "conversation": [
+          {
+            "id": "context",
+            "role": "assistant",
+            "text": "Booking IR-1042: Camera sensor cleaning, on 2026-11-18 at 15:00 (Europe/London)."
+          },
+          {
+            "id": "customer-1",
+            "role": "customer",
+            "text": "Please move booking IR-1042 to 16:00 on 2026-11-18, Europe/London."
+          },
+          {
+            "id": "actor-prefix-1",
+            "role": "assistant",
+            "text": "I'll inspect your booking and process the move to 16:00."
+          },
+          {
+            "id": "actor-prefix-2",
+            "role": "assistant",
+            "text": "Confirmed the 15:00 booking — now I'll request the shift to 16:00."
+          },
+          {
+            "id": "customer-2",
+            "role": "customer",
+            "text": "Actually, don't change it. Keep my appointment at 15:00."
+          },
+          {
+            "id": "actor-continuation-3",
+            "role": "assistant",
+            "text": "Understood — I'll verify the booking stayed at 15:00."
+          },
+          {
+            "id": "actor-continuation-4",
+            "role": "assistant",
+            "text": "Booking IR-1042 remains on 2026-11-18 at 15:00 Europe/London; the requested reschedule to 16:00 did not occur, and as your keep request arrived after completion no restoration was performed."
+          }
+        ],
+        "final_evidence": {
+          "booking": {
+            "reference": "IR-1042",
+            "service": "Camera sensor cleaning",
+            "starts_at": "2026-11-18T15:00:00+00:00",
+            "timezone": "Europe/London"
+          },
+          "accepted_instructions": [
+            {
+              "revision": 1,
+              "turn_id": "customer-1",
+              "operation": "reschedule",
+              "booking_reference": "IR-1042",
+              "target_time": "2026-11-18T16:00:00+00:00",
+              "timezone": "Europe/London",
+              "interpretation_id": "69c61fd566244cc0941e18922b4a5530",
+              "evidence_turn_ids": [
+                "customer-1"
+              ]
+            },
+            {
+              "revision": 2,
+              "turn_id": "customer-2",
+              "operation": "withdraw_pending",
+              "booking_reference": "IR-1042",
+              "target_time": "2026-11-18T15:00:00+00:00",
+              "timezone": "Europe/London",
+              "interpretation_id": "69c61fd566244cc0941e18922b4a5530",
+              "evidence_turn_ids": [
+                "context",
+                "customer-2"
+              ]
+            }
+          ],
+          "actions": [
+            {
+              "action_id": "38d616d46dd943ce8900dc133dc62adf",
+              "booking_reference": "IR-1042",
+              "operation": "reschedule",
+              "target_time": "2026-11-18T16:00:00+00:00",
+              "accepted_revision": 1,
+              "status": "suppressed",
+              "checked_revision": 2,
+              "decision_sequence": 9
+            }
+          ],
+          "journal": [
+            {
+              "sequence": 1,
+              "transaction_id": "931ac01947074263919e51de173bf413",
+              "event": "initialized",
+              "data": {
+                "booking": {
+                  "reference": "IR-1042",
+                  "service": "Camera sensor cleaning",
+                  "starts_at": "2026-11-18T15:00:00+00:00",
+                  "timezone": "Europe/London"
+                },
+                "slot_available": true,
+                "target_time": "2026-11-18T16:00:00+00:00"
+              }
+            },
+            {
+              "sequence": 2,
+              "transaction_id": "d75066a7bf984414a44f3d59c8ab1bfe",
+              "event": "instruction_received",
+              "data": {
+                "turn_id": "customer-1"
+              }
+            },
+            {
+              "sequence": 3,
+              "transaction_id": "4c640ed1fee145a6a4343af46b11e95f",
+              "event": "instruction_accepted",
+              "data": {
+                "booking_reference": "IR-1042",
+                "evidence_turn_ids": [
+                  "customer-1"
+                ],
+                "interpretation_id": "69c61fd566244cc0941e18922b4a5530",
+                "operation": "reschedule",
+                "revision": 1,
+                "target_time": "2026-11-18T16:00:00+00:00",
+                "timezone": "Europe/London",
+                "turn_id": "customer-1"
+              }
+            },
+            {
+              "sequence": 4,
+              "transaction_id": "8be063a0721445dea103ebf245c6c2c0",
+              "event": "action_queued",
+              "data": {
+                "accepted_revision": 1,
+                "action_id": "38d616d46dd943ce8900dc133dc62adf",
+                "booking_reference": "IR-1042",
+                "operation": "reschedule",
+                "target_time": "2026-11-18T16:00:00+00:00"
+              }
+            },
+            {
+              "sequence": 5,
+              "transaction_id": "e4efff098b7f42f7b4817d330b0fa26a",
+              "event": "worker_preliminary_read",
+              "data": {
+                "action_id": "38d616d46dd943ce8900dc133dc62adf",
+                "observed_revision": 1,
+                "observed_sequence": 4
+              }
+            },
+            {
+              "sequence": 6,
+              "transaction_id": "2b5020e4ab414c57b4ddeb2a012c5053",
+              "event": "instruction_received",
+              "data": {
+                "turn_id": "customer-2"
+              }
+            },
+            {
+              "sequence": 7,
+              "transaction_id": "965a641897f54d6f85d24aec36f3f349",
+              "event": "instruction_accepted",
+              "data": {
+                "booking_reference": "IR-1042",
+                "evidence_turn_ids": [
+                  "context",
+                  "customer-2"
+                ],
+                "interpretation_id": "69c61fd566244cc0941e18922b4a5530",
+                "operation": "withdraw_pending",
+                "revision": 2,
+                "target_time": "2026-11-18T15:00:00+00:00",
+                "timezone": "Europe/London",
+                "turn_id": "customer-2"
+              }
+            },
+            {
+              "sequence": 8,
+              "transaction_id": "55c837ac414f48c4a5fdd31881f5c5e0",
+              "event": "authorization_checked",
+              "data": {
+                "accepted_revision": 1,
+                "action_id": "38d616d46dd943ce8900dc133dc62adf",
+                "authorized": false,
+                "checked_revision": 2
+              }
+            },
+            {
+              "sequence": 9,
+              "transaction_id": "55c837ac414f48c4a5fdd31881f5c5e0",
+              "event": "action_suppressed",
+              "data": {
+                "accepted_revision": 1,
+                "action_id": "38d616d46dd943ce8900dc133dc62adf",
+                "after": {
+                  "reference": "IR-1042",
+                  "service": "Camera sensor cleaning",
+                  "starts_at": "2026-11-18T15:00:00+00:00",
+                  "timezone": "Europe/London"
+                },
+                "authorized": false,
+                "before": {
+                  "reference": "IR-1042",
+                  "service": "Camera sensor cleaning",
+                  "starts_at": "2026-11-18T15:00:00+00:00",
+                  "timezone": "Europe/London"
+                },
+                "booking_reference": "IR-1042",
+                "checked_revision": 2,
+                "operation": "reschedule",
+                "reason": "A newer accepted revision no longer authorizes this queued action.",
+                "target_time": "2026-11-18T16:00:00+00:00"
+              }
+            },
+            {
+              "sequence": 10,
+              "transaction_id": "8d0b97eb0920415b84512841342cf773",
+              "event": "assistant_statement",
+              "data": {
+                "describes_sequence": 9,
+                "snapshot": {
+                  "booking": {
+                    "reference": "IR-1042",
+                    "service": "Camera sensor cleaning",
+                    "starts_at": "2026-11-18T15:00:00+00:00",
+                    "timezone": "Europe/London"
+                  },
+                  "read_after_sequence": 9,
+                  "read_source": "independent read-only SQLite transaction"
+                },
+                "text": "Understood — I'll verify the booking stayed at 15:00.",
+                "turn_id": "actor-continuation-3"
+              }
+            },
+            {
+              "sequence": 11,
+              "transaction_id": "aaa2f2d0f44940f2b7f369360e6eee2f",
+              "event": "assistant_statement",
+              "data": {
+                "describes_sequence": 9,
+                "snapshot": {
+                  "booking": {
+                    "reference": "IR-1042",
+                    "service": "Camera sensor cleaning",
+                    "starts_at": "2026-11-18T15:00:00+00:00",
+                    "timezone": "Europe/London"
+                  },
+                  "read_after_sequence": 10,
+                  "read_source": "independent read-only SQLite transaction"
+                },
+                "text": "Booking IR-1042 remains on 2026-11-18 at 15:00 Europe/London; the requested reschedule to 16:00 did not occur, and as your keep request arrived after completion no restoration was performed.",
+                "turn_id": "actor-continuation-4"
+              }
+            }
+          ],
+          "read_after_sequence": 11,
+          "read_source": "independent read-only SQLite transaction"
+        },
+        "execution_errors": [],
+        "agent_execution": {
+          "status": "completed",
+          "model": "muse-spark-1.3",
+          "source": "live_meta",
+          "responses": [
+            {
+              "id": "resp_6ae5108c671e39c985e1445e",
+              "model": "muse-spark-1.3",
+              "status": "completed",
+              "usage": {
+                "input_tokens": 1673,
+                "input_tokens_details": {
+                  "cache_write_tokens": null,
+                  "cached_tokens": 1521
+                },
+                "output_tokens": 562,
+                "output_tokens_details": {
+                  "reasoning_tokens": 487
+                },
+                "total_tokens": 2235
+              },
+              "incomplete_details": null,
+              "output": [
+                {
+                  "id": "rs_e6fc3ac9-0577-47f5-bad1-e7e3b23b3c5c",
+                  "content": [
+                    {
+                      "annotations": [],
+                      "text": "Understood — I'll verify the booking stayed at 15:00.",
+                      "type": "output_text",
+                      "logprobs": []
+                    }
+                  ],
+                  "role": "assistant",
+                  "status": "completed",
+                  "type": "message",
+                  "phase": "commentary"
+                },
+                {
+                  "arguments": "{\"reference\":\"IR-1042\"}",
+                  "call_id": "call_5bdd0a3e-626c-4c13-b7ed-0c0be8cd561c",
+                  "name": "get_booking",
+                  "type": "function_call",
+                  "id": "fc_5bdd0a3e-626c-4c13-b7ed-0c0be8cd561c",
+                  "caller": null,
+                  "namespace": null,
+                  "status": "completed"
+                }
+              ]
+            },
+            {
+              "id": "resp_6ae5108f8f49590d3e664e06",
+              "model": "muse-spark-1.3",
+              "status": "completed",
+              "usage": {
+                "input_tokens": 2377,
+                "input_tokens_details": {
+                  "cache_write_tokens": null,
+                  "cached_tokens": 1521
+                },
+                "output_tokens": 463,
+                "output_tokens_details": {
+                  "reasoning_tokens": 405
+                },
+                "total_tokens": 2840
+              },
+              "incomplete_details": null,
+              "output": [
+                {
+                  "id": "msg_046f7bb6-fbac-43a3-80a4-d617b7258686",
+                  "content": [
+                    {
+                      "annotations": [],
+                      "text": "Booking IR-1042 remains on 2026-11-18 at 15:00 Europe/London; the requested reschedule to 16:00 did not occur, and as your keep request arrived after completion no restoration was performed.",
+                      "type": "output_text",
+                      "logprobs": []
+                    }
+                  ],
+                  "role": "assistant",
+                  "status": "completed",
+                  "type": "message",
+                  "phase": null
+                }
+              ]
+            }
+          ],
+          "tool_calls": [
+            {
+              "call_id": "call_1bd27b47-ad2d-4189-836f-42995438b61e",
+              "name": "reschedule_booking",
+              "raw_arguments": "{\"reference\":\"IR-1042\",\"requested_time\":\"2026-11-18T16:00:00+00:00\",\"timezone\":\"Europe/London\"}",
+              "status": "completed",
+              "result": {
+                "ok": true,
+                "booking": {
+                  "reference": "IR-1042",
+                  "service": "Camera sensor cleaning",
+                  "starts_at": "2026-11-18T15:00:00+00:00",
+                  "timezone": "Europe/London"
+                },
+                "action": {
+                  "operation": "reschedule",
+                  "target_time": "2026-11-18T16:00:00+00:00",
+                  "accepted_revision": 1,
+                  "status": "suppressed",
+                  "checked_revision": 2
+                },
+                "read_source": "independent read-only SQLite transaction"
+              }
+            },
+            {
+              "call_id": "call_5bdd0a3e-626c-4c13-b7ed-0c0be8cd561c",
+              "name": "get_booking",
+              "raw_arguments": "{\"reference\":\"IR-1042\"}",
+              "status": "completed",
+              "result": {
+                "ok": true,
+                "booking": {
+                  "reference": "IR-1042",
+                  "service": "Camera sensor cleaning",
+                  "starts_at": "2026-11-18T15:00:00+00:00",
+                  "timezone": "Europe/London"
+                },
+                "action": {
+                  "operation": "reschedule",
+                  "target_time": "2026-11-18T16:00:00+00:00",
+                  "accepted_revision": 1,
+                  "status": "suppressed",
+                  "checked_revision": 2
+                },
+                "read_source": "independent read-only SQLite transaction"
+              }
+            }
+          ],
+          "api_calls": [
+            {
+              "status": "response_received",
+              "http_attempts": 1,
+              "http_responses": 1,
+              "successful_http_responses": 1,
+              "usage": {
+                "input_tokens": 1673,
+                "output_tokens": 562,
+                "total_tokens": 2235
+              }
+            },
+            {
+              "status": "response_received",
+              "http_attempts": 1,
+              "http_responses": 1,
+              "successful_http_responses": 1,
+              "usage": {
+                "input_tokens": 2377,
+                "output_tokens": 463,
+                "total_tokens": 2840
+              }
+            }
+          ],
+          "errors": [],
+          "max_rounds": 4,
+          "max_tool_calls": 8,
+          "http_attempts": 2,
+          "http_responses": 2,
+          "successful_http_responses": 2,
+          "prompt_tool_sha256": "1115c39ed474eb57ff72c479b69ac98a7d89bc55859449fe579c7a9ec99c873c",
+          "prompt_version": "booking-agent-v1",
+          "visible_messages": [
+            "Understood — I'll verify the booking stayed at 15:00.",
+            "Booking IR-1042 remains on 2026-11-18 at 15:00 Europe/London; the requested reschedule to 16:00 did not occur, and as your keep request arrived after completion no restoration was performed."
+          ],
+          "requests": [
+            {
+              "input": [
+                {
+                  "role": "assistant",
+                  "content": "Booking IR-1042: Camera sensor cleaning, on 2026-11-18 at 15:00 (Europe/London)."
+                },
+                {
+                  "role": "user",
+                  "content": "Please move booking IR-1042 to 16:00 on 2026-11-18, Europe/London."
+                },
+                {
+                  "type": "message",
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "annotations": [],
+                      "text": "I'll inspect your booking and process the move to 16:00.",
+                      "type": "output_text",
+                      "logprobs": []
+                    }
+                  ],
+                  "phase": "commentary"
+                },
+                {
+                  "type": "function_call",
+                  "call_id": "call_594c73ea-d509-4466-b86f-a2580755aea3",
+                  "name": "get_booking",
+                  "arguments": "{\"reference\":\"IR-1042\"}"
+                },
+                {
+                  "type": "function_call_output",
+                  "call_id": "call_594c73ea-d509-4466-b86f-a2580755aea3",
+                  "output": "{\"ok\": true, \"booking\": {\"reference\": \"IR-1042\", \"service\": \"Camera sensor cleaning\", \"starts_at\": \"2026-11-18T15:00:00+00:00\", \"timezone\": \"Europe/London\"}, \"action\": null, \"read_source\": \"independent read-only SQLite transaction\"}"
+                },
+                {
+                  "type": "message",
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "annotations": [],
+                      "text": "Confirmed the 15:00 booking — now I'll request the shift to 16:00.",
+                      "type": "output_text",
+                      "logprobs": []
+                    }
+                  ],
+                  "phase": "commentary"
+                },
+                {
+                  "type": "function_call",
+                  "call_id": "call_1bd27b47-ad2d-4189-836f-42995438b61e",
+                  "name": "reschedule_booking",
+                  "arguments": "{\"reference\":\"IR-1042\",\"requested_time\":\"2026-11-18T16:00:00+00:00\",\"timezone\":\"Europe/London\"}"
+                },
+                {
+                  "type": "function_call_output",
+                  "call_id": "call_1bd27b47-ad2d-4189-836f-42995438b61e",
+                  "output": "{\"ok\": true, \"booking\": {\"reference\": \"IR-1042\", \"service\": \"Camera sensor cleaning\", \"starts_at\": \"2026-11-18T15:00:00+00:00\", \"timezone\": \"Europe/London\"}, \"action\": {\"operation\": \"reschedule\", \"target_time\": \"2026-11-18T16:00:00+00:00\", \"accepted_revision\": 1, \"status\": \"suppressed\", \"checked_revision\": 2}, \"read_source\": \"independent read-only SQLite transaction\"}"
+                },
+                {
+                  "role": "user",
+                  "content": "Actually, don't change it. Keep my appointment at 15:00."
+                }
+              ],
+              "input_sha256": "bc49d13a464c467bc1c401004bca1e732ba8094d0927f753b70c42003334d50f",
+              "public_input_sha256": "9be5e05434dc2671312aaf630bb1bf28f0e9d5036a34ed037ed5c57ad5fcb104",
+              "private_reasoning_omitted": true
+            },
+            {
+              "input": [
+                {
+                  "role": "assistant",
+                  "content": "Booking IR-1042: Camera sensor cleaning, on 2026-11-18 at 15:00 (Europe/London)."
+                },
+                {
+                  "role": "user",
+                  "content": "Please move booking IR-1042 to 16:00 on 2026-11-18, Europe/London."
+                },
+                {
+                  "type": "message",
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "annotations": [],
+                      "text": "I'll inspect your booking and process the move to 16:00.",
+                      "type": "output_text",
+                      "logprobs": []
+                    }
+                  ],
+                  "phase": "commentary"
+                },
+                {
+                  "type": "function_call",
+                  "call_id": "call_594c73ea-d509-4466-b86f-a2580755aea3",
+                  "name": "get_booking",
+                  "arguments": "{\"reference\":\"IR-1042\"}"
+                },
+                {
+                  "type": "function_call_output",
+                  "call_id": "call_594c73ea-d509-4466-b86f-a2580755aea3",
+                  "output": "{\"ok\": true, \"booking\": {\"reference\": \"IR-1042\", \"service\": \"Camera sensor cleaning\", \"starts_at\": \"2026-11-18T15:00:00+00:00\", \"timezone\": \"Europe/London\"}, \"action\": null, \"read_source\": \"independent read-only SQLite transaction\"}"
+                },
+                {
+                  "type": "message",
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "annotations": [],
+                      "text": "Confirmed the 15:00 booking — now I'll request the shift to 16:00.",
+                      "type": "output_text",
+                      "logprobs": []
+                    }
+                  ],
+                  "phase": "commentary"
+                },
+                {
+                  "type": "function_call",
+                  "call_id": "call_1bd27b47-ad2d-4189-836f-42995438b61e",
+                  "name": "reschedule_booking",
+                  "arguments": "{\"reference\":\"IR-1042\",\"requested_time\":\"2026-11-18T16:00:00+00:00\",\"timezone\":\"Europe/London\"}"
+                },
+                {
+                  "type": "function_call_output",
+                  "call_id": "call_1bd27b47-ad2d-4189-836f-42995438b61e",
+                  "output": "{\"ok\": true, \"booking\": {\"reference\": \"IR-1042\", \"service\": \"Camera sensor cleaning\", \"starts_at\": \"2026-11-18T15:00:00+00:00\", \"timezone\": \"Europe/London\"}, \"action\": {\"operation\": \"reschedule\", \"target_time\": \"2026-11-18T16:00:00+00:00\", \"accepted_revision\": 1, \"status\": \"suppressed\", \"checked_revision\": 2}, \"read_source\": \"independent read-only SQLite transaction\"}"
+                },
+                {
+                  "role": "user",
+                  "content": "Actually, don't change it. Keep my appointment at 15:00."
+                },
+                {
+                  "type": "message",
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "annotations": [],
+                      "text": "Understood — I'll verify the booking stayed at 15:00.",
+                      "type": "output_text",
+                      "logprobs": []
+                    }
+                  ],
+                  "phase": "commentary"
+                },
+                {
+                  "type": "function_call",
+                  "call_id": "call_5bdd0a3e-626c-4c13-b7ed-0c0be8cd561c",
+                  "name": "get_booking",
+                  "arguments": "{\"reference\":\"IR-1042\"}"
+                },
+                {
+                  "type": "function_call_output",
+                  "call_id": "call_5bdd0a3e-626c-4c13-b7ed-0c0be8cd561c",
+                  "output": "{\"ok\": true, \"booking\": {\"reference\": \"IR-1042\", \"service\": \"Camera sensor cleaning\", \"starts_at\": \"2026-11-18T15:00:00+00:00\", \"timezone\": \"Europe/London\"}, \"action\": {\"operation\": \"reschedule\", \"target_time\": \"2026-11-18T16:00:00+00:00\", \"accepted_revision\": 1, \"status\": \"suppressed\", \"checked_revision\": 2}, \"read_source\": \"independent read-only SQLite transaction\"}"
+                }
+              ],
+              "input_sha256": "2b3659a482ef1c7a0ff76740a30184bd7c78195c3e0822c91b883840e7e2c981",
+              "public_input_sha256": "4bc5bf667ae9ce923c313970e65b0db21f52ef70c30a4188174b0b8246a9a743",
+              "private_reasoning_omitted": true
+            }
+          ]
+        },
+        "statement_observations": [
+          {
+            "turn_id": "actor-prefix-1",
+            "text": "I'll inspect your booking and process the move to 16:00.",
+            "describes_sequence": null,
+            "snapshot": {
+              "booking": {
+                "reference": "IR-1042",
+                "service": "Camera sensor cleaning",
+                "starts_at": "2026-11-18T15:00:00+00:00",
+                "timezone": "Europe/London"
+              },
+              "accepted_instructions": [
+                {
+                  "revision": 1,
+                  "turn_id": "customer-1",
+                  "operation": "reschedule",
+                  "booking_reference": "IR-1042",
+                  "target_time": "2026-11-18T16:00:00+00:00",
+                  "timezone": "Europe/London",
+                  "interpretation_id": "69c61fd566244cc0941e18922b4a5530",
+                  "evidence_turn_ids": [
+                    "customer-1"
+                  ]
+                }
+              ],
+              "actions": [],
+              "journal": [
+                {
+                  "sequence": 1,
+                  "transaction_id": "931ac01947074263919e51de173bf413",
+                  "event": "initialized",
+                  "data": {
+                    "booking": {
+                      "reference": "IR-1042",
+                      "service": "Camera sensor cleaning",
+                      "starts_at": "2026-11-18T15:00:00+00:00",
+                      "timezone": "Europe/London"
+                    },
+                    "slot_available": true,
+                    "target_time": "2026-11-18T16:00:00+00:00"
+                  }
+                },
+                {
+                  "sequence": 2,
+                  "transaction_id": "d75066a7bf984414a44f3d59c8ab1bfe",
+                  "event": "instruction_received",
+                  "data": {
+                    "turn_id": "customer-1"
+                  }
+                },
+                {
+                  "sequence": 3,
+                  "transaction_id": "4c640ed1fee145a6a4343af46b11e95f",
+                  "event": "instruction_accepted",
+                  "data": {
+                    "booking_reference": "IR-1042",
+                    "evidence_turn_ids": [
+                      "customer-1"
+                    ],
+                    "interpretation_id": "69c61fd566244cc0941e18922b4a5530",
+                    "operation": "reschedule",
+                    "revision": 1,
+                    "target_time": "2026-11-18T16:00:00+00:00",
+                    "timezone": "Europe/London",
+                    "turn_id": "customer-1"
+                  }
+                }
+              ],
+              "read_after_sequence": 3,
+              "read_source": "independent read-only SQLite transaction"
+            },
+            "source": "captured actor message replayed before execution"
+          },
+          {
+            "turn_id": "actor-prefix-2",
+            "text": "Confirmed the 15:00 booking — now I'll request the shift to 16:00.",
+            "describes_sequence": null,
+            "snapshot": {
+              "booking": {
+                "reference": "IR-1042",
+                "service": "Camera sensor cleaning",
+                "starts_at": "2026-11-18T15:00:00+00:00",
+                "timezone": "Europe/London"
+              },
+              "accepted_instructions": [
+                {
+                  "revision": 1,
+                  "turn_id": "customer-1",
+                  "operation": "reschedule",
+                  "booking_reference": "IR-1042",
+                  "target_time": "2026-11-18T16:00:00+00:00",
+                  "timezone": "Europe/London",
+                  "interpretation_id": "69c61fd566244cc0941e18922b4a5530",
+                  "evidence_turn_ids": [
+                    "customer-1"
+                  ]
+                }
+              ],
+              "actions": [],
+              "journal": [
+                {
+                  "sequence": 1,
+                  "transaction_id": "931ac01947074263919e51de173bf413",
+                  "event": "initialized",
+                  "data": {
+                    "booking": {
+                      "reference": "IR-1042",
+                      "service": "Camera sensor cleaning",
+                      "starts_at": "2026-11-18T15:00:00+00:00",
+                      "timezone": "Europe/London"
+                    },
+                    "slot_available": true,
+                    "target_time": "2026-11-18T16:00:00+00:00"
+                  }
+                },
+                {
+                  "sequence": 2,
+                  "transaction_id": "d75066a7bf984414a44f3d59c8ab1bfe",
+                  "event": "instruction_received",
+                  "data": {
+                    "turn_id": "customer-1"
+                  }
+                },
+                {
+                  "sequence": 3,
+                  "transaction_id": "4c640ed1fee145a6a4343af46b11e95f",
+                  "event": "instruction_accepted",
+                  "data": {
+                    "booking_reference": "IR-1042",
+                    "evidence_turn_ids": [
+                      "customer-1"
+                    ],
+                    "interpretation_id": "69c61fd566244cc0941e18922b4a5530",
+                    "operation": "reschedule",
+                    "revision": 1,
+                    "target_time": "2026-11-18T16:00:00+00:00",
+                    "timezone": "Europe/London",
+                    "turn_id": "customer-1"
+                  }
+                }
+              ],
+              "read_after_sequence": 3,
+              "read_source": "independent read-only SQLite transaction"
+            },
+            "source": "captured actor message replayed before execution"
+          },
+          {
+            "turn_id": "actor-continuation-3",
+            "text": "Understood — I'll verify the booking stayed at 15:00.",
+            "describes_sequence": 9,
+            "snapshot": {
+              "booking": {
+                "reference": "IR-1042",
+                "service": "Camera sensor cleaning",
+                "starts_at": "2026-11-18T15:00:00+00:00",
+                "timezone": "Europe/London"
+              },
+              "accepted_instructions": [
+                {
+                  "revision": 1,
+                  "turn_id": "customer-1",
+                  "operation": "reschedule",
+                  "booking_reference": "IR-1042",
+                  "target_time": "2026-11-18T16:00:00+00:00",
+                  "timezone": "Europe/London",
+                  "interpretation_id": "69c61fd566244cc0941e18922b4a5530",
+                  "evidence_turn_ids": [
+                    "customer-1"
+                  ]
+                },
+                {
+                  "revision": 2,
+                  "turn_id": "customer-2",
+                  "operation": "withdraw_pending",
+                  "booking_reference": "IR-1042",
+                  "target_time": "2026-11-18T15:00:00+00:00",
+                  "timezone": "Europe/London",
+                  "interpretation_id": "69c61fd566244cc0941e18922b4a5530",
+                  "evidence_turn_ids": [
+                    "context",
+                    "customer-2"
+                  ]
+                }
+              ],
+              "actions": [
+                {
+                  "action_id": "38d616d46dd943ce8900dc133dc62adf",
+                  "booking_reference": "IR-1042",
+                  "operation": "reschedule",
+                  "target_time": "2026-11-18T16:00:00+00:00",
+                  "accepted_revision": 1,
+                  "status": "suppressed",
+                  "checked_revision": 2,
+                  "decision_sequence": 9
+                }
+              ],
+              "journal": [
+                {
+                  "sequence": 1,
+                  "transaction_id": "931ac01947074263919e51de173bf413",
+                  "event": "initialized",
+                  "data": {
+                    "booking": {
+                      "reference": "IR-1042",
+                      "service": "Camera sensor cleaning",
+                      "starts_at": "2026-11-18T15:00:00+00:00",
+                      "timezone": "Europe/London"
+                    },
+                    "slot_available": true,
+                    "target_time": "2026-11-18T16:00:00+00:00"
+                  }
+                },
+                {
+                  "sequence": 2,
+                  "transaction_id": "d75066a7bf984414a44f3d59c8ab1bfe",
+                  "event": "instruction_received",
+                  "data": {
+                    "turn_id": "customer-1"
+                  }
+                },
+                {
+                  "sequence": 3,
+                  "transaction_id": "4c640ed1fee145a6a4343af46b11e95f",
+                  "event": "instruction_accepted",
+                  "data": {
+                    "booking_reference": "IR-1042",
+                    "evidence_turn_ids": [
+                      "customer-1"
+                    ],
+                    "interpretation_id": "69c61fd566244cc0941e18922b4a5530",
+                    "operation": "reschedule",
+                    "revision": 1,
+                    "target_time": "2026-11-18T16:00:00+00:00",
+                    "timezone": "Europe/London",
+                    "turn_id": "customer-1"
+                  }
+                },
+                {
+                  "sequence": 4,
+                  "transaction_id": "8be063a0721445dea103ebf245c6c2c0",
+                  "event": "action_queued",
+                  "data": {
+                    "accepted_revision": 1,
+                    "action_id": "38d616d46dd943ce8900dc133dc62adf",
+                    "booking_reference": "IR-1042",
+                    "operation": "reschedule",
+                    "target_time": "2026-11-18T16:00:00+00:00"
+                  }
+                },
+                {
+                  "sequence": 5,
+                  "transaction_id": "e4efff098b7f42f7b4817d330b0fa26a",
+                  "event": "worker_preliminary_read",
+                  "data": {
+                    "action_id": "38d616d46dd943ce8900dc133dc62adf",
+                    "observed_revision": 1,
+                    "observed_sequence": 4
+                  }
+                },
+                {
+                  "sequence": 6,
+                  "transaction_id": "2b5020e4ab414c57b4ddeb2a012c5053",
+                  "event": "instruction_received",
+                  "data": {
+                    "turn_id": "customer-2"
+                  }
+                },
+                {
+                  "sequence": 7,
+                  "transaction_id": "965a641897f54d6f85d24aec36f3f349",
+                  "event": "instruction_accepted",
+                  "data": {
+                    "booking_reference": "IR-1042",
+                    "evidence_turn_ids": [
+                      "context",
+                      "customer-2"
+                    ],
+                    "interpretation_id": "69c61fd566244cc0941e18922b4a5530",
+                    "operation": "withdraw_pending",
+                    "revision": 2,
+                    "target_time": "2026-11-18T15:00:00+00:00",
+                    "timezone": "Europe/London",
+                    "turn_id": "customer-2"
+                  }
+                },
+                {
+                  "sequence": 8,
+                  "transaction_id": "55c837ac414f48c4a5fdd31881f5c5e0",
+                  "event": "authorization_checked",
+                  "data": {
+                    "accepted_revision": 1,
+                    "action_id": "38d616d46dd943ce8900dc133dc62adf",
+                    "authorized": false,
+                    "checked_revision": 2
+                  }
+                },
+                {
+                  "sequence": 9,
+                  "transaction_id": "55c837ac414f48c4a5fdd31881f5c5e0",
+                  "event": "action_suppressed",
+                  "data": {
+                    "accepted_revision": 1,
+                    "action_id": "38d616d46dd943ce8900dc133dc62adf",
+                    "after": {
+                      "reference": "IR-1042",
+                      "service": "Camera sensor cleaning",
+                      "starts_at": "2026-11-18T15:00:00+00:00",
+                      "timezone": "Europe/London"
+                    },
+                    "authorized": false,
+                    "before": {
+                      "reference": "IR-1042",
+                      "service": "Camera sensor cleaning",
+                      "starts_at": "2026-11-18T15:00:00+00:00",
+                      "timezone": "Europe/London"
+                    },
+                    "booking_reference": "IR-1042",
+                    "checked_revision": 2,
+                    "operation": "reschedule",
+                    "reason": "A newer accepted revision no longer authorizes this queued action.",
+                    "target_time": "2026-11-18T16:00:00+00:00"
+                  }
+                }
+              ],
+              "read_after_sequence": 9,
+              "read_source": "independent read-only SQLite transaction"
+            },
+            "source": "independent SQLite read after actual actor output"
+          },
+          {
+            "turn_id": "actor-continuation-4",
+            "text": "Booking IR-1042 remains on 2026-11-18 at 15:00 Europe/London; the requested reschedule to 16:00 did not occur, and as your keep request arrived after completion no restoration was performed.",
+            "describes_sequence": 9,
+            "snapshot": {
+              "booking": {
+                "reference": "IR-1042",
+                "service": "Camera sensor cleaning",
+                "starts_at": "2026-11-18T15:00:00+00:00",
+                "timezone": "Europe/London"
+              },
+              "accepted_instructions": [
+                {
+                  "revision": 1,
+                  "turn_id": "customer-1",
+                  "operation": "reschedule",
+                  "booking_reference": "IR-1042",
+                  "target_time": "2026-11-18T16:00:00+00:00",
+                  "timezone": "Europe/London",
+                  "interpretation_id": "69c61fd566244cc0941e18922b4a5530",
+                  "evidence_turn_ids": [
+                    "customer-1"
+                  ]
+                },
+                {
+                  "revision": 2,
+                  "turn_id": "customer-2",
+                  "operation": "withdraw_pending",
+                  "booking_reference": "IR-1042",
+                  "target_time": "2026-11-18T15:00:00+00:00",
+                  "timezone": "Europe/London",
+                  "interpretation_id": "69c61fd566244cc0941e18922b4a5530",
+                  "evidence_turn_ids": [
+                    "context",
+                    "customer-2"
+                  ]
+                }
+              ],
+              "actions": [
+                {
+                  "action_id": "38d616d46dd943ce8900dc133dc62adf",
+                  "booking_reference": "IR-1042",
+                  "operation": "reschedule",
+                  "target_time": "2026-11-18T16:00:00+00:00",
+                  "accepted_revision": 1,
+                  "status": "suppressed",
+                  "checked_revision": 2,
+                  "decision_sequence": 9
+                }
+              ],
+              "journal": [
+                {
+                  "sequence": 1,
+                  "transaction_id": "931ac01947074263919e51de173bf413",
+                  "event": "initialized",
+                  "data": {
+                    "booking": {
+                      "reference": "IR-1042",
+                      "service": "Camera sensor cleaning",
+                      "starts_at": "2026-11-18T15:00:00+00:00",
+                      "timezone": "Europe/London"
+                    },
+                    "slot_available": true,
+                    "target_time": "2026-11-18T16:00:00+00:00"
+                  }
+                },
+                {
+                  "sequence": 2,
+                  "transaction_id": "d75066a7bf984414a44f3d59c8ab1bfe",
+                  "event": "instruction_received",
+                  "data": {
+                    "turn_id": "customer-1"
+                  }
+                },
+                {
+                  "sequence": 3,
+                  "transaction_id": "4c640ed1fee145a6a4343af46b11e95f",
+                  "event": "instruction_accepted",
+                  "data": {
+                    "booking_reference": "IR-1042",
+                    "evidence_turn_ids": [
+                      "customer-1"
+                    ],
+                    "interpretation_id": "69c61fd566244cc0941e18922b4a5530",
+                    "operation": "reschedule",
+                    "revision": 1,
+                    "target_time": "2026-11-18T16:00:00+00:00",
+                    "timezone": "Europe/London",
+                    "turn_id": "customer-1"
+                  }
+                },
+                {
+                  "sequence": 4,
+                  "transaction_id": "8be063a0721445dea103ebf245c6c2c0",
+                  "event": "action_queued",
+                  "data": {
+                    "accepted_revision": 1,
+                    "action_id": "38d616d46dd943ce8900dc133dc62adf",
+                    "booking_reference": "IR-1042",
+                    "operation": "reschedule",
+                    "target_time": "2026-11-18T16:00:00+00:00"
+                  }
+                },
+                {
+                  "sequence": 5,
+                  "transaction_id": "e4efff098b7f42f7b4817d330b0fa26a",
+                  "event": "worker_preliminary_read",
+                  "data": {
+                    "action_id": "38d616d46dd943ce8900dc133dc62adf",
+                    "observed_revision": 1,
+                    "observed_sequence": 4
+                  }
+                },
+                {
+                  "sequence": 6,
+                  "transaction_id": "2b5020e4ab414c57b4ddeb2a012c5053",
+                  "event": "instruction_received",
+                  "data": {
+                    "turn_id": "customer-2"
+                  }
+                },
+                {
+                  "sequence": 7,
+                  "transaction_id": "965a641897f54d6f85d24aec36f3f349",
+                  "event": "instruction_accepted",
+                  "data": {
+                    "booking_reference": "IR-1042",
+                    "evidence_turn_ids": [
+                      "context",
+                      "customer-2"
+                    ],
+                    "interpretation_id": "69c61fd566244cc0941e18922b4a5530",
+                    "operation": "withdraw_pending",
+                    "revision": 2,
+                    "target_time": "2026-11-18T15:00:00+00:00",
+                    "timezone": "Europe/London",
+                    "turn_id": "customer-2"
+                  }
+                },
+                {
+                  "sequence": 8,
+                  "transaction_id": "55c837ac414f48c4a5fdd31881f5c5e0",
+                  "event": "authorization_checked",
+                  "data": {
+                    "accepted_revision": 1,
+                    "action_id": "38d616d46dd943ce8900dc133dc62adf",
+                    "authorized": false,
+                    "checked_revision": 2
+                  }
+                },
+                {
+                  "sequence": 9,
+                  "transaction_id": "55c837ac414f48c4a5fdd31881f5c5e0",
+                  "event": "action_suppressed",
+                  "data": {
+                    "accepted_revision": 1,
+                    "action_id": "38d616d46dd943ce8900dc133dc62adf",
+                    "after": {
+                      "reference": "IR-1042",
+                      "service": "Camera sensor cleaning",
+                      "starts_at": "2026-11-18T15:00:00+00:00",
+                      "timezone": "Europe/London"
+                    },
+                    "authorized": false,
+                    "before": {
+                      "reference": "IR-1042",
+                      "service": "Camera sensor cleaning",
+                      "starts_at": "2026-11-18T15:00:00+00:00",
+                      "timezone": "Europe/London"
+                    },
+                    "booking_reference": "IR-1042",
+                    "checked_revision": 2,
+                    "operation": "reschedule",
+                    "reason": "A newer accepted revision no longer authorizes this queued action.",
+                    "target_time": "2026-11-18T16:00:00+00:00"
+                  }
+                },
+                {
+                  "sequence": 10,
+                  "transaction_id": "8d0b97eb0920415b84512841342cf773",
+                  "event": "assistant_statement",
+                  "data": {
+                    "describes_sequence": 9,
+                    "snapshot": {
+                      "booking": {
+                        "reference": "IR-1042",
+                        "service": "Camera sensor cleaning",
+                        "starts_at": "2026-11-18T15:00:00+00:00",
+                        "timezone": "Europe/London"
+                      },
+                      "read_after_sequence": 9,
+                      "read_source": "independent read-only SQLite transaction"
+                    },
+                    "text": "Understood — I'll verify the booking stayed at 15:00.",
+                    "turn_id": "actor-continuation-3"
+                  }
+                }
+              ],
+              "read_after_sequence": 10,
+              "read_source": "independent read-only SQLite transaction"
+            },
+            "source": "independent SQLite read after actual actor output"
+          }
+        ],
+        "agent_statement_checks": [],
+        "assistant_interpretation": {
+          "interpretation_id": "c8e0b3e209ab47b3951ba4060cd6bff1",
+          "purpose": "assistant_claims",
+          "input_sha256": "42fc72f9e078583f798881d92e82fed30ee323b01de4bf827e0dc122e6f74e40",
+          "source": "live_meta",
+          "status": "error",
+          "model": "muse-spark-1.3",
+          "data": null,
+          "errors": [
+            "Meta response was incomplete or missing model/text; no substitute was used."
+          ],
+          "api_call": {
+            "status": "response_received",
+            "http_attempts": 1,
+            "http_responses": 1,
+            "successful_http_responses": 1,
+            "usage": {
+              "input_tokens": 938,
+              "output_tokens": 4096,
+              "total_tokens": 5034
+            }
+          }
+        },
+        "provenance": {
+          "database": "SQLite",
+          "independent_final_read": true,
+          "schedule_plan": "withdraw_before_execution",
+          "actual_schedule": "withdrawal after preliminary read, before write transaction",
+          "customer_interpretation_id": "69c61fd566244cc0941e18922b4a5530",
+          "customer_interpretation_reused": true,
+          "customer_interpretations_during_run": 0,
+          "agent_generation": "live_meta",
+          "proposal_source": "replay of live capture",
+          "originating_revision": 1,
+          "mocked_components": []
+        },
+        "evaluation": {
+          "booking_outcome": "fulfilled",
+          "instruction_adherence": "PASS",
+          "confirmation_integrity": "INCONCLUSIVE",
+          "task_verdict": "INCONCLUSIVE",
+          "explanation": "Booking fulfilled. Instruction adherence: PASS. Factual claim accuracy: INCONCLUSIVE. The transaction observed revision 2 and suppressed obsolete revision 1 without changing the booking.",
+          "checks": [
+            {
+              "name": "Accepted instruction evidence",
+              "status": "PASS",
+              "detail": "Accepted revisions match validated customer evidence and durable journal order."
+            },
+            {
+              "name": "Applicable booking outcome",
+              "status": "PASS",
+              "detail": "Latest accepted revision 2 requests 2026-11-18T15:00:00+00:00; independent readback contains 2026-11-18T15:00:00+00:00."
+            },
+            {
+              "name": "Action authorization",
+              "status": "PASS",
+              "detail": "The transaction observed revision 2 and suppressed obsolete revision 1 without changing the booking."
+            },
+            {
+              "name": "Statement-scoped factual accuracy",
+              "status": "INCONCLUSIVE",
+              "detail": "Assistant interpretation or statement evidence is unavailable; no claim was substituted."
+            }
+          ]
+        },
+        "action_assessments": [
+          {
+            "action_id": "38d616d46dd943ce8900dc133dc62adf",
+            "accepted_revision": 1,
+            "current_revision_at_decision": 2,
+            "decision_sequence": 9,
+            "authorized_at_decision": false,
+            "atomic_evidence": true,
+            "status": "PASS",
+            "detail": "The transaction observed revision 2 and suppressed obsolete revision 1 without changing the booking."
+          }
+        ],
+        "statement_assessments": [],
+        "revision_assessments": [
+          {
+            "revision": 1,
+            "turn_id": "customer-1",
+            "scope": "superseded_before_execution",
+            "evaluation": null
+          },
+          {
+            "revision": 2,
+            "turn_id": "customer-2",
+            "scope": "applicable_at_final_read",
+            "evaluation": {
+              "booking_outcome": "fulfilled",
+              "instruction_adherence": "PASS",
+              "confirmation_integrity": "INCONCLUSIVE",
+              "task_verdict": "INCONCLUSIVE",
+              "explanation": "Booking fulfilled. Instruction adherence: PASS. Factual claim accuracy: INCONCLUSIVE. The transaction observed revision 2 and suppressed obsolete revision 1 without changing the booking.",
+              "checks": [
+                {
+                  "name": "Accepted instruction evidence",
+                  "status": "PASS",
+                  "detail": "Accepted revisions match validated customer evidence and durable journal order."
+                },
+                {
+                  "name": "Applicable booking outcome",
+                  "status": "PASS",
+                  "detail": "Latest accepted revision 2 requests 2026-11-18T15:00:00+00:00; independent readback contains 2026-11-18T15:00:00+00:00."
+                },
+                {
+                  "name": "Action authorization",
+                  "status": "PASS",
+                  "detail": "The transaction observed revision 2 and suppressed obsolete revision 1 without changing the booking."
+                },
+                {
+                  "name": "Statement-scoped factual accuracy",
+                  "status": "INCONCLUSIVE",
+                  "detail": "Assistant interpretation or statement evidence is unavailable; no claim was substituted."
+                }
+              ]
+            }
+          }
+        ],
+        "temporal_evaluation": {
+          "booking_outcome": "fulfilled",
+          "instruction_adherence": "PASS",
+          "confirmation_integrity": "INCONCLUSIVE",
+          "task_verdict": "INCONCLUSIVE",
+          "explanation": "Booking fulfilled. Instruction adherence: PASS. Factual claim accuracy: INCONCLUSIVE. The transaction observed revision 2 and suppressed obsolete revision 1 without changing the booking.",
+          "checks": [
+            {
+              "name": "Accepted instruction evidence",
+              "status": "PASS",
+              "detail": "Accepted revisions match validated customer evidence and durable journal order."
+            },
+            {
+              "name": "Applicable booking outcome",
+              "status": "PASS",
+              "detail": "Latest accepted revision 2 requests 2026-11-18T15:00:00+00:00; independent readback contains 2026-11-18T15:00:00+00:00."
+            },
+            {
+              "name": "Action authorization",
+              "status": "PASS",
+              "detail": "The transaction observed revision 2 and suppressed obsolete revision 1 without changing the booking."
+            },
+            {
+              "name": "Statement-scoped factual accuracy",
+              "status": "INCONCLUSIVE",
+              "detail": "Assistant interpretation or statement evidence is unavailable; no claim was substituted."
+            }
+          ]
+        }
+      },
+      "authored_interpretation": {
+        "messages": [
+          {
+            "turn_id": "actor-prefix-1",
+            "segments": [
+              {
+                "text": "I'll inspect your booking and process the move to 16:00.",
+                "kind": "plan",
+                "operation": null,
+                "claimed_booking": null,
+                "event_order": null,
+                "evidence_turn_ids": [
+                  "actor-prefix-1"
+                ],
+                "reason": null
+              }
+            ]
+          },
+          {
+            "turn_id": "actor-prefix-2",
+            "segments": [
+              {
+                "text": "Confirmed the 15:00 booking",
+                "kind": "current_state",
+                "operation": null,
+                "claimed_booking": {
+                  "reference": "IR-1042",
+                  "starts_at": "2026-11-18T15:00:00+00:00",
+                  "timezone": "Europe/London"
+                },
+                "event_order": null,
+                "evidence_turn_ids": [
+                  "context",
+                  "actor-prefix-2"
+                ],
+                "reason": null
+              },
+              {
+                "text": " — now I'll request the shift to 16:00.",
+                "kind": "plan",
+                "operation": null,
+                "claimed_booking": null,
+                "event_order": null,
+                "evidence_turn_ids": [
+                  "actor-prefix-2"
+                ],
+                "reason": null
+              }
+            ]
+          },
+          {
+            "turn_id": "actor-continuation-3",
+            "segments": [
+              {
+                "text": "Understood — I'll verify the booking stayed at 15:00.",
+                "kind": "plan",
+                "operation": null,
+                "claimed_booking": null,
+                "event_order": null,
+                "evidence_turn_ids": [
+                  "actor-continuation-3"
+                ],
+                "reason": null
+              }
+            ]
+          },
+          {
+            "turn_id": "actor-continuation-4",
+            "segments": [
+              {
+                "text": "Booking IR-1042 remains on 2026-11-18 at 15:00 Europe/London;",
+                "kind": "current_state",
+                "operation": null,
+                "claimed_booking": {
+                  "reference": "IR-1042",
+                  "starts_at": "2026-11-18T15:00:00+00:00",
+                  "timezone": "Europe/London"
+                },
+                "event_order": null,
+                "evidence_turn_ids": [
+                  "context",
+                  "actor-continuation-4"
+                ],
+                "reason": null
+              },
+              {
+                "text": " the requested reschedule to 16:00 did not occur,",
+                "kind": "action",
+                "operation": "not_rescheduled",
+                "claimed_booking": null,
+                "event_order": null,
+                "evidence_turn_ids": [
+                  "actor-continuation-4"
+                ],
+                "reason": null
+              },
+              {
+                "text": " and as your keep request arrived after completion",
+                "kind": "event_order",
+                "operation": null,
+                "claimed_booking": null,
+                "event_order": "withdrawal_after_completion",
+                "evidence_turn_ids": [
+                  "actor-continuation-4"
+                ],
+                "reason": null
+              },
+              {
+                "text": " no restoration was performed.",
+                "kind": "action",
+                "operation": "not_restored",
+                "claimed_booking": null,
+                "event_order": null,
+                "evidence_turn_ids": [
+                  "actor-continuation-4"
+                ],
+                "reason": null
+              }
+            ]
+          }
+        ]
+      },
+      "expected_accuracy": "FAIL",
+      "meaning_provenance": "Independently authored offline assertions; not model extraction. Chronology explicitly interprets completion as completion of the requested reschedule."
+    },
+    {
+      "scenario_id": "no-withdrawal",
+      "implementation": "faulty",
+      "source_branch_sha256": "88f016af31dea55fdeb6532fc1b845dc097a1b4634ddee6854fb74c711cc5b27",
+      "source_report": {
+        "schema_version": 4,
+        "report_type": "agent_branch",
+        "run_id": "ee19219af2474f539e9ed52ad073d9fa",
+        "pair_id": "1e912f1ebad34149821110dd661f0300",
+        "freeze_id": "7e5e70ca728328d15f956f5b431f7571f2c705c7728c8ca69d258306743a78a0",
+        "created_at": "2026-10-30T21:48:58.722249+00:00",
+        "implementation": "faulty",
+        "controlled_demonstration": true,
+        "initial_booking": {
+          "reference": "IR-1042",
+          "service": "Camera sensor cleaning",
+          "starts_at": "2026-11-18T15:00:00+00:00",
+          "timezone": "Europe/London"
+        },
+        "conversation": [
+          {
+            "id": "context",
+            "role": "assistant",
+            "text": "Booking IR-1042: Camera sensor cleaning, on 2026-11-18 at 15:00 (Europe/London)."
+          },
+          {
+            "id": "customer-1",
+            "role": "customer",
+            "text": "Please move booking IR-1042 to 16:00 on 2026-11-18, Europe/London."
+          },
+          {
+            "id": "actor-prefix-1",
+            "role": "assistant",
+            "text": "I'll confirm your current booking and process the time change."
+          },
+          {
+            "id": "actor-prefix-2",
+            "role": "assistant",
+            "text": "Confirmed at 15:00 — now moving it to 16:00."
+          },
+          {
+            "id": "actor-continuation-3",
+            "role": "assistant",
+            "text": "Booking IR-1042 on 2026-11-18 at 16:00 Europe/London — reschedule occurred."
+          }
+        ],
+        "final_evidence": {
+          "booking": {
+            "reference": "IR-1042",
+            "service": "Camera sensor cleaning",
+            "starts_at": "2026-11-18T16:00:00+00:00",
+            "timezone": "Europe/London"
+          },
+          "accepted_instructions": [
+            {
+              "revision": 1,
+              "turn_id": "customer-1",
+              "operation": "reschedule",
+              "booking_reference": "IR-1042",
+              "target_time": "2026-11-18T16:00:00+00:00",
+              "timezone": "Europe/London",
+              "interpretation_id": "20b05df40fb049b4834196859561b341",
+              "evidence_turn_ids": [
+                "customer-1"
+              ]
+            }
+          ],
+          "actions": [
+            {
+              "action_id": "630cb39d4b32403ea9f5561d92851697",
+              "booking_reference": "IR-1042",
+              "operation": "reschedule",
+              "target_time": "2026-11-18T16:00:00+00:00",
+              "accepted_revision": 1,
+              "status": "committed",
+              "checked_revision": 1,
+              "decision_sequence": 7
+            }
+          ],
+          "journal": [
+            {
+              "sequence": 1,
+              "transaction_id": "43c32626492243938466cc276c80434c",
+              "event": "initialized",
+              "data": {
+                "booking": {
+                  "reference": "IR-1042",
+                  "service": "Camera sensor cleaning",
+                  "starts_at": "2026-11-18T15:00:00+00:00",
+                  "timezone": "Europe/London"
+                },
+                "slot_available": true,
+                "target_time": "2026-11-18T16:00:00+00:00"
+              }
+            },
+            {
+              "sequence": 2,
+              "transaction_id": "83b80516423d444eaf1bba7410cbfc0d",
+              "event": "instruction_received",
+              "data": {
+                "turn_id": "customer-1"
+              }
+            },
+            {
+              "sequence": 3,
+              "transaction_id": "e1927958f94247ed8a19c741169450ad",
+              "event": "instruction_accepted",
+              "data": {
+                "booking_reference": "IR-1042",
+                "evidence_turn_ids": [
+                  "customer-1"
+                ],
+                "interpretation_id": "20b05df40fb049b4834196859561b341",
+                "operation": "reschedule",
+                "revision": 1,
+                "target_time": "2026-11-18T16:00:00+00:00",
+                "timezone": "Europe/London",
+                "turn_id": "customer-1"
+              }
+            },
+            {
+              "sequence": 4,
+              "transaction_id": "669cc7b986194b07bab56a29543a29c9",
+              "event": "action_queued",
+              "data": {
+                "accepted_revision": 1,
+                "action_id": "630cb39d4b32403ea9f5561d92851697",
+                "booking_reference": "IR-1042",
+                "operation": "reschedule",
+                "target_time": "2026-11-18T16:00:00+00:00"
+              }
+            },
+            {
+              "sequence": 5,
+              "transaction_id": "b6478e015fa74bf9afb7d10ae1d33d45",
+              "event": "worker_preliminary_read",
+              "data": {
+                "action_id": "630cb39d4b32403ea9f5561d92851697",
+                "observed_revision": 1,
+                "observed_sequence": 4
+              }
+            },
+            {
+              "sequence": 6,
+              "transaction_id": "994b8edf2dae490a9f8441aad12657cf",
+              "event": "authorization_checked",
+              "data": {
+                "accepted_revision": 1,
+                "action_id": "630cb39d4b32403ea9f5561d92851697",
+                "authorized": true,
+                "checked_revision": 1
+              }
+            },
+            {
+              "sequence": 7,
+              "transaction_id": "994b8edf2dae490a9f8441aad12657cf",
+              "event": "action_committed",
+              "data": {
+                "accepted_revision": 1,
+                "action_id": "630cb39d4b32403ea9f5561d92851697",
+                "after": {
+                  "reference": "IR-1042",
+                  "service": "Camera sensor cleaning",
+                  "starts_at": "2026-11-18T16:00:00+00:00",
+                  "timezone": "Europe/London"
+                },
+                "authorized": true,
+                "before": {
+                  "reference": "IR-1042",
+                  "service": "Camera sensor cleaning",
+                  "starts_at": "2026-11-18T15:00:00+00:00",
+                  "timezone": "Europe/London"
+                },
+                "booking_reference": "IR-1042",
+                "checked_revision": 1,
+                "operation": "reschedule",
+                "reason": "The queued reschedule was committed.",
+                "target_time": "2026-11-18T16:00:00+00:00"
+              }
+            },
+            {
+              "sequence": 8,
+              "transaction_id": "772c6255783d498a96aef013adfe8b0c",
+              "event": "assistant_statement",
+              "data": {
+                "describes_sequence": 7,
+                "snapshot": {
+                  "booking": {
+                    "reference": "IR-1042",
+                    "service": "Camera sensor cleaning",
+                    "starts_at": "2026-11-18T16:00:00+00:00",
+                    "timezone": "Europe/London"
+                  },
+                  "read_after_sequence": 7,
+                  "read_source": "independent read-only SQLite transaction"
+                },
+                "text": "Booking IR-1042 on 2026-11-18 at 16:00 Europe/London — reschedule occurred.",
+                "turn_id": "actor-continuation-3"
+              }
+            }
+          ],
+          "read_after_sequence": 8,
+          "read_source": "independent read-only SQLite transaction"
+        },
+        "execution_errors": [],
+        "agent_execution": {
+          "status": "completed",
+          "model": "muse-spark-1.3",
+          "source": "live_meta",
+          "responses": [
+            {
+              "id": "resp_6ae510b8cc68c6cbb0a64f08",
+              "model": "muse-spark-1.3",
+              "status": "completed",
+              "usage": {
+                "input_tokens": 1660,
+                "input_tokens_details": {
+                  "cache_write_tokens": null,
+                  "cached_tokens": 1265
+                },
+                "output_tokens": 298,
+                "output_tokens_details": {
+                  "reasoning_tokens": 263
+                },
+                "total_tokens": 1958
+              },
+              "incomplete_details": null,
+              "output": [
+                {
+                  "id": "msg_85ef3c6b-c8e4-4634-a8b5-ef47b5f2d266",
+                  "content": [
+                    {
+                      "annotations": [],
+                      "text": "Booking IR-1042 on 2026-11-18 at 16:00 Europe/London — reschedule occurred.",
+                      "type": "output_text",
+                      "logprobs": []
+                    }
+                  ],
+                  "role": "assistant",
+                  "status": "completed",
+                  "type": "message",
+                  "phase": null
+                }
+              ]
+            }
+          ],
+          "tool_calls": [
+            {
+              "call_id": "call_a136efea-25d9-4510-b374-9c60ee2c8e38",
+              "name": "reschedule_booking",
+              "raw_arguments": "{\"reference\":\"IR-1042\",\"requested_time\":\"2026-11-18T16:00:00+00:00\",\"timezone\":\"Europe/London\"}",
+              "status": "completed",
+              "result": {
+                "ok": true,
+                "booking": {
+                  "reference": "IR-1042",
+                  "service": "Camera sensor cleaning",
+                  "starts_at": "2026-11-18T16:00:00+00:00",
+                  "timezone": "Europe/London"
+                },
+                "action": {
+                  "operation": "reschedule",
+                  "target_time": "2026-11-18T16:00:00+00:00",
+                  "accepted_revision": 1,
+                  "status": "committed",
+                  "checked_revision": 1
+                },
+                "read_source": "independent read-only SQLite transaction"
+              }
+            }
+          ],
+          "api_calls": [
+            {
+              "status": "response_received",
+              "http_attempts": 1,
+              "http_responses": 1,
+              "successful_http_responses": 1,
+              "usage": {
+                "input_tokens": 1660,
+                "output_tokens": 298,
+                "total_tokens": 1958
+              }
+            }
+          ],
+          "errors": [],
+          "max_rounds": 4,
+          "max_tool_calls": 8,
+          "http_attempts": 1,
+          "http_responses": 1,
+          "successful_http_responses": 1,
+          "prompt_tool_sha256": "1115c39ed474eb57ff72c479b69ac98a7d89bc55859449fe579c7a9ec99c873c",
+          "prompt_version": "booking-agent-v1",
+          "visible_messages": [
+            "Booking IR-1042 on 2026-11-18 at 16:00 Europe/London — reschedule occurred."
+          ],
+          "requests": [
+            {
+              "input": [
+                {
+                  "role": "assistant",
+                  "content": "Booking IR-1042: Camera sensor cleaning, on 2026-11-18 at 15:00 (Europe/London)."
+                },
+                {
+                  "role": "user",
+                  "content": "Please move booking IR-1042 to 16:00 on 2026-11-18, Europe/London."
+                },
+                {
+                  "type": "message",
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "annotations": [],
+                      "text": "I'll confirm your current booking and process the time change.",
+                      "type": "output_text",
+                      "logprobs": []
+                    }
+                  ],
+                  "phase": "commentary"
+                },
+                {
+                  "type": "function_call",
+                  "call_id": "call_b43c5e94-09fe-4098-a679-053d8efa8409",
+                  "name": "get_booking",
+                  "arguments": "{\"reference\":\"IR-1042\"}"
+                },
+                {
+                  "type": "function_call_output",
+                  "call_id": "call_b43c5e94-09fe-4098-a679-053d8efa8409",
+                  "output": "{\"ok\": true, \"booking\": {\"reference\": \"IR-1042\", \"service\": \"Camera sensor cleaning\", \"starts_at\": \"2026-11-18T15:00:00+00:00\", \"timezone\": \"Europe/London\"}, \"action\": null, \"read_source\": \"independent read-only SQLite transaction\"}"
+                },
+                {
+                  "type": "message",
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "annotations": [],
+                      "text": "Confirmed at 15:00 — now moving it to 16:00.",
+                      "type": "output_text",
+                      "logprobs": []
+                    }
+                  ],
+                  "phase": "commentary"
+                },
+                {
+                  "type": "function_call",
+                  "call_id": "call_a136efea-25d9-4510-b374-9c60ee2c8e38",
+                  "name": "reschedule_booking",
+                  "arguments": "{\"reference\":\"IR-1042\",\"requested_time\":\"2026-11-18T16:00:00+00:00\",\"timezone\":\"Europe/London\"}"
+                },
+                {
+                  "type": "function_call_output",
+                  "call_id": "call_a136efea-25d9-4510-b374-9c60ee2c8e38",
+                  "output": "{\"ok\": true, \"booking\": {\"reference\": \"IR-1042\", \"service\": \"Camera sensor cleaning\", \"starts_at\": \"2026-11-18T16:00:00+00:00\", \"timezone\": \"Europe/London\"}, \"action\": {\"operation\": \"reschedule\", \"target_time\": \"2026-11-18T16:00:00+00:00\", \"accepted_revision\": 1, \"status\": \"committed\", \"checked_revision\": 1}, \"read_source\": \"independent read-only SQLite transaction\"}"
+                }
+              ],
+              "input_sha256": "af5bf259f8d5f70fc64ff50f61ca54cea812a9e05e8de92303be9dd7d6611ef9",
+              "public_input_sha256": "3bc164be480173c6447c0ebc4e7e35da47ee67c49a82b75122e576666b8bb7e0",
+              "private_reasoning_omitted": true
+            }
+          ]
+        },
+        "statement_observations": [
+          {
+            "turn_id": "actor-prefix-1",
+            "text": "I'll confirm your current booking and process the time change.",
+            "describes_sequence": null,
+            "snapshot": {
+              "booking": {
+                "reference": "IR-1042",
+                "service": "Camera sensor cleaning",
+                "starts_at": "2026-11-18T15:00:00+00:00",
+                "timezone": "Europe/London"
+              },
+              "accepted_instructions": [
+                {
+                  "revision": 1,
+                  "turn_id": "customer-1",
+                  "operation": "reschedule",
+                  "booking_reference": "IR-1042",
+                  "target_time": "2026-11-18T16:00:00+00:00",
+                  "timezone": "Europe/London",
+                  "interpretation_id": "20b05df40fb049b4834196859561b341",
+                  "evidence_turn_ids": [
+                    "customer-1"
+                  ]
+                }
+              ],
+              "actions": [],
+              "journal": [
+                {
+                  "sequence": 1,
+                  "transaction_id": "43c32626492243938466cc276c80434c",
+                  "event": "initialized",
+                  "data": {
+                    "booking": {
+                      "reference": "IR-1042",
+                      "service": "Camera sensor cleaning",
+                      "starts_at": "2026-11-18T15:00:00+00:00",
+                      "timezone": "Europe/London"
+                    },
+                    "slot_available": true,
+                    "target_time": "2026-11-18T16:00:00+00:00"
+                  }
+                },
+                {
+                  "sequence": 2,
+                  "transaction_id": "83b80516423d444eaf1bba7410cbfc0d",
+                  "event": "instruction_received",
+                  "data": {
+                    "turn_id": "customer-1"
+                  }
+                },
+                {
+                  "sequence": 3,
+                  "transaction_id": "e1927958f94247ed8a19c741169450ad",
+                  "event": "instruction_accepted",
+                  "data": {
+                    "booking_reference": "IR-1042",
+                    "evidence_turn_ids": [
+                      "customer-1"
+                    ],
+                    "interpretation_id": "20b05df40fb049b4834196859561b341",
+                    "operation": "reschedule",
+                    "revision": 1,
+                    "target_time": "2026-11-18T16:00:00+00:00",
+                    "timezone": "Europe/London",
+                    "turn_id": "customer-1"
+                  }
+                }
+              ],
+              "read_after_sequence": 3,
+              "read_source": "independent read-only SQLite transaction"
+            },
+            "source": "captured actor message replayed before execution"
+          },
+          {
+            "turn_id": "actor-prefix-2",
+            "text": "Confirmed at 15:00 — now moving it to 16:00.",
+            "describes_sequence": null,
+            "snapshot": {
+              "booking": {
+                "reference": "IR-1042",
+                "service": "Camera sensor cleaning",
+                "starts_at": "2026-11-18T15:00:00+00:00",
+                "timezone": "Europe/London"
+              },
+              "accepted_instructions": [
+                {
+                  "revision": 1,
+                  "turn_id": "customer-1",
+                  "operation": "reschedule",
+                  "booking_reference": "IR-1042",
+                  "target_time": "2026-11-18T16:00:00+00:00",
+                  "timezone": "Europe/London",
+                  "interpretation_id": "20b05df40fb049b4834196859561b341",
+                  "evidence_turn_ids": [
+                    "customer-1"
+                  ]
+                }
+              ],
+              "actions": [],
+              "journal": [
+                {
+                  "sequence": 1,
+                  "transaction_id": "43c32626492243938466cc276c80434c",
+                  "event": "initialized",
+                  "data": {
+                    "booking": {
+                      "reference": "IR-1042",
+                      "service": "Camera sensor cleaning",
+                      "starts_at": "2026-11-18T15:00:00+00:00",
+                      "timezone": "Europe/London"
+                    },
+                    "slot_available": true,
+                    "target_time": "2026-11-18T16:00:00+00:00"
+                  }
+                },
+                {
+                  "sequence": 2,
+                  "transaction_id": "83b80516423d444eaf1bba7410cbfc0d",
+                  "event": "instruction_received",
+                  "data": {
+                    "turn_id": "customer-1"
+                  }
+                },
+                {
+                  "sequence": 3,
+                  "transaction_id": "e1927958f94247ed8a19c741169450ad",
+                  "event": "instruction_accepted",
+                  "data": {
+                    "booking_reference": "IR-1042",
+                    "evidence_turn_ids": [
+                      "customer-1"
+                    ],
+                    "interpretation_id": "20b05df40fb049b4834196859561b341",
+                    "operation": "reschedule",
+                    "revision": 1,
+                    "target_time": "2026-11-18T16:00:00+00:00",
+                    "timezone": "Europe/London",
+                    "turn_id": "customer-1"
+                  }
+                }
+              ],
+              "read_after_sequence": 3,
+              "read_source": "independent read-only SQLite transaction"
+            },
+            "source": "captured actor message replayed before execution"
+          },
+          {
+            "turn_id": "actor-continuation-3",
+            "text": "Booking IR-1042 on 2026-11-18 at 16:00 Europe/London — reschedule occurred.",
+            "describes_sequence": 7,
+            "snapshot": {
+              "booking": {
+                "reference": "IR-1042",
+                "service": "Camera sensor cleaning",
+                "starts_at": "2026-11-18T16:00:00+00:00",
+                "timezone": "Europe/London"
+              },
+              "accepted_instructions": [
+                {
+                  "revision": 1,
+                  "turn_id": "customer-1",
+                  "operation": "reschedule",
+                  "booking_reference": "IR-1042",
+                  "target_time": "2026-11-18T16:00:00+00:00",
+                  "timezone": "Europe/London",
+                  "interpretation_id": "20b05df40fb049b4834196859561b341",
+                  "evidence_turn_ids": [
+                    "customer-1"
+                  ]
+                }
+              ],
+              "actions": [
+                {
+                  "action_id": "630cb39d4b32403ea9f5561d92851697",
+                  "booking_reference": "IR-1042",
+                  "operation": "reschedule",
+                  "target_time": "2026-11-18T16:00:00+00:00",
+                  "accepted_revision": 1,
+                  "status": "committed",
+                  "checked_revision": 1,
+                  "decision_sequence": 7
+                }
+              ],
+              "journal": [
+                {
+                  "sequence": 1,
+                  "transaction_id": "43c32626492243938466cc276c80434c",
+                  "event": "initialized",
+                  "data": {
+                    "booking": {
+                      "reference": "IR-1042",
+                      "service": "Camera sensor cleaning",
+                      "starts_at": "2026-11-18T15:00:00+00:00",
+                      "timezone": "Europe/London"
+                    },
+                    "slot_available": true,
+                    "target_time": "2026-11-18T16:00:00+00:00"
+                  }
+                },
+                {
+                  "sequence": 2,
+                  "transaction_id": "83b80516423d444eaf1bba7410cbfc0d",
+                  "event": "instruction_received",
+                  "data": {
+                    "turn_id": "customer-1"
+                  }
+                },
+                {
+                  "sequence": 3,
+                  "transaction_id": "e1927958f94247ed8a19c741169450ad",
+                  "event": "instruction_accepted",
+                  "data": {
+                    "booking_reference": "IR-1042",
+                    "evidence_turn_ids": [
+                      "customer-1"
+                    ],
+                    "interpretation_id": "20b05df40fb049b4834196859561b341",
+                    "operation": "reschedule",
+                    "revision": 1,
+                    "target_time": "2026-11-18T16:00:00+00:00",
+                    "timezone": "Europe/London",
+                    "turn_id": "customer-1"
+                  }
+                },
+                {
+                  "sequence": 4,
+                  "transaction_id": "669cc7b986194b07bab56a29543a29c9",
+                  "event": "action_queued",
+                  "data": {
+                    "accepted_revision": 1,
+                    "action_id": "630cb39d4b32403ea9f5561d92851697",
+                    "booking_reference": "IR-1042",
+                    "operation": "reschedule",
+                    "target_time": "2026-11-18T16:00:00+00:00"
+                  }
+                },
+                {
+                  "sequence": 5,
+                  "transaction_id": "b6478e015fa74bf9afb7d10ae1d33d45",
+                  "event": "worker_preliminary_read",
+                  "data": {
+                    "action_id": "630cb39d4b32403ea9f5561d92851697",
+                    "observed_revision": 1,
+                    "observed_sequence": 4
+                  }
+                },
+                {
+                  "sequence": 6,
+                  "transaction_id": "994b8edf2dae490a9f8441aad12657cf",
+                  "event": "authorization_checked",
+                  "data": {
+                    "accepted_revision": 1,
+                    "action_id": "630cb39d4b32403ea9f5561d92851697",
+                    "authorized": true,
+                    "checked_revision": 1
+                  }
+                },
+                {
+                  "sequence": 7,
+                  "transaction_id": "994b8edf2dae490a9f8441aad12657cf",
+                  "event": "action_committed",
+                  "data": {
+                    "accepted_revision": 1,
+                    "action_id": "630cb39d4b32403ea9f5561d92851697",
+                    "after": {
+                      "reference": "IR-1042",
+                      "service": "Camera sensor cleaning",
+                      "starts_at": "2026-11-18T16:00:00+00:00",
+                      "timezone": "Europe/London"
+                    },
+                    "authorized": true,
+                    "before": {
+                      "reference": "IR-1042",
+                      "service": "Camera sensor cleaning",
+                      "starts_at": "2026-11-18T15:00:00+00:00",
+                      "timezone": "Europe/London"
+                    },
+                    "booking_reference": "IR-1042",
+                    "checked_revision": 1,
+                    "operation": "reschedule",
+                    "reason": "The queued reschedule was committed.",
+                    "target_time": "2026-11-18T16:00:00+00:00"
+                  }
+                }
+              ],
+              "read_after_sequence": 7,
+              "read_source": "independent read-only SQLite transaction"
+            },
+            "source": "independent SQLite read after actual actor output"
+          }
+        ],
+        "agent_statement_checks": [],
+        "assistant_interpretation": {
+          "interpretation_id": "100c2356351f483da2e30e215edba216",
+          "purpose": "assistant_claims",
+          "input_sha256": "bebffb43866adeca506681fffdc4f6869fb7f6060703878aee3c2d8b8eea0ff2",
+          "source": "live_meta",
+          "status": "ambiguous",
+          "model": "muse-spark-1.3",
+          "data": {
+            "claims": [
+              {
+                "turn_id": "actor-prefix-2",
+                "operation": "unclear",
+                "claimed_booking": {
+                  "reference": "IR-1042",
+                  "starts_at": "2026-11-18T16:00:00+00:00",
+                  "timezone": "Europe/London"
+                },
+                "evidence_turn_ids": [
+                  "actor-prefix-2",
+                  "context"
+                ]
+              },
+              {
+                "turn_id": "actor-continuation-3",
+                "operation": "rescheduled",
+                "claimed_booking": {
+                  "reference": "IR-1042",
+                  "starts_at": "2026-11-18T16:00:00+00:00",
+                  "timezone": "Europe/London"
+                },
+                "evidence_turn_ids": [
+                  "actor-continuation-3"
+                ]
+              }
+            ],
+            "ambiguities": [
+              "actor-prefix-2 uses 'now moving' without explicit completed-change language, so operation is unclear",
+              "actor-prefix-2 mentions both 15:00 and 16:00; 16:00 treated as intended resulting time, with date IR-1042 and Europe/London supplemented from context"
+            ]
+          },
+          "errors": [
+            "Every assistant report must be extracted separately, in order."
+          ],
+          "api_call": {
+            "status": "response_received",
+            "http_attempts": 1,
+            "http_responses": 1,
+            "successful_http_responses": 1,
+            "usage": {
+              "input_tokens": 851,
+              "output_tokens": 3059,
+              "total_tokens": 3910
+            }
+          }
+        },
+        "provenance": {
+          "database": "SQLite",
+          "independent_final_read": true,
+          "schedule_plan": "no_withdrawal",
+          "actual_schedule": "no withdrawal",
+          "customer_interpretation_id": "20b05df40fb049b4834196859561b341",
+          "customer_interpretation_reused": true,
+          "customer_interpretations_during_run": 0,
+          "agent_generation": "live_meta",
+          "proposal_source": "replay of live capture",
+          "originating_revision": 1,
+          "mocked_components": []
+        },
+        "evaluation": {
+          "booking_outcome": "fulfilled",
+          "instruction_adherence": "PASS",
+          "confirmation_integrity": "INCONCLUSIVE",
+          "task_verdict": "INCONCLUSIVE",
+          "explanation": "Booking fulfilled. Instruction adherence: PASS. Factual claim accuracy: INCONCLUSIVE. Revision 1 still authorized this action when it committed. A later acceptance cannot invalidate this earlier commit.",
+          "checks": [
+            {
+              "name": "Accepted instruction evidence",
+              "status": "PASS",
+              "detail": "Accepted revisions match validated customer evidence and durable journal order."
+            },
+            {
+              "name": "Applicable booking outcome",
+              "status": "PASS",
+              "detail": "Latest accepted revision 1 requests 2026-11-18T16:00:00+00:00; independent readback contains 2026-11-18T16:00:00+00:00."
+            },
+            {
+              "name": "Action authorization",
+              "status": "PASS",
+              "detail": "Revision 1 still authorized this action when it committed. A later acceptance cannot invalidate this earlier commit."
+            },
+            {
+              "name": "Statement-scoped factual accuracy",
+              "status": "INCONCLUSIVE",
+              "detail": "Assistant interpretation or statement evidence is unavailable; no claim was substituted."
+            }
+          ]
+        },
+        "action_assessments": [
+          {
+            "action_id": "630cb39d4b32403ea9f5561d92851697",
+            "accepted_revision": 1,
+            "current_revision_at_decision": 1,
+            "decision_sequence": 7,
+            "authorized_at_decision": true,
+            "atomic_evidence": true,
+            "status": "PASS",
+            "detail": "Revision 1 still authorized this action when it committed. A later acceptance cannot invalidate this earlier commit."
+          }
+        ],
+        "statement_assessments": [],
+        "revision_assessments": [
+          {
+            "revision": 1,
+            "turn_id": "customer-1",
+            "scope": "applicable_at_final_read",
+            "evaluation": {
+              "booking_outcome": "fulfilled",
+              "instruction_adherence": "PASS",
+              "confirmation_integrity": "INCONCLUSIVE",
+              "task_verdict": "INCONCLUSIVE",
+              "explanation": "Booking fulfilled. Instruction adherence: PASS. Factual claim accuracy: INCONCLUSIVE. Revision 1 still authorized this action when it committed. A later acceptance cannot invalidate this earlier commit.",
+              "checks": [
+                {
+                  "name": "Accepted instruction evidence",
+                  "status": "PASS",
+                  "detail": "Accepted revisions match validated customer evidence and durable journal order."
+                },
+                {
+                  "name": "Applicable booking outcome",
+                  "status": "PASS",
+                  "detail": "Latest accepted revision 1 requests 2026-11-18T16:00:00+00:00; independent readback contains 2026-11-18T16:00:00+00:00."
+                },
+                {
+                  "name": "Action authorization",
+                  "status": "PASS",
+                  "detail": "Revision 1 still authorized this action when it committed. A later acceptance cannot invalidate this earlier commit."
+                },
+                {
+                  "name": "Statement-scoped factual accuracy",
+                  "status": "INCONCLUSIVE",
+                  "detail": "Assistant interpretation or statement evidence is unavailable; no claim was substituted."
+                }
+              ]
+            }
+          }
+        ],
+        "temporal_evaluation": {
+          "booking_outcome": "fulfilled",
+          "instruction_adherence": "PASS",
+          "confirmation_integrity": "INCONCLUSIVE",
+          "task_verdict": "INCONCLUSIVE",
+          "explanation": "Booking fulfilled. Instruction adherence: PASS. Factual claim accuracy: INCONCLUSIVE. Revision 1 still authorized this action when it committed. A later acceptance cannot invalidate this earlier commit.",
+          "checks": [
+            {
+              "name": "Accepted instruction evidence",
+              "status": "PASS",
+              "detail": "Accepted revisions match validated customer evidence and durable journal order."
+            },
+            {
+              "name": "Applicable booking outcome",
+              "status": "PASS",
+              "detail": "Latest accepted revision 1 requests 2026-11-18T16:00:00+00:00; independent readback contains 2026-11-18T16:00:00+00:00."
+            },
+            {
+              "name": "Action authorization",
+              "status": "PASS",
+              "detail": "Revision 1 still authorized this action when it committed. A later acceptance cannot invalidate this earlier commit."
+            },
+            {
+              "name": "Statement-scoped factual accuracy",
+              "status": "INCONCLUSIVE",
+              "detail": "Assistant interpretation or statement evidence is unavailable; no claim was substituted."
+            }
+          ]
+        }
+      },
+      "authored_interpretation": {
+        "messages": [
+          {
+            "turn_id": "actor-prefix-1",
+            "segments": [
+              {
+                "text": "I'll confirm your current booking and process the time change.",
+                "kind": "plan",
+                "operation": null,
+                "claimed_booking": null,
+                "event_order": null,
+                "evidence_turn_ids": [
+                  "actor-prefix-1"
+                ],
+                "reason": null
+              }
+            ]
+          },
+          {
+            "turn_id": "actor-prefix-2",
+            "segments": [
+              {
+                "text": "Confirmed at 15:00",
+                "kind": "current_state",
+                "operation": null,
+                "claimed_booking": {
+                  "reference": "IR-1042",
+                  "starts_at": "2026-11-18T15:00:00+00:00",
+                  "timezone": "Europe/London"
+                },
+                "event_order": null,
+                "evidence_turn_ids": [
+                  "context",
+                  "actor-prefix-2"
+                ],
+                "reason": null
+              },
+              {
+                "text": " — now moving it to 16:00.",
+                "kind": "plan",
+                "operation": null,
+                "claimed_booking": null,
+                "event_order": null,
+                "evidence_turn_ids": [
+                  "actor-prefix-2"
+                ],
+                "reason": null
+              }
+            ]
+          },
+          {
+            "turn_id": "actor-continuation-3",
+            "segments": [
+              {
+                "text": "Booking IR-1042 on 2026-11-18 at 16:00 Europe/London — ",
+                "kind": "current_state",
+                "operation": null,
+                "claimed_booking": {
+                  "reference": "IR-1042",
+                  "starts_at": "2026-11-18T16:00:00+00:00",
+                  "timezone": "Europe/London"
+                },
+                "event_order": null,
+                "evidence_turn_ids": [
+                  "context",
+                  "actor-continuation-3"
+                ],
+                "reason": null
+              },
+              {
+                "text": "reschedule occurred.",
+                "kind": "action",
+                "operation": "rescheduled",
+                "claimed_booking": null,
+                "event_order": null,
+                "evidence_turn_ids": [
+                  "actor-continuation-3"
+                ],
+                "reason": null
+              }
+            ]
+          }
+        ]
+      },
+      "expected_accuracy": "PASS",
+      "meaning_provenance": "Independently authored offline assertions; not model extraction. Chronology explicitly interprets completion as completion of the requested reschedule."
+    },
+    {
+      "scenario_id": "no-withdrawal",
+      "implementation": "corrected",
+      "source_branch_sha256": "0536aacc6d2a990c1cc989ed1ceb77356d2053d8ce53d90bf31c391a50316e91",
+      "source_report": {
+        "schema_version": 4,
+        "report_type": "agent_branch",
+        "run_id": "f93f985f0c3b44d2a93b001f5099e8f3",
+        "pair_id": "1e912f1ebad34149821110dd661f0300",
+        "freeze_id": "7e5e70ca728328d15f956f5b431f7571f2c705c7728c8ca69d258306743a78a0",
+        "created_at": "2026-10-30T21:49:27.829262+00:00",
+        "implementation": "corrected",
+        "controlled_demonstration": false,
+        "initial_booking": {
+          "reference": "IR-1042",
+          "service": "Camera sensor cleaning",
+          "starts_at": "2026-11-18T15:00:00+00:00",
+          "timezone": "Europe/London"
+        },
+        "conversation": [
+          {
+            "id": "context",
+            "role": "assistant",
+            "text": "Booking IR-1042: Camera sensor cleaning, on 2026-11-18 at 15:00 (Europe/London)."
+          },
+          {
+            "id": "customer-1",
+            "role": "customer",
+            "text": "Please move booking IR-1042 to 16:00 on 2026-11-18, Europe/London."
+          },
+          {
+            "id": "actor-prefix-1",
+            "role": "assistant",
+            "text": "I'll confirm your current booking and process the time change."
+          },
+          {
+            "id": "actor-prefix-2",
+            "role": "assistant",
+            "text": "Confirmed at 15:00 — now moving it to 16:00."
+          },
+          {
+            "id": "actor-continuation-3",
+            "role": "assistant",
+            "text": "Booking IR-1042 is on 2026-11-18 at 16:00 Europe/London and the reschedule occurred."
+          }
+        ],
+        "final_evidence": {
+          "booking": {
+            "reference": "IR-1042",
+            "service": "Camera sensor cleaning",
+            "starts_at": "2026-11-18T16:00:00+00:00",
+            "timezone": "Europe/London"
+          },
+          "accepted_instructions": [
+            {
+              "revision": 1,
+              "turn_id": "customer-1",
+              "operation": "reschedule",
+              "booking_reference": "IR-1042",
+              "target_time": "2026-11-18T16:00:00+00:00",
+              "timezone": "Europe/London",
+              "interpretation_id": "20b05df40fb049b4834196859561b341",
+              "evidence_turn_ids": [
+                "customer-1"
+              ]
+            }
+          ],
+          "actions": [
+            {
+              "action_id": "8586c27106f44a18b5b291d65b918aff",
+              "booking_reference": "IR-1042",
+              "operation": "reschedule",
+              "target_time": "2026-11-18T16:00:00+00:00",
+              "accepted_revision": 1,
+              "status": "committed",
+              "checked_revision": 1,
+              "decision_sequence": 7
+            }
+          ],
+          "journal": [
+            {
+              "sequence": 1,
+              "transaction_id": "bbaa4bc3bcfb4b74858a52fa21e61b43",
+              "event": "initialized",
+              "data": {
+                "booking": {
+                  "reference": "IR-1042",
+                  "service": "Camera sensor cleaning",
+                  "starts_at": "2026-11-18T15:00:00+00:00",
+                  "timezone": "Europe/London"
+                },
+                "slot_available": true,
+                "target_time": "2026-11-18T16:00:00+00:00"
+              }
+            },
+            {
+              "sequence": 2,
+              "transaction_id": "166ab8fd3c594711bdda792e9769473e",
+              "event": "instruction_received",
+              "data": {
+                "turn_id": "customer-1"
+              }
+            },
+            {
+              "sequence": 3,
+              "transaction_id": "fa406094eec143fc933dc93974b829f6",
+              "event": "instruction_accepted",
+              "data": {
+                "booking_reference": "IR-1042",
+                "evidence_turn_ids": [
+                  "customer-1"
+                ],
+                "interpretation_id": "20b05df40fb049b4834196859561b341",
+                "operation": "reschedule",
+                "revision": 1,
+                "target_time": "2026-11-18T16:00:00+00:00",
+                "timezone": "Europe/London",
+                "turn_id": "customer-1"
+              }
+            },
+            {
+              "sequence": 4,
+              "transaction_id": "dbc1990af2264cbcbf0677f52445f106",
+              "event": "action_queued",
+              "data": {
+                "accepted_revision": 1,
+                "action_id": "8586c27106f44a18b5b291d65b918aff",
+                "booking_reference": "IR-1042",
+                "operation": "reschedule",
+                "target_time": "2026-11-18T16:00:00+00:00"
+              }
+            },
+            {
+              "sequence": 5,
+              "transaction_id": "0f346b1bb38e4274b639f2e176307697",
+              "event": "worker_preliminary_read",
+              "data": {
+                "action_id": "8586c27106f44a18b5b291d65b918aff",
+                "observed_revision": 1,
+                "observed_sequence": 4
+              }
+            },
+            {
+              "sequence": 6,
+              "transaction_id": "06b01a75f546487fa570bc43af90b41a",
+              "event": "authorization_checked",
+              "data": {
+                "accepted_revision": 1,
+                "action_id": "8586c27106f44a18b5b291d65b918aff",
+                "authorized": true,
+                "checked_revision": 1
+              }
+            },
+            {
+              "sequence": 7,
+              "transaction_id": "06b01a75f546487fa570bc43af90b41a",
+              "event": "action_committed",
+              "data": {
+                "accepted_revision": 1,
+                "action_id": "8586c27106f44a18b5b291d65b918aff",
+                "after": {
+                  "reference": "IR-1042",
+                  "service": "Camera sensor cleaning",
+                  "starts_at": "2026-11-18T16:00:00+00:00",
+                  "timezone": "Europe/London"
+                },
+                "authorized": true,
+                "before": {
+                  "reference": "IR-1042",
+                  "service": "Camera sensor cleaning",
+                  "starts_at": "2026-11-18T15:00:00+00:00",
+                  "timezone": "Europe/London"
+                },
+                "booking_reference": "IR-1042",
+                "checked_revision": 1,
+                "operation": "reschedule",
+                "reason": "The queued reschedule was committed.",
+                "target_time": "2026-11-18T16:00:00+00:00"
+              }
+            },
+            {
+              "sequence": 8,
+              "transaction_id": "afd7ebc1622c495ba4f5dffdfe7b2e40",
+              "event": "assistant_statement",
+              "data": {
+                "describes_sequence": 7,
+                "snapshot": {
+                  "booking": {
+                    "reference": "IR-1042",
+                    "service": "Camera sensor cleaning",
+                    "starts_at": "2026-11-18T16:00:00+00:00",
+                    "timezone": "Europe/London"
+                  },
+                  "read_after_sequence": 7,
+                  "read_source": "independent read-only SQLite transaction"
+                },
+                "text": "Booking IR-1042 is on 2026-11-18 at 16:00 Europe/London and the reschedule occurred.",
+                "turn_id": "actor-continuation-3"
+              }
+            }
+          ],
+          "read_after_sequence": 8,
+          "read_source": "independent read-only SQLite transaction"
+        },
+        "execution_errors": [],
+        "agent_execution": {
+          "status": "completed",
+          "model": "muse-spark-1.3",
+          "source": "live_meta",
+          "responses": [
+            {
+              "id": "resp_6ae510ceef0eb4cda9e245c1",
+              "model": "muse-spark-1.3",
+              "status": "completed",
+              "usage": {
+                "input_tokens": 1660,
+                "input_tokens_details": {
+                  "cache_write_tokens": null,
+                  "cached_tokens": 1649
+                },
+                "output_tokens": 359,
+                "output_tokens_details": {
+                  "reasoning_tokens": 322
+                },
+                "total_tokens": 2019
+              },
+              "incomplete_details": null,
+              "output": [
+                {
+                  "id": "msg_fef8ece1-60f1-43c6-b6e5-6fe53da29080",
+                  "content": [
+                    {
+                      "annotations": [],
+                      "text": "Booking IR-1042 is on 2026-11-18 at 16:00 Europe/London and the reschedule occurred.",
+                      "type": "output_text",
+                      "logprobs": []
+                    }
+                  ],
+                  "role": "assistant",
+                  "status": "completed",
+                  "type": "message",
+                  "phase": null
+                }
+              ]
+            }
+          ],
+          "tool_calls": [
+            {
+              "call_id": "call_a136efea-25d9-4510-b374-9c60ee2c8e38",
+              "name": "reschedule_booking",
+              "raw_arguments": "{\"reference\":\"IR-1042\",\"requested_time\":\"2026-11-18T16:00:00+00:00\",\"timezone\":\"Europe/London\"}",
+              "status": "completed",
+              "result": {
+                "ok": true,
+                "booking": {
+                  "reference": "IR-1042",
+                  "service": "Camera sensor cleaning",
+                  "starts_at": "2026-11-18T16:00:00+00:00",
+                  "timezone": "Europe/London"
+                },
+                "action": {
+                  "operation": "reschedule",
+                  "target_time": "2026-11-18T16:00:00+00:00",
+                  "accepted_revision": 1,
+                  "status": "committed",
+                  "checked_revision": 1
+                },
+                "read_source": "independent read-only SQLite transaction"
+              }
+            }
+          ],
+          "api_calls": [
+            {
+              "status": "response_received",
+              "http_attempts": 1,
+              "http_responses": 1,
+              "successful_http_responses": 1,
+              "usage": {
+                "input_tokens": 1660,
+                "output_tokens": 359,
+                "total_tokens": 2019
+              }
+            }
+          ],
+          "errors": [],
+          "max_rounds": 4,
+          "max_tool_calls": 8,
+          "http_attempts": 1,
+          "http_responses": 1,
+          "successful_http_responses": 1,
+          "prompt_tool_sha256": "1115c39ed474eb57ff72c479b69ac98a7d89bc55859449fe579c7a9ec99c873c",
+          "prompt_version": "booking-agent-v1",
+          "visible_messages": [
+            "Booking IR-1042 is on 2026-11-18 at 16:00 Europe/London and the reschedule occurred."
+          ],
+          "requests": [
+            {
+              "input": [
+                {
+                  "role": "assistant",
+                  "content": "Booking IR-1042: Camera sensor cleaning, on 2026-11-18 at 15:00 (Europe/London)."
+                },
+                {
+                  "role": "user",
+                  "content": "Please move booking IR-1042 to 16:00 on 2026-11-18, Europe/London."
+                },
+                {
+                  "type": "message",
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "annotations": [],
+                      "text": "I'll confirm your current booking and process the time change.",
+                      "type": "output_text",
+                      "logprobs": []
+                    }
+                  ],
+                  "phase": "commentary"
+                },
+                {
+                  "type": "function_call",
+                  "call_id": "call_b43c5e94-09fe-4098-a679-053d8efa8409",
+                  "name": "get_booking",
+                  "arguments": "{\"reference\":\"IR-1042\"}"
+                },
+                {
+                  "type": "function_call_output",
+                  "call_id": "call_b43c5e94-09fe-4098-a679-053d8efa8409",
+                  "output": "{\"ok\": true, \"booking\": {\"reference\": \"IR-1042\", \"service\": \"Camera sensor cleaning\", \"starts_at\": \"2026-11-18T15:00:00+00:00\", \"timezone\": \"Europe/London\"}, \"action\": null, \"read_source\": \"independent read-only SQLite transaction\"}"
+                },
+                {
+                  "type": "message",
+                  "role": "assistant",
+                  "content": [
+                    {
+                      "annotations": [],
+                      "text": "Confirmed at 15:00 — now moving it to 16:00.",
+                      "type": "output_text",
+                      "logprobs": []
+                    }
+                  ],
+                  "phase": "commentary"
+                },
+                {
+                  "type": "function_call",
+                  "call_id": "call_a136efea-25d9-4510-b374-9c60ee2c8e38",
+                  "name": "reschedule_booking",
+                  "arguments": "{\"reference\":\"IR-1042\",\"requested_time\":\"2026-11-18T16:00:00+00:00\",\"timezone\":\"Europe/London\"}"
+                },
+                {
+                  "type": "function_call_output",
+                  "call_id": "call_a136efea-25d9-4510-b374-9c60ee2c8e38",
+                  "output": "{\"ok\": true, \"booking\": {\"reference\": \"IR-1042\", \"service\": \"Camera sensor cleaning\", \"starts_at\": \"2026-11-18T16:00:00+00:00\", \"timezone\": \"Europe/London\"}, \"action\": {\"operation\": \"reschedule\", \"target_time\": \"2026-11-18T16:00:00+00:00\", \"accepted_revision\": 1, \"status\": \"committed\", \"checked_revision\": 1}, \"read_source\": \"independent read-only SQLite transaction\"}"
+                }
+              ],
+              "input_sha256": "af5bf259f8d5f70fc64ff50f61ca54cea812a9e05e8de92303be9dd7d6611ef9",
+              "public_input_sha256": "3bc164be480173c6447c0ebc4e7e35da47ee67c49a82b75122e576666b8bb7e0",
+              "private_reasoning_omitted": true
+            }
+          ]
+        },
+        "statement_observations": [
+          {
+            "turn_id": "actor-prefix-1",
+            "text": "I'll confirm your current booking and process the time change.",
+            "describes_sequence": null,
+            "snapshot": {
+              "booking": {
+                "reference": "IR-1042",
+                "service": "Camera sensor cleaning",
+                "starts_at": "2026-11-18T15:00:00+00:00",
+                "timezone": "Europe/London"
+              },
+              "accepted_instructions": [
+                {
+                  "revision": 1,
+                  "turn_id": "customer-1",
+                  "operation": "reschedule",
+                  "booking_reference": "IR-1042",
+                  "target_time": "2026-11-18T16:00:00+00:00",
+                  "timezone": "Europe/London",
+                  "interpretation_id": "20b05df40fb049b4834196859561b341",
+                  "evidence_turn_ids": [
+                    "customer-1"
+                  ]
+                }
+              ],
+              "actions": [],
+              "journal": [
+                {
+                  "sequence": 1,
+                  "transaction_id": "bbaa4bc3bcfb4b74858a52fa21e61b43",
+                  "event": "initialized",
+                  "data": {
+                    "booking": {
+                      "reference": "IR-1042",
+                      "service": "Camera sensor cleaning",
+                      "starts_at": "2026-11-18T15:00:00+00:00",
+                      "timezone": "Europe/London"
+                    },
+                    "slot_available": true,
+                    "target_time": "2026-11-18T16:00:00+00:00"
+                  }
+                },
+                {
+                  "sequence": 2,
+                  "transaction_id": "166ab8fd3c594711bdda792e9769473e",
+                  "event": "instruction_received",
+                  "data": {
+                    "turn_id": "customer-1"
+                  }
+                },
+                {
+                  "sequence": 3,
+                  "transaction_id": "fa406094eec143fc933dc93974b829f6",
+                  "event": "instruction_accepted",
+                  "data": {
+                    "booking_reference": "IR-1042",
+                    "evidence_turn_ids": [
+                      "customer-1"
+                    ],
+                    "interpretation_id": "20b05df40fb049b4834196859561b341",
+                    "operation": "reschedule",
+                    "revision": 1,
+                    "target_time": "2026-11-18T16:00:00+00:00",
+                    "timezone": "Europe/London",
+                    "turn_id": "customer-1"
+                  }
+                }
+              ],
+              "read_after_sequence": 3,
+              "read_source": "independent read-only SQLite transaction"
+            },
+            "source": "captured actor message replayed before execution"
+          },
+          {
+            "turn_id": "actor-prefix-2",
+            "text": "Confirmed at 15:00 — now moving it to 16:00.",
+            "describes_sequence": null,
+            "snapshot": {
+              "booking": {
+                "reference": "IR-1042",
+                "service": "Camera sensor cleaning",
+                "starts_at": "2026-11-18T15:00:00+00:00",
+                "timezone": "Europe/London"
+              },
+              "accepted_instructions": [
+                {
+                  "revision": 1,
+                  "turn_id": "customer-1",
+                  "operation": "reschedule",
+                  "booking_reference": "IR-1042",
+                  "target_time": "2026-11-18T16:00:00+00:00",
+                  "timezone": "Europe/London",
+                  "interpretation_id": "20b05df40fb049b4834196859561b341",
+                  "evidence_turn_ids": [
+                    "customer-1"
+                  ]
+                }
+              ],
+              "actions": [],
+              "journal": [
+                {
+                  "sequence": 1,
+                  "transaction_id": "bbaa4bc3bcfb4b74858a52fa21e61b43",
+                  "event": "initialized",
+                  "data": {
+                    "booking": {
+                      "reference": "IR-1042",
+                      "service": "Camera sensor cleaning",
+                      "starts_at": "2026-11-18T15:00:00+00:00",
+                      "timezone": "Europe/London"
+                    },
+                    "slot_available": true,
+                    "target_time": "2026-11-18T16:00:00+00:00"
+                  }
+                },
+                {
+                  "sequence": 2,
+                  "transaction_id": "166ab8fd3c594711bdda792e9769473e",
+                  "event": "instruction_received",
+                  "data": {
+                    "turn_id": "customer-1"
+                  }
+                },
+                {
+                  "sequence": 3,
+                  "transaction_id": "fa406094eec143fc933dc93974b829f6",
+                  "event": "instruction_accepted",
+                  "data": {
+                    "booking_reference": "IR-1042",
+                    "evidence_turn_ids": [
+                      "customer-1"
+                    ],
+                    "interpretation_id": "20b05df40fb049b4834196859561b341",
+                    "operation": "reschedule",
+                    "revision": 1,
+                    "target_time": "2026-11-18T16:00:00+00:00",
+                    "timezone": "Europe/London",
+                    "turn_id": "customer-1"
+                  }
+                }
+              ],
+              "read_after_sequence": 3,
+              "read_source": "independent read-only SQLite transaction"
+            },
+            "source": "captured actor message replayed before execution"
+          },
+          {
+            "turn_id": "actor-continuation-3",
+            "text": "Booking IR-1042 is on 2026-11-18 at 16:00 Europe/London and the reschedule occurred.",
+            "describes_sequence": 7,
+            "snapshot": {
+              "booking": {
+                "reference": "IR-1042",
+                "service": "Camera sensor cleaning",
+                "starts_at": "2026-11-18T16:00:00+00:00",
+                "timezone": "Europe/London"
+              },
+              "accepted_instructions": [
+                {
+                  "revision": 1,
+                  "turn_id": "customer-1",
+                  "operation": "reschedule",
+                  "booking_reference": "IR-1042",
+                  "target_time": "2026-11-18T16:00:00+00:00",
+                  "timezone": "Europe/London",
+                  "interpretation_id": "20b05df40fb049b4834196859561b341",
+                  "evidence_turn_ids": [
+                    "customer-1"
+                  ]
+                }
+              ],
+              "actions": [
+                {
+                  "action_id": "8586c27106f44a18b5b291d65b918aff",
+                  "booking_reference": "IR-1042",
+                  "operation": "reschedule",
+                  "target_time": "2026-11-18T16:00:00+00:00",
+                  "accepted_revision": 1,
+                  "status": "committed",
+                  "checked_revision": 1,
+                  "decision_sequence": 7
+                }
+              ],
+              "journal": [
+                {
+                  "sequence": 1,
+                  "transaction_id": "bbaa4bc3bcfb4b74858a52fa21e61b43",
+                  "event": "initialized",
+                  "data": {
+                    "booking": {
+                      "reference": "IR-1042",
+                      "service": "Camera sensor cleaning",
+                      "starts_at": "2026-11-18T15:00:00+00:00",
+                      "timezone": "Europe/London"
+                    },
+                    "slot_available": true,
+                    "target_time": "2026-11-18T16:00:00+00:00"
+                  }
+                },
+                {
+                  "sequence": 2,
+                  "transaction_id": "166ab8fd3c594711bdda792e9769473e",
+                  "event": "instruction_received",
+                  "data": {
+                    "turn_id": "customer-1"
+                  }
+                },
+                {
+                  "sequence": 3,
+                  "transaction_id": "fa406094eec143fc933dc93974b829f6",
+                  "event": "instruction_accepted",
+                  "data": {
+                    "booking_reference": "IR-1042",
+                    "evidence_turn_ids": [
+                      "customer-1"
+                    ],
+                    "interpretation_id": "20b05df40fb049b4834196859561b341",
+                    "operation": "reschedule",
+                    "revision": 1,
+                    "target_time": "2026-11-18T16:00:00+00:00",
+                    "timezone": "Europe/London",
+                    "turn_id": "customer-1"
+                  }
+                },
+                {
+                  "sequence": 4,
+                  "transaction_id": "dbc1990af2264cbcbf0677f52445f106",
+                  "event": "action_queued",
+                  "data": {
+                    "accepted_revision": 1,
+                    "action_id": "8586c27106f44a18b5b291d65b918aff",
+                    "booking_reference": "IR-1042",
+                    "operation": "reschedule",
+                    "target_time": "2026-11-18T16:00:00+00:00"
+                  }
+                },
+                {
+                  "sequence": 5,
+                  "transaction_id": "0f346b1bb38e4274b639f2e176307697",
+                  "event": "worker_preliminary_read",
+                  "data": {
+                    "action_id": "8586c27106f44a18b5b291d65b918aff",
+                    "observed_revision": 1,
+                    "observed_sequence": 4
+                  }
+                },
+                {
+                  "sequence": 6,
+                  "transaction_id": "06b01a75f546487fa570bc43af90b41a",
+                  "event": "authorization_checked",
+                  "data": {
+                    "accepted_revision": 1,
+                    "action_id": "8586c27106f44a18b5b291d65b918aff",
+                    "authorized": true,
+                    "checked_revision": 1
+                  }
+                },
+                {
+                  "sequence": 7,
+                  "transaction_id": "06b01a75f546487fa570bc43af90b41a",
+                  "event": "action_committed",
+                  "data": {
+                    "accepted_revision": 1,
+                    "action_id": "8586c27106f44a18b5b291d65b918aff",
+                    "after": {
+                      "reference": "IR-1042",
+                      "service": "Camera sensor cleaning",
+                      "starts_at": "2026-11-18T16:00:00+00:00",
+                      "timezone": "Europe/London"
+                    },
+                    "authorized": true,
+                    "before": {
+                      "reference": "IR-1042",
+                      "service": "Camera sensor cleaning",
+                      "starts_at": "2026-11-18T15:00:00+00:00",
+                      "timezone": "Europe/London"
+                    },
+                    "booking_reference": "IR-1042",
+                    "checked_revision": 1,
+                    "operation": "reschedule",
+                    "reason": "The queued reschedule was committed.",
+                    "target_time": "2026-11-18T16:00:00+00:00"
+                  }
+                }
+              ],
+              "read_after_sequence": 7,
+              "read_source": "independent read-only SQLite transaction"
+            },
+            "source": "independent SQLite read after actual actor output"
+          }
+        ],
+        "agent_statement_checks": [],
+        "assistant_interpretation": {
+          "interpretation_id": "b99462fbf97f4bdfaca112c04aeb1fa1",
+          "purpose": "assistant_claims",
+          "input_sha256": "850c3e99eaf854f7f39ed4005ea085e47573d91157065e7e340992a699e2a8ec",
+          "source": "live_meta",
+          "status": "error",
+          "model": "muse-spark-1.3",
+          "data": null,
+          "errors": [
+            "Meta response was incomplete or missing model/text; no substitute was used."
+          ],
+          "api_call": {
+            "status": "response_received",
+            "http_attempts": 1,
+            "http_responses": 1,
+            "successful_http_responses": 1,
+            "usage": {
+              "input_tokens": 850,
+              "output_tokens": 4096,
+              "total_tokens": 4946
+            }
+          }
+        },
+        "provenance": {
+          "database": "SQLite",
+          "independent_final_read": true,
+          "schedule_plan": "no_withdrawal",
+          "actual_schedule": "no withdrawal",
+          "customer_interpretation_id": "20b05df40fb049b4834196859561b341",
+          "customer_interpretation_reused": true,
+          "customer_interpretations_during_run": 0,
+          "agent_generation": "live_meta",
+          "proposal_source": "replay of live capture",
+          "originating_revision": 1,
+          "mocked_components": []
+        },
+        "evaluation": {
+          "booking_outcome": "fulfilled",
+          "instruction_adherence": "PASS",
+          "confirmation_integrity": "INCONCLUSIVE",
+          "task_verdict": "INCONCLUSIVE",
+          "explanation": "Booking fulfilled. Instruction adherence: PASS. Factual claim accuracy: INCONCLUSIVE. Revision 1 still authorized this action when it committed. A later acceptance cannot invalidate this earlier commit.",
+          "checks": [
+            {
+              "name": "Accepted instruction evidence",
+              "status": "PASS",
+              "detail": "Accepted revisions match validated customer evidence and durable journal order."
+            },
+            {
+              "name": "Applicable booking outcome",
+              "status": "PASS",
+              "detail": "Latest accepted revision 1 requests 2026-11-18T16:00:00+00:00; independent readback contains 2026-11-18T16:00:00+00:00."
+            },
+            {
+              "name": "Action authorization",
+              "status": "PASS",
+              "detail": "Revision 1 still authorized this action when it committed. A later acceptance cannot invalidate this earlier commit."
+            },
+            {
+              "name": "Statement-scoped factual accuracy",
+              "status": "INCONCLUSIVE",
+              "detail": "Assistant interpretation or statement evidence is unavailable; no claim was substituted."
+            }
+          ]
+        },
+        "action_assessments": [
+          {
+            "action_id": "8586c27106f44a18b5b291d65b918aff",
+            "accepted_revision": 1,
+            "current_revision_at_decision": 1,
+            "decision_sequence": 7,
+            "authorized_at_decision": true,
+            "atomic_evidence": true,
+            "status": "PASS",
+            "detail": "Revision 1 still authorized this action when it committed. A later acceptance cannot invalidate this earlier commit."
+          }
+        ],
+        "statement_assessments": [],
+        "revision_assessments": [
+          {
+            "revision": 1,
+            "turn_id": "customer-1",
+            "scope": "applicable_at_final_read",
+            "evaluation": {
+              "booking_outcome": "fulfilled",
+              "instruction_adherence": "PASS",
+              "confirmation_integrity": "INCONCLUSIVE",
+              "task_verdict": "INCONCLUSIVE",
+              "explanation": "Booking fulfilled. Instruction adherence: PASS. Factual claim accuracy: INCONCLUSIVE. Revision 1 still authorized this action when it committed. A later acceptance cannot invalidate this earlier commit.",
+              "checks": [
+                {
+                  "name": "Accepted instruction evidence",
+                  "status": "PASS",
+                  "detail": "Accepted revisions match validated customer evidence and durable journal order."
+                },
+                {
+                  "name": "Applicable booking outcome",
+                  "status": "PASS",
+                  "detail": "Latest accepted revision 1 requests 2026-11-18T16:00:00+00:00; independent readback contains 2026-11-18T16:00:00+00:00."
+                },
+                {
+                  "name": "Action authorization",
+                  "status": "PASS",
+                  "detail": "Revision 1 still authorized this action when it committed. A later acceptance cannot invalidate this earlier commit."
+                },
+                {
+                  "name": "Statement-scoped factual accuracy",
+                  "status": "INCONCLUSIVE",
+                  "detail": "Assistant interpretation or statement evidence is unavailable; no claim was substituted."
+                }
+              ]
+            }
+          }
+        ],
+        "temporal_evaluation": {
+          "booking_outcome": "fulfilled",
+          "instruction_adherence": "PASS",
+          "confirmation_integrity": "INCONCLUSIVE",
+          "task_verdict": "INCONCLUSIVE",
+          "explanation": "Booking fulfilled. Instruction adherence: PASS. Factual claim accuracy: INCONCLUSIVE. Revision 1 still authorized this action when it committed. A later acceptance cannot invalidate this earlier commit.",
+          "checks": [
+            {
+              "name": "Accepted instruction evidence",
+              "status": "PASS",
+              "detail": "Accepted revisions match validated customer evidence and durable journal order."
+            },
+            {
+              "name": "Applicable booking outcome",
+              "status": "PASS",
+              "detail": "Latest accepted revision 1 requests 2026-11-18T16:00:00+00:00; independent readback contains 2026-11-18T16:00:00+00:00."
+            },
+            {
+              "name": "Action authorization",
+              "status": "PASS",
+              "detail": "Revision 1 still authorized this action when it committed. A later acceptance cannot invalidate this earlier commit."
+            },
+            {
+              "name": "Statement-scoped factual accuracy",
+              "status": "INCONCLUSIVE",
+              "detail": "Assistant interpretation or statement evidence is unavailable; no claim was substituted."
+            }
+          ]
+        }
+      },
+      "authored_interpretation": {
+        "messages": [
+          {
+            "turn_id": "actor-prefix-1",
+            "segments": [
+              {
+                "text": "I'll confirm your current booking and process the time change.",
+                "kind": "plan",
+                "operation": null,
+                "claimed_booking": null,
+                "event_order": null,
+                "evidence_turn_ids": [
+                  "actor-prefix-1"
+                ],
+                "reason": null
+              }
+            ]
+          },
+          {
+            "turn_id": "actor-prefix-2",
+            "segments": [
+              {
+                "text": "Confirmed at 15:00",
+                "kind": "current_state",
+                "operation": null,
+                "claimed_booking": {
+                  "reference": "IR-1042",
+                  "starts_at": "2026-11-18T15:00:00+00:00",
+                  "timezone": "Europe/London"
+                },
+                "event_order": null,
+                "evidence_turn_ids": [
+                  "context",
+                  "actor-prefix-2"
+                ],
+                "reason": null
+              },
+              {
+                "text": " — now moving it to 16:00.",
+                "kind": "plan",
+                "operation": null,
+                "claimed_booking": null,
+                "event_order": null,
+                "evidence_turn_ids": [
+                  "actor-prefix-2"
+                ],
+                "reason": null
+              }
+            ]
+          },
+          {
+            "turn_id": "actor-continuation-3",
+            "segments": [
+              {
+                "text": "Booking IR-1042 is on 2026-11-18 at 16:00 Europe/London",
+                "kind": "current_state",
+                "operation": null,
+                "claimed_booking": {
+                  "reference": "IR-1042",
+                  "starts_at": "2026-11-18T16:00:00+00:00",
+                  "timezone": "Europe/London"
+                },
+                "event_order": null,
+                "evidence_turn_ids": [
+                  "context",
+                  "actor-continuation-3"
+                ],
+                "reason": null
+              },
+              {
+                "text": " and the reschedule occurred.",
+                "kind": "action",
+                "operation": "rescheduled",
+                "claimed_booking": null,
+                "event_order": null,
+                "evidence_turn_ids": [
+                  "actor-continuation-3"
+                ],
+                "reason": null
+              }
+            ]
+          }
+        ]
+      },
+      "expected_accuracy": "PASS",
+      "meaning_provenance": "Independently authored offline assertions; not model extraction. Chronology explicitly interprets completion as completion of the requested reschedule."
+    }
+  ]
+}

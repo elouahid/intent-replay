@@ -1,0 +1,56 @@
+{
+  "initial_booking": {
+    "reference": "IR-1042",
+    "service": "Camera sensor cleaning",
+    "starts_at": "2026-11-18T15:00:00+00:00",
+    "timezone": "Europe/London"
+  },
+  "target_time": "2026-11-18T16:00:00+00:00",
+  "slot_available": true,
+  "scenarios": [
+    {
+      "id": "withdraw-before-execution",
+      "name": "Accepted withdrawal before execution",
+      "plan": "withdraw_before_execution",
+      "customer_messages": [
+        "Please move booking IR-1042 to 16:00 on 2026-11-18, Europe/London.",
+        "Actually, don't change it. Keep my appointment at 15:00."
+      ]
+    },
+    {
+      "id": "withdraw-after-preliminary-read",
+      "name": "Withdrawal after preliminary read",
+      "plan": "withdraw_after_preliminary_read",
+      "customer_messages": [
+        "Please move booking IR-1042 to 16:00 on 2026-11-18, Europe/London.",
+        "Actually, don't change it. Keep my appointment at 15:00."
+      ]
+    },
+    {
+      "id": "commit-before-withdrawal",
+      "name": "Commit before later withdrawal",
+      "plan": "commit_before_withdrawal",
+      "customer_messages": [
+        "Please move booking IR-1042 to 16:00 on 2026-11-18, Europe/London.",
+        "Actually, don't change it. Keep my appointment at 15:00."
+      ]
+    },
+    {
+      "id": "no-withdrawal",
+      "name": "No withdrawal control",
+      "plan": "no_withdrawal",
+      "customer_messages": [
+        "Please move booking IR-1042 to 16:00 on 2026-11-18, Europe/London."
+      ]
+    },
+    {
+      "id": "alternative-withdrawal",
+      "name": "Alternative withdrawal phrasing",
+      "plan": "withdraw_before_execution",
+      "customer_messages": [
+        "Please move booking IR-1042 to 16:00 on 2026-11-18, Europe/London.",
+        "Please withdraw the pending reschedule. Leave my appointment at 3 pm."
+      ]
+    }
+  ]
+}

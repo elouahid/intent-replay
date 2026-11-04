@@ -1,0 +1,16 @@
+{
+  "accounting_issue": "usage_unknown",
+  "caller_reported_error": true,
+  "finished_at": "2026-11-04T21:30:43.762812+00:00",
+  "http_attempts": 1,
+  "http_status": 400,
+  "latency_seconds": 2.877041,
+  "private_reasoning_retained": false,
+  "public_response": null,
+  "request_id": "live-meta-proposal-1",
+  "response_sha256": "4a82547a944c7cd6153bded86976e88f29957afebc1f86cfb87c9ee6d5ba6798",
+  "schema_version": "live-proposal-attempt-v1",
+  "sha256": "5ca3a957ec94edb84f63670481f2691896d28d2d71095931ca071a4b878472fd",
+  "transport_error_type": null,
+  "usage": null
+}

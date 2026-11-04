@@ -1,0 +1,1373 @@
+{
+  "schema_version": 1,
+  "cases": [
+    {
+      "id": "development-1",
+      "source_branch_sha256": "157bc576f54c88521ca0c09e515b39a67dd87ee7f688cb45a79c1ef437582a56",
+      "meaning_source": "authored development meanings, not provider output",
+      "interpretation": {
+        "messages": [
+          {
+            "turn_id": "actor-prefix-1",
+            "segments": [
+              {
+                "text": "I'll inspect your booking and process the move to 16:00.",
+                "claims": [
+                  {
+                    "id": "c1",
+                    "kind": "plan",
+                    "facts": {},
+                    "citations": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "turn_id": "actor-prefix-2",
+            "segments": [
+              {
+                "text": "Confirmed the 15:00 booking",
+                "claims": [
+                  {
+                    "id": "c2",
+                    "kind": "current_state",
+                    "facts": {
+                      "reference": "IR-1042",
+                      "date": "2026-11-18",
+                      "time": "15:00",
+                      "timezone": "Europe/London"
+                    },
+                    "citations": [
+                      {
+                        "field": "reference",
+                        "turn_id": "customer-1",
+                        "quote": "IR-1042"
+                      },
+                      {
+                        "field": "date",
+                        "turn_id": "customer-1",
+                        "quote": "2026-11-18"
+                      },
+                      {
+                        "field": "time",
+                        "turn_id": "actor-prefix-2",
+                        "quote": "15:00"
+                      },
+                      {
+                        "field": "timezone",
+                        "turn_id": "customer-1",
+                        "quote": "Europe/London"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "text": " — now I'll request the shift to 16:00.",
+                "claims": [
+                  {
+                    "id": "c3",
+                    "kind": "plan",
+                    "facts": {},
+                    "citations": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "turn_id": "actor-continuation-3",
+            "segments": [
+              {
+                "text": "Noted — I'll verify the current booking status without making further changes.",
+                "claims": [
+                  {
+                    "id": "c4",
+                    "kind": "plan",
+                    "facts": {},
+                    "citations": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "turn_id": "actor-continuation-4",
+            "segments": [
+              {
+                "text": "Booking IR-1042 is on 2026-11-18 at 16:00 Europe/London — ",
+                "claims": [
+                  {
+                    "id": "c5",
+                    "kind": "current_state",
+                    "facts": {
+                      "reference": "IR-1042",
+                      "date": "2026-11-18",
+                      "time": "16:00",
+                      "timezone": "Europe/London"
+                    },
+                    "citations": [
+                      {
+                        "field": "reference",
+                        "turn_id": "actor-continuation-4",
+                        "quote": "IR-1042"
+                      },
+                      {
+                        "field": "date",
+                        "turn_id": "actor-continuation-4",
+                        "quote": "2026-11-18"
+                      },
+                      {
+                        "field": "time",
+                        "turn_id": "actor-continuation-4",
+                        "quote": "16:00"
+                      },
+                      {
+                        "field": "timezone",
+                        "turn_id": "actor-continuation-4",
+                        "quote": "Europe/London"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "text": "reschedule occurred",
+                "claims": [
+                  {
+                    "id": "c6",
+                    "kind": "action",
+                    "facts": {},
+                    "citations": [],
+                    "operation": "rescheduled"
+                  }
+                ]
+              },
+              {
+                "text": " and no restoration to 15:00 was performed.",
+                "claims": [
+                  {
+                    "id": "c7",
+                    "kind": "action",
+                    "facts": {
+                      "time": "15:00"
+                    },
+                    "citations": [
+                      {
+                        "field": "time",
+                        "turn_id": "actor-continuation-4",
+                        "quote": "15:00"
+                      }
+                    ],
+                    "operation": "not_restored"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "expected_accuracy": "PASS"
+    },
+    {
+      "id": "development-2",
+      "source_branch_sha256": "cef57f72fd6636c4dca65b071a54d7f5eba42b3f9d532057fdf3e9bec388f39c",
+      "meaning_source": "authored development meanings, not provider output",
+      "interpretation": {
+        "messages": [
+          {
+            "turn_id": "actor-prefix-1",
+            "segments": [
+              {
+                "text": "I'll inspect your booking and process the move to 16:00.",
+                "claims": [
+                  {
+                    "id": "c1",
+                    "kind": "plan",
+                    "facts": {},
+                    "citations": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "turn_id": "actor-prefix-2",
+            "segments": [
+              {
+                "text": "Confirmed the 15:00 booking",
+                "claims": [
+                  {
+                    "id": "c2",
+                    "kind": "current_state",
+                    "facts": {
+                      "reference": "IR-1042",
+                      "date": "2026-11-18",
+                      "time": "15:00",
+                      "timezone": "Europe/London"
+                    },
+                    "citations": [
+                      {
+                        "field": "reference",
+                        "turn_id": "customer-1",
+                        "quote": "IR-1042"
+                      },
+                      {
+                        "field": "date",
+                        "turn_id": "customer-1",
+                        "quote": "2026-11-18"
+                      },
+                      {
+                        "field": "time",
+                        "turn_id": "actor-prefix-2",
+                        "quote": "15:00"
+                      },
+                      {
+                        "field": "timezone",
+                        "turn_id": "customer-1",
+                        "quote": "Europe/London"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "text": " — now I'll request the shift to 16:00.",
+                "claims": [
+                  {
+                    "id": "c3",
+                    "kind": "plan",
+                    "facts": {},
+                    "citations": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "turn_id": "actor-continuation-3",
+            "segments": [
+              {
+                "text": "Understood — I'll verify the booking stayed at 15:00.",
+                "claims": [
+                  {
+                    "id": "c4",
+                    "kind": "plan",
+                    "facts": {},
+                    "citations": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "turn_id": "actor-continuation-4",
+            "segments": [
+              {
+                "text": "Booking IR-1042 remains on 2026-11-18 at 15:00 Europe/London;",
+                "claims": [
+                  {
+                    "id": "c5",
+                    "kind": "current_state",
+                    "facts": {
+                      "reference": "IR-1042",
+                      "date": "2026-11-18",
+                      "time": "15:00",
+                      "timezone": "Europe/London"
+                    },
+                    "citations": [
+                      {
+                        "field": "reference",
+                        "turn_id": "actor-continuation-4",
+                        "quote": "IR-1042"
+                      },
+                      {
+                        "field": "date",
+                        "turn_id": "actor-continuation-4",
+                        "quote": "2026-11-18"
+                      },
+                      {
+                        "field": "time",
+                        "turn_id": "actor-continuation-4",
+                        "quote": "15:00"
+                      },
+                      {
+                        "field": "timezone",
+                        "turn_id": "actor-continuation-4",
+                        "quote": "Europe/London"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "text": " the requested reschedule to 16:00 did not occur,",
+                "claims": [
+                  {
+                    "id": "c6",
+                    "kind": "action",
+                    "facts": {
+                      "time": "16:00"
+                    },
+                    "citations": [
+                      {
+                        "field": "time",
+                        "turn_id": "actor-continuation-4",
+                        "quote": "16:00"
+                      }
+                    ],
+                    "operation": "not_rescheduled"
+                  }
+                ]
+              },
+              {
+                "text": " and as your keep request arrived after completion",
+                "claims": [
+                  {
+                    "id": "c7",
+                    "kind": "unsupported",
+                    "facts": {},
+                    "citations": [],
+                    "reason": "Completion referent is ambiguous; no specific reschedule event can be established from this clause."
+                  }
+                ]
+              },
+              {
+                "text": " no restoration was performed.",
+                "claims": [
+                  {
+                    "id": "c8",
+                    "kind": "action",
+                    "facts": {},
+                    "citations": [],
+                    "operation": "not_restored"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "expected_accuracy": "INCONCLUSIVE"
+    },
+    {
+      "id": "development-3",
+      "source_branch_sha256": "88f016af31dea55fdeb6532fc1b845dc097a1b4634ddee6854fb74c711cc5b27",
+      "meaning_source": "authored development meanings, not provider output",
+      "interpretation": {
+        "messages": [
+          {
+            "turn_id": "actor-prefix-1",
+            "segments": [
+              {
+                "text": "I'll confirm your current booking and process the time change.",
+                "claims": [
+                  {
+                    "id": "c1",
+                    "kind": "plan",
+                    "facts": {},
+                    "citations": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "turn_id": "actor-prefix-2",
+            "segments": [
+              {
+                "text": "Confirmed at 15:00",
+                "claims": [
+                  {
+                    "id": "c2",
+                    "kind": "current_state",
+                    "facts": {
+                      "reference": "IR-1042",
+                      "date": "2026-11-18",
+                      "time": "15:00",
+                      "timezone": "Europe/London"
+                    },
+                    "citations": [
+                      {
+                        "field": "reference",
+                        "turn_id": "customer-1",
+                        "quote": "IR-1042"
+                      },
+                      {
+                        "field": "date",
+                        "turn_id": "customer-1",
+                        "quote": "2026-11-18"
+                      },
+                      {
+                        "field": "time",
+                        "turn_id": "actor-prefix-2",
+                        "quote": "15:00"
+                      },
+                      {
+                        "field": "timezone",
+                        "turn_id": "customer-1",
+                        "quote": "Europe/London"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "text": " — now moving it to 16:00.",
+                "claims": [
+                  {
+                    "id": "c3",
+                    "kind": "plan",
+                    "facts": {},
+                    "citations": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "turn_id": "actor-continuation-3",
+            "segments": [
+              {
+                "text": "Booking IR-1042 on 2026-11-18 at 16:00 Europe/London — ",
+                "claims": [
+                  {
+                    "id": "c4",
+                    "kind": "current_state",
+                    "facts": {
+                      "reference": "IR-1042",
+                      "date": "2026-11-18",
+                      "time": "16:00",
+                      "timezone": "Europe/London"
+                    },
+                    "citations": [
+                      {
+                        "field": "reference",
+                        "turn_id": "actor-continuation-3",
+                        "quote": "IR-1042"
+                      },
+                      {
+                        "field": "date",
+                        "turn_id": "actor-continuation-3",
+                        "quote": "2026-11-18"
+                      },
+                      {
+                        "field": "time",
+                        "turn_id": "actor-continuation-3",
+                        "quote": "16:00"
+                      },
+                      {
+                        "field": "timezone",
+                        "turn_id": "actor-continuation-3",
+                        "quote": "Europe/London"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "text": "reschedule occurred.",
+                "claims": [
+                  {
+                    "id": "c5",
+                    "kind": "action",
+                    "facts": {},
+                    "citations": [],
+                    "operation": "rescheduled"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "expected_accuracy": "PASS"
+    },
+    {
+      "id": "development-4",
+      "source_branch_sha256": "0536aacc6d2a990c1cc989ed1ceb77356d2053d8ce53d90bf31c391a50316e91",
+      "meaning_source": "authored development meanings, not provider output",
+      "interpretation": {
+        "messages": [
+          {
+            "turn_id": "actor-prefix-1",
+            "segments": [
+              {
+                "text": "I'll confirm your current booking and process the time change.",
+                "claims": [
+                  {
+                    "id": "c1",
+                    "kind": "plan",
+                    "facts": {},
+                    "citations": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "turn_id": "actor-prefix-2",
+            "segments": [
+              {
+                "text": "Confirmed at 15:00",
+                "claims": [
+                  {
+                    "id": "c2",
+                    "kind": "current_state",
+                    "facts": {
+                      "reference": "IR-1042",
+                      "date": "2026-11-18",
+                      "time": "15:00",
+                      "timezone": "Europe/London"
+                    },
+                    "citations": [
+                      {
+                        "field": "reference",
+                        "turn_id": "customer-1",
+                        "quote": "IR-1042"
+                      },
+                      {
+                        "field": "date",
+                        "turn_id": "customer-1",
+                        "quote": "2026-11-18"
+                      },
+                      {
+                        "field": "time",
+                        "turn_id": "actor-prefix-2",
+                        "quote": "15:00"
+                      },
+                      {
+                        "field": "timezone",
+                        "turn_id": "customer-1",
+                        "quote": "Europe/London"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "text": " — now moving it to 16:00.",
+                "claims": [
+                  {
+                    "id": "c3",
+                    "kind": "plan",
+                    "facts": {},
+                    "citations": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "turn_id": "actor-continuation-3",
+            "segments": [
+              {
+                "text": "Booking IR-1042 is on 2026-11-18 at 16:00 Europe/London",
+                "claims": [
+                  {
+                    "id": "c4",
+                    "kind": "current_state",
+                    "facts": {
+                      "reference": "IR-1042",
+                      "date": "2026-11-18",
+                      "time": "16:00",
+                      "timezone": "Europe/London"
+                    },
+                    "citations": [
+                      {
+                        "field": "reference",
+                        "turn_id": "actor-continuation-3",
+                        "quote": "IR-1042"
+                      },
+                      {
+                        "field": "date",
+                        "turn_id": "actor-continuation-3",
+                        "quote": "2026-11-18"
+                      },
+                      {
+                        "field": "time",
+                        "turn_id": "actor-continuation-3",
+                        "quote": "16:00"
+                      },
+                      {
+                        "field": "timezone",
+                        "turn_id": "actor-continuation-3",
+                        "quote": "Europe/London"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "text": " and the reschedule occurred.",
+                "claims": [
+                  {
+                    "id": "c5",
+                    "kind": "action",
+                    "facts": {},
+                    "citations": [],
+                    "operation": "rescheduled"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "expected_accuracy": "PASS"
+    },
+    {
+      "id": "development-5",
+      "source_branch_sha256": "0d504973367194677a0a7be647f892ff22f40176b0738702ab9e36cdf167e5b9",
+      "meaning_source": "authored development meanings, not provider output",
+      "interpretation": {
+        "messages": [
+          {
+            "turn_id": "actor-prefix-1",
+            "segments": [
+              {
+                "text": "I'll check your current booking",
+                "claims": [
+                  {
+                    "id": "c1",
+                    "kind": "plan",
+                    "facts": {},
+                    "citations": []
+                  }
+                ]
+              },
+              {
+                "text": " and request the move to 16:00.",
+                "claims": [
+                  {
+                    "id": "c2",
+                    "kind": "plan",
+                    "facts": {},
+                    "citations": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "turn_id": "actor-prefix-2",
+            "segments": [
+              {
+                "text": "Confirmed the 15:00 slot",
+                "claims": [
+                  {
+                    "id": "c3",
+                    "kind": "current_state",
+                    "facts": {
+                      "reference": "IR-1042",
+                      "date": "2026-11-18",
+                      "time": "15:00",
+                      "timezone": "Europe/London"
+                    },
+                    "citations": [
+                      {
+                        "field": "reference",
+                        "turn_id": "customer-1",
+                        "quote": "IR-1042"
+                      },
+                      {
+                        "field": "date",
+                        "turn_id": "customer-1",
+                        "quote": "2026-11-18"
+                      },
+                      {
+                        "field": "time",
+                        "turn_id": "actor-prefix-2",
+                        "quote": "15:00"
+                      },
+                      {
+                        "field": "timezone",
+                        "turn_id": "customer-1",
+                        "quote": "Europe/London"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "text": " — now I'll submit the reschedule request.",
+                "claims": [
+                  {
+                    "id": "c4",
+                    "kind": "plan",
+                    "facts": {},
+                    "citations": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "turn_id": "actor-continuation-3",
+            "segments": [
+              {
+                "text": "Understood",
+                "claims": [
+                  {
+                    "id": "c5",
+                    "kind": "acknowledgement",
+                    "facts": {},
+                    "citations": []
+                  }
+                ]
+              },
+              {
+                "text": " — you want to stay at 15:00.",
+                "claims": [
+                  {
+                    "id": "c6",
+                    "kind": "request_summary",
+                    "operation": "withdraw_pending",
+                    "request_turn_id": "customer-2",
+                    "facts": {
+                      "time": "15:00"
+                    },
+                    "citations": [
+                      {
+                        "field": "subject",
+                        "turn_id": "customer-2",
+                        "quote": "Actually, don't change it. Keep my appointment at 15:00."
+                      },
+                      {
+                        "field": "time",
+                        "turn_id": "actor-continuation-3",
+                        "quote": "15:00"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "text": " I'll verify the current time.",
+                "claims": [
+                  {
+                    "id": "c7",
+                    "kind": "plan",
+                    "facts": {},
+                    "citations": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "turn_id": "actor-continuation-4",
+            "segments": [
+              {
+                "text": "I see it moved to 16:00",
+                "claims": [
+                  {
+                    "id": "c8",
+                    "kind": "current_state",
+                    "facts": {
+                      "reference": "IR-1042",
+                      "date": "2026-11-18",
+                      "time": "16:00",
+                      "timezone": "Europe/London"
+                    },
+                    "citations": [
+                      {
+                        "field": "reference",
+                        "turn_id": "customer-1",
+                        "quote": "IR-1042"
+                      },
+                      {
+                        "field": "date",
+                        "turn_id": "customer-1",
+                        "quote": "2026-11-18"
+                      },
+                      {
+                        "field": "time",
+                        "turn_id": "actor-continuation-4",
+                        "quote": "16:00"
+                      },
+                      {
+                        "field": "timezone",
+                        "turn_id": "customer-1",
+                        "quote": "Europe/London"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "c9",
+                    "kind": "action",
+                    "facts": {
+                      "reference": "IR-1042",
+                      "date": "2026-11-18",
+                      "time": "16:00",
+                      "timezone": "Europe/London"
+                    },
+                    "citations": [
+                      {
+                        "field": "reference",
+                        "turn_id": "customer-1",
+                        "quote": "IR-1042"
+                      },
+                      {
+                        "field": "date",
+                        "turn_id": "customer-1",
+                        "quote": "2026-11-18"
+                      },
+                      {
+                        "field": "time",
+                        "turn_id": "actor-continuation-4",
+                        "quote": "16:00"
+                      },
+                      {
+                        "field": "timezone",
+                        "turn_id": "customer-1",
+                        "quote": "Europe/London"
+                      }
+                    ],
+                    "operation": "rescheduled"
+                  }
+                ]
+              },
+              {
+                "text": " — I'll move it back to 15:00 as requested.",
+                "claims": [
+                  {
+                    "id": "c10",
+                    "kind": "plan",
+                    "facts": {},
+                    "citations": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "turn_id": "actor-continuation-5",
+            "segments": [
+              {
+                "text": "Booking IR-1042 is on 2026-11-18 at 16:00 Europe/London;",
+                "claims": [
+                  {
+                    "id": "c11",
+                    "kind": "current_state",
+                    "facts": {
+                      "reference": "IR-1042",
+                      "date": "2026-11-18",
+                      "time": "16:00",
+                      "timezone": "Europe/London"
+                    },
+                    "citations": [
+                      {
+                        "field": "reference",
+                        "turn_id": "actor-continuation-5",
+                        "quote": "IR-1042"
+                      },
+                      {
+                        "field": "date",
+                        "turn_id": "actor-continuation-5",
+                        "quote": "2026-11-18"
+                      },
+                      {
+                        "field": "time",
+                        "turn_id": "actor-continuation-5",
+                        "quote": "Booking IR-1042 is on 2026-11-18 at 16:00 Europe/London;"
+                      },
+                      {
+                        "field": "timezone",
+                        "turn_id": "actor-continuation-5",
+                        "quote": "Europe/London"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "text": " the reschedule to 16:00 occurred and is committed.",
+                "claims": [
+                  {
+                    "id": "c12",
+                    "kind": "action",
+                    "facts": {
+                      "reference": "IR-1042",
+                      "date": "2026-11-18",
+                      "time": "16:00",
+                      "timezone": "Europe/London"
+                    },
+                    "citations": [
+                      {
+                        "field": "reference",
+                        "turn_id": "actor-continuation-5",
+                        "quote": "IR-1042"
+                      },
+                      {
+                        "field": "date",
+                        "turn_id": "actor-continuation-5",
+                        "quote": "2026-11-18"
+                      },
+                      {
+                        "field": "time",
+                        "turn_id": "actor-continuation-5",
+                        "quote": " the reschedule to 16:00 occurred and is committed."
+                      },
+                      {
+                        "field": "timezone",
+                        "turn_id": "actor-continuation-5",
+                        "quote": "Europe/London"
+                      }
+                    ],
+                    "operation": "rescheduled"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "expected_accuracy": "PASS"
+    },
+    {
+      "id": "development-6",
+      "source_branch_sha256": "89727efd023d556866a5d715f658634b7ab03ecd3d863ed5bf5dda9dda4bd101",
+      "meaning_source": "authored development meanings, not provider output",
+      "interpretation": {
+        "messages": [
+          {
+            "turn_id": "actor-prefix-1",
+            "segments": [
+              {
+                "text": "I'll check your current booking and request the move to 16:00.",
+                "claims": [
+                  {
+                    "id": "c1",
+                    "kind": "plan",
+                    "facts": {},
+                    "citations": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "turn_id": "actor-prefix-2",
+            "segments": [
+              {
+                "text": "Confirmed the 15:00 slot",
+                "claims": [
+                  {
+                    "id": "c2",
+                    "kind": "current_state",
+                    "facts": {
+                      "reference": "IR-1042",
+                      "date": "2026-11-18",
+                      "time": "15:00",
+                      "timezone": "Europe/London"
+                    },
+                    "citations": [
+                      {
+                        "field": "reference",
+                        "turn_id": "customer-1",
+                        "quote": "IR-1042"
+                      },
+                      {
+                        "field": "date",
+                        "turn_id": "customer-1",
+                        "quote": "2026-11-18"
+                      },
+                      {
+                        "field": "time",
+                        "turn_id": "actor-prefix-2",
+                        "quote": "15:00"
+                      },
+                      {
+                        "field": "timezone",
+                        "turn_id": "customer-1",
+                        "quote": "Europe/London"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "text": " — now I'll submit the reschedule request.",
+                "claims": [
+                  {
+                    "id": "c3",
+                    "kind": "plan",
+                    "facts": {},
+                    "citations": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "turn_id": "actor-continuation-3",
+            "segments": [
+              {
+                "text": "Understood",
+                "claims": [
+                  {
+                    "id": "c4",
+                    "kind": "acknowledgement",
+                    "facts": {},
+                    "citations": []
+                  }
+                ]
+              },
+              {
+                "text": " — keeping it at 15:00.",
+                "claims": [
+                  {
+                    "id": "c5",
+                    "kind": "unsupported",
+                    "reason": "Unqualified keeping-at is ambiguous between a plan and retained state.",
+                    "facts": {},
+                    "citations": []
+                  }
+                ]
+              },
+              {
+                "text": " I'll verify the booking status.",
+                "claims": [
+                  {
+                    "id": "c6",
+                    "kind": "plan",
+                    "facts": {},
+                    "citations": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "turn_id": "actor-continuation-4",
+            "segments": [
+              {
+                "text": "Booking IR-1042 is on 2026-11-18 at 15:00 Europe/London;",
+                "claims": [
+                  {
+                    "id": "c7",
+                    "kind": "current_state",
+                    "facts": {
+                      "reference": "IR-1042",
+                      "date": "2026-11-18",
+                      "time": "15:00",
+                      "timezone": "Europe/London"
+                    },
+                    "citations": [
+                      {
+                        "field": "reference",
+                        "turn_id": "actor-continuation-4",
+                        "quote": "IR-1042"
+                      },
+                      {
+                        "field": "date",
+                        "turn_id": "actor-continuation-4",
+                        "quote": "2026-11-18"
+                      },
+                      {
+                        "field": "time",
+                        "turn_id": "actor-continuation-4",
+                        "quote": "15:00"
+                      },
+                      {
+                        "field": "timezone",
+                        "turn_id": "actor-continuation-4",
+                        "quote": "Europe/London"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "text": " the reschedule to 16:00 did not occur",
+                "claims": [
+                  {
+                    "id": "c8",
+                    "kind": "action",
+                    "facts": {
+                      "time": "16:00"
+                    },
+                    "citations": [
+                      {
+                        "field": "time",
+                        "turn_id": "actor-continuation-4",
+                        "quote": "16:00"
+                      }
+                    ],
+                    "operation": "not_rescheduled"
+                  }
+                ]
+              },
+              {
+                "text": " and was suppressed.",
+                "claims": [
+                  {
+                    "id": "c9",
+                    "kind": "action",
+                    "facts": {
+                      "reference": "IR-1042",
+                      "time": "16:00"
+                    },
+                    "citations": [
+                      {
+                        "field": "reference",
+                        "turn_id": "actor-continuation-4",
+                        "quote": "IR-1042"
+                      },
+                      {
+                        "field": "time",
+                        "turn_id": "actor-continuation-4",
+                        "quote": "16:00"
+                      }
+                    ],
+                    "operation": "suppressed"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "expected_accuracy": "INCONCLUSIVE"
+    },
+    {
+      "id": "development-7",
+      "source_branch_sha256": "ecfb2bad0050bfa5aab3cf6329c72642ed6c288b7998d364fc58c5f07975128d",
+      "meaning_source": "authored development meanings, not provider output",
+      "interpretation": {
+        "messages": [
+          {
+            "turn_id": "actor-prefix-1",
+            "segments": [
+              {
+                "text": "Moving your booking — ",
+                "claims": [
+                  {
+                    "id": "c1",
+                    "kind": "plan",
+                    "facts": {},
+                    "citations": []
+                  }
+                ]
+              },
+              {
+                "text": "I'll confirm the new time.",
+                "claims": [
+                  {
+                    "id": "c2",
+                    "kind": "plan",
+                    "facts": {},
+                    "citations": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "turn_id": "actor-prefix-2",
+            "segments": [
+              {
+                "text": "Confirmed current details — ",
+                "claims": [
+                  {
+                    "id": "c3",
+                    "kind": "inspection",
+                    "facts": {},
+                    "citations": []
+                  }
+                ]
+              },
+              {
+                "text": "now requesting the move to 16:00.",
+                "claims": [
+                  {
+                    "id": "c4",
+                    "kind": "plan",
+                    "facts": {},
+                    "citations": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "turn_id": "actor-continuation-3",
+            "segments": [
+              {
+                "text": "Booking IR-1042 for Camera sensor cleaning is on 2026-11-18 at 16:00 Europe/London;",
+                "claims": [
+                  {
+                    "id": "c5",
+                    "kind": "current_state",
+                    "facts": {
+                      "reference": "IR-1042",
+                      "date": "2026-11-18",
+                      "time": "16:00",
+                      "timezone": "Europe/London",
+                      "service": "Camera sensor cleaning"
+                    },
+                    "citations": [
+                      {
+                        "field": "reference",
+                        "turn_id": "actor-continuation-3",
+                        "quote": "IR-1042"
+                      },
+                      {
+                        "field": "date",
+                        "turn_id": "actor-continuation-3",
+                        "quote": "2026-11-18"
+                      },
+                      {
+                        "field": "time",
+                        "turn_id": "actor-continuation-3",
+                        "quote": "16:00"
+                      },
+                      {
+                        "field": "timezone",
+                        "turn_id": "actor-continuation-3",
+                        "quote": "Europe/London"
+                      },
+                      {
+                        "field": "service",
+                        "turn_id": "actor-continuation-3",
+                        "quote": "Camera sensor cleaning"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "text": " reschedule occurred and committed.",
+                "claims": [
+                  {
+                    "id": "c6",
+                    "kind": "action",
+                    "facts": {},
+                    "citations": [],
+                    "operation": "rescheduled"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "expected_accuracy": "INCONCLUSIVE"
+    },
+    {
+      "id": "development-8",
+      "source_branch_sha256": "042831d992f909b63569e1808568b885680ffef74c164797181e345585055476",
+      "meaning_source": "authored development meanings, not provider output",
+      "interpretation": {
+        "messages": [
+          {
+            "turn_id": "actor-prefix-1",
+            "segments": [
+              {
+                "text": "Moving your booking — I'll confirm the new time.",
+                "claims": [
+                  {
+                    "id": "c1",
+                    "kind": "plan",
+                    "facts": {},
+                    "citations": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "turn_id": "actor-prefix-2",
+            "segments": [
+              {
+                "text": "Confirmed current details",
+                "claims": [
+                  {
+                    "id": "c2",
+                    "kind": "inspection",
+                    "facts": {},
+                    "citations": []
+                  }
+                ]
+              },
+              {
+                "text": " — now requesting the move to 16:00.",
+                "claims": [
+                  {
+                    "id": "c3",
+                    "kind": "plan",
+                    "facts": {},
+                    "citations": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "turn_id": "actor-continuation-3",
+            "segments": [
+              {
+                "text": "Booking IR-1042 for Camera sensor cleaning on 2026-11-18 at 16:00 Europe/London",
+                "claims": [
+                  {
+                    "id": "c4",
+                    "kind": "current_state",
+                    "facts": {
+                      "reference": "IR-1042",
+                      "date": "2026-11-18",
+                      "time": "16:00",
+                      "timezone": "Europe/London",
+                      "service": "Camera sensor cleaning"
+                    },
+                    "citations": [
+                      {
+                        "field": "reference",
+                        "turn_id": "actor-continuation-3",
+                        "quote": "IR-1042"
+                      },
+                      {
+                        "field": "date",
+                        "turn_id": "actor-continuation-3",
+                        "quote": "2026-11-18"
+                      },
+                      {
+                        "field": "time",
+                        "turn_id": "actor-continuation-3",
+                        "quote": "16:00"
+                      },
+                      {
+                        "field": "timezone",
+                        "turn_id": "actor-continuation-3",
+                        "quote": "Europe/London"
+                      },
+                      {
+                        "field": "service",
+                        "turn_id": "actor-continuation-3",
+                        "quote": "Camera sensor cleaning"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "text": " — reschedule occurred and committed.",
+                "claims": [
+                  {
+                    "id": "c5",
+                    "kind": "action",
+                    "facts": {},
+                    "citations": [],
+                    "operation": "rescheduled"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "expected_accuracy": "INCONCLUSIVE"
+    }
+  ]
+}

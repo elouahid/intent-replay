@@ -1,0 +1,3 @@
+# Preserve captured JSON and source-contract bytes across Git clones.
+# The execution contract hashes file bytes; do not normalize line endings.
+* -text

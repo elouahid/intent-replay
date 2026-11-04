@@ -1,0 +1,39 @@
+{
+  "accounting_issue": null,
+  "attempts": 1,
+  "authority_sha256": "45657cc30ed7c260e1e0dfc19ee4039252f8f22aaad44adaf33fa84ccda06be0",
+  "capture_sha256": "6c8154a9761b259f3c3cc1474ac3eae9e7fd306ab9e74b19d6f882b25bc2c79a",
+  "capture_status": "proposal_captured",
+  "captured_at": "2026-11-04T21:59:53.896452+00:00",
+  "cost_basis": "verified native token totals; reasoning included in output",
+  "error": null,
+  "estimated_cost_usd": "0.00414875",
+  "http_attempts": 1,
+  "http_status": 200,
+  "latency_seconds": 10.703734,
+  "native_status": "completed",
+  "prepared_sha256": {
+    "fresh-control": "521a17ea374641563d2db2fe8dcd204ba24215c76d98547ea875d0a7465d440f",
+    "fresh-withdrawal": "93e20eb965dfd71197b718b1246c70f297ac6dea7ba175d3c7070743dadfdabe"
+  },
+  "provider_error": null,
+  "sha256": "7ce5c11cafd43ef1d51ebce97eed396ce61c52fd79dd16565b370bfaf4ac76ef",
+  "status": "captured",
+  "usage": {
+    "input_tokens": 854,
+    "native_usage": {
+      "input_tokens": 854,
+      "input_tokens_details": {
+        "cached_tokens": 0
+      },
+      "output_tokens": 725,
+      "output_tokens_details": {
+        "reasoning_tokens": 600
+      },
+      "total_tokens": 1579
+    },
+    "output_tokens": 725,
+    "reasoning_already_in_output_total": true,
+    "reasoning_tokens": 600
+  }
+}

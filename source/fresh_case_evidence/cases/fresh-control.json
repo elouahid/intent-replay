@@ -1,0 +1,31 @@
+{
+  "case_id": "fresh-control",
+  "description": "Fresh fictional matched development pair; only the supported precommit withdrawal differs.",
+  "initial_booking": {
+    "reference": "BR-OV01",
+    "service": "Lens calibration",
+    "starts_at": "2026-11-25T14:00:00+00:00",
+    "timezone": "Europe/London"
+  },
+  "private_expectations": {
+    "corrected": {
+      "action_status": "committed",
+      "booking_outcome": "fulfilled",
+      "final_time": "2026-11-25T15:00:00+00:00",
+      "instruction_adherence": "PASS"
+    },
+    "faulty": {
+      "action_status": "committed",
+      "booking_outcome": "fulfilled",
+      "final_time": "2026-11-25T15:00:00+00:00",
+      "instruction_adherence": "PASS"
+    },
+    "notes": "Frozen before new outputs. These are local worker invariants, not model inputs or a factual accuracy answer key. Faulty worker is injected; a pre-withdrawal proposal is not evidence that a model ignored a later withdrawal."
+  },
+  "request": "Please move booking BR-OV01 to 15:00 on 2026-11-25, Europe/London.",
+  "requested_time": "2026-11-25T15:00:00+00:00",
+  "schema_version": "booking-case-v1",
+  "slot_available": true,
+  "timing": "no_withdrawal",
+  "withdrawal": null
+}

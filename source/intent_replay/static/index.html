@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light">
+    <meta name="theme-color" content="#f6f8f7">
+    <title>Intent Replay | Recorded Execution Audit</title>
+    <link rel="icon" type="image/svg+xml" href="/static/assets/replay.svg">
+    <link rel="preload" href="/static/assets/plex-sans-400.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="/static/app.css">
+    <script defer src="/static/assets/lucide.min.js"></script>
+    <script defer src="/static/app.js"></script>
+    <script defer src="/static/temporal.js"></script>
+    <script defer src="/static/agent.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to workspace</a>
+    <header class="site-header">
+      <div class="page-width header-inner">
+        <div class="identity">
+          <span class="brand-mark" aria-hidden="true"><i data-lucide="rotate-ccw"></i></span>
+          <div>
+            <h1>Intent Replay</h1>
+            <p class="lab-marker"><span class="lab-dot" aria-hidden="true"></span>Execution and authorization audit</p>
+          </div>
+        </div>
+        <div class="model-context">
+          <span class="eyebrow" id="model-role-label">Recorded Meta model</span>
+          <span class="model-identity"><i data-lucide="cpu" aria-hidden="true"></i><code id="model-name">Connecting</code></span>
+        </div>
+      </div>
+    </header>
+
+    <main id="main-content" tabindex="-1">
+      <section class="page-width demo-intro" aria-labelledby="demo-heading">
+        <p id="demo-mode-label" class="controlled-label">Recorded Meta tool call — saved comparison — no new API requests</p>
+        <h2 id="demo-heading">An AI action was queued. The customer changed their mind.</h2>
+        <p>Intent Replay replays an AI agent's queued action and checks whether the committed result still follows the customer's accepted instruction.</p>
+        <div id="demo-choices" class="demo-choices" hidden>
+          <button id="demo-withdrawal" class="button button-primary" type="button" disabled>Withdrawal before execution</button>
+          <button id="demo-control" class="button button-secondary" type="button" disabled>Control: no withdrawal</button>
+        </div>
+        <p id="demo-mode-detail" class="evidence-note">Loading saved-demo configuration. No model call is made on opening.</p>
+      </section>
+      <section class="booking-band" aria-label="Appointment context">
+        <div class="page-width booking-context">
+          <div class="appointment-identity">
+            <img class="camera-thumbnail" src="/static/assets/camera.jpg" alt="Camera equipment" width="68" height="68">
+            <div>
+              <p class="eyebrow">Fictional booking · local SQLite</p>
+              <h2 id="booking-service">Loading booking</h2>
+              <p class="reference-line">Booking <code id="booking-reference">Pending</code></p>
+            </div>
+          </div>
+          <dl class="appointment-facts">
+            <div><dt>Appointment date</dt><dd id="booking-date">Pending</dd></div>
+            <div><dt>Initial time</dt><dd id="booking-time" class="mono">Pending</dd></div>
+            <div><dt>Time zone</dt><dd id="booking-timezone">Pending</dd></div>
+          </dl>
+        </div>
+      </section>
+
+      <div class="page-width workflow-tabs" role="tablist" aria-label="Replay workflow">
+        <button id="temporal-tab" type="button" role="tab" aria-controls="temporal-view" aria-selected="false" tabindex="-1"><i data-lucide="git-compare-arrows" aria-hidden="true"></i>Synthetic queued withdrawal</button>
+        <button id="immediate-tab" type="button" role="tab" aria-controls="immediate-view" aria-selected="false" tabindex="-1"><i data-lucide="calendar-clock" aria-hidden="true"></i>Synthetic immediate booking</button>
+        <button id="agent-tab" type="button" role="tab" aria-controls="agent-view" aria-selected="true"><i data-lucide="bot" aria-hidden="true"></i>Meta execution comparison</button>
+      </div>
+
+      <div id="temporal-view" role="tabpanel" aria-labelledby="temporal-tab" hidden>
+        <section class="control-band" aria-label="Temporal comparison configuration">
+          <div class="page-width temporal-controls">
+            <form id="temporal-freeze-form" class="temporal-form" aria-busy="false">
+              <div>
+                <label class="control-label" for="temporal-scenario">Scheduling control</label>
+                <div class="select-wrapper"><select id="temporal-scenario" disabled><option>Loading scenarios...</option></select><i data-lucide="chevron-down" aria-hidden="true"></i></div>
+              </div>
+              <button id="freeze-button" class="button button-secondary" type="submit" disabled><i data-lucide="snowflake" aria-hidden="true"></i><span>Interpret &amp; freeze</span></button>
+              <button id="compare-button" class="button button-primary" type="button" disabled><i data-lucide="columns-2" aria-hidden="true"></i><span>Run frozen pair</span></button>
+            </form>
+            <p id="temporal-status" class="request-status" role="status" aria-live="polite">Loading temporal scenarios.</p>
+            <div id="temporal-notice" class="error-notice" role="alert" hidden></div>
+            <div class="saved-comparisons">
+              <label class="control-label" for="saved-comparison">Saved comparison</label>
+              <div class="select-wrapper"><select id="saved-comparison" disabled><option value="">No saved comparisons</option></select><i data-lucide="chevron-down" aria-hidden="true"></i></div>
+              <button id="open-comparison" class="button button-secondary" type="button" title="Open saved comparison without a model call" disabled><i data-lucide="folder-open" aria-hidden="true"></i><span>Open</span></button>
+            </div>
+          </div>
+        </section>
+
+        <div class="page-width temporal-workspace">
+          <div class="temporal-heading">
+            <h2>Queued reschedule withdrawal</h2><span class="controlled-label">Controlled demonstration</span>
+          </div>
+          <section class="shared-inputs" aria-labelledby="shared-heading">
+            <div class="section-heading"><h3 id="shared-heading"><i data-lucide="messages-square" aria-hidden="true"></i>Shared customer instructions</h3><span id="freeze-status" class="section-note">Not interpreted</span></div>
+            <ol id="shared-instructions" class="shared-instruction-list"></ol>
+            <details id="freeze-details" class="freeze-details" hidden><summary>Frozen input provenance</summary><dl id="freeze-provenance" class="freeze-provenance" hidden></dl></details>
+            <ol id="schedule-steps" class="schedule-steps" aria-label="Deterministic scheduling plan"></ol>
+          </section>
+          <section aria-labelledby="comparison-heading">
+            <div class="report-heading">
+              <div><h2 id="comparison-heading"><i data-lucide="git-compare-arrows" aria-hidden="true"></i>Execution comparison</h2><p id="comparison-caption" class="section-description">No comparison recorded.</p></div>
+              <button id="download-comparison" class="button button-secondary download-button" type="button" title="Download the complete version-3 comparison JSON" disabled><i data-lucide="download" aria-hidden="true"></i><span>Pair JSON</span></button>
+            </div>
+            <p id="comparison-context" class="report-context" role="status" hidden></p>
+            <div id="comparison-empty" class="empty-state"><i data-lucide="git-pull-request" aria-hidden="true"></i><h3>No comparison recorded</h3><p id="temporal-empty-detail">Awaiting frozen customer inputs.</p></div>
+            <div id="comparison-content" hidden>
+              <table class="comparison-table" aria-label="Faulty and corrected execution assessments">
+                <thead><tr><th scope="col">Assessment</th><th scope="col">Faulty</th><th scope="col">Corrected</th></tr></thead>
+                <tbody id="comparison-matrix"></tbody>
+              </table>
+              <p id="comparison-accounting" class="comparison-accounting"></p>
+              <div id="comparison-branches" class="comparison-branches"></div>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <div id="agent-view" role="tabpanel" aria-labelledby="agent-tab">
+        <section class="control-band" aria-label="Real agent configuration">
+          <div class="page-width temporal-controls">
+            <form id="agent-freeze-form" class="temporal-form" aria-busy="false">
+              <div><label class="control-label" for="agent-scenario">Scheduling control</label><div class="select-wrapper"><select id="agent-scenario" disabled><option>Loading scenarios...</option></select></div></div>
+              <button id="agent-freeze" class="button button-secondary" type="submit" disabled>Interpret &amp; freeze</button>
+              <button id="agent-run" class="button button-primary" type="button" disabled>Run real agent</button>
+            </form>
+            <p id="agent-status" class="request-status" role="status" aria-live="polite">Loading agent inputs.</p>
+            <div id="agent-notice" class="error-notice" role="alert" hidden></div>
+            <details id="agent-saved-disclosure" class="agent-detail">
+              <summary>Other saved comparisons</summary>
+              <div class="saved-comparisons">
+              <label class="control-label" for="agent-saved">Saved agent report</label>
+              <div class="select-wrapper"><select id="agent-saved" disabled><option value="">No saved reports</option></select></div>
+              <button id="agent-open" class="button button-secondary" type="button" disabled>Open</button>
+              </div>
+            </details>
+          </div>
+        </section>
+        <div class="page-width temporal-workspace">
+          <div class="temporal-heading"><h2>Tool-using agent execution</h2><span id="agent-mode-label" class="controlled-label">Saved evidence</span></div>
+          <p class="section-description">One real Meta-generated tool proposal, two isolated workers. The faulty worker injects a controlled backend defect. The guarded worker checks the accepted instruction in the write transaction. This is a local fictional-booking experiment.</p>
+          <details class="shared-inputs agent-detail" aria-labelledby="agent-input-heading">
+            <summary id="agent-input-heading">Inspect customer input and original frozen provenance</summary>
+            <ol id="agent-inputs" class="shared-instruction-list"></ol>
+            <dl id="agent-freeze-provenance" class="freeze-provenance"></dl>
+          </details>
+          <section aria-labelledby="agent-report-heading">
+            <div class="report-heading"><div><h2 id="agent-report-heading">Recorded execution comparison</h2><p id="agent-caption" class="section-description">No saved comparison selected.</p></div><button id="agent-download" class="button button-secondary" type="button" disabled>Export saved JSON</button></div>
+            <p id="agent-context" class="report-context" role="status" hidden></p>
+            <div id="agent-empty" class="empty-state"><h3>No saved comparison selected</h3><p>Use the recorded demo to inspect the withdrawal and control without a key. Live developer workflows require an explicit developer launch.</p></div>
+            <div id="agent-report" hidden></div>
+          </section>
+        </div>
+      </div>
+
+      <div id="immediate-view" role="tabpanel" aria-labelledby="immediate-tab" hidden>
+      <section class="control-band" aria-label="Replay configuration">
+        <div class="page-width control-content">
+          <form id="replay-form" class="controls-grid" aria-busy="true">
+            <div class="scenario-control">
+              <label class="control-label" for="scenario-select">Scenario</label>
+              <div class="select-wrapper">
+                <select id="scenario-select" aria-describedby="scenario-description" disabled>
+                  <option value="">Loading scenarios...</option>
+                </select>
+                <i data-lucide="chevron-down" aria-hidden="true"></i>
+              </div>
+              <p id="scenario-description" class="control-caption">Connecting to the replay service.</p>
+            </div>
+
+            <fieldset class="implementation-control" aria-describedby="implementation-caption">
+              <legend class="control-label">Implementation</legend>
+              <div class="mode-switch" role="group" aria-label="Implementation mode">
+                <button id="mode-faulty" class="mode-button" type="button" aria-pressed="true" disabled>
+                  <i data-lucide="flask-conical" aria-hidden="true"></i><span>Faulty</span>
+                </button>
+                <button id="mode-corrected" class="mode-button" type="button" aria-pressed="false" disabled>
+                  <i data-lucide="wrench" aria-hidden="true"></i><span>Corrected</span>
+                </button>
+              </div>
+              <p id="implementation-caption" class="control-caption implementation-caption">
+                <span class="controlled-label">Controlled demonstration</span>
+                <span>The reschedule write is deliberately skipped.</span>
+              </p>
+            </fieldset>
+
+            <div class="run-control">
+              <span class="control-label">Execution</span>
+              <button id="run-button" class="button button-primary" type="submit" disabled>
+                <i data-lucide="play" aria-hidden="true"></i><span>Run replay</span>
+              </button>
+            </div>
+          </form>
+
+          <p id="run-status" class="request-status" role="status" aria-live="polite" aria-atomic="true">Loading scenarios.</p>
+          <div id="notice" class="error-notice" role="alert" aria-atomic="true" hidden>
+            <i data-lucide="circle-alert" aria-hidden="true"></i>
+            <p id="notice-message"></p>
+            <button id="retry-scenarios" class="button button-secondary" type="button" hidden>
+              <i data-lucide="refresh-cw" aria-hidden="true"></i><span>Retry connection</span>
+            </button>
+          </div>
+
+          <div class="request-preview">
+            <p class="eyebrow">Selected customer request</p>
+            <p id="scenario-request" class="request-preview-text">Awaiting scenarios</p>
+            <div id="scenario-conditions" class="scenario-conditions" aria-label="Scenario conditions"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="page-width report-workspace" aria-labelledby="report-heading">
+        <div class="report-heading">
+          <div>
+            <h2 id="report-heading"><i data-lucide="file-search" aria-hidden="true"></i>Run report</h2>
+            <p id="report-caption" class="section-description">No run has been recorded.</p>
+          </div>
+          <button id="download-report" class="button button-secondary download-button" type="button" title="Download this report as JSON" disabled>
+            <i data-lucide="download" aria-hidden="true"></i><span>Report JSON</span>
+          </button>
+        </div>
+
+        <dl id="report-meta" class="report-meta" hidden>
+          <div><dt>Run ID</dt><dd id="report-run-id" class="mono"></dd></div>
+          <div><dt>Scenario</dt><dd id="report-scenario"></dd></div>
+          <div><dt>Implementation</dt><dd class="report-mode"><strong id="report-implementation"></strong><span id="report-controlled" class="controlled-label" hidden>Controlled demonstration</span></dd></div>
+          <div><dt>Recorded</dt><dd id="report-created"></dd></div>
+          <div><dt>Duration</dt><dd id="report-duration" class="mono"></dd></div>
+        </dl>
+        <p id="report-context" class="report-context" role="status" aria-live="polite" hidden></p>
+
+        <div id="empty-state" class="empty-state">
+          <span id="empty-icon" class="empty-icon" aria-hidden="true"><i data-lucide="inbox"></i></span>
+          <h3 id="empty-title">No replay recorded</h3>
+          <p id="empty-detail">Connecting to the replay service.</p>
+        </div>
+
+        <div id="report-content" class="report-content" hidden>
+          <section class="verdict-grid" aria-label="Evaluation results">
+            <div class="verdict-cell">
+              <h3 class="eyebrow">Overall task</h3>
+              <p id="task-verdict" class="verdict-value"></p>
+            </div>
+            <div class="verdict-cell">
+              <h3 class="eyebrow">Booking outcome</h3>
+              <p id="booking-outcome" class="verdict-value"></p>
+            </div>
+            <div class="verdict-cell">
+              <h3 class="eyebrow">Instruction adherence</h3>
+              <p id="instruction-adherence" class="verdict-value"></p>
+            </div>
+            <div class="verdict-cell">
+              <h3 class="eyebrow">Factual claim accuracy</h3>
+              <p id="confirmation-integrity" class="verdict-value"></p>
+            </div>
+            <div class="evaluation-summary">
+              <h3 class="eyebrow">Evaluation</h3>
+              <p id="evaluation-explanation"></p>
+            </div>
+          </section>
+
+          <section class="report-section persisted-section" aria-labelledby="persisted-heading">
+            <div class="section-heading">
+              <h3 id="persisted-heading"><i data-lucide="database" aria-hidden="true"></i>Persisted booking</h3>
+              <span class="section-note">Initial state / final readback</span>
+            </div>
+            <div class="persisted-columns">
+              <div class="booking-snapshot">
+                <div class="snapshot-heading"><h4>Initial state</h4></div>
+                <div id="initial-booking"></div>
+              </div>
+              <div class="booking-snapshot final-snapshot">
+                <div class="snapshot-heading"><h4>Final state</h4><span id="final-state-status"></span></div>
+                <div id="final-booking"></div>
+                <p id="final-state-detail" class="final-state-detail"></p>
+              </div>
+            </div>
+          </section>
+
+          <div class="evidence-grid">
+            <section class="report-section conversation-section" aria-labelledby="conversation-heading">
+              <div class="section-heading">
+                <h3 id="conversation-heading"><i data-lucide="messages-square" aria-hidden="true"></i>Conversation evidence</h3>
+              </div>
+              <div class="request-quote">
+                <h4 class="eyebrow">Customer request</h4>
+                <blockquote id="report-request"></blockquote>
+              </div>
+              <ol id="conversation" class="conversation-list"></ol>
+            </section>
+
+            <section class="report-section interpretation-section" aria-labelledby="interpretation-heading">
+              <div class="section-heading">
+                <h3 id="interpretation-heading"><i data-lucide="scan-text" aria-hidden="true"></i>Extracted intent</h3>
+                <span id="interpretation-status"></span>
+              </div>
+              <p id="interpretation-model" class="interpretation-model mono"></p>
+              <dl id="intent-fields" class="intent-fields"></dl>
+              <div class="interpretation-notes">
+                <h4>Ambiguities</h4>
+                <ul id="ambiguities" class="note-list"></ul>
+              </div>
+              <div id="interpretation-error-section" class="interpretation-notes interpretation-errors" hidden>
+                <h4>Interpretation errors</h4>
+                <ul id="interpretation-errors" class="note-list"></ul>
+              </div>
+            </section>
+          </div>
+
+          <div class="trace-checks-grid">
+            <section class="report-section trace-section" aria-labelledby="trace-heading">
+              <div class="section-heading">
+                <h3 id="trace-heading"><i data-lucide="list-tree" aria-hidden="true"></i>Action trace</h3>
+              </div>
+              <ol id="action-trace" class="action-trace"></ol>
+            </section>
+
+            <section class="report-section checks-section" aria-labelledby="checks-heading">
+              <div class="section-heading">
+                <h3 id="checks-heading"><i data-lucide="list-checks" aria-hidden="true"></i>Evaluation checks</h3>
+              </div>
+              <ul id="evaluation-checks" class="evaluation-checks"></ul>
+            </section>
+          </div>
+
+          <section class="report-section provenance-section" aria-labelledby="provenance-heading">
+            <div class="section-heading">
+              <h3 id="provenance-heading"><i data-lucide="fingerprint" aria-hidden="true"></i>Run provenance</h3>
+            </div>
+            <dl id="provenance" class="provenance-grid"></dl>
+            <div class="provenance-demonstrations">
+              <h4>Controlled demonstrations</h4>
+              <ul id="controlled-demonstrations" class="note-list"></ul>
+            </div>
+          </section>
+        </div>
+      </section>
+      </div>
+    </main>
+
+    <footer class="page-width page-footer">
+      <span>Intent Replay / local replay lab</span>
+      <a href="https://unsplash.com" target="_blank" rel="noopener noreferrer" aria-label="Camera photo source: Unsplash (opens in a new tab)">Camera photo / Unsplash<i data-lucide="external-link" aria-hidden="true"></i></a>
+    </footer>
+    <noscript><p class="noscript-message">JavaScript is required to connect to the replay service.</p></noscript>
+  </body>
+</html>

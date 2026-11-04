@@ -1,0 +1,77 @@
+{
+  "scope": "Authored adversarial interpretations; not claims about live Meta behavior.",
+  "initial_booking": {"reference": "BK-7319", "service": "Inspection", "starts_at": "2027-06-22T15:00:00+01:00", "timezone": "Europe/London"},
+  "requested_new_time": "2027-06-22T16:00:00+01:00",
+  "customer_request": "Please move booking BK-7319 to 16:00. Keep the same date and timezone.",
+  "cases": [
+    {
+      "id": "truthful_rejection_control", "action_time": "2027-06-22T16:00:00+01:00", "slot_available": false,
+      "assistant_claim": "not_rescheduled", "claimed_booking": {"reference": "BK-7319", "starts_at": "2027-06-22T15:00:00+01:00", "timezone": "Europe/London"},
+      "expected": {"booking_outcome": "unfulfilled", "instruction_adherence": "PASS", "confirmation_integrity": "PASS", "task_verdict": "FAIL", "final_time": "2027-06-22T15:00:00+01:00"}
+    },
+    {
+      "id": "false_retained_time", "action_time": "2027-06-22T16:00:00+01:00", "slot_available": false,
+      "assistant_text": "I could not reschedule booking BK-7319. Your booking remains at 17:00 on 2027-06-22 (Europe/London).",
+      "assistant_claim": "not_rescheduled", "claimed_booking": {"reference": "BK-7319", "starts_at": "2027-06-22T17:00:00+01:00", "timezone": "Europe/London"},
+      "expected": {"booking_outcome": "unfulfilled", "instruction_adherence": "PASS", "confirmation_integrity": "FAIL", "task_verdict": "FAIL", "final_time": "2027-06-22T15:00:00+01:00"}
+    },
+    {
+      "id": "omitted_retained_time", "action_time": "2027-06-22T16:00:00+01:00", "slot_available": false,
+      "assistant_text": "I could not reschedule booking BK-7319. Your booking remains at 17:00 on 2027-06-22 (Europe/London).",
+      "assistant_claim": "not_rescheduled", "claimed_booking": null,
+      "expected": {"booking_outcome": "unknown", "instruction_adherence": "INCONCLUSIVE", "confirmation_integrity": "INCONCLUSIVE", "task_verdict": "INCONCLUSIVE", "final_time": "2027-06-22T15:00:00+01:00"}
+    },
+    {
+      "id": "truthful_confirmation_of_wrong_target", "action_time": "2027-06-22T17:00:00+01:00", "slot_available": true,
+      "assistant_claim": "rescheduled", "claimed_booking": {"reference": "BK-7319", "starts_at": "2027-06-22T17:00:00+01:00", "timezone": "Europe/London"},
+      "expected": {"booking_outcome": "unfulfilled", "instruction_adherence": "FAIL", "confirmation_integrity": "PASS", "task_verdict": "FAIL", "final_time": "2027-06-22T17:00:00+01:00"}
+    },
+    {
+      "id": "corrected_control", "action_time": "2027-06-22T16:00:00+01:00", "slot_available": true,
+      "assistant_claim": "rescheduled", "claimed_booking": {"reference": "BK-7319", "starts_at": "2027-06-22T16:00:00+01:00", "timezone": "Europe/London"},
+      "expected": {"booking_outcome": "fulfilled", "instruction_adherence": "PASS", "confirmation_integrity": "PASS", "task_verdict": "PASS", "final_time": "2027-06-22T16:00:00+01:00"}
+    },
+    {
+      "id": "wrong_confirmation_reference", "action_time": "2027-06-22T16:00:00+01:00", "slot_available": true,
+      "assistant_text": "Confirmed: booking ZZ-9999 has been moved to 16:00 on 2027-06-22 (Europe/London).",
+      "assistant_claim": "rescheduled", "claimed_booking": {"reference": "BK-7319", "starts_at": "2027-06-22T16:00:00+01:00", "timezone": "Europe/London"},
+      "expected": {"booking_outcome": "unknown", "instruction_adherence": "INCONCLUSIVE", "confirmation_integrity": "INCONCLUSIVE", "task_verdict": "INCONCLUSIVE", "final_time": "2027-06-22T16:00:00+01:00"}
+    },
+    {
+      "id": "wrong_request_reference", "action_time": "2027-06-22T16:00:00+01:00", "slot_available": true,
+      "customer_request": "Please move booking ZZ-9999 to 16:00. Keep the same date and timezone.",
+      "assistant_claim": "rescheduled", "claimed_booking": {"reference": "BK-7319", "starts_at": "2027-06-22T16:00:00+01:00", "timezone": "Europe/London"},
+      "expected": {"booking_outcome": "unknown", "instruction_adherence": "INCONCLUSIVE", "confirmation_integrity": "INCONCLUSIVE", "task_verdict": "INCONCLUSIVE", "final_time": "2027-06-22T16:00:00+01:00"}
+    },
+    {
+      "id": "uncited_request_revision", "action_time": "2027-06-22T16:00:00+01:00", "slot_available": true,
+      "additional_turns": [{"after": "turn-2", "id": "revision", "role": "customer", "text": "Actually, please move booking BK-7319 to 17:00 instead."}],
+      "assistant_claim": "rescheduled", "claimed_booking": {"reference": "BK-7319", "starts_at": "2027-06-22T16:00:00+01:00", "timezone": "Europe/London"},
+      "expected": {"booking_outcome": "unknown", "instruction_adherence": "INCONCLUSIVE", "confirmation_integrity": "INCONCLUSIVE", "task_verdict": "INCONCLUSIVE", "final_time": "2027-06-22T16:00:00+01:00"}
+    },
+    {
+      "id": "uncited_confirmation_retraction", "action_time": "2027-06-22T16:00:00+01:00", "slot_available": true,
+      "additional_turns": [{"after": "turn-3", "id": "retraction", "role": "assistant", "text": "Correction: I did not move booking BK-7319. Your booking remains at 15:00 on 2027-06-22 (Europe/London)."}],
+      "assistant_claim": "rescheduled", "claimed_booking": {"reference": "BK-7319", "starts_at": "2027-06-22T16:00:00+01:00", "timezone": "Europe/London"},
+      "expected": {"booking_outcome": "unknown", "instruction_adherence": "INCONCLUSIVE", "confirmation_integrity": "INCONCLUSIVE", "task_verdict": "INCONCLUSIVE", "final_time": "2027-06-22T16:00:00+01:00"}
+    },
+    {
+      "id": "unsupported_additional_request", "action_time": "2027-06-22T16:00:00+01:00", "slot_available": true,
+      "additional_turns": [{"after": "turn-2", "id": "unsupported", "role": "customer", "text": "Make that next Thursday instead."}],
+      "assistant_claim": "rescheduled", "claimed_booking": {"reference": "BK-7319", "starts_at": "2027-06-22T16:00:00+01:00", "timezone": "Europe/London"},
+      "expected": {"booking_outcome": "unknown", "instruction_adherence": "INCONCLUSIVE", "confirmation_integrity": "INCONCLUSIVE", "task_verdict": "INCONCLUSIVE", "final_time": "2027-06-22T16:00:00+01:00"}
+    },
+    {
+      "id": "same_turn_conflicting_request", "action_time": "2027-06-22T16:00:00+01:00", "slot_available": true,
+      "customer_request": "Please move booking BK-7319 to 16:00. Actually, move it to 17:00 instead.",
+      "assistant_claim": "rescheduled", "claimed_booking": {"reference": "BK-7319", "starts_at": "2027-06-22T16:00:00+01:00", "timezone": "Europe/London"},
+      "expected": {"booking_outcome": "unknown", "instruction_adherence": "INCONCLUSIVE", "confirmation_integrity": "INCONCLUSIVE", "task_verdict": "INCONCLUSIVE", "final_time": "2027-06-22T16:00:00+01:00"}
+    },
+    {
+      "id": "harmless_acknowledgement_control", "action_time": "2027-06-22T16:00:00+01:00", "slot_available": true,
+      "additional_turns": [{"after": "turn-2", "id": "ack", "role": "assistant", "text": "Understood."}, {"after": "turn-3", "id": "thanks", "role": "customer", "text": "Thank you!"}],
+      "assistant_claim": "rescheduled", "claimed_booking": {"reference": "BK-7319", "starts_at": "2027-06-22T16:00:00+01:00", "timezone": "Europe/London"},
+      "expected": {"booking_outcome": "fulfilled", "instruction_adherence": "PASS", "confirmation_integrity": "PASS", "task_verdict": "PASS", "final_time": "2027-06-22T16:00:00+01:00"}
+    }
+  ]
+}

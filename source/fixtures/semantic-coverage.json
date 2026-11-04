@@ -1,0 +1,99 @@
+{
+  "scope": "Offline semantic-coverage regressions: deliberately authored interpretations, real SQLite, independent expectations, no live Meta claim.",
+  "initial_booking": {"reference": "RV-2086", "service": "Inspection", "starts_at": "2028-04-18T09:00:00-04:00", "timezone": "America/New_York"},
+  "context": "Booking RV-2086: Inspection, on 2028-04-18 at 09:00 (America/New_York).",
+  "customer_request": "Please move booking RV-2086 to 10:00 on 2028-04-18 (America/New_York).",
+  "requested_new_time": "2028-04-18T10:00:00-04:00",
+  "claimed_booking": {"reference": "RV-2086", "starts_at": "2028-04-18T10:00:00-04:00", "timezone": "America/New_York"},
+  "authored_customer_interpretation": {
+    "instructions": [
+      {"turn_id": "request", "operation": "reschedule", "booking_reference": "RV-2086", "requested_time": "2028-04-18T10:00:00-04:00", "timezone": "America/New_York", "withdraws_turn_id": null, "evidence_turn_ids": ["request"]},
+      {"turn_id": "withdrawal", "operation": "withdraw_pending", "booking_reference": "RV-2086", "requested_time": "2028-04-18T09:00:00-04:00", "timezone": "America/New_York", "withdraws_turn_id": "request", "evidence_turn_ids": ["context", "withdrawal"]}
+    ],
+    "ambiguities": []
+  },
+  "expected_customer_results": {
+    "blocked": {
+      "status": "invalid", "accepted_revisions": 0,
+      "faulty": {"action": null, "final_time": "2028-04-18T09:00:00-04:00", "booking_outcome": "unknown", "instruction_adherence": "INCONCLUSIVE", "confirmation_integrity": "INCONCLUSIVE", "task_verdict": "INCONCLUSIVE"},
+      "corrected": {"action": null, "final_time": "2028-04-18T09:00:00-04:00", "booking_outcome": "unknown", "instruction_adherence": "INCONCLUSIVE", "confirmation_integrity": "INCONCLUSIVE", "task_verdict": "INCONCLUSIVE"}
+    },
+    "rescheduled": {
+      "status": "valid", "accepted_revisions": 1,
+      "faulty": {"action": "committed", "final_time": "2028-04-18T10:00:00-04:00", "booking_outcome": "fulfilled", "instruction_adherence": "PASS", "confirmation_integrity": "PASS", "task_verdict": "PASS"},
+      "corrected": {"action": "committed", "final_time": "2028-04-18T10:00:00-04:00", "booking_outcome": "fulfilled", "instruction_adherence": "PASS", "confirmation_integrity": "PASS", "task_verdict": "PASS"}
+    },
+    "withdrawn": {
+      "status": "valid", "accepted_revisions": 2,
+      "faulty": {"action": "committed", "final_time": "2028-04-18T10:00:00-04:00", "booking_outcome": "unfulfilled", "instruction_adherence": "FAIL", "confirmation_integrity": "PASS", "task_verdict": "FAIL"},
+      "corrected": {"action": "suppressed", "final_time": "2028-04-18T09:00:00-04:00", "booking_outcome": "fulfilled", "instruction_adherence": "PASS", "confirmation_integrity": "PASS", "task_verdict": "PASS"}
+    }
+  },
+  "customer_cases": [
+    {"id": "reschedule_then_cancel", "request": "Please move booking RV-2086 to 10:00 on 2028-04-18 (America/New_York), then cancel my appointment.", "expected": "blocked"},
+    {"id": "reschedule_and_cancel", "request": "Please move booking RV-2086 to 10:00 on 2028-04-18 (America/New_York) and cancel my appointment.", "expected": "blocked"},
+    {"id": "reschedule_then_email", "request": "Please move booking RV-2086 to 10:00 on 2028-04-18 (America/New_York), then email the technician.", "expected": "blocked"},
+    {"id": "withdrawal_and_cancel", "withdrawal": "Actually, don't change it. Keep my appointment at 09:00 and cancel my appointment.", "expected": "blocked"},
+    {"id": "withdrawal_and_notify", "withdrawal": "Please cancel the pending change. Keep my appointment at 09:00 and notify the technician.", "expected": "blocked"},
+    {"id": "pending_change_cancel", "withdrawal": "Please cancel the pending change. Keep my appointment at 09:00.", "expected": "withdrawn"},
+    {"id": "coordinated_pending_change_cancel", "withdrawal": "Cancel the pending change and keep my appointment at 09:00. Thanks.", "expected": "withdrawn"},
+    {"id": "ordinary_withdrawal", "withdrawal": "Actually, don't change it. Keep my appointment at 09:00.", "expected": "withdrawn"},
+    {"id": "ordinary_reschedule", "expected": "rescheduled"},
+    {"id": "comma_timezone", "request": "Please move booking RV-2086 to 10:00 on 2028-04-18, America/New_York.", "expected": "rescheduled"},
+    {"id": "comma_timezone_keep", "withdrawal": "Please cancel the pending change. Keep my appointment at 09:00, America/New_York.", "expected": "withdrawn"},
+    {"id": "harmless_acknowledgements", "request": "Please move booking RV-2086 to 10:00 on 2028-04-18 (America/New_York). Thanks.", "acknowledgement": "Understood.", "expected": "rescheduled"},
+    {"id": "unchanged_date_timezone", "request": "Please move booking RV-2086 to 10:00 on 2028-04-18 (America/New_York). Keep the same date and timezone.", "expected": "rescheduled"}
+  ],
+  "claim_cases": [
+    {
+      "id": "contradictory_time",
+      "assistant_text": "Confirmed: booking RV-2086 has been moved to 10:00 on 2028-04-18 (America/New_York). Your booking is scheduled for 11:00 on 2028-04-18 (America/New_York).",
+      "expected_status": "invalid", "expected_accuracy": "INCONCLUSIVE", "expected_task": "INCONCLUSIVE"
+    },
+    {
+      "id": "contradictory_date",
+      "assistant_text": "Confirmed: booking RV-2086 has been moved to 10:00 on 2028-04-18 (America/New_York). Your booking is scheduled for 10:00 on 2028-04-19 (America/New_York).",
+      "expected_status": "invalid", "expected_accuracy": "INCONCLUSIVE", "expected_task": "INCONCLUSIVE"
+    },
+    {
+      "id": "contradictory_reference",
+      "assistant_text": "Confirmed: booking RV-2086 has been moved to 10:00 on 2028-04-18 (America/New_York). Booking OTHER-9913 is scheduled for 10:00 on 2028-04-18 (America/New_York).",
+      "expected_status": "invalid", "expected_accuracy": "INCONCLUSIVE", "expected_task": "INCONCLUSIVE"
+    },
+    {
+      "id": "contradictory_timezone",
+      "assistant_text": "Confirmed: booking RV-2086 has been moved to 10:00 on 2028-04-18 (America/New_York). Your booking is scheduled for 10:00 on 2028-04-18 (Europe/London).",
+      "expected_status": "invalid", "expected_accuracy": "INCONCLUSIVE", "expected_task": "INCONCLUSIVE"
+    },
+    {
+      "id": "equal_offset_different_named_zone",
+      "assistant_text": "Confirmed: booking RV-2086 has been moved to 10:00 on 2028-04-18 (America/New_York). Your booking is scheduled for 10:00 on 2028-04-18 (America/New_York). Your appointment is scheduled for 10:00 on 2028-04-18 (America/Toronto).",
+      "expected_status": "invalid", "expected_accuracy": "INCONCLUSIVE", "expected_task": "INCONCLUSIVE"
+    },
+    {
+      "id": "same_clause_conflicting_time",
+      "assistant_text": "Confirmed: booking RV-2086 has been moved to 10:00 on 2028-04-18 (America/New_York) and your booking is scheduled for 11:00 on 2028-04-18 (America/New_York).",
+      "expected_status": "invalid", "expected_accuracy": "INCONCLUSIVE", "expected_task": "INCONCLUSIVE"
+    },
+    {
+      "id": "ordinary_confirmation",
+      "assistant_text": "Confirmed: booking RV-2086 has been moved to 10:00 on 2028-04-18 (America/New_York).",
+      "expected_status": "valid", "expected_accuracy": "PASS", "expected_task": "PASS"
+    },
+    {
+      "id": "agreeing_two_sentences",
+      "assistant_text": "Confirmed: booking RV-2086 has been moved to 10:00 on 2028-04-18 (America/New_York). Your booking is scheduled for 10:00 on 2028-04-18 (America/New_York).",
+      "expected_status": "valid", "expected_accuracy": "PASS", "expected_task": "PASS"
+    },
+    {
+      "id": "agreeing_partial_date",
+      "assistant_text": "Confirmed: booking RV-2086 has been moved to 10:00 on 2028-04-18 (America/New_York). Your booking is on 2028-04-18.",
+      "expected_status": "valid", "expected_accuracy": "PASS", "expected_task": "PASS"
+    },
+    {
+      "id": "confirmation_then_result_details",
+      "assistant_text": "Confirmed: booking RV-2086 has been moved. Your booking is scheduled for 10:00 on 2028-04-18 (America/New_York).",
+      "expected_status": "valid", "expected_accuracy": "PASS", "expected_task": "PASS"
+    }
+  ]
+}

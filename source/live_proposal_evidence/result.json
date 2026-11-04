@@ -1,0 +1,19 @@
+{
+  "accounting_issue": "usage_unknown",
+  "attempts": 1,
+  "authority_sha256": "7d6578c7764257260eddbd0da6f29ed168b0d6db12016ae7ecfb90a8a4225244",
+  "capture_sha256": "404dd6b0c2cfd810878d1231be86b37f7ed1d1bd4698d61d9b30346d7c639d9a",
+  "capture_status": "blocked_or_failed",
+  "captured_at": "2026-11-04T21:30:43.775302+00:00",
+  "cost_basis": "conservative reservation; actual usage unknown",
+  "error": "Provider returned HTTP 400; no application retry.",
+  "estimated_cost_usd": "1.319424",
+  "http_attempts": 1,
+  "http_status": 400,
+  "latency_seconds": 2.877041,
+  "native_status": null,
+  "prepared_sha256": {},
+  "sha256": "9f2f3f6519f42ec62245422387aa3e42391a91268fc36497afe0112e295d1a49",
+  "status": "failed",
+  "usage": null
+}

@@ -1,0 +1,18 @@
+{
+  "expected_intent": {
+    "requested_operation": "reschedule",
+    "appointment_reference": "IR-1042",
+    "requested_new_time": "2026-11-18T16:00:00+00:00",
+    "ambiguities": []
+  },
+  "cases": [
+    {"id": "A", "scenario_id": "reschedule", "implementation": "faulty", "booking_outcome": "unfulfilled", "instruction_adherence": "FAIL", "confirmation_integrity": "FAIL", "task_verdict": "FAIL", "final_time": "2026-11-18T15:00:00+00:00", "assistant_claim": "rescheduled", "claimed_booking": {"reference": "IR-1042", "starts_at": "2026-11-18T16:00:00+00:00", "timezone": "Europe/London"}},
+    {"id": "B", "scenario_id": "reschedule", "implementation": "corrected", "booking_outcome": "fulfilled", "instruction_adherence": "PASS", "confirmation_integrity": "PASS", "task_verdict": "PASS", "final_time": "2026-11-18T16:00:00+00:00", "assistant_claim": "rescheduled", "claimed_booking": {"reference": "IR-1042", "starts_at": "2026-11-18T16:00:00+00:00", "timezone": "Europe/London"}},
+    {"id": "C", "scenario_id": "unavailable", "implementation": "corrected", "booking_outcome": "unfulfilled", "instruction_adherence": "PASS", "confirmation_integrity": "PASS", "task_verdict": "FAIL", "final_time": "2026-11-18T15:00:00+00:00", "assistant_claim": "not_rescheduled", "claimed_booking": {"reference": "IR-1042", "starts_at": "2026-11-18T15:00:00+00:00", "timezone": "Europe/London"}},
+    {"id": "D", "scenario_id": "missing-evidence", "implementation": "corrected", "booking_outcome": "unknown", "instruction_adherence": "INCONCLUSIVE", "confirmation_integrity": "INCONCLUSIVE", "task_verdict": "INCONCLUSIVE", "final_time": null, "assistant_claim": "rescheduled", "claimed_booking": {"reference": "IR-1042", "starts_at": "2026-11-18T16:00:00+00:00", "timezone": "Europe/London"}},
+    {"id": "E", "scenario_id": "rephrased", "implementation": "faulty", "booking_outcome": "unfulfilled", "instruction_adherence": "FAIL", "confirmation_integrity": "FAIL", "task_verdict": "FAIL", "final_time": "2026-11-18T15:00:00+00:00", "assistant_claim": "rescheduled", "claimed_booking": {"reference": "IR-1042", "starts_at": "2026-11-18T16:00:00+00:00", "timezone": "Europe/London"}},
+    {"id": "F", "scenario_id": "rephrased", "implementation": "corrected", "booking_outcome": "fulfilled", "instruction_adherence": "PASS", "confirmation_integrity": "PASS", "task_verdict": "PASS", "final_time": "2026-11-18T16:00:00+00:00", "assistant_claim": "rescheduled", "claimed_booking": {"reference": "IR-1042", "starts_at": "2026-11-18T16:00:00+00:00", "timezone": "Europe/London"}},
+    {"id": "G", "scenario_id": "unavailable", "implementation": "faulty", "booking_outcome": "unfulfilled", "instruction_adherence": "PASS", "confirmation_integrity": "PASS", "task_verdict": "FAIL", "final_time": "2026-11-18T15:00:00+00:00", "assistant_claim": "not_rescheduled", "claimed_booking": {"reference": "IR-1042", "starts_at": "2026-11-18T15:00:00+00:00", "timezone": "Europe/London"}},
+    {"id": "H", "scenario_id": "missing-evidence", "implementation": "faulty", "booking_outcome": "unknown", "instruction_adherence": "INCONCLUSIVE", "confirmation_integrity": "INCONCLUSIVE", "task_verdict": "INCONCLUSIVE", "final_time": null, "assistant_claim": "rescheduled", "claimed_booking": {"reference": "IR-1042", "starts_at": "2026-11-18T16:00:00+00:00", "timezone": "Europe/London"}}
+  ]
+}

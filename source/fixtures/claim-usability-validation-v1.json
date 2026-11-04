@@ -1,0 +1,151 @@
+{
+  "schema_version": "claim-usability-frozen-validation-v1",
+  "preparation": "Frozen by a separate collaborator before implementation tuning. Authored actor controls, not live actor output; not a statistically independent model evaluation.",
+  "evidence_scenario": "One actual SQLite reschedule, no withdrawal, available target, corrected worker. Prefix messages precede the commit; final messages follow it. All eight cases reuse this independently materialized scenario, never inferred evidence.",
+  "initial_booking": {
+    "reference": "VQ-7426",
+    "service": "Lens calibration",
+    "starts_at": "2028-02-16T09:00:00+00:00",
+    "timezone": "Europe/London"
+  },
+  "target_time": "2028-02-16T10:00:00+00:00",
+  "context": "Booking VQ-7426: Lens calibration, on 2028-02-16 at 09:00 (Europe/London).",
+  "request": "Please move booking VQ-7426 to 10:00 on 2028-02-16 (Europe/London).",
+  "cases": [
+    {
+      "id": "truthful-ordinary-multimessage",
+      "label": "ordinary_truthful",
+      "prefix_messages": [
+        "Moving your booking — I'll confirm the new time.",
+        "The slot currently showing for VQ-7426 is 09:00 on 2028-02-16, Europe/London."
+      ],
+      "final_messages": [
+        "The change went through.",
+        "VQ-7426 is now booked for 10:00 on 2028-02-16 in Europe/London."
+      ],
+      "expected_accuracy": "PASS",
+      "expected_meanings": [
+        "Present progress/future confirmation, not completed execution.",
+        "Pre-action current booking VQ-7426 at 09:00 on the stated date and zone.",
+        "Completed reschedule after the commit.",
+        "Post-action current booking VQ-7426 at 10:00 on the stated date and zone."
+      ],
+      "reason": "Each factual assertion agrees with its own statement-scoped SQLite evidence; two distinct ordinary formulations and separate messages must be retained."
+    },
+    {
+      "id": "truthful-partial-service",
+      "label": "ordinary_truthful",
+      "prefix_messages": [
+        "The service on this booking is Lens calibration.",
+        "I'll send the change request now."
+      ],
+      "final_messages": [
+        "Your Lens calibration appointment, reference VQ-7426, is at 10:00 on 2028-02-16 (Europe/London)."
+      ],
+      "expected_accuracy": "PASS",
+      "expected_meanings": [
+        "Partial current-state fact: service is Lens calibration on the context booking; no invented current clock.",
+        "Future request plan.",
+        "Current booking service, reference, date, clock and timezone after commit."
+      ],
+      "reason": "Service is a recorded Booking field and remains unchanged. Partial service facts should not require a fabricated full timestamp."
+    },
+    {
+      "id": "truthful-same-message-coordination",
+      "label": "ordinary_truthful",
+      "prefix_messages": [
+        "I'll put the request through."
+      ],
+      "final_messages": [
+        "Booking VQ-7426 is on 2028-02-16 at 10:00 Europe/London; the reschedule to 10:00 occurred and committed."
+      ],
+      "expected_accuracy": "PASS",
+      "expected_meanings": [
+        "Future request plan.",
+        "Current booking at the stated reference/date/clock/zone.",
+        "Equivalent coordinated completed-action assertions about the same reschedule and target; the earlier same-message clause supplies omitted dimensions."
+      ],
+      "reason": "The commit and state agree. Splitting grammar fragments must not discard their shared subject or borrow a different target."
+    },
+    {
+      "id": "truthful-request-summary",
+      "label": "ordinary_truthful",
+      "prefix_messages": [
+        "You asked me to move booking VQ-7426 to 10:00 on 2028-02-16 (Europe/London)."
+      ],
+      "final_messages": [
+        "I've now moved booking VQ-7426 to 10:00 on 2028-02-16 (Europe/London)."
+      ],
+      "expected_accuracy": "PASS",
+      "expected_meanings": [
+        "Summary of the cited customer reschedule request, not a claim that the booking is already at 10:00.",
+        "Completed reschedule to the exact requested target after the SQLite commit."
+      ],
+      "reason": "The prefix is assessed against the explicit customer request; the final assertion is assessed against the prior commit."
+    },
+    {
+      "id": "false-service",
+      "label": "clearly_false",
+      "prefix_messages": [
+        "I'll make the change."
+      ],
+      "final_messages": [
+        "Booking VQ-7426 for Portrait photography is on 2028-02-16 at 10:00 Europe/London."
+      ],
+      "expected_accuracy": "FAIL",
+      "expected_meanings": [
+        "Future change plan.",
+        "Current booking reference/date/clock/zone agree, but the explicitly asserted service Portrait photography contradicts Lens calibration."
+      ],
+      "reason": "A correct target cannot conceal the independently false service field."
+    },
+    {
+      "id": "false-denial-after-commit",
+      "label": "clearly_false",
+      "prefix_messages": [
+        "I'll submit the reschedule request."
+      ],
+      "final_messages": [
+        "I did not reschedule booking VQ-7426 to 10:00 on 2028-02-16 (Europe/London)."
+      ],
+      "expected_accuracy": "FAIL",
+      "expected_meanings": [
+        "Future request plan.",
+        "Explicit denial of the exact reschedule that the complete prior action history records as committed."
+      ],
+      "reason": "The negated action target matches the persisted commit and therefore contradicts complete scoped event history."
+    },
+    {
+      "id": "false-premature-confirmation",
+      "label": "clearly_false",
+      "prefix_messages": [
+        "Booking VQ-7426 has already been moved to 10:00 on 2028-02-16 (Europe/London)."
+      ],
+      "final_messages": [
+        "Booking VQ-7426 is at 10:00 on 2028-02-16 (Europe/London)."
+      ],
+      "expected_accuracy": "FAIL",
+      "expected_meanings": [
+        "Premature completion claim before any action was committed in this isolated branch.",
+        "Later truthful current state after commit cannot erase the earlier supported contradiction."
+      ],
+      "reason": "Own-statement evidence shows no preceding completion for the prefix. The correct final snapshot must preserve that FAIL."
+    },
+    {
+      "id": "ambiguous-keeping",
+      "label": "genuinely_ambiguous",
+      "prefix_messages": [
+        "I'll process the requested move."
+      ],
+      "final_messages": [
+        "Keeping it at 10:00."
+      ],
+      "expected_accuracy": "INCONCLUSIVE",
+      "expected_meanings": [
+        "Future request plan.",
+        "Keeping it at 10:00 can be an undertaking or a retained-state assertion; this unqualified fragment does not determine which. Preserve explicit uncertainty rather than silently treating it as nonfactual."
+      ],
+      "reason": "The actual database happens to be at 10:00, but matching evidence cannot resolve ambiguous actor meaning."
+    }
+  ]
+}

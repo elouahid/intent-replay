@@ -1,0 +1,73 @@
+{
+  "accounting_issue": null,
+  "caller_reported_error": false,
+  "finished_at": "2026-11-04T21:59:53.889350+00:00",
+  "http_attempts": 1,
+  "http_status": 200,
+  "latency_seconds": 10.703734,
+  "private_error_diagnostic_saved": false,
+  "private_reasoning_retained": false,
+  "provider_error": null,
+  "public_response": {
+    "id": "resp_6aebaad9ff42a23be80b40bf",
+    "incomplete_details": null,
+    "model": "muse-spark-1.3",
+    "output": [
+      {
+        "content": [
+          {
+            "text": "Proposing the reschedule to 15:00 Europe/London as requested.",
+            "type": "output_text"
+          }
+        ],
+        "id": "rs_2ed47652-cf93-4765-b1de-dc95732c1e89",
+        "phase": "commentary",
+        "role": "assistant",
+        "status": "completed",
+        "type": "message"
+      },
+      {
+        "arguments": "{\"reference\":\"BR-OV01\",\"requested_time\":\"2026-11-25T15:00:00+00:00\",\"timezone\":\"Europe/London\"}",
+        "call_id": "call_4f9e5f95-caff-464e-9a1c-08cdee617e68",
+        "id": "fc_4f9e5f95-caff-464e-9a1c-08cdee617e68",
+        "name": "reschedule_booking",
+        "status": "completed",
+        "type": "function_call"
+      }
+    ],
+    "status": "completed",
+    "usage": {
+      "input_tokens": 854,
+      "input_tokens_details": {
+        "cached_tokens": 0
+      },
+      "output_tokens": 725,
+      "output_tokens_details": {
+        "reasoning_tokens": 600
+      },
+      "total_tokens": 1579
+    }
+  },
+  "request_id": "live-meta-auto-proposal-1",
+  "response_sha256": "838587490d421876c3bca62b2b2015f717c04ab7513c7e90c07b0d5b1c262c07",
+  "schema_version": "live-proposal-attempt-v1",
+  "sha256": "3042936f205bf8e5a3f2b4d52af48b4d7eac05a3150c350a9bef5579721d3a84",
+  "transport_error_type": null,
+  "usage": {
+    "input_tokens": 854,
+    "native_usage": {
+      "input_tokens": 854,
+      "input_tokens_details": {
+        "cached_tokens": 0
+      },
+      "output_tokens": 725,
+      "output_tokens_details": {
+        "reasoning_tokens": 600
+      },
+      "total_tokens": 1579
+    },
+    "output_tokens": 725,
+    "reasoning_already_in_output_total": true,
+    "reasoning_tokens": 600
+  }
+}

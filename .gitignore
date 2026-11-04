@@ -1,0 +1,24 @@
+# Credentials and local configuration
+.env
+.env.*
+*.pem
+*.key
+
+# Runtime, dependency and private evidence directories
+.venv/
+venv/
+.local/
+__pycache__/
+*.py[cod]
+*.sqlite
+*.sqlite3
+*.db
+node_modules/
+private-provider-error.json
+
+# Local captures, exported reports and archives
+*.zip
+*.mp4
+*.wav
+*.mp3
+*.webm

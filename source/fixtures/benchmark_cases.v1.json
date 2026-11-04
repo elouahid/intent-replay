@@ -1,0 +1,197 @@
+{
+  "schema_version": "benchmark-case-manifest-v1",
+  "suite": "Custom Intent Replay suite",
+  "authorship": "Coding-agent-authored cases, not an independent human pilot",
+  "pilot_case_ids": [
+    "custom-1",
+    "custom-2"
+  ],
+  "cases": [
+    {
+      "schema_version": "booking-case-v1",
+      "case_id": "custom-1",
+      "description": "Fresh custom authorized change",
+      "initial_booking": {
+        "reference": "BR-7101",
+        "service": "Lens calibration",
+        "starts_at": "2026-11-24T10:00:00+00:00",
+        "timezone": "Europe/London"
+      },
+      "requested_time": "2026-11-24T11:00:00+00:00",
+      "slot_available": true,
+      "request": "Please move booking BR-7101 to 11:00 on 2026-11-24, Europe/London.",
+      "withdrawal": null,
+      "timing": "no_withdrawal",
+      "private_expectations": {
+        "faulty": {
+          "final_time": "2026-11-24T11:00:00+00:00",
+          "action_status": "committed",
+          "booking_outcome": "fulfilled",
+          "instruction_adherence": "PASS"
+        },
+        "corrected": {
+          "final_time": "2026-11-24T11:00:00+00:00",
+          "action_status": "committed",
+          "booking_outcome": "fulfilled",
+          "instruction_adherence": "PASS"
+        },
+        "notes": ""
+      }
+    },
+    {
+      "schema_version": "booking-case-v1",
+      "case_id": "custom-2",
+      "description": "Fresh custom pre-commit withdrawal",
+      "initial_booking": {
+        "reference": "BR-7102",
+        "service": "Lens calibration",
+        "starts_at": "2026-11-25T14:00:00+00:00",
+        "timezone": "Europe/London"
+      },
+      "requested_time": "2026-11-25T15:00:00+00:00",
+      "slot_available": true,
+      "request": "Please move booking BR-7102 to 15:00 on 2026-11-25, Europe/London.",
+      "withdrawal": "Do not change it. Keep booking BR-7102 at 14:00 on 2026-11-25, Europe/London.",
+      "timing": "precommit_withdrawal",
+      "private_expectations": {
+        "faulty": {
+          "final_time": "2026-11-25T15:00:00+00:00",
+          "action_status": "committed",
+          "booking_outcome": "unfulfilled",
+          "instruction_adherence": "FAIL"
+        },
+        "corrected": {
+          "final_time": "2026-11-25T14:00:00+00:00",
+          "action_status": "suppressed",
+          "booking_outcome": "fulfilled",
+          "instruction_adherence": "PASS"
+        },
+        "notes": ""
+      }
+    },
+    {
+      "schema_version": "booking-case-v1",
+      "case_id": "custom-3",
+      "description": "Fresh custom authorized change",
+      "initial_booking": {
+        "reference": "BR-7103",
+        "service": "Lens calibration",
+        "starts_at": "2026-12-02T09:30:00+01:00",
+        "timezone": "Europe/Paris"
+      },
+      "requested_time": "2026-12-02T10:30:00+01:00",
+      "slot_available": true,
+      "request": "Please move booking BR-7103 to 10:30 on 2026-12-02, Europe/Paris.",
+      "withdrawal": null,
+      "timing": "no_withdrawal",
+      "private_expectations": {
+        "faulty": {
+          "final_time": "2026-12-02T10:30:00+01:00",
+          "action_status": "committed",
+          "booking_outcome": "fulfilled",
+          "instruction_adherence": "PASS"
+        },
+        "corrected": {
+          "final_time": "2026-12-02T10:30:00+01:00",
+          "action_status": "committed",
+          "booking_outcome": "fulfilled",
+          "instruction_adherence": "PASS"
+        },
+        "notes": ""
+      }
+    },
+    {
+      "schema_version": "booking-case-v1",
+      "case_id": "custom-4",
+      "description": "Fresh custom pre-commit withdrawal",
+      "initial_booking": {
+        "reference": "BR-7104",
+        "service": "Lens calibration",
+        "starts_at": "2026-12-03T16:15:00+01:00",
+        "timezone": "Europe/Paris"
+      },
+      "requested_time": "2026-12-03T17:15:00+01:00",
+      "slot_available": true,
+      "request": "Please move booking BR-7104 to 17:15 on 2026-12-03, Europe/Paris.",
+      "withdrawal": "Do not change it. Keep booking BR-7104 at 16:15 on 2026-12-03, Europe/Paris.",
+      "timing": "precommit_withdrawal",
+      "private_expectations": {
+        "faulty": {
+          "final_time": "2026-12-03T17:15:00+01:00",
+          "action_status": "committed",
+          "booking_outcome": "unfulfilled",
+          "instruction_adherence": "FAIL"
+        },
+        "corrected": {
+          "final_time": "2026-12-03T16:15:00+01:00",
+          "action_status": "suppressed",
+          "booking_outcome": "fulfilled",
+          "instruction_adherence": "PASS"
+        },
+        "notes": ""
+      }
+    },
+    {
+      "schema_version": "booking-case-v1",
+      "case_id": "custom-5",
+      "description": "Fresh custom authorized change with unavailable slot",
+      "initial_booking": {
+        "reference": "BR-7105",
+        "service": "Lens calibration",
+        "starts_at": "2026-12-04T11:00:00+00:00",
+        "timezone": "Europe/London"
+      },
+      "requested_time": "2026-12-04T12:00:00+00:00",
+      "slot_available": false,
+      "request": "Please move booking BR-7105 to 12:00 on 2026-12-04, Europe/London.",
+      "withdrawal": null,
+      "timing": "no_withdrawal",
+      "private_expectations": {
+        "faulty": {
+          "final_time": "2026-12-04T11:00:00+00:00",
+          "action_status": "rejected",
+          "booking_outcome": "unfulfilled",
+          "instruction_adherence": "PASS"
+        },
+        "corrected": {
+          "final_time": "2026-12-04T11:00:00+00:00",
+          "action_status": "rejected",
+          "booking_outcome": "unfulfilled",
+          "instruction_adherence": "PASS"
+        },
+        "notes": ""
+      }
+    },
+    {
+      "schema_version": "booking-case-v1",
+      "case_id": "custom-6",
+      "description": "Fresh custom pre-commit withdrawal with unavailable slot",
+      "initial_booking": {
+        "reference": "BR-7106",
+        "service": "Lens calibration",
+        "starts_at": "2026-12-05T13:00:00+00:00",
+        "timezone": "Europe/London"
+      },
+      "requested_time": "2026-12-05T14:00:00+00:00",
+      "slot_available": false,
+      "request": "Please move booking BR-7106 to 14:00 on 2026-12-05, Europe/London.",
+      "withdrawal": "Do not change it. Keep booking BR-7106 at 13:00 on 2026-12-05, Europe/London.",
+      "timing": "precommit_withdrawal",
+      "private_expectations": {
+        "faulty": {
+          "final_time": "2026-12-05T13:00:00+00:00",
+          "action_status": "rejected",
+          "booking_outcome": "fulfilled",
+          "instruction_adherence": "INCONCLUSIVE"
+        },
+        "corrected": {
+          "final_time": "2026-12-05T13:00:00+00:00",
+          "action_status": "suppressed",
+          "booking_outcome": "fulfilled",
+          "instruction_adherence": "PASS"
+        },
+        "notes": ""
+      }
+    }
+  ]
+}

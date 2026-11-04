@@ -1,0 +1,19 @@
+{
+  "schema_version": "claim-usability-frozen-validation-manifest-v1",
+  "frozen_at": "2026-10-31T00:07:00.000873+00:00",
+  "prepared_by": "separate collaborator /root/frozen_validation before application implementation tuning",
+  "independence": "Independently prepared conversation cases in a separate reviewer task; same underlying assistant model, not statistically independent. Fixed authored validation set, not live actor behavior.",
+  "assessment_rule": "Assess each exactly once after application source freeze; do not edit labels or cases after assessing. Expectations must not appear in model inputs.",
+  "files": [
+    {
+      "path": "fixtures/claim-usability-validation-v1.json",
+      "size": 6883,
+      "sha256": "d60d82e40ff48676c5e0bb49ced3d9bc143d5f4d47a4ae50116da10732ccac78"
+    },
+    {
+      "path": "scripts/claim_usability_validation.py",
+      "size": 3739,
+      "sha256": "01e5330047ea233b25ae48517be3f74c44208757821cf45191196574f4c6922c"
+    }
+  ]
+}

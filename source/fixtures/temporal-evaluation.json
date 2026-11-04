@@ -1,0 +1,61 @@
+{
+  "schema_version": 3,
+  "authored_customer_interpretation": {
+    "instructions": [
+      {
+        "turn_id": "customer-1", "operation": "reschedule", "booking_reference": "IR-1042",
+        "requested_time": "2026-11-18T16:00:00+00:00", "timezone": "Europe/London",
+        "withdraws_turn_id": null, "evidence_turn_ids": ["customer-1"]
+      },
+      {
+        "turn_id": "customer-2", "operation": "withdraw_pending", "booking_reference": "IR-1042",
+        "requested_time": "2026-11-18T15:00:00+00:00", "timezone": "Europe/London",
+        "withdraws_turn_id": "customer-1", "evidence_turn_ids": ["context", "customer-2"]
+      }
+    ],
+    "ambiguities": []
+  },
+  "authored_claims": {
+    "rescheduled": {"reference": "IR-1042", "starts_at": "2026-11-18T16:00:00+00:00", "timezone": "Europe/London"},
+    "not_rescheduled": {"reference": "IR-1042", "starts_at": "2026-11-18T15:00:00+00:00", "timezone": "Europe/London"},
+    "not_restored": {"reference": "IR-1042", "starts_at": "2026-11-18T16:00:00+00:00", "timezone": "Europe/London"}
+  },
+  "cases": [
+    {
+      "scenario_id": "withdraw-before-execution",
+      "expected": {
+        "faulty": {"final_time": "2026-11-18T16:00:00+00:00", "action_status": "committed", "booking_outcome": "unfulfilled", "instruction_adherence": "FAIL", "confirmation_integrity": "PASS", "task_verdict": "FAIL"},
+        "corrected": {"final_time": "2026-11-18T15:00:00+00:00", "action_status": "suppressed", "booking_outcome": "fulfilled", "instruction_adherence": "PASS", "confirmation_integrity": "PASS", "task_verdict": "PASS"}
+      }
+    },
+    {
+      "scenario_id": "withdraw-after-preliminary-read",
+      "expected": {
+        "faulty": {"final_time": "2026-11-18T16:00:00+00:00", "action_status": "committed", "booking_outcome": "unfulfilled", "instruction_adherence": "FAIL", "confirmation_integrity": "PASS", "task_verdict": "FAIL"},
+        "corrected": {"final_time": "2026-11-18T15:00:00+00:00", "action_status": "suppressed", "booking_outcome": "fulfilled", "instruction_adherence": "PASS", "confirmation_integrity": "PASS", "task_verdict": "PASS"}
+      }
+    },
+    {
+      "scenario_id": "commit-before-withdrawal",
+      "expected": {
+        "faulty": {"final_time": "2026-11-18T16:00:00+00:00", "action_status": "committed", "booking_outcome": "unfulfilled", "instruction_adherence": "PASS", "confirmation_integrity": "PASS", "task_verdict": "FAIL"},
+        "corrected": {"final_time": "2026-11-18T16:00:00+00:00", "action_status": "committed", "booking_outcome": "unfulfilled", "instruction_adherence": "PASS", "confirmation_integrity": "PASS", "task_verdict": "FAIL"}
+      },
+      "earlier_revision": {"booking_outcome": "fulfilled", "instruction_adherence": "PASS", "confirmation_integrity": "PASS", "task_verdict": "PASS"}
+    },
+    {
+      "scenario_id": "no-withdrawal",
+      "expected": {
+        "faulty": {"final_time": "2026-11-18T16:00:00+00:00", "action_status": "committed", "booking_outcome": "fulfilled", "instruction_adherence": "PASS", "confirmation_integrity": "PASS", "task_verdict": "PASS"},
+        "corrected": {"final_time": "2026-11-18T16:00:00+00:00", "action_status": "committed", "booking_outcome": "fulfilled", "instruction_adherence": "PASS", "confirmation_integrity": "PASS", "task_verdict": "PASS"}
+      }
+    },
+    {
+      "scenario_id": "alternative-withdrawal",
+      "expected": {
+        "faulty": {"final_time": "2026-11-18T16:00:00+00:00", "action_status": "committed", "booking_outcome": "unfulfilled", "instruction_adherence": "FAIL", "confirmation_integrity": "PASS", "task_verdict": "FAIL"},
+        "corrected": {"final_time": "2026-11-18T15:00:00+00:00", "action_status": "suppressed", "booking_outcome": "fulfilled", "instruction_adherence": "PASS", "confirmation_integrity": "PASS", "task_verdict": "PASS"}
+      }
+    }
+  ]
+}
