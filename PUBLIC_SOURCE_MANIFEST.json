@@ -1,5 +1,5 @@
 {
-  "version": "focused-public-submission-v3-license",
+  "version": "focused-public-submission-v4-video",
   "baseline": "intent-replay-live-proposal-repair-candidate-20261104/source",
   "baseline_file_count": 402,
   "unchanged_source_file_count": 95,
@@ -30,9 +30,9 @@
     },
     {
       "path": "README.md",
-      "bytes": 6787,
-      "sha256": "6897252b94ec26218a04867ab1156721d1c48aeb370a00b6bcb654cdf91f745a",
-      "origin": "owner-approved first-party MIT licensing documentation"
+      "bytes": 6996,
+      "sha256": "914833c07ceaa7528b7c609b9cb9ddc333a7916a4c8b4393f8931df51b672288",
+      "origin": "public documentation with owner-uploaded demonstration video and approved MIT licensing"
     },
     {
       "path": "THIRD_PARTY_NOTICES.md",
@@ -656,5 +656,12 @@
     "previous_verified_commit": "17743c7fc26bc8c00ce8873e2b57a92889f38604",
     "changes": "LICENSE and licensing paragraphs in README.md and THIRD_PARTY_NOTICES.md only; source and evidence unchanged.",
     "verification": "Existing verification remains the historical baseline; license-only update checked by exact file hashes."
+  },
+  "video_publication": {
+    "url": "https://youtu.be/irrL2Acrs6E",
+    "duration": "2:46",
+    "scope": "Real recorded Meta proposal and local execution; stock synthetic Kokoro narration generated offline.",
+    "previous_commit": "879238983be3545cd69e9546234971d6fafdab30",
+    "changes": "README video link only; source and evidence unchanged."
   }
 }

@@ -2,6 +2,8 @@
 
 An agent can propose the right action and still execute an outdated instruction. Intent Replay helps QA engineers and developers reproduce that gap, inspect the execution evidence, and keep the case as a regression.
 
+**Watch the 2:46 demo:** [Intent Replay on YouTube](https://youtu.be/irrL2Acrs6E). It shows a real recorded Meta proposal followed by local execution; narration is stock synthetic Kokoro generated offline.
+
 This submission demonstrates a fictional booking moved from **14:00 to 15:00 on 25 November 2026, Europe/London**. Meta generated a native `reschedule_booking` proposal. The same proposal is replayed through a deliberately faulty local worker and a guarded worker after the customer withdraws the change. A no-withdrawal control uses the same proposal and initial booking.
 
 ![Actual withdrawal comparison: faulty worker saved 15:00; guarded worker retained 14:00](docs/withdrawal-comparison.jpg)
