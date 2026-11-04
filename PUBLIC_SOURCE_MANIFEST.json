@@ -1,12 +1,12 @@
 {
-  "version": "focused-public-submission-v2",
+  "version": "focused-public-submission-v3-license",
   "baseline": "intent-replay-live-proposal-repair-candidate-20261104/source",
   "baseline_file_count": 402,
   "unchanged_source_file_count": 95,
   "modified_production_files": 2,
   "modified_verification_files": 1,
   "new_verification_files": 1,
-  "payload_file_count": 105,
+  "payload_file_count": 106,
   "manifest_hashes_itself": false,
   "execution_contract_sha256": "f7329ae57d934c5a0399755c0d1d7e7e6f42c86975b6067d5fa43a4ed0bbd1dd",
   "files": [
@@ -23,6 +23,24 @@
       "origin": "new public documentation"
     },
     {
+      "path": "LICENSE",
+      "bytes": 1079,
+      "sha256": "cff396869ec626a750890af111dcffd1d4e2aba44a9d9793ccda6bbcdc0f8fbf",
+      "origin": "owner-approved first-party MIT license"
+    },
+    {
+      "path": "README.md",
+      "bytes": 6787,
+      "sha256": "6897252b94ec26218a04867ab1156721d1c48aeb370a00b6bcb654cdf91f745a",
+      "origin": "owner-approved first-party MIT licensing documentation"
+    },
+    {
+      "path": "THIRD_PARTY_NOTICES.md",
+      "bytes": 1516,
+      "sha256": "09292398c1397d0454dce12150ecf083fd5658c96f1e5a0c1518fbca2516623d",
+      "origin": "owner-approved first-party MIT licensing documentation"
+    },
+    {
       "path": "docs/VERIFICATION.md",
       "bytes": 2730,
       "sha256": "186f228c54dfc8d2a7ed9a961868421ee05adfab06cd8b791b4561576660ac75",
@@ -33,12 +51,6 @@
       "bytes": 96134,
       "sha256": "f0281f416970eee54b9d400fff95ae32ea67b0b63fe7d5a42c4c9e2de42361ce",
       "origin": "public demonstration documentation or screenshot"
-    },
-    {
-      "path": "README.md",
-      "bytes": 6616,
-      "sha256": "cce361cec85d50c060d89f23ceb794d1d311c450afb94bee69e571d9e7c2942b",
-      "origin": "new public documentation"
     },
     {
       "path": "source/fixtures/agent-claim-repair.json",
@@ -633,14 +645,16 @@
       "bytes": 12164,
       "sha256": "9586b13946f8830c77be492d2c5df2d85b66d0e27fb3eb9ea69d88e6d34da169",
       "origin": "unchanged baseline"
-    },
-    {
-      "path": "THIRD_PARTY_NOTICES.md",
-      "bytes": 1276,
-      "sha256": "e93a0df2ff5bd850c4e202056399fc751da02d6f98758d886104909869ce41f7",
-      "origin": "new public documentation"
     }
   ],
   "git_byte_preservation": ".gitattributes disables text normalization for all tracked files; local Git core.autocrlf should also be false.",
-  "publications_note": "Full private archives remain local; only this manifest-listed distribution is published."
+  "publications_note": "Full private archives remain local; only this manifest-listed distribution is published.",
+  "license_publication": {
+    "license": "MIT",
+    "copyright": "2026 Salah Eddine El Ouahid",
+    "scope": "First-party application code and associated first-party documentation; third-party notices and applicable provider-capture terms remain unchanged.",
+    "previous_verified_commit": "17743c7fc26bc8c00ce8873e2b57a92889f38604",
+    "changes": "LICENSE and licensing paragraphs in README.md and THIRD_PARTY_NOTICES.md only; source and evidence unchanged.",
+    "verification": "Existing verification remains the historical baseline; license-only update checked by exact file hashes."
+  }
 }
