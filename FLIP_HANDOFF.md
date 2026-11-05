@@ -2,6 +2,16 @@
 
 Updated 2026-11-05. The QA workflow is implemented and tested; the actual messaging-room/human-review demonstration is still pending. Continue in this worktree, not the original `hackthons` folder.
 
+## Latest resume checkpoint — Windows restart pending
+
+Resumed from `c6455e3402e476e0eaab40874e4a11f4cc89d142` on 2026-11-05. The user has agreed to save work and use **Windows Start → Power → Restart**, then reopen this chat. A prior reported sign-out did not yield a new observed session: Explorer still started at 00:10:02. Read-only process-token inspection confirmed that Explorer, Docker Desktop, and both newly started Docker backend processes all lack the `docker-users` SID despite the account's local group membership.
+
+Docker Desktop's supported `desktop restart --timeout 45` stopped/restarted its processes at 20:50:28 but returned `context deadline exceeded`. Subsequent `docker version` timed out after 15 seconds; `docker desktop status` and the dashboard both reported `starting`. The available pre-restart logs contain `checking group membership: user is not a member of the group`; these are **old MSIX-overlay logs**, not proof of a new backend error. Docker and Hyper-V services are running. Do not reinstall, reset Docker data, or alter access checks based on those old logs.
+
+The authenticated QA probe still succeeds against Core 0.31.0 and the existing direct room; the submitted checkout is clean at `d074b16`. No replay, approval, completion, provider reconfiguration, or source/evaluator change was made during this resume. Mattermost has not started, so there is no verified Mattermost room URL yet.
+
+After Windows restarts: verify Docker server access first; start the existing Switch profile and enable **Server → Mattermost → Run Mattermost**. The installed Console can add Mattermost beside native Core without recreating the server or agent. Use the bootstrap's verified bridge to create a private room with the existing agent, retain the direct room history, update the private connection reference, and restart the evidence listener. For actual Mattermost messages, verify the person's original Gateway `sender.clientId` and pin it; `sender.userId` normally remains null. Follow the identity steps in the setup document. Then run A, wait for the user's actual approval, request B, demonstrate stale A completion refusal, and let the user freshly approve/complete B. Never issue human-review commands on their behalf.
+
 ## Baseline and preservation
 
 - Submitted baseline: **`d074b160d7af890ce7d8d99c2f580c597684a95c`**; setup commit: `15a3839933d7add8500fdbefd1c70a009e50f772`.
