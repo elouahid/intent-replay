@@ -22,3 +22,6 @@ private-provider-error.json
 *.wav
 *.mp3
 *.webm
+
+# Console-managed local agent credentials and runtime metadata
+.switch/

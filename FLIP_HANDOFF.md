@@ -1,64 +1,51 @@
 # Flip the Switch — Intent Replay handoff
 
-Prepared 2026-11-05. Workspace isolation and baseline verification are complete; the Switch QA room and human-review gate are the next implementation scope.
+Updated 2026-11-05. The QA workflow is implemented and tested; the actual messaging-room/human-review demonstration is still pending. Continue in this worktree, not the original `hackthons` folder.
 
-## Verified submitted baseline
+## Baseline and preservation
 
-- Repository: `https://github.com/elouahid/intent-replay`.
-- Submitted commit: `d074b160d7af890ce7d8d99c2f580c597684a95c`.
-- Archive: `C:\Users\asus\OneDrive\Documents\ChatGPT\hackthons\intent-replay-submitted-source-20261104.zip`.
-- Archive SHA-256: `675c58efe37004833d99f051512dabe44209e8e89481303f9c9e469139732292`.
-- Evidence: the original `intent-replay-submission-confirmation-20261104.json` names that commit/archive and records “Project Submitted”; the corresponding `.verification.json` and `.sha256` corroborate it. Fresh local checks matched all **107 archive files** to Git blobs and the Flip checkout, plus all **106 manifest payload hashes**.
-- The earlier public review archive records `17743c7fc26bc8c00ce8873e2b57a92889f38604`; licensing commit `879238983be3545cd69e9546234971d6fafdab30` and the final demo-link commit followed. Use the submitted commit above, not the older review ZIP or the outer folder's source.
-- Execution contract: `f7329ae57d934c5a0399755c0d1d7e7e6f42c86975b6067d5fa43a4ed0bbd1dd`. Preserve `.gitattributes` byte handling and the original public manifest as baseline records.
+- Submitted baseline: **`d074b160d7af890ce7d8d99c2f580c597684a95c`**; setup commit: `15a3839933d7add8500fdbefd1c70a009e50f772`.
+- Worktree: **`C:\Users\asus\OneDrive\Documents\ChatGPT\intent-replay-flip`**, branch **`flip-qa-room`**. Application: its `source` directory.
+- Shared Git/submitted checkout: `C:\Users\asus\OneDrive\Documents\ChatGPT\hackthons\intent-replay-public-submission-20261104`. Keep it: this worktree uses its Git metadata. Its `main` remains clean at the submitted commit.
+- Submission confirmation, verification and archive files established this baseline, rather than the earlier review commit `17743c7` or the uncommitted outer repository.
+- Submitted archive: `C:\Users\asus\OneDrive\Documents\ChatGPT\hackthons\intent-replay-submitted-source-20261104.zip`; SHA-256 `675c58efe37004833d99f051512dabe44209e8e89481303f9c9e469139732292`.
+- Reused [FLIP_BASELINE_VERIFICATION.json](FLIP_BASELINE_VERIFICATION.json): 107 archive/Git matches, 106 manifest payload hashes and 28,486 original files preserved. Do not repeat the giant inventory without a new reason.
+- All ten runner/evaluator contract files still byte-match baseline. Contract SHA-256: `f7329ae57d934c5a0399755c0d1d7e7e6f42c86975b6067d5fa43a4ed0bbd1dd`. Saved cases, expectations, captures and submitted reports are unchanged.
 
-Full verification: [FLIP_BASELINE_VERIFICATION.json](FLIP_BASELINE_VERIFICATION.json). These are local artifact checks; the completed submission was not edited or resubmitted.
+## Added scope
 
-## Working location and preservation
+One person, one Console-managed QA agent, one personal Switch messaging room and the retained local booking workflow. Operations: verify, show, approve an exact run, complete review of that exact run. Task `booking-withdrawal`; case set `corrected-meta-withdrawal-control`.
 
-- **Worktree:** `C:\Users\asus\OneDrive\Documents\ChatGPT\intent-replay-flip`
-- **Branch:** `flip-qa-room`, created explicitly from the submitted commit.
-- **Application directory:** `C:\Users\asus\OneDrive\Documents\ChatGPT\intent-replay-flip\source`
-- **Original submitted checkout / shared Git repository:** `C:\Users\asus\OneDrive\Documents\ChatGPT\hackthons\intent-replay-public-submission-20261104`. Keep this directory: the worktree uses its Git metadata. Its `main` branch stays at the submission commit.
-- The outer `hackthons` repository has no commits or tracked files. It was not made into the Flip baseline. Its submissions, reports, captures, recordings and private configuration remain in place.
-- Before/after SHA-256 checks found **28,486 original files unchanged**, with none added or removed (Git metadata, dependencies and caches excluded). Fresh Flip checks passed **57 Python tests, 58 UI scenarios and 6 saved cases / 12 branch expectations**; the execution contract is unchanged.
-- Put new runs and local evidence under the Flip worktree's ignored `.local/` directory. Do not write into submitted evidence directories or reuse historical output directories. Setup logs and the private preservation inventory are under `.local/flip-setup/`.
-- The user permits continued use of Meta and existing baseline-provider tokens/free credits; the packaged providers include Meta and Baseten. Provider access and remaining balances have not been live-checked. Existing credentials stay in `C:\Users\asus\OneDrive\Documents\ChatGPT\hackthons\.env`; reference that file with supported `--env-file` handling when live work is needed. Never copy its values into source, reports or this handoff. Setup made zero provider requests.
+`qa_room.py` persists immutable run evidence and review bindings. Acceptance makes the new pending run current before execution, atomically with platform sequence ordering. Failed/pending reruns and late older results cannot restore old approval. Completion checks current run, evidence, human identity and original event time under the same transaction. Duplicate events are durable and idempotent.
 
-## Switch QA room scope
+`qa_room_switch.py` retrieves the original authenticated Gateway event and posts deterministic results as the QA agent. `qa_room_http.py` serves the existing exports plus an opt-in, bearer-authenticated local bridge that accepts **only an original message ID**. The managed agent uses Node `http.request`, not shell commands or browser JavaScript. CLI dispatch remains an operator diagnostic.
 
-Build a room that requests a supported replay, exposes its evidence, verifies the guarded implementation and no-withdrawal control, then requires human review of that exact verification.
+Regression PASS includes expected faulty withdrawal execution FAIL. Guarded withdrawal suppresses the change and retains 14:00; both no-withdrawal control workers commit 15:00. Factual accuracy remains INCONCLUSIVE/unassessed; overall task remains FAIL for faulty withdrawal and INCONCLUSIVE for guarded/control. Human review is separate and has not been fabricated.
 
-1. Resolve the supported case/provider/prepared-hash selection server-side. Begin with the two corrected Meta cases in `source/repaired_live_proposal_evidence/prepared/`; keep the four original Meta/Baseten prepared cases available. Arbitrary external agents and production booking systems remain outside this initial scope.
-2. Assign each verification a fresh server-owned ID and revision. Reuse `benchmark_execution.execute_prepared` and `regression.assess`; preserve sealed inputs, captures, reports, frozen expectations and separate worker executions. Replays perform local SQLite execution without inference.
-3. Show the accepted instruction/revision, proposed action, authorization decision, action journal, independent booking read, execution ID and report/prepared hashes. Retained captures remain labeled recorded evidence.
-4. Bind human review to the current verification ID/revision, **both withdrawal and control execution IDs**, both report and prepared hashes, and the execution-contract hash. Record reviewer identity, decision and timestamp. An advisory model response is not human approval.
-5. Complete verification only through an atomic server-side check of that exact current binding and successful required checks. A new request or rerun supersedes the prior pending review. Delayed, duplicate, wrong-run or stale-tab approvals cannot complete a newer verification; historical review stays attached to its historical run. An exact duplicate may be idempotent only for its own original verification.
-6. Missing control, incomplete/error results, unsupported inputs or changed evidence cannot complete verification. Preserve the existing distinction between regression expectation match, execution verdict, factual accuracy, overall-task verdict and human-review status.
+## Current integration
 
-For the corrected retained pair (25 November 2026, Europe/London): withdrawal must reproduce faulty **commit 15:00 / execution FAIL** and guarded **suppression, retain 14:00 / execution PASS**; control must let both workers **commit 15:00 / execution PASS**. Expected faulty FAIL is a matching regression. Factual accuracy remains **INCONCLUSIVE / unassessed**; review must not relabel it as factual success.
+- Installed Switch Console **0.40.1**, native Core **0.31.0**, gateway `http://127.0.0.1:56741`.
+- Agent `intent-replay-qa`, ID `e9d69e59-a025-4e2d-abea-ce114dc448f8`, correct worktree, official standalone Codex **0.166.0** through npm. Existing ChatGPT login/model retained; temporary alpha executable bridges removed, original desktop installation intact.
+- Default `.local/qa-room/connection.json` currently targets Console **direct chat** `95574125-421c-4810-bdc2-d47822117d2b`. This is not the final Mattermost-backed room.
+- Private references resolve into the Codex MSIX `LocalCache\Roaming\switchdash` profile. After sign-out, resume this Codex chat and launch/check the same existing server/agent; do not assume an ordinary Start-menu launch or generic `--user-data-dir` selects that profile. Exact paths and checks are in [QA_ROOM_SETUP.md](docs/QA_ROOM_SETUP.md).
+- Docker Desktop **4.98.0** installed with existing Hyper-V. `asus` is in `docker-users`, but its old login token caused Docker's membership check to fail. **Save open work, sign out of Windows, then sign back in** before rechecking Docker. No automatic sign-out/restart was performed.
+- Then enable Switch **Admin → Status → Run Mattermost**, create one personal **Intent Replay QA** room using the existing agent, back up/update the verified room ID in connection configuration, and restart the evidence listener. Prefer Console messages inside that actual room so the existing human user-ID pin remains valid.
 
-Acceptance must exercise a successful reviewed pair, approval of run A after run B starts, approval racing a rerun, a stale browser response, modified evidence, missing/failed control and incomplete/error output. The current verification must never inherit an older approval.
+## Evidence and continuation
 
-## Existing implementation to reuse
+- **143 Python tests pass.** The existing corrected-pair regression was run once: 2 cases / 4 matched expectations. Logs: `.local/qa-room-development/`; saved regression: `.local/qa-room-regression/3de3be8198fe409a9fe56e67b51bf141/`.
+- Live direct-chat transport check: authentic event → manually invoked dispatcher → existing replay → one authenticated result post. Run `702b015c613b4c3c8fdf2511d1876ac1`; both original reports opened in the browser and all six artifacts returned HTTP 200. Still unreviewed. Evidence: `.local/qa-room/direct-smoke-verification.json`.
+- Automatic managed-agent HTTP dispatch **passed** in the direct chat: event `sw_f36a2b41b84b4269a0cf9ba88ed728c2` produced current run `50ed6e0dcc144da0adc9409cf9ada895` and one agent post, with no operator dispatch. Browser/HTTP evidence access verified. See [FLIP_VERIFICATION.json](FLIP_VERIFICATION.json). The final messaging-room walkthrough and actual human approval/completion remain pending.
+- Replay uses zero new model requests. Switch-agent inference is separate and occurred during integration; do not describe the entire flow as zero inference. Meta/Baseten tokens/free credits remain permitted for future work; keep their existing configuration in place and never copy values into source or reports.
 
-Paths below are relative to `source/`:
-
-- `scripts/serve_live_proposal_demo.py`: retained/live entry point; `scripts/serve_submission_demo.py`: supported replay, history and rerun routes.
-- `intent_replay/benchmark_execution.py`: prepared validation, fresh execution IDs and sealed reports; its ten `CONTRACT_FILES` define runner/evaluator compatibility. Add the room around this layer initially.
-- `intent_replay/temporal.py` and `temporal_evaluator.py`: transaction-time authorization, guarded execution and independent evidence evaluation.
-- `intent_replay/regression.py`: completeness/frozen-expectation assessment; CLI exits **0** match, **1** mismatch, **2** invalid/incomplete/error.
-- `intent_replay/replay_history.py`, `evidence_handoff.py`, `static/submission.js`: existing exact-report bindings, export and stale-response handling. They do not yet persist a human-approval gate.
-
-## Continue here
-
-Use the new worktree explicitly in this chat; the original chat working directory was `hackthons`. Existing Python 3.13 dependencies can be reused without modifying them:
+Start the configured service from this worktree:
 
 ```powershell
-Set-Location 'C:\Users\asus\OneDrive\Documents\ChatGPT\intent-replay-flip\source'
-$flipPython = 'C:\Users\asus\OneDrive\Documents\ChatGPT\hackthons\.venv\Scripts\python.exe'
-& $flipPython -B scripts/run_saved_regression.py --prepared repaired_live_proposal_evidence/prepared/fresh-withdrawal-meta.json --prepared repaired_live_proposal_evidence/prepared/fresh-control-meta.json --output ../.local/flip-runs
-& $flipPython -B scripts/serve_live_proposal_demo.py --port 8054 --profile auto-direct-v2 --retained-capture repaired_live_proposal_evidence --output ../.local/flip-demo
+$qaPython = 'C:\Users\asus\OneDrive\Documents\ChatGPT\hackthons\.venv\Scripts\python.exe'
+& $qaPython -B .\source\scripts\run_qa_room.py probe
+& $qaPython -B .\source\scripts\run_qa_room.py serve
 ```
 
-The second command serves the existing retained demo at `http://127.0.0.1:8054/demo`; it is not yet the Switch QA room. Generation is disabled in retained mode. New setup validation results and preservation counts are recorded in `FLIP_BASELINE_VERIFICATION.json`; detailed logs stay in `.local/flip-setup/checks/`.
+The local evidence index is `http://127.0.0.1:8054/qa/current`. `serve` creates the private `.local/qa-room/dispatch-token`; do not print or package it. State/runs stay under ignored `.local/qa-room/state`.
+
+Continue with [QA_ROOM_SETUP.md](docs/QA_ROOM_SETUP.md), [agent instructions](docs/QA_ROOM_AGENT_INSTRUCTIONS.md) and the exact [human A/B walkthrough](docs/QA_ROOM_COMMANDS.md). Implementation, limitations and source-package commands are in [FLIP_IMPLEMENTATION_REPORT.md](FLIP_IMPLEMENTATION_REPORT.md). Finish the real room interaction and human review before adding features or visual polish.

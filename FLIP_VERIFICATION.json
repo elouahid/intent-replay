@@ -1,0 +1,107 @@
+{
+  "scope": "Offline tests and verified automatic Switch direct-chat integration; final Mattermost room and actual human review remain pending.",
+  "python_suite": {
+    "status": "PASS",
+    "tests": 143,
+    "seconds": 43.024,
+    "exit_code": 0,
+    "log": ".local/qa-room-development/final-tests.log",
+    "log_sha256": "ee0d776ada5fc225c5381479b85bbfce18e373ef87745f7641800f5866f10c54"
+  },
+  "saved_regression": {
+    "status": "PASS",
+    "cases": 2,
+    "matched_branch_expectations": 4,
+    "exit_code": 0,
+    "summary": ".local/qa-room-regression/3de3be8198fe409a9fe56e67b51bf141/regression-summary.json",
+    "new_model_requests": 0
+  },
+  "original_submission": {
+    "branch": "main",
+    "head": "d074b160d7af890ce7d8d99c2f580c597684a95c",
+    "clean": true
+  },
+  "contract": {
+    "baseline_commit": "d074b160d7af890ce7d8d99c2f580c597684a95c",
+    "execution_contract_sha256": "f7329ae57d934c5a0399755c0d1d7e7e6f42c86975b6067d5fa43a4ed0bbd1dd",
+    "contract_files": {
+      "source/intent_replay/benchmark_cases.py": true,
+      "source/intent_replay/benchmark_targets.py": true,
+      "source/intent_replay/benchmark_execution.py": true,
+      "source/intent_replay/temporal.py": true,
+      "source/intent_replay/temporal_evaluator.py": true,
+      "source/intent_replay/temporal_interpreter.py": true,
+      "source/intent_replay/interpreter.py": true,
+      "source/intent_replay/evaluator.py": true,
+      "source/intent_replay/booking.py": true,
+      "source/intent_replay/models.py": true
+    },
+    "all_ten_unchanged": true
+  },
+  "recorded_at": "2026-11-05T09:06:42.435753+00:00",
+  "real_switch_direct_integration": {
+    "channel_type": "direct",
+    "request_initiator": "Codex on user-authorized verification task; not a human review",
+    "request_event": "sw_f36a2b41b84b4269a0cf9ba88ed728c2",
+    "room_id": "95574125-421c-4810-bdc2-d47822117d2b",
+    "agent_id": "e9d69e59-a025-4e2d-abea-ce114dc448f8",
+    "provider": "standalone codex-cli0.166.0, existing login and provider-default model",
+    "dispatch": "automatic Console-managed agent Node HTTP call; operator did not dispatch this event",
+    "run_id": "50ed6e0dcc144da0adc9409cf9ada895",
+    "run_status": "ready",
+    "regression_status": "PASS",
+    "required_guarded_control_checks": "PASS",
+    "result_post_count": 1,
+    "result_post_id": "sw_aa5cd7832a05446d979efcd678bc8925",
+    "browser_exact_run_opened": true,
+    "artifact_checks": [
+      {
+        "artifact": "control-evidence.zip",
+        "status": 200,
+        "sha256": "d7c79d13d2b4b7ec321f1d6b5efafba0c6aba2e6601fc646e612f89c1bb87cd8",
+        "bytes": 18726
+      },
+      {
+        "artifact": "control-report.html",
+        "status": 200,
+        "sha256": "f4279608571be607524e0ba19d143e90b9d7951bcaebcdfc168ba0f7f03bc9e3",
+        "bytes": 40427
+      },
+      {
+        "artifact": "control-report.json",
+        "status": 200,
+        "sha256": "8a8bd547644a96338bf51157a6956614d3cbcaa51383998af297399b152ec26b",
+        "bytes": 23494
+      },
+      {
+        "artifact": "withdrawal-evidence.zip",
+        "status": 200,
+        "sha256": "7ae8dfe3163c866fd59dad232a2f1d0ae4046b1a37163e441d7dc74f4ad98eb3",
+        "bytes": 19899
+      },
+      {
+        "artifact": "withdrawal-report.html",
+        "status": 200,
+        "sha256": "2c25bd2aff3156dff2c6ff6f729c74c71c2404a562ed30d47df714e9ac6074dd",
+        "bytes": 44752
+      },
+      {
+        "artifact": "withdrawal-report.json",
+        "status": 200,
+        "sha256": "2a2052c91d63e7b548a9ae056e4e914925e4fc82ec59ec3a0845e50b11b34f8f",
+        "bytes": 26137
+      }
+    ],
+    "human_review_status": "unreviewed",
+    "replay_new_model_requests": 0,
+    "switch_agent_usage": {
+      "verification_requests_sent": 4,
+      "inference_observed": true,
+      "exact_inference_calls": null,
+      "tokens": null,
+      "note": "Gateway activity exposes turns/tools, not provider usage totals; replay usage excludes agent inference."
+    },
+    "mattermost_room_verified": false
+  },
+  "actual_human_walkthrough_complete": false
+}
