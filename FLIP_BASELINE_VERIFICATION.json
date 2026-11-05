@@ -1,0 +1,81 @@
+{
+  "checked_on": "2026-11-05",
+  "status": "PASS",
+  "submitted_baseline": {
+    "repository": "https://github.com/elouahid/intent-replay",
+    "commit": "d074b160d7af890ce7d8d99c2f580c597684a95c",
+    "git_tree": "edc6bef0c7f30b69a12d7f6bde417865d0179549",
+    "source_archive": "C:\\Users\\asus\\OneDrive\\Documents\\ChatGPT\\hackthons\\intent-replay-submitted-source-20261104.zip",
+    "source_archive_sha256": "675c58efe37004833d99f051512dabe44209e8e89481303f9c9e469139732292",
+    "submission_confirmation": "C:\\Users\\asus\\OneDrive\\Documents\\ChatGPT\\hackthons\\intent-replay-submission-confirmation-20261104.json",
+    "archive_verification_record": "C:\\Users\\asus\\OneDrive\\Documents\\ChatGPT\\hackthons\\intent-replay-submitted-source-20261104.verification.json",
+    "public_manifest_version": "focused-public-submission-v4-video",
+    "execution_contract_sha256": "f7329ae57d934c5a0399755c0d1d7e7e6f42c86975b6067d5fa43a4ed0bbd1dd"
+  },
+  "baseline_checks": {
+    "git_blob_files": 107,
+    "archive_files": 107,
+    "exact_worktree_files_matched": 107,
+    "manifest_payload_files_verified": 106,
+    "byte_mismatches": 0
+  },
+  "earlier_review_baseline": {
+    "commit": "17743c7fc26bc8c00ce8873e2b57a92889f38604",
+    "archive": "C:\\Users\\asus\\OneDrive\\Documents\\ChatGPT\\hackthons\\intent-replay-public-submission-review-20261104.zip",
+    "note": "Precedes final licensing and video-link documentation; not the submitted source identity."
+  },
+  "isolation": {
+    "worktree": "C:\\Users\\asus\\OneDrive\\Documents\\ChatGPT\\intent-replay-flip",
+    "branch": "flip-qa-room",
+    "original_submitted_checkout": "C:\\Users\\asus\\OneDrive\\Documents\\ChatGPT\\hackthons\\intent-replay-public-submission-20261104",
+    "outer_repository_has_no_commits": true,
+    "initial_head": "d074b160d7af890ce7d8d99c2f580c597684a95c"
+  },
+  "setup_provider_requests": 0,
+  "credentials_copied": false,
+  "notes": [
+    "Verification is local against saved submission records and Git objects; no new remote or submission-platform verification.",
+    "Original main and submitted files remain preserved; worktree creation adds Git branch/worktree metadata only."
+  ],
+  "preservation": {
+    "status": "PASS",
+    "protected_files": 28486,
+    "protected_bytes": 1350323741,
+    "changed_files": [],
+    "missing_files": [],
+    "added_files": [],
+    "excluded_directory_names": [
+      ".git",
+      ".venv",
+      "__pycache__",
+      "node_modules",
+      "venv"
+    ],
+    "scope": "All original workspace files except Git metadata, dependency directories and Python caches; includes .env, submitted archives, reports, captures, configuration and .local historical evidence. Hash values for private files stay in ignored local manifest.",
+    "before_manifest": ".local/flip-setup/original-preservation.json"
+  },
+  "validation": {
+    "status": "PASS",
+    "python_tests": 57,
+    "python_tests_exit": 0,
+    "ui_scenarios": 58,
+    "ui_scenarios_exit": 0,
+    "saved_cases": 6,
+    "saved_regression_exit": 0,
+    "matched_branch_expectations": 12,
+    "execution_contract_unchanged": true,
+    "provider_requests": 0,
+    "details": ".local/flip-setup/checks/verification.json",
+    "details_file_sha256": "91eeea5a0595a43b348cdb739d2a1384f9196a8b22ebd89d466c7df5f2ba9177",
+    "regression_summary": ".local/flip-setup/checks/regression-runs/d2a120d2ebd841bea0491c0838aff09d/regression-summary.json",
+    "interpretation": "Regression PASS means frozen expectations matched, including expected faulty withdrawal execution FAIL. Factual accuracy remains INCONCLUSIVE and unassessed. Overall task verdicts remain FAIL or INCONCLUSIVE."
+  },
+  "changes": {
+    "implementation_changes": false,
+    "tracked_additions": [
+      "FLIP_HANDOFF.md",
+      "FLIP_BASELINE_VERIFICATION.json"
+    ],
+    "note": "Preparation and handoff only. Switch QA room and exact-run human review remain implementation scope."
+  }
+}
