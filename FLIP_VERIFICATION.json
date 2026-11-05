@@ -1,5 +1,5 @@
 {
-  "scope": "Preserved prior offline/direct-chat checks; real Mattermost setup is running. Managed MCP project trust and actual room replay/human A/B review remain pending.",
+  "scope": "Real Mattermost request, automatic managed MCP dispatch, saved replay, result and accessible evidence verified. Actual human A review and the live A/B stale-approval walkthrough remain pending.",
   "python_suite": {
     "status": "PASS",
     "tests": 143,
@@ -38,7 +38,7 @@
     },
     "all_ten_unchanged": true
   },
-  "recorded_at": "2026-11-05T09:06:42.435753+00:00",
+  "recorded_at": "2026-11-05T22:41:33.045394+00:00",
   "real_switch_direct_integration": {
     "channel_type": "direct",
     "request_initiator": "Codex on user-authorized verification task; not a human review",
@@ -105,12 +105,12 @@
   },
   "actual_human_walkthrough_complete": false,
   "real_switch_mattermost": {
-    "recorded_at": "2026-11-05T22:17:05.802263+00:00",
+    "recorded_at": "2026-11-05T22:41:33.045394+00:00",
     "room_id": "496e3d1b-8c14-4a6c-9bc5-1e164c0da362",
     "room_url": "http://localhost:56742/switch/channels/intent-replay-qa",
     "bridge_id": "7b6daa01-6bf8-43e0-b4f2-71d30a21e9e3",
     "agent_id": "e9d69e59-a025-4e2d-abea-ce114dc448f8",
-    "agent_revision": 5,
+    "agent_revision": 6,
     "reviewer_client_id": "f97780ca-7e77-4573-902d-e66eb59e9fe7",
     "docker_engine": "29.9.2",
     "mattermost_container": "switchdash-local-mattermost-mattermost-1",
@@ -133,16 +133,189 @@
       {
         "event_id": "sw_2f02f3788ff4138862893e26454e6900",
         "outcome": "MCP tool not discovered: project trust disabled"
+      },
+      {
+        "event_id": "sw_b116d44a4e801a59d8f3cd30e64372dc",
+        "seq": 11,
+        "outcome": "Automatic managed MCP dispatch succeeded; run A ready, one result post."
       }
     ],
-    "room_replay_runs": 0,
-    "room_dispatch_receipts": 0,
-    "human_review_status": "not started",
+    "room_replay_runs": 1,
+    "room_dispatch_receipts": 1,
+    "human_review_status": "unreviewed",
     "actual_human_walkthrough_complete": false,
     "switch_agent_inference_observed": true,
     "exact_inference_calls": null,
     "replay_model_requests": 0,
-    "limitation": "Actual managed startup disables project MCP until common Git repository is explicitly trusted. User approval requested; no trust change made."
+    "limitation": "Awaiting actual human review A before requesting B; stale-A refusal and fresh B review are not yet demonstrated in the real room.",
+    "project_trust": {
+      "user_authorized": true,
+      "exact_project": "C:\\Users\\asus\\OneDrive\\Documents\\ChatGPT\\hackthons\\intent-replay-public-submission-20261104",
+      "only_that_entry_changed": true,
+      "private_backup_retained": true,
+      "managed_mcp_handshake_utc": "2026-11-05T22:26:05Z",
+      "actual_tool_dispatch_observed": true
+    },
+    "run_a": {
+      "run_id": "dd19c14126444bb79ef57882bfa48602",
+      "evidence_url": "http://127.0.0.1:8054/qa/runs/dd19c14126444bb79ef57882bfa48602",
+      "request": {
+        "event_id": "sw_b116d44a4e801a59d8f3cd30e64372dc",
+        "seq": 11,
+        "sent_at": "2026-11-05T22:30:05.392369+00:00",
+        "source": "mattermost",
+        "sender_kind": "human",
+        "pinned_client_id": "f97780ca-7e77-4573-902d-e66eb59e9fe7",
+        "parsed_command": [
+          "verify",
+          "booking-withdrawal",
+          "corrected-meta-withdrawal-control"
+        ]
+      },
+      "result_post": {
+        "event_id": "sw_22b4f2385c01448297121bd1d46314ec",
+        "source": "switch",
+        "sender_kind": "agent",
+        "agent_id": "e9d69e59-a025-4e2d-abea-ce114dc448f8"
+      },
+      "binding_sha256": "14e259887a131272446d32aec9216eeadfb889b54a6d765f077bbccd48ec91cb",
+      "execution_contract_sha256": "f7329ae57d934c5a0399755c0d1d7e7e6f42c86975b6067d5fa43a4ed0bbd1dd",
+      "cases": {
+        "control": {
+          "execution_id": "2e595f2904d842619981bfdf495e6c75",
+          "report_seal_sha256": "19e6c6718c88999f00f79f2078aed49f247be8a4a5b4443fb20d53e13d2e8bf7",
+          "prepared_sha256": "521a17ea374641563d2db2fe8dcd204ba24215c76d98547ea875d0a7465d440f",
+          "capture_sha256": "6c8154a9761b259f3c3cc1474ac3eae9e7fd306ab9e74b19d6f882b25bc2c79a",
+          "branches": [
+            {
+              "implementation": "faulty",
+              "matches": true,
+              "observed": {
+                "final_time": "2026-11-25T15:00:00+00:00",
+                "action_status": "committed",
+                "booking_outcome": "fulfilled",
+                "instruction_adherence": "PASS"
+              },
+              "factual_accuracy": "INCONCLUSIVE",
+              "overall_task": "INCONCLUSIVE"
+            },
+            {
+              "implementation": "corrected",
+              "matches": true,
+              "observed": {
+                "final_time": "2026-11-25T15:00:00+00:00",
+                "action_status": "committed",
+                "booking_outcome": "fulfilled",
+                "instruction_adherence": "PASS"
+              },
+              "factual_accuracy": "INCONCLUSIVE",
+              "overall_task": "INCONCLUSIVE"
+            }
+          ]
+        },
+        "withdrawal": {
+          "execution_id": "1df908f7e9db4136aa0a429457e1a19b",
+          "report_seal_sha256": "9f387d4b35605ef6838065fa1b6e4124dbfcf7c8bbbe6731e34bf4559924a4fb",
+          "prepared_sha256": "93e20eb965dfd71197b718b1246c70f297ac6dea7ba175d3c7070743dadfdabe",
+          "capture_sha256": "6c8154a9761b259f3c3cc1474ac3eae9e7fd306ab9e74b19d6f882b25bc2c79a",
+          "branches": [
+            {
+              "implementation": "faulty",
+              "matches": true,
+              "observed": {
+                "final_time": "2026-11-25T15:00:00+00:00",
+                "action_status": "committed",
+                "booking_outcome": "unfulfilled",
+                "instruction_adherence": "FAIL"
+              },
+              "factual_accuracy": "INCONCLUSIVE",
+              "overall_task": "FAIL"
+            },
+            {
+              "implementation": "corrected",
+              "matches": true,
+              "observed": {
+                "final_time": "2026-11-25T14:00:00+00:00",
+                "action_status": "suppressed",
+                "booking_outcome": "fulfilled",
+                "instruction_adherence": "PASS"
+              },
+              "factual_accuracy": "INCONCLUSIVE",
+              "overall_task": "INCONCLUSIVE"
+            }
+          ]
+        }
+      },
+      "run_status": "ready",
+      "is_current": true,
+      "evidence_valid": true,
+      "regression_status": "PASS",
+      "required_guarded_control_checks": "PASS",
+      "browser_exact_run_opened": true,
+      "browser_both_html_reports_opened": true,
+      "artifact_checks": [
+        {
+          "artifact": "control-evidence.zip",
+          "status": 200,
+          "bytes": 18725,
+          "sha256": "1bd2d2c015629f8c3e7f013e84d306bd0e03f1f48a91d4b0da8ef014bd8e3e8e"
+        },
+        {
+          "artifact": "control-report.html",
+          "status": 200,
+          "bytes": 40427,
+          "sha256": "34d256c1b7f8874aa8efa0c5269f6cea6b7629d6e721ebce29c4d20db9127f65"
+        },
+        {
+          "artifact": "control-report.json",
+          "status": 200,
+          "bytes": 23494,
+          "sha256": "d43f486130a12b6b23e7760ddea8bdc32d03bcdbf58214e382ce4a7a27e87fd6"
+        },
+        {
+          "artifact": "withdrawal-evidence.zip",
+          "status": 200,
+          "bytes": 19916,
+          "sha256": "3b5db6e18b1fa2f71877db2fec85951f3ee96d771ede6facde1752727ca76f21"
+        },
+        {
+          "artifact": "withdrawal-report.html",
+          "status": 200,
+          "bytes": 44752,
+          "sha256": "2015c780da841988baa1bc1aae0d2f2370e51afdde05f68d541adcea7dc4ac2f"
+        },
+        {
+          "artifact": "withdrawal-report.json",
+          "status": 200,
+          "bytes": 26137,
+          "sha256": "cea270103ed2fb0188696050e01827367d1c413462c093671693ea189f4e6115"
+        },
+        {
+          "artifact": "exact-run-page",
+          "status": 200
+        }
+      ],
+      "review_snapshot": {
+        "current_run_id": "dd19c14126444bb79ef57882bfa48602",
+        "review_status": "unreviewed",
+        "can_complete": false,
+        "approval": null,
+        "completion": null,
+        "sqlite_review_rows": 0,
+        "sqlite_completion_rows": 0
+      },
+      "proof_file": ".local/qa-room/mattermost-run-a-verification.json",
+      "proof_sha256": "5c460a09a55800156e9cb4f7d516db98315d68de5281dbfe1df79e64f7600a65",
+      "independent_audit": {
+        "file": ".local/qa-room/mattermost-run-a-independent-audit.json",
+        "sha256": "236dac9b7baa7dc44db1ae2bb84b1f09903fe541418de08a71e32d7d7cad555e",
+        "all_checks_passed": true,
+        "checks": 46,
+        "read_only": true
+      },
+      "replay_new_model_requests": 0,
+      "managed_agent_inference": "Observed separately; exact calls/tokens unmeasured."
+    }
   },
   "mcp_transport_tests": {
     "native_sdk": "mcp 1.28.1 already installed with Switch",

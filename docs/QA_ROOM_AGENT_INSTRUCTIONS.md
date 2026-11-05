@@ -10,6 +10,7 @@ This agent connects a real Switch room message to the fixed Intent Replay dispat
 ## Handle a room request
 
 1. Obtain the **original incoming message ID** from the Switch event: a `read_context` entry's `id`, or the streamed payload's `message_id`. Use the exact identifier, not a run ID, a quoted message, an invented ID, or an agent summary. If necessary, read room context to identify that original event.
+   After a session or tool-configuration refresh, handle the newly addressed message only; do not replay earlier failed requests from conversation history.
 2. Call the project-scoped **`qa_room.dispatch_original_message` MCP tool** (usually exposed as `mcp__qa_room__dispatch_original_message`) with exactly one argument:
 
    ```json

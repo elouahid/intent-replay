@@ -4,9 +4,9 @@
 
 ## Result and current limit
 
-The persistent QA workflow, authenticated Switch adapter and evidence server are implemented. **143 Python tests pass**, including the existing tests, and the retained corrected Meta regression matches **2 cases / 4 branch expectations**. A real Console direct-chat request was handled automatically by the managed QA agent through the bounded local HTTP bridge, executed by the existing replay runner, and answered through the agent's authenticated relay. Its exact-run page opened in the local browser; all six downloadable artifacts returned HTTP 200. Both original HTML reports were also browser-checked on the earlier transport run.
+The persistent QA workflow, authenticated Switch adapter and evidence server now handle a **real Mattermost room request automatically through the existing managed agent**. Run A `dd19c14126444bb79ef57882bfa48602` is ready, current and evidence-valid. The exact-run page and both original HTML reports opened in the browser; all six downloads returned HTTP 200. An independent read-only audit passed 46 checks of original message provenance, result delivery, bindings, seals, evaluator results and artifact manifests. Prior checks remain: **143 Python tests pass**, retained corrected Meta regression **2 cases / 4 branch expectations**, and **8 focused MCP tests pass**.
 
-This checkpoint does **not** establish the requested Mattermost-backed room demonstration or actual human approval. The final room and human A → B review walkthrough remain outstanding. Verification messages were sent by Codex on the user's authorized testing task; approval/completion messages must be sent by the person. No approval or completion was fabricated.
+The room request/replay/result milestone is established. **Actual human approval A, followed by B and the stale-A/fresh-B review walkthrough, remains outstanding.** The person has been asked to inspect A's evidence and send its approval in the room. Verification messages were sent by Codex on the user's authorized testing task; approval/completion messages must be sent by the person. No approval or completion was fabricated.
 
 ## What existed before Flip
 
@@ -53,7 +53,9 @@ All four expected branches match. Factual accuracy remains INCONCLUSIVE/unassess
 - Automatic managed-agent check: request `sw_f36a2b41b84b4269a0cf9ba88ed728c2`, run **`50ed6e0dcc144da0adc9409cf9ada895`**, one result post `sw_aa5cd7832a05446d979efcd678bc8925`. Gateway activity confirms the agent's Node tool call and completed turn; no operator dispatch was used for this event. Evidence: `.local/qa-room/automatic-direct-verification.json` and [FLIP_VERIFICATION.json](FLIP_VERIFICATION.json).
 - Browser inspection verified the current automatic run and the earlier withdrawal/control reports. Both ZIP bundles contain the original exporter five-file handoff. Human review remains unreviewed. Re-delivering the earlier event through the authenticated HTTP bridge returned its original posted receipt without rerunning or reposting.
 
-Replays made **zero new model requests**. Four verification requests were sent during provider/transport integration; managed-agent inference occurred. Gateway activity exposes turns/tools, not exact provider model-call or token totals, so those totals remain unmeasured and are not claimed to be zero. Meta/Baseten credentials and balances were not accessed for these replays.
+The real Mattermost request `sw_b116d44a4e801a59d8f3cd30e64372dc` (sequence 11, source `mattermost`) was automatically dispatched by managed agent revision 6 through `qa_room.dispatch_original_message`. Result `sw_22b4f2385c01448297121bd1d46314ec` (sequence 12) was posted once as the QA agent. Run A's binding is `14e259887a131272446d32aec9216eeadfb889b54a6d765f077bbccd48ec91cb`. Live evidence: [run A](http://127.0.0.1:8054/qa/runs/dd19c14126444bb79ef57882bfa48602). Private proof: `.local/qa-room/mattermost-run-a-verification.json`; independent audit: `.local/qa-room/mattermost-run-a-independent-audit.json`. Read-only SQLite and HTTP checks confirm no actual review/completion records yet.
+
+Replays made **zero new model requests**. The earlier direct-chat integration sent four verification requests; Mattermost integration retained three failed attempts and the successful A request. Managed-agent inference occurred separately. Gateway activity exposes turns/tools, not exact provider model-call or token totals, so those totals remain unmeasured and are not claimed to be zero. Meta/Baseten credentials and balances were not accessed for these replays.
 
 ## Installed integration and remaining work
 
@@ -65,9 +67,9 @@ The official standalone `@openai/codex@0.166.0` retains the existing ChatGPT log
 
 The replacement stdio MCP tool forwards only the original event ID to that same HTTP bridge. **Eight focused tests pass** with installed SDK 1.28.1, including stdio initialization, exact single-tool schema, extra-field rejection, bounded transport, safe errors and receipt binding. Baseline Python ran six transport checks and skipped the two optional-SDK tests; no baseline dependency environment was modified. Logs: `.local/qa-room-mcp-tests/`.
 
-Agent instructions are revision 5, with unchanged model, sandbox and approval settings. A third real-room request correctly stopped because the tool was unavailable. Actual managed startup logs and the MCP catalog reveal that Codex disables project tools until the worktree's common Git repository is explicitly trusted. A targeted user approval is pending for `C:\Users\asus\OneDrive\Documents\ChatGPT\hackthons\intent-replay-public-submission-20261104`. The three Mattermost requests are retained as integration attempts, not successful replays or human review. No review commands were sent on the person's behalf.
+The third real-room request correctly stopped because the tool was unavailable: Codex disabled project tools until the worktree's common Git repository was explicitly trusted. The user then approved exactly `C:\Users\asus\OneDrive\Documents\ChatGPT\hackthons\intent-replay-public-submission-20261104`. Only that project trust entry was added to `C:\Users\asus\.codex\config.toml`, with a private backup; no submitted files or other configuration settings changed. Managed MCP startup succeeded at 22:26:05 UTC. Agent instructions revision 6 preserve model, sandbox and approval settings and tell the agent to handle newly addressed messages without replaying failed history. The next real request produced A successfully. The three earlier attempts remain preserved as failures; none is human review.
 
-Follow [QA_ROOM_SETUP.md](docs/QA_ROOM_SETUP.md) for exact startup/configuration and [QA_ROOM_COMMANDS.md](docs/QA_ROOM_COMMANDS.md) for the human A → review A → B → stale A refused → review/complete B walkthrough. After the final room is connected, verify its own request/result/evidence path before claiming the milestone complete.
+Follow [QA_ROOM_SETUP.md](docs/QA_ROOM_SETUP.md) for exact startup/configuration and [QA_ROOM_COMMANDS.md](docs/QA_ROOM_COMMANDS.md) for the human A → review A → B → stale A refused → review/complete B walkthrough. The room path is verified; do not claim the complete human milestone until those actual room actions and bound records are observed.
 
 Official sources used: [Switch resources](https://www.wemakedevs.org/hackathons/switch/resources), [getting started](https://docs.switchagents.ai/switch-rooms/getting-started), [managed agents](https://docs.switchagents.ai/switch-rooms/getting-started/add-a-second-agent), the released Switch Console/Core sources, [Docker Windows installation](https://docs.docker.com/desktop/setup/install/windows-install/), and [Codex CLI](https://learn.chatgpt.com/docs/codex/cli). Released source and observed server metadata take precedence over assumptions about an SDK.
 
@@ -76,8 +78,11 @@ Official sources used: [Switch resources](https://www.wemakedevs.org/hackathons/
 After the implementation commit, run from this worktree:
 
 ```powershell
-git archive --format=zip --prefix=intent-replay-flip/ --output=.local/intent-replay-flip-checkpoint.zip HEAD
-Get-FileHash -Algorithm SHA256 -LiteralPath .local/intent-replay-flip-checkpoint.zip
+$qaCommit = git rev-parse --short HEAD
+$qaArchive = ".local/intent-replay-flip-$qaCommit.zip"
+if (Test-Path -LiteralPath $qaArchive) { throw 'Checkpoint already exists; preserve it.' }
+git archive --format=zip --prefix=intent-replay-flip/ --output=$qaArchive HEAD
+Get-FileHash -Algorithm SHA256 -LiteralPath $qaArchive
 ```
 
-This creates a reproducible source checkpoint from the committed tree. It excludes `.local/`, credentials, provider logins and runtime databases. It is not evidence that the outstanding room/human walkthrough has completed.
+This creates a reproducible source checkpoint from the committed tree without overwriting earlier checkpoints. It excludes `.local/`, credentials, provider logins and runtime databases. It is not evidence that the outstanding human walkthrough has completed.

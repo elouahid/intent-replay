@@ -1,6 +1,6 @@
 # QA Room setup and resume
 
-Updated on 2026-11-05 after the Windows restart and MCP transport setup. Docker, native Switch, the Mattermost room and linked human identity are available. The QA agent recovered after targeted stale-owner metadata repair. Two actual Mattermost Node invocations exited before dispatch, producing zero QA runs or delivery receipts. Agent revision 5 targets the project-local MCP transport; its eight focused tests pass. The third request could not discover the tool because actual managed startup disables project configuration pending trust of the common Git repository. User approval of that exact trust entry is pending. No real room replay or human review completion is claimed here.
+Updated on 2026-11-05 after the first successful automatic Mattermost verification. Agent revision 6 dispatched the original room request through its managed MCP tool and returned run A, `dd19c14126444bb79ef57882bfa48602`, to the room at 22:30:14 UTC. The run is ready with valid evidence and matching frozen expectations. Human review is still unreviewed at this checkpoint; the human A/B approval and stale-completion demonstration remain pending. No human review completion is claimed here.
 
 ## Installed components and current scope
 
@@ -10,7 +10,7 @@ Updated on 2026-11-05 after the Windows restart and MCP transport setup. Docker,
 | Native Switch Core | 0.31.0; gateway `http://127.0.0.1:56741` |
 | Existing native server | `b82ac60d-6645-491f-aafa-21de5f2e6ee9` |
 | Existing QA agent | `intent-replay-qa`; ID `e9d69e59-a025-4e2d-abea-ce114dc448f8` |
-| Agent transport | Revision 5; project-local `qa_room.dispatch_original_message` MCP tool |
+| Agent transport | Revision 6; project-local `qa_room.dispatch_original_message` MCP tool |
 | Agent workspace | `C:\Users\asus\OneDrive\Documents\ChatGPT\intent-replay-flip` — verified |
 | Verification task | `booking-withdrawal` |
 | Supported case set | `corrected-meta-withdrawal-control` |
@@ -22,6 +22,27 @@ Updated on 2026-11-05 after the Windows restart and MCP transport setup. Docker,
 | Docker Desktop | 4.98.0 with Hyper-V backend; engine healthy after the restart |
 
 Historical Console direct chat `95574125-421c-4810-bdc2-d47822117d2b` and its runs remain preserved under their original room scope. They do not count as the Mattermost demonstration. A successful gateway probe, running agent, or local test is not a substitute for a verified request and result in the current room.
+
+## Observed run A checkpoint
+
+| Evidence | Verified value |
+|---|---|
+| Original Mattermost request | `sw_b116d44a4e801a59d8f3cd30e64372dc`, room sequence 11 |
+| Automatic agent result | `sw_22b4f2385c01448297121bd1d46314ec`, room sequence 12 |
+| Exact run | `dd19c14126444bb79ef57882bfa48602` |
+| Workflow state at capture | Ready, current, evidence valid; approval and completion both absent |
+| Checks | Regression PASS; required guarded/control checks PASS; factual accuracy INCONCLUSIVE |
+| Local evidence record | `.local/qa-room/mattermost-run-a-verification.json` |
+
+The [exact run A page](http://127.0.0.1:8054/qa/runs/dd19c14126444bb79ef57882bfa48602) and both HTML reports were opened successfully in the browser. HTTP checks returned 200 for that page and all six artifacts, including both evidence bundles. The captured room events, managed-agent activity and workflow snapshot establish automatic request-to-result delivery; they do not constitute human approval. Replay used zero new model requests.
+
+After personally inspecting A's evidence, the next human room command is:
+
+```text
+@intent-replay-qa qa approve booking-withdrawal dd19c14126444bb79ef57882bfa48602
+```
+
+Then follow the remaining A/B steps in [QA_ROOM_COMMANDS.md](QA_ROOM_COMMANDS.md). Do not request B before recording the actual human review of A if continuing this walkthrough.
 
 ## Start after reboot
 
@@ -37,9 +58,9 @@ The old-session `docker-users` token blocker is resolved. No further reinstall o
    The URI requests focus; verify the visible server and existing agent IDs match the table. The preserved profile resolves under Codex MSIX `LocalCache\Roaming\switchdash`. Do not use a generic `--user-data-dir` workaround: the app overrides that setting. Do not initialize a replacement server/profile if the expected records are absent.
 3. In Console, use the native server **Start** button if the native service is stopped; focusing the UI alone does not start it. Wait for it to become healthy, then select the existing native server `b82ac60d-6645-491f-aafa-21de5f2e6ee9` at `http://127.0.0.1:56741`. Route the existing agent/room through that server. On **Server → Mattermost**, use **Run Mattermost** only if the existing messaging service is stopped. Preserve native server data and the existing agent/session.
 4. Open the existing [Intent Replay QA channel](http://localhost:56742/switch/channels/intent-replay-qa). Keep the single room and agent identified above; do not recreate them.
-5. Run `probe` and `serve` using the commands below. Restart `serve` after any deliberate connection-scope change because it holds the configured room in memory.
+5. Run `probe` using the commands below and reuse the existing evidence listener on port 8054. Start `serve` only when that listener is absent; do not launch a duplicate. Restart its owning process deliberately after a connection-scope change because it holds the configured room in memory.
 6. Confirm the managed session exposes `qa_room.dispatch_original_message` from the existing project configuration. Inspect original request/delivery state before retrying an uncertain dispatch. Preserve the failed Node events listed below; do not claim a result without its receipt or invent an event to recover it.
-7. Verify returned exact-run evidence, both HTML reports and bundles open on this computer. Then perform [QA_ROOM_COMMANDS.md](QA_ROOM_COMMANDS.md). Only the person sends approval/completion messages; these steps remain pending.
+7. Open the exact current run and its evidence on this computer, then resume [QA_ROOM_COMMANDS.md](QA_ROOM_COMMANDS.md) at the captured checkpoint. Run A's page/reports and artifact delivery have been verified; actual human approval/completion and the live stale-A demonstration remain pending.
 
 Current log contents and listener ownership are better startup evidence than an old file modification timestamp: during recovery, native log tails showed fresh Gateway HTTP 200 entries while their reported modification times still reflected shutdown.
 
@@ -94,18 +115,27 @@ With native Switch running and the intended room configured:
 Set-Location 'C:\Users\asus\OneDrive\Documents\ChatGPT\intent-replay-flip'
 $qaPython = 'C:\Users\asus\OneDrive\Documents\ChatGPT\hackthons\.venv\Scripts\python.exe'
 & $qaPython -B .\source\scripts\run_qa_room.py probe
+```
+
+The evidence listener is already running at this checkpoint. Open the exact A page above, or `http://127.0.0.1:8054/qa/current`, and reuse that listener. If it is absent after reboot, start one instance:
+
+```powershell
 & $qaPython -B .\source\scripts\run_qa_room.py serve
 ```
 
-Keep `serve` running. It serves evidence and authenticated `POST http://127.0.0.1:8054/api/qa/dispatch`, and generates `.local/qa-room/dispatch-token` if absent. The MCP wrapper reads that local bearer token internally and submits only `{"message_id":"<original ID>"}`. The agent does not read or display the token. The bridge rejects extra fields and browser `Origin`/`Sec-Fetch-*` headers, then applies the same original-Gateway-event and workflow guards as the CLI.
+Do not run a second `serve` while port 8054 is already listening. Confirm the existing page belongs to the configured room/task before continuing. Keep the existing instance running: it serves evidence and authenticated `POST http://127.0.0.1:8054/api/qa/dispatch`, and generates `.local/qa-room/dispatch-token` if absent. The MCP wrapper reads that local bearer token internally and submits only `{"message_id":"<original ID>"}`. The agent does not read or display the token. The bridge rejects extra fields and browser `Origin`/`Sec-Fetch-*` headers, then applies the same original-Gateway-event and workflow guards as the CLI.
 
 `probe` checks Gateway authentication/identity; it does not prove the full room interaction. The report URL is loopback and must be opened on this same computer. The exact supported room commands and A/B review walkthrough are in [QA_ROOM_COMMANDS.md](QA_ROOM_COMMANDS.md); the agent MCP call and operator-only CLI fallback are in [QA_ROOM_AGENT_INSTRUCTIONS.md](QA_ROOM_AGENT_INSTRUCTIONS.md).
 
 ## Project-local MCP transport
 
-The existing `.codex/config.toml` registers one stdio server, `qa_room`, with only `dispatch_original_message` enabled. Agent revision 5 instructs it to pass only the authoritative original message ID; sandbox and automatic-approval settings were not changed.
+The existing `.codex/config.toml` registers one stdio server, `qa_room`, with only `dispatch_original_message` enabled. Agent revision 6 instructs it to pass only the authoritative original message ID; sandbox and automatic-approval settings were not changed.
 
-**Current blocker:** actual managed startup logs at 22:02:40 UTC and a no-inference MCP catalog probe show that this project layer is disabled until Codex explicitly trusts the common Git repository `C:\Users\asus\OneDrive\Documents\ChatGPT\hackthons\intent-replay-public-submission-20261104`. An earlier configuration-only probe appeared enabled; actual startup/catalog evidence supersedes that result. The inherited drive-root trust does not satisfy this worktree check. The user has been asked to approve this specific project-trust entry; no trust change has been made. After approval and supported session refresh, verify `qa_room` and `dispatch_original_message` appear in `mcpServerStatus/list` before sending another room request.
+**Resolved project-trust blocker:** the user explicitly authorized the `trust_level = "trusted"` entry for `C:\Users\asus\OneDrive\Documents\ChatGPT\hackthons\intent-replay-public-submission-20261104` in the user Codex configuration, `C:\Users\asus\.codex\config.toml`. This is the common Git repository verified by `git rev-parse --git-common-dir`, not a drive-wide trust change. The prior private configuration was backed up before appending this exact entry; no other user-configuration settings changed. Submitted repository files, credentials, sandbox and automatic-approval policy were unchanged.
+
+Before that approval, actual managed startup at 22:02:40 UTC disabled the project layer despite an earlier configuration-only probe appearing enabled. The inherited drive-root trust did not satisfy the worktree check. Preserve that distinction: `config/read` alone was insufficient evidence of tool availability.
+
+After applying the approved entry and refreshing the existing managed agent, the actual managed MCP handshake succeeded at **22:26:05 UTC on 2026-11-05**. The official SDK tool listing returned exactly `dispatch_original_message`. On future resume, confirm `qa_room` and that sole tool in the live catalog before sending a new room request. This preflight established transport availability; the separate run A checkpoint above establishes automatic room delivery. Actual human review remains outstanding.
 
 The configured executable uses the resolved physical path to the already-installed native Switch environment:
 
@@ -138,6 +168,6 @@ The Console-managed agent now uses official npm **`@openai/codex@0.166.0`** with
 
 The four temporary alpha executable hardlinks (`codex.exe`, `codex-code-mode-host.exe`, `codex-command-runner.exe`, `codex-windows-sandbox-setup.exe`) were removed from the npm PATH directory after stopping the managed agent. The original desktop installation under `C:\Users\asus\AppData\Local\OpenAI\Codex\bin\a159911ff70742e9` remains unchanged. Do not restore those temporary hardlinks or copy credentials to fix PATH.
 
-Python shell execution in the managed agent was denied or unreliable, and both actual Node dispatch attempts exited before reaching the bridge. The default is now the single project-local MCP tool, launched by the managed runtime and forwarding to the existing HTTP bridge. The same local event verification and human-review rules apply; passing transport tests and loading configuration do not establish successful end-to-end room behavior.
+Python shell execution in the managed agent was denied or unreliable, and both actual Node dispatch attempts exited before reaching the bridge. The default is now the single project-local MCP tool, launched by the managed runtime and forwarding to the existing HTTP bridge. Run A verified this automatic request-to-result path while retaining the original-event and review guards. Human approval/completion and the live stale-run demonstration remain outstanding.
 
 This provider setup is independent of the retained Meta proposal captures. Replay adds zero model requests; any inference by the Console-managed Codex agent is separate, and its usage is reported only where observable.
