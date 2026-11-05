@@ -1,10 +1,10 @@
 # Intent Replay — QA Room commands
 
-One personal/local Switch room, agent `intent-replay-qa`, task `booking-withdrawal`, and case set `corrected-meta-withdrawal-control`. The integration targets Switch Console 0.40.1 / native Core 0.31.0. Console manages the agent; the actual room requires a supported messaging app. Local implementation/tests and a real-room demonstration are separate evidence; connection and human-review completion must be observed before claiming them.
+One personal/local Switch room, agent `intent-replay-qa`, task `booking-withdrawal`, and case set `corrected-meta-withdrawal-control`. The integration targets Switch Console 0.40.1 / native Core 0.31.0, using the existing [Intent Replay QA Mattermost channel](http://localhost:56742/switch/channels/intent-replay-qa). Agent revision 5 uses the project-local MCP transport. Its eight focused tests pass; real room result return and the human A/B review walkthrough remain pending in the 2026-11-05 setup snapshot.
 
 ## Start the configured local workflow
 
-After Console room/agent setup has created the private connection references:
+After reboot, start Docker and use Console's native server **Start** button if needed. Select the existing server `b82ac60d-6645-491f-aafa-21de5f2e6ee9` at `http://127.0.0.1:56741` and the existing Mattermost room; see [QA_ROOM_SETUP.md](QA_ROOM_SETUP.md). With the preserved private connection references:
 
 ```powershell
 Set-Location 'C:\Users\asus\OneDrive\Documents\ChatGPT\intent-replay-flip'
@@ -15,7 +15,9 @@ $qaPython = 'C:\Users\asus\OneDrive\Documents\ChatGPT\hackthons\.venv\Scripts\py
 
 `probe` verifies the configured gateway connection and identity, not the complete real-room flow. Keep `serve` running: it serves evidence and the bounded dispatch bridge, creating the private `.local/qa-room/dispatch-token` if absent. Do not print that token. The default evidence address is `http://127.0.0.1:8054/qa/current`. The configured report origin is loopback: open it on the same computer as the demonstrated room. Before review, confirm the exact-run page, both HTML reports, and evidence bundles open successfully. A printed filesystem path alone is not verified reviewer access.
 
-The Console-managed agent uses [QA_ROOM_AGENT_INSTRUCTIONS.md](QA_ROOM_AGENT_INSTRUCTIONS.md). Its Node tool submits only the original Switch message ID to authenticated `POST /api/qa/dispatch`; the server fetches the original human event and posts its own deterministic result. No shell command, message body, actor, or human-approval assertion is accepted. The fixed CLI dispatch remains an operator diagnostic fallback.
+The Console-managed agent uses [QA_ROOM_AGENT_INSTRUCTIONS.md](QA_ROOM_AGENT_INSTRUCTIONS.md). Its sole `qa_room.dispatch_original_message` MCP tool accepts `{"original_message_id":"<exact original incoming ID>"}`. The wrapper reads the local token internally and forwards only that ID to authenticated `POST /api/qa/dispatch`; the server fetches the original human event and posts its own deterministic result. No shell command, message body, actor, or human-approval assertion is accepted. The agent must not duplicate the server's result or improvise a Node/shell fallback. The fixed CLI dispatch remains an operator diagnostic fallback.
+
+The official SDK `mcp==1.28.1` is already installed in the native Switch environment; no install is needed. Actual managed startup currently disables the project layer pending explicit trust of the shared Git repository; the requested user approval and MCP catalog preflight must precede this live walkthrough. Optional dependency pin, exact launcher details and the observed blocker are recorded in [QA_ROOM_SETUP.md](QA_ROOM_SETUP.md), alongside the [official MCP configuration reference](https://learn.chatgpt.com/docs/extend/mcp?surface=cli).
 
 ## Human walkthrough
 

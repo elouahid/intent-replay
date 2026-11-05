@@ -2,15 +2,19 @@
 
 Updated 2026-11-05. The QA workflow is implemented and tested; the actual messaging-room/human-review demonstration is still pending. Continue in this worktree, not the original `hackthons` folder.
 
-## Latest resume checkpoint — Windows restart pending
+## Latest resume checkpoint — real room running, tool trust pending
 
-Resumed from `c6455e3402e476e0eaab40874e4a11f4cc89d142` on 2026-11-05. The user has agreed to save work and use **Windows Start → Power → Restart**, then reopen this chat. A prior reported sign-out did not yield a new observed session: Explorer still started at 00:10:02. Read-only process-token inspection confirmed that Explorer, Docker Desktop, and both newly started Docker backend processes all lack the `docker-users` SID despite the account's local group membership.
+The full Windows restart resolved `docker-users` token membership. Docker Desktop 4.98.0 / Engine 29.9.2 now responds, native Switch is healthy, and dedicated container `switchdash-local-mattermost-mattermost-1` is healthy. A transient Hyper-V 2 GB allocation failure recovered; no reinstall or security-policy change was made.
 
-Docker Desktop's supported `desktop restart --timeout 45` stopped/restarted its processes at 20:50:28 but returned `context deadline exceeded`. Subsequent `docker version` timed out after 15 seconds; `docker desktop status` and the dashboard both reported `starting`. The available pre-restart logs contain `checking group membership: user is not a member of the group`; these are **old MSIX-overlay logs**, not proof of a new backend error. Docker and Hyper-V services are running. Do not reinstall, reset Docker data, or alter access checks based on those old logs.
+The real private [Intent Replay QA room](http://localhost:56742/switch/channels/intent-replay-qa) exists: room `496e3d1b-8c14-4a6c-9bc5-1e164c0da362`, bridge `7b6daa01-6bf8-43e0-b4f2-71d30a21e9e3`. The original agent is connected, revision 5. Its actual Mattermost human sender is pinned as client `f97780ca-7e77-4573-902d-e66eb59e9fe7`. The adapter's administrator joined through the supported chat-membership API so original events are readable. Direct-room history/configuration was preserved before updating `.local/qa-room/connection.json`.
 
-The authenticated QA probe still succeeds against Core 0.31.0 and the existing direct room; the submitted checkout is clean at `d074b16`. No replay, approval, completion, provider reconfiguration, or source/evaluator change was made during this resume. Mattermost has not started, so there is no verified Mattermost room URL yet.
+The reboot exposed stale Switch owner files naming a PID now assigned to `svchost`. Four exact obsolete runtime files were hash-checked and renamed with `.preboot-20261105-preserved`; no unrelated process or session history was removed. Supported agent restart succeeded. See the incident record in [QA_ROOM_SETUP.md](docs/QA_ROOM_SETUP.md).
 
-After Windows restarts: verify Docker server access first; start the existing Switch profile and enable **Server → Mattermost → Run Mattermost**. The installed Console can add Mattermost beside native Core without recreating the server or agent. Use the bootstrap's verified bridge to create a private room with the existing agent, retain the direct room history, update the private connection reference, and restart the evidence listener. For actual Mattermost messages, verify the person's original Gateway `sender.clientId` and pin it; `sender.userId` normally remains null. Follow the identity steps in the setup document. Then run A, wait for the user's actual approval, request B, demonstrate stale A completion refusal, and let the user freshly approve/complete B. Never issue human-review commands on their behalf.
+Two real Mattermost requests (`sw_bb01ce3f665773f8056b904782f5ce97`, `sw_9a3d735148603160b10808e8c9f4be5a`) encountered `trusted Node process exited unexpectedly; kernel reset, rerun your request`. Neither reached the dispatcher: no new room run or receipt. A transport-only MCP wrapper now forwards one original message ID to the **same** HTTP bridge; eight focused tests pass, including the official SDK stdio handshake. It uses installed SDK 1.28.1 and leaves sandbox/approval settings unchanged.
+
+The third request (`sw_2f02f3788ff4138862893e26454e6900`) could not discover that tool. Actual managed Codex startup logs and a no-inference MCP catalog probe establish that the project's `.codex/config.toml` is **disabled pending explicit trust of the common Git repository**: `C:\Users\asus\OneDrive\Documents\ChatGPT\hackthons\intent-replay-public-submission-20261104`. An earlier configuration-only probe appeared enabled; actual startup/catalog evidence supersedes it. The user has been asked to approve that exact project-trust entry. **Do not change trust or repeat a room request before that answer and a successful MCP catalog preflight.** No real Mattermost replay or human approval/completion is claimed yet.
+
+After trust is resolved: verify `qa_room` exposes `dispatch_original_message` in the managed provider's MCP catalog; make one real room request; verify its evidence; guide actual human approval A, then request B and observe stale A refusal before the person's fresh B review. Never send review commands on the person's behalf.
 
 ## Baseline and preservation
 
@@ -36,10 +40,9 @@ Regression PASS includes expected faulty withdrawal execution FAIL. Guarded with
 
 - Installed Switch Console **0.40.1**, native Core **0.31.0**, gateway `http://127.0.0.1:56741`.
 - Agent `intent-replay-qa`, ID `e9d69e59-a025-4e2d-abea-ce114dc448f8`, correct worktree, official standalone Codex **0.166.0** through npm. Existing ChatGPT login/model retained; temporary alpha executable bridges removed, original desktop installation intact.
-- Default `.local/qa-room/connection.json` currently targets Console **direct chat** `95574125-421c-4810-bdc2-d47822117d2b`. This is not the final Mattermost-backed room.
+- Default `.local/qa-room/connection.json` now targets the verified Mattermost room above; previous direct-chat configuration is backed up beside it.
 - Private references resolve into the Codex MSIX `LocalCache\Roaming\switchdash` profile. After sign-out, resume this Codex chat and launch/check the same existing server/agent; do not assume an ordinary Start-menu launch or generic `--user-data-dir` selects that profile. Exact paths and checks are in [QA_ROOM_SETUP.md](docs/QA_ROOM_SETUP.md).
-- Docker Desktop **4.98.0** installed with existing Hyper-V. `asus` is in `docker-users`, but its old login token caused Docker's membership check to fail. **Save open work, sign out of Windows, then sign back in** before rechecking Docker. No automatic sign-out/restart was performed.
-- Then enable Switch **Admin → Status → Run Mattermost**, create one personal **Intent Replay QA** room using the existing agent, back up/update the verified room ID in connection configuration, and restart the evidence listener. Prefer Console messages inside that actual room so the existing human user-ID pin remains valid.
+- Docker/Mattermost are running. The embedded Mattermost UI uses source `mattermost` and the verified client pin, not the former Console user-ID pin. The evidence listener was restarted with that scope.
 
 ## Evidence and continuation
 

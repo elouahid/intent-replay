@@ -10,43 +10,17 @@ This agent connects a real Switch room message to the fixed Intent Replay dispat
 ## Handle a room request
 
 1. Obtain the **original incoming message ID** from the Switch event: a `read_context` entry's `id`, or the streamed payload's `message_id`. Use the exact identifier, not a run ID, a quoted message, an invented ID, or an agent summary. If necessary, read room context to identify that original event.
-2. Use the Node JavaScript tool to call only the fixed local HTTP bridge. `serve` creates `.local/qa-room/dispatch-token`; read it for the bearer header without displaying it. Send a JSON object containing **only** the original `message_id`:
+2. Call the project-scoped **`qa_room.dispatch_original_message` MCP tool** (usually exposed as `mcp__qa_room__dispatch_original_message`) with exactly one argument:
 
-   ```javascript
-   var qaReceipt = await (async () => {
-     const fs = await import('node:fs/promises');
-     const http = await import('node:http');
-     const token = (await fs.readFile('C:/Users/asus/OneDrive/Documents/ChatGPT/intent-replay-flip/.local/qa-room/dispatch-token', 'utf8')).trim();
-     const body = JSON.stringify({message_id: '<exact original message ID>'});
-     return await new Promise((resolve, reject) => {
-       const request = http.request('http://127.0.0.1:8054/api/qa/dispatch', {
-         method: 'POST',
-         headers: {'Content-Type': 'application/json', 'Content-Length': Buffer.byteLength(body), Authorization: 'Bearer ' + token}
-       }, response => {
-         let text = '';
-         response.setEncoding('utf8');
-         response.on('data', chunk => { text += chunk; });
-         response.on('end', () => {
-           try { resolve({http_status: response.statusCode, body: JSON.parse(text)}); }
-           catch { reject(new Error('Invalid local dispatch response; inspect the current run before retrying.')); }
-         });
-       });
-       request.on('error', () => reject(new Error('Local dispatch unavailable; inspect the current run before retrying.')));
-       request.setTimeout(45000, () => request.destroy());
-       request.end(body);
-     });
-   })();
-   nodeRepl.write({http_status: qaReceipt.http_status, ok: qaReceipt.body.ok, duplicate: qaReceipt.body.duplicate,
-     delivery_status: qaReceipt.body.delivery_status, run_id: qaReceipt.body.run_id,
-     posted_event_id: qaReceipt.body.posted_event_id, error_code: qaReceipt.body.error_code,
-     message: qaReceipt.body.message ?? qaReceipt.body.detail ?? qaReceipt.body.note});
+   ```json
+   {"original_message_id":"<exact original incoming Switch message ID>"}
    ```
 
-   Replace only the message-ID placeholder. Never echo the token, headers, or private file contents. Use `node:http.request`: Node's built-in `fetch` adds `Sec-Fetch-Mode`, which the bridge deliberately rejects along with browser `Origin`/`Sec-Fetch-*` headers. Do not send from browser JavaScript. The server uses its configured `.local/qa-room/connection.json` and `.local/qa-room/state`; room text cannot override them.
+   Replace only the message-ID placeholder. This fixed tool reads the private dispatch token internally and calls the existing loopback HTTP bridge. It does not accept commands, actor/consent claims, URLs, paths or configuration. Do not use Node, a shell, browser JavaScript, or an operator CLI fallback for supported QA messages. Do not read or display credentials. If the tool is unavailable, stop and report the missing tool in the Console session; do not improvise a dispatch.
 3. The dispatcher retrieves the original authenticated message from Switch and validates its room, pinned human reviewer, complete command, event identity, and authoritative send time. The core compares that original time with the finished run and actual approval inside its completion transaction. Never pass a message body, actor name, timestamp, consent flag, or assertion that somebody approved. Those are not bridge inputs.
 4. The server posts the deterministic result as the QA agent through its bearer-authenticated Switch route. **Do not post acknowledgements, progress updates, or a second model-written result or summary for supported QA commands.** After dispatch, wait for another real human message. Duplicate events are idempotent. If posting is uncertain or a run is interrupted, preserve the returned status; do not invent success, resend the post, or create a replacement event.
 
-The managed provider is the official npm `@openai/codex@0.166.0`, using the existing ChatGPT login/model. Its tools work, but Python shell execution was denied or unreliable in this managed environment; the bounded HTTP operation is the default. It grants no arbitrary shell operation and supplies no substitute human approval.
+The managed provider is the official npm `@openai/codex@0.166.0`, using the existing ChatGPT login/model. Two actual Mattermost requests encountered a trusted Node-process exit before dispatch; no replay or receipt was created. The project-local MCP tool replaces that unreliable transport while retaining the same HTTP dispatcher and original-event checks. It uses the already-installed MCP SDK and does not change sandbox, trust, or approval policy. Human review still requires the person's actual room action.
 
 ## Operator diagnostic fallback
 

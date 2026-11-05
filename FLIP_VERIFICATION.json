@@ -1,5 +1,5 @@
 {
-  "scope": "Offline tests and verified automatic Switch direct-chat integration; final Mattermost room and actual human review remain pending.",
+  "scope": "Preserved prior offline/direct-chat checks; real Mattermost setup is running. Managed MCP project trust and actual room replay/human A/B review remain pending.",
   "python_suite": {
     "status": "PASS",
     "tests": 143,
@@ -103,5 +103,56 @@
     },
     "mattermost_room_verified": false
   },
-  "actual_human_walkthrough_complete": false
+  "actual_human_walkthrough_complete": false,
+  "real_switch_mattermost": {
+    "recorded_at": "2026-11-05T22:17:05.802263+00:00",
+    "room_id": "496e3d1b-8c14-4a6c-9bc5-1e164c0da362",
+    "room_url": "http://localhost:56742/switch/channels/intent-replay-qa",
+    "bridge_id": "7b6daa01-6bf8-43e0-b4f2-71d30a21e9e3",
+    "agent_id": "e9d69e59-a025-4e2d-abea-ce114dc448f8",
+    "agent_revision": 5,
+    "reviewer_client_id": "f97780ca-7e77-4573-902d-e66eb59e9fe7",
+    "docker_engine": "29.9.2",
+    "mattermost_container": "switchdash-local-mattermost-mattermost-1",
+    "container_health": "healthy",
+    "gateway": "0.31.0 authenticated",
+    "platform_setup": "PASS",
+    "managed_agent_host": "running",
+    "request_initiator": "Codex using the actual Mattermost UI for user-authorized verification; not human review",
+    "requests": [
+      {
+        "event_id": "sw_bb01ce3f665773f8056b904782f5ce97",
+        "seq": 6,
+        "outcome": "Node tool exited before dispatch"
+      },
+      {
+        "event_id": "sw_9a3d735148603160b10808e8c9f4be5a",
+        "seq": 9,
+        "outcome": "Fresh bounded retry: Node tool exited before dispatch"
+      },
+      {
+        "event_id": "sw_2f02f3788ff4138862893e26454e6900",
+        "outcome": "MCP tool not discovered: project trust disabled"
+      }
+    ],
+    "room_replay_runs": 0,
+    "room_dispatch_receipts": 0,
+    "human_review_status": "not started",
+    "actual_human_walkthrough_complete": false,
+    "switch_agent_inference_observed": true,
+    "exact_inference_calls": null,
+    "replay_model_requests": 0,
+    "limitation": "Actual managed startup disables project MCP until common Git repository is explicitly trusted. User approval requested; no trust change made."
+  },
+  "mcp_transport_tests": {
+    "native_sdk": "mcp 1.28.1 already installed with Switch",
+    "tests_passed": 8,
+    "baseline_python_transport_tests_passed": 6,
+    "baseline_python_optional_sdk_tests_skipped": 2,
+    "real_events_dispatched_by_tests": 0,
+    "logs_sha256": {
+      ".local/qa-room-mcp-tests/baseline-python-test-output.txt": "124aa124751f20807749b0caa630d1a5cd3868611544b25189757452e06fd963",
+      ".local/qa-room-mcp-tests/native-sdk-test-output.txt": "6c1444917b11c651aaf41344476102352fe818d07a8aaaa5dc79661cc7c5090c"
+    }
+  }
 }

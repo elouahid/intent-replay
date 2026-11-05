@@ -1,0 +1,2 @@
+# Optional managed-agent stdio transport; existing replay dependencies are unchanged.
+mcp==1.28.1

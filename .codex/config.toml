@@ -1,0 +1,9 @@
+# Project-only tool transport for the existing managed QA agent.
+# Uses the already-installed Switch MCP SDK; no credential values are stored here.
+[mcp_servers.qa_room]
+command = 'C:\Users\asus\AppData\Local\Packages\OpenAI.Codex_2p2nqsd0c76g0\LocalCache\Roaming\switchdash\local-switch-server\native\switch-core\0.31.0\venv\Scripts\python.exe'
+args = ['-B', 'C:\Users\asus\OneDrive\Documents\ChatGPT\intent-replay-flip\source\scripts\run_qa_room_mcp.py']
+cwd = 'C:\Users\asus\OneDrive\Documents\ChatGPT\intent-replay-flip'
+enabled_tools = ['dispatch_original_message']
+startup_timeout_sec = 30
+tool_timeout_sec = 90
