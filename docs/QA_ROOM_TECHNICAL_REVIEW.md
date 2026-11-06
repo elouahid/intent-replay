@@ -1,8 +1,8 @@
-# Run A — assistant technical review
+# Runs A and B — assistant technical review
 
 Reviewed by Codex on 2026-11-06 at the user's request. **This is an assistant review of retained evidence, not a human approval or completion record.**
 
-Run: `dd19c14126444bb79ef57882bfa48602`; task `booking-withdrawal`; Mattermost room `496e3d1b-8c14-4a6c-9bc5-1e164c0da362`. [Open the exact evidence](http://127.0.0.1:8054/qa/runs/dd19c14126444bb79ef57882bfa48602).
+Task `booking-withdrawal`; Mattermost room `496e3d1b-8c14-4a6c-9bc5-1e164c0da362`. [A's preserved evidence](http://127.0.0.1:8054/qa/runs/dd19c14126444bb79ef57882bfa48602) is historical; [B's evidence](http://127.0.0.1:8054/qa/runs/a9ce6b8d4b9f4c1eb6d8cab94d24cd67) is current. Both remain unreviewed in the human workflow. Sections below retain A's initial inspection and then record the B continuation.
 
 ## Technical finding
 
@@ -26,16 +26,32 @@ The guarded control is necessary evidence: the implementation does not obtain it
 - `qa_room.py` makes a new request current and resets task review status in its acceptance transaction. Review/completion recheck current run, exact evidence binding and authoritative event time under the write lock. `qa_room_switch.py` fetches the original room event and requires the pinned human account and exact command.
 - Prior isolated tests cover stale A, unapproved B, duplicate historical approvals, races, delayed source timestamps and corrupt evidence. Simulated reviewers in those tests are not real human-room approval evidence. No live A/B human walkthrough is claimed by this review.
 
-## Limits and live state at review
+## Limits and A state at initial review
 
 Factual accuracy remains **INCONCLUSIVE / unassessed** because this proposal-only profile generated no final assistant reply. Overall task remains FAIL for faulty withdrawal and INCONCLUSIVE for guarded/control. This does not establish external booking success or production readiness.
 
-The restored Gateway's latest room sequence is 12. A is ready/current and **unreviewed**, with no approval or completion. This review did not dispatch a command, rerun evidence, modify workflow state or create a human record. Saved replay made zero new model requests; managed-agent inference is a separate activity.
+At the initial review, the restored Gateway's latest room sequence was 12. A was ready/current and **unreviewed**, with no approval or completion. That technical inspection did not dispatch a command, rerun evidence, modify workflow state or create a human record. Saved replay made zero new model requests; managed-agent inference is a separate activity.
 
 Platform identity authenticates an account; it does not independently prove that a person inspected the reports. Posting a review through the person's account using automation would not constitute the actual human action requested for this demonstration.
 
 After asking to delegate the review, the user replied “I approve it” to the proposed autonomous assistant-reviewed demonstration. That chat approval is recorded as conversation context only; it is not an original Mattermost approval event. Continue the assistant-reviewed A/B demonstration while reporting actual human review as incomplete. The original human path remains documented in [QA_ROOM_COMMANDS.md](QA_ROOM_COMMANDS.md).
 
-The next real verification request reached Mattermost as `sw_ceb8c35e683bc85544b2f490c8ab56dd` (sequence 13), but the managed provider could not refresh its expired ChatGPT token (401). Agent failure `sw_3fc8dcf784aa49608cb0c59e3ce6997c` (sequence 14) occurred before dispatch; no B run or receipt was created. A remains current. Authentication recovery uses the existing session's isolated Codex home and requires the person's browser sign-in. No human review was fabricated.
+The next real verification request reached Mattermost as `sw_ceb8c35e683bc85544b2f490c8ab56dd` (sequence 13), but the managed provider could not refresh its expired ChatGPT token (401). Agent failure `sw_3fc8dcf784aa49608cb0c59e3ce6997c` (sequence 14) occurred before dispatch; that request created no B run or receipt. A remained current until the successful fresh request below. Authentication recovery used the existing session's isolated Codex home and the person's browser sign-in. No human review was fabricated.
 
 Three existing isolated tests were rerun successfully: simulated A/B stale completion, duplicate historical approval/completion against a new run, and atomic completion followed by a concurrent rerun. These use temporary databases and simulated reviewers only. Log: `.local/qa-room-assistant-review/simulated-review-tests-20261106T231812Z.log`; SHA-256 `a65d372104960ed2bb0db151b881ff1230240f03bd37c5b27002436bc15ab93c`. Failed-request proof: `.local/qa-room-assistant-review/failed-b-request-20261106.json`.
+
+## B continuation and technical finding
+
+After the person completed scoped sign-in and the existing agent restarted successfully, Codex sent a fresh verification through the actual Mattermost UI: `sw_2038d700ac6120ad2ddd84c04b7139ca`, sequence 15, 23:30:20 UTC. The managed agent's activity records completed `qa_room.dispatch_original_message` and completed turn `b0294787-bfdf-5039-9362-1a41241514e9`. It returned B `a9ce6b8d4b9f4c1eb6d8cab94d24cd67` in result `sw_1a434e896a694e1db3d5ae3399453cdd`, sequence 16. No operator dispatch was used.
+
+B supports the same scoped acceptance finding as A. The guarded withdrawal accepts revision 2 at journal sequence 7, denies authorization at 8 and suppresses at 9 in shared transaction `70aad15c973a4a0a82bf83591fcd050c`; the independent read after 9 retains 14:00. The guarded control authorizes revision 1 at sequence 6 and commits at 7 in shared transaction `7fadfba6617d4721a796e846608013d3`; its independent read after 7 is 15:00. The faulty withdrawal's expected execution FAIL and the other three execution PASS outcomes all match their frozen expectations.
+
+- B binding SHA-256: `ba73f978df6da5f22bec1b5a9ee2b55b367a6cc4512e8aebd20bf1e71be79630`.
+- Withdrawal execution: `1405d7351aca4324b9b837e228c0caff`; report seal `97ffff1b0835bbe6721da7fb75ab7ce9fd04a3b6581242f1b75e6e877bfba180`.
+- Control execution: `95cdbdbe24ce4ca28208d952b85347fa`; report seal `7e88f520f0583eb8aa3484e4ace1662eb3c8c71eea6f8ced7b95188446901e68`.
+- Both prepared seals, the original capture and execution contract are unchanged. Executions and the run binding are distinct from A.
+- The read-only audit passed **56/56 checks** of original events, posted receipt, bindings, seals, six HTTP/disk artifacts and ZIP manifests. Both original HTML reports and B's index opened in the browser. Proof: `.local/qa-room-assistant-review/mattermost-a-b-evidence-audit.json`; managed activity: `.local/qa-room-assistant-review/run-b-managed-activity.json`.
+
+A is historical, cannot be approved/completed for the current task, and retains valid evidence. B is current and eligible for fresh approval, but cannot complete without that approval. Both have `approval=null`, `completion=null`, `review_status=unreviewed`; the live database has zero review/completion records. This demonstrates replacement of the current run, **not rejection of an actual historical human approval**, because none existed. That guard's evidence remains the three isolated simulated tests. Actual-person B review and a future B/C stale-approval walkthrough are documented in [QA_ROOM_COMMANDS.md](QA_ROOM_COMMANDS.md).
+
+Factual accuracy remains INCONCLUSIVE/unassessed and overall task remains FAIL for faulty withdrawal, INCONCLUSIVE for guarded/control. B used zero new replay-model calls; managed-agent inference occurred separately with exact usage unmeasured. The preserved local SQLite evidence establishes neither external booking success nor production readiness.

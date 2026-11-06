@@ -1,8 +1,8 @@
 # Flip the Switch — Intent Replay handoff
 
-Updated 2026-11-06. **Run A's real Mattermost request → managed agent → saved replay → result is verified. The user now authorizes an assistant-reviewed continuation; actual human-room review remains incomplete. The next request stopped before dispatch because the managed Codex login expired.**
+Updated 2026-11-06 UTC. **A and B completed through real Mattermost requests → the existing managed agent → saved replay → room results. B is current, evidence-valid and unreviewed; A is historical. Assistant review is complete for the included local execution evidence. Actual human-room approval/completion remains incomplete.**
 
-2026-11-06 resume: Docker's 2 GB Hyper-V allocation initially failed with `0x800705AA`; after the person closed unused applications, Docker, the existing Switch server/Mattermost room and the evidence listener were restored. Run A and its evidence remained intact. [Codex's technical review](docs/QA_ROOM_TECHNICAL_REVIEW.md) supports the scoped local execution findings but creates no human review. The user's chat approval is separate from Mattermost review. New request `sw_ceb8c35e683bc85544b2f490c8ab56dd` (sequence 13) failed before dispatch with expired-token refresh 401; B does not exist and A remains current/unreviewed. A browser login has been launched for only the existing Mattermost provider home; await the person's successful sign-in, then resume the managed request path without claiming a completed human walkthrough.
+Recovery preserved A and its evidence. Docker's 2 GB Hyper-V allocation failure (`0x800705AA`) resolved after the person freed memory. Request sequence 13 then failed before dispatch with expired-token refresh 401; it created no B. The person completed browser sign-in for the existing Mattermost provider home, and supported agent restart succeeded. Fresh sequence 15 produced B automatically. Only the scoped login was refreshed; global authentication and provider credential configuration were unchanged. Baseline files and evaluator semantics were preserved. The user's chat approval authorizes this assistant-reviewed continuation; it is not a Mattermost review record.
 
 ## Baseline and isolation
 
@@ -29,11 +29,15 @@ The single project MCP tool `qa_room.dispatch_original_message` forwards only an
 
 **Run A: `dd19c14126444bb79ef57882bfa48602`** — [open evidence](http://127.0.0.1:8054/qa/runs/dd19c14126444bb79ef57882bfa48602).
 
-Actual Mattermost request `sw_b116d44a4e801a59d8f3cd30e64372dc` (sequence 11, 22:30:05 UTC) was sent by Codex for the authorized verification. The managed agent dispatched automatically and posted result `sw_22b4f2385c01448297121bd1d46314ec` (sequence 12); no operator dispatch. A is ready/current/evidence-valid; regression and guarded/control checks PASS. Exact page and both original HTML reports opened in the browser; all six artifacts returned HTTP 200. Proof: `.local/qa-room/mattermost-run-a-verification.json` and [FLIP_VERIFICATION.json](FLIP_VERIFICATION.json).
+Request `sw_b116d44a4e801a59d8f3cd30e64372dc` (sequence 11, November 5) produced result `sw_22b4f2385c01448297121bd1d46314ec` (sequence 12). A remains ready/evidence-valid and is now historical. Its original proof and artifacts remain intact.
 
-**Human review remains unreviewed.** The user delegated the technical review and approved continuing with an assistant-reviewed demo in this chat. This does not create a Mattermost human record. After the scoped sign-in succeeds, request a new verification through the real room and managed agent, inspect B, and show A historical/B current with human review still unreviewed. Preserve the failed sequence-13 request as an authentication failure, not a completed B.
+**Run B: `a9ce6b8d4b9f4c1eb6d8cab94d24cd67`** — [open evidence](http://127.0.0.1:8054/qa/runs/a9ce6b8d4b9f4c1eb6d8cab94d24cd67).
 
-The original actual-human A/B walkthrough remains incomplete. Its stale-approval guard passed three selected isolated tests using explicitly simulated reviewers; logs are under `.local/qa-room-assistant-review/`. Never send human review commands on the person's behalf. [The human walkthrough](docs/QA_ROOM_COMMANDS.md) remains available for a later actual-person demonstration. Prepare concise demo/README/submission materials after the autonomous real-room continuation, clearly labeling the remaining human-review limitation.
+Request `sw_2038d700ac6120ad2ddd84c04b7139ca` (sequence 15, November 6, 23:30:20 UTC) produced result `sw_1a434e896a694e1db3d5ae3399453cdd` (sequence 16). Both requests were sent by Codex through the actual Mattermost UI for authorized verification; the managed agent automatically dispatched them, with no operator dispatch. B is ready/current/evidence-valid. Both HTML reports opened; all six artifacts were checked. [Verification records](FLIP_VERIFICATION.json) and [assistant technical review](docs/QA_ROOM_TECHNICAL_REVIEW.md) retain exact identities and evidence.
+
+**Neither A nor B has human approval or completion.** The live demonstration establishes A historical/B current, not invalidation of an actual prior human approval. Three selected isolated tests passed the stale-review guards using simulated reviewers. To review B, personally inspect both reports, send `@intent-replay-qa qa approve booking-withdrawal a9ce6b8d4b9f4c1eb6d8cab94d24cd67`, wait for confirmation, then personally send the corresponding `qa complete` command. A full actual-human stale-approval demonstration can continue as B → human approval B → new C → stale B refused → human review C. See [commands](docs/QA_ROOM_COMMANDS.md).
+
+Prepared materials: [README](README.md), [concise demo script](docs/FLIP_DEMO_SCRIPT.md), and [submission draft](docs/FLIP_SUBMISSION.md). Nothing has been published or submitted for Flip.
 
 ## Result distinctions
 
@@ -58,4 +62,4 @@ $qaPython = 'C:\Users\asus\OneDrive\Documents\ChatGPT\hackthons\.venv\Scripts\py
 & $qaPython -B .\source\scripts\run_qa_room.py serve
 ```
 
-Keep `serve` running. [Current evidence](http://127.0.0.1:8054/qa/current) is read-only. A false Console-user comparison in `probe` is expected with the Mattermost client pin; original room identity is checked separately. Never print/package dispatch tokens, credentials or runtime databases. Detailed paths/recovery: [setup](docs/QA_ROOM_SETUP.md). Implementation and limits: [report](FLIP_IMPLEMENTATION_REPORT.md). Finish actual human A/B review before adding features or visual polish.
+Keep `serve` running. [Current evidence](http://127.0.0.1:8054/qa/current) is read-only. A false Console-user comparison in `probe` is expected with the Mattermost client pin; original room identity is checked separately. Never print/package dispatch tokens, credentials or runtime databases. Detailed paths/recovery: [setup](docs/QA_ROOM_SETUP.md). Implementation and limits: [report](FLIP_IMPLEMENTATION_REPORT.md). The remaining milestone is actual human review; preserve its incomplete status until original room actions are observed.

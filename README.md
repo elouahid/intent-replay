@@ -1,75 +1,83 @@
-# Intent Replay
+# Intent Replay — QA Room
 
-An agent can propose the right action and still execute an outdated instruction. Intent Replay helps QA engineers and developers reproduce that gap, inspect the execution evidence, and keep the case as a regression.
+A replay can pass its checks while its human approval belongs to an older run. Intent Replay brings a supported execution regression into a Switch room, exposes its original evidence, and binds review to the exact result. Accepting a rerun immediately makes the new run current, including while it is pending or fails.
 
-**Watch the 2:46 demo:** [Intent Replay on YouTube](https://youtu.be/irrL2Acrs6E). It shows a real recorded Meta proposal followed by local execution; narration is stock synthetic Kokoro generated offline.
+One person, one Console-managed QA agent, and one local Mattermost room use the retained booking withdrawal/control pair. The existing runner, evaluator, saved model captures and report exporter are reused unchanged.
 
-This submission demonstrates a fictional booking moved from **14:00 to 15:00 on 25 November 2026, Europe/London**. Meta generated a native `reschedule_booking` proposal. The same proposal is replayed through a deliberately faulty local worker and a guarded worker after the customer withdraws the change. A no-withdrawal control uses the same proposal and initial booking.
+## Verified checkpoint
 
-![Actual withdrawal comparison: faulty worker saved 15:00; guarded worker retained 14:00](docs/withdrawal-comparison.jpg)
+Two real Mattermost verification requests were automatically handled by the managed agent through `qa_room.dispatch_original_message`. The requests were sent by Codex under the user's authorization; they were not human review actions.
 
-*Actual local execution of the retained Meta proposal. The deliberately injected failure is an expected regression result; factual accuracy and overall success remain separate.*
+| Run | ID | Observed state |
+|---|---|---|
+| A | `dd19c14126444bb79ef57882bfa48602` | Historical after B was accepted |
+| B | `a9ce6b8d4b9f4c1eb6d8cab94d24cd67` | Current, ready, unreviewed; completion unavailable |
 
-## Run the no-key demonstration on Windows
+B's exact page and both original HTML reports opened in the browser. A read-only audit passed 56 checks, including original events, report seals and all six B artifact hashes. The assistant inspected the technical evidence under the user's authorization. **No actual human approval or completion is recorded.** Three isolated tests with simulated reviewers passed the stale-approval, historical-duplicate and concurrent-rerun checks; those tests do not establish a real human A/B walkthrough.
 
-Open PowerShell in this repository's root. Python 3.13 was used for the recorded verification.
+| Case | Faulty worker | Guarded worker |
+|---|---|---|
+| Withdrawal | Commits 15:00; expected execution FAIL | Suppresses; retains 14:00; execution PASS |
+| No-withdrawal control | Commits 15:00; execution PASS | Commits 15:00; execution PASS |
+
+All four frozen expectations match. Factual accuracy remains **INCONCLUSIVE / unassessed**; overall task remains FAIL for faulty withdrawal and INCONCLUSIVE for guarded/control. Any eventual completion means only: “Human review completed for the checked local execution behavior, using run <ID>.”
+
+## Resume the demonstrated Windows setup
+
+The installed setup uses Switch Console **0.40.1**, native Core **0.31.0**, Docker-backed Mattermost, and the existing managed agent `intent-replay-qa`. Start Docker and the existing native server/Mattermost only if stopped. Use the preserved Console profile:
 
 ```powershell
-Set-Location .\source
+Start-Process -FilePath 'C:\Users\asus\AppData\Local\Programs\Switch Console\Switch Console.exe' -ArgumentList 'switchdash://focus'
+Set-Location 'C:\Users\asus\OneDrive\Documents\ChatGPT\intent-replay-flip'
+$qaPython = 'C:\Users\asus\OneDrive\Documents\ChatGPT\hackthons\.venv\Scripts\python.exe'
+& $qaPython -B .\source\scripts\run_qa_room.py probe
+```
+
+Reuse the evidence listener on port 8054. **Only if it is absent**, start one instance and keep it running:
+
+```powershell
+& $qaPython -B .\source\scripts\run_qa_room.py serve
+```
+
+Open the [QA room](http://localhost:56742/switch/channels/intent-replay-qa) and [current evidence](http://127.0.0.1:8054/qa/current) on this computer. Confirm the native server and live single-tool MCP catalog before sending a fresh standalone room request:
+
+```text
+@intent-replay-qa qa verify booking-withdrawal corrected-meta-withdrawal-control
+```
+
+This requests a new current run. To inspect B without rerunning it, open [B's retained evidence](http://127.0.0.1:8054/qa/runs/a9ce6b8d4b9f4c1eb6d8cab94d24cd67). The full startup, private identity-reference setup and recovery record are in [QA_ROOM_SETUP.md](docs/QA_ROOM_SETUP.md); review commands are in [QA_ROOM_COMMANDS.md](docs/QA_ROOM_COMMANDS.md).
+
+## Reproduce in a fresh checkout
+
+Create an isolated Python environment; do not reinstall into the preserved submitted environment:
+
+```powershell
 py -3 -m venv .venv
-.\.venv\Scripts\python.exe -m pip install -r requirements.txt
-.\.venv\Scripts\python.exe -B .\scripts\serve_live_proposal_demo.py --port 8052 --profile auto-direct-v2 --retained-capture .\repaired_live_proposal_evidence --output .\.local\retained-repaired-demo
+& .\.venv\Scripts\python.exe -m pip install -r .\source\requirements.txt
 ```
 
-Open **http://127.0.0.1:8052/demo**. Keep the terminal open. Dependency installation needs package-index access; the retained demonstration needs no API key and performs no inference.
-
-1. Inspect the previously generated Meta proposal and its recorded timestamp.
-2. Run the withdrawal replay. The fault-injected worker commits **15:00** and fails its execution assessment. The guarded worker suppresses the action and keeps **14:00**.
-3. Inspect the accepted instruction, authorization check, action journal and independent local booking read.
-4. Select the no-withdrawal control and replay. Both local workers commit **15:00**.
-5. Open a saved execution, rerun its exact saved input, or export its review bundle.
-
-The generation control stays disabled in retained mode. Changing runtime folders does not make this recorded output a new model response.
-
-## Run both saved regressions
-
-From the `source` directory with dependencies installed:
+The saved replay needs no provider key. Run the same two prepared cases from the repository root:
 
 ```powershell
-.\.venv\Scripts\python.exe -B .\scripts\run_saved_regression.py --prepared .\repaired_live_proposal_evidence\prepared\fresh-withdrawal-meta.json --prepared .\repaired_live_proposal_evidence\prepared\fresh-control-meta.json --output .\.local\saved-regressions
+& .\.venv\Scripts\python.exe -B .\source\scripts\run_saved_regression.py --prepared .\source\repaired_live_proposal_evidence\prepared\fresh-withdrawal-meta.json --prepared .\source\repaired_live_proposal_evidence\prepared\fresh-control-meta.json --output .\.local\flip-regression
 ```
 
-The command prints expected versus observed results and saves complete reports. Exit **0** means the frozen expectations matched; **1** means a mismatch; **2** means invalid evidence, missing observations or an execution error. The deliberately faulty withdrawal branch is expected to receive execution **FAIL**, so reproducing that defect is a passing regression check.
+Exit 0 means frozen expectations matched, including the deliberately faulty withdrawal's expected FAIL. Exit 1 means a mismatch; exit 2 means invalid evidence or an execution error.
 
-## What Meta contributed
+The Switch integration also needs a locally configured supported Switch/Mattermost installation, authenticated room membership, a pinned reviewer identity and an agent provider login. These private settings are not bundled. The tracked `.codex/config.toml` contains **demonstration-machine absolute paths**: adapt its Python command, script argument and working directory to your checkout. Its optional SDK pin is `source/requirements-qa-mcp.txt` (`mcp==1.28.1`); install it only into an isolated MCP environment if needed. The demonstrated host already had that SDK. Authorize project trust explicitly and verify the live tool catalog; a configuration-only read is insufficient. Follow [setup](docs/QA_ROOM_SETUP.md) and [agent instructions](docs/QA_ROOM_AGENT_INSTRUCTIONS.md), using your own verified identities and credential-file references.
 
-The corrected, separately authorized request to `muse-spark-1.3` completed on 4 November 2026. Meta returned the proposal arguments; it did not execute the booking. The receipt records one HTTP 200 request, native status `completed`, 854 input tokens and 725 output tokens, including 600 reasoning tokens. Estimated token cost was $0.00414875. Saved customer interpretation was reused from the earlier frozen case.
+## Evidence, demo and limits
 
-`source/repaired_live_proposal_evidence` preserves this capture and both prepared cases unchanged. `source/live_proposal_evidence` preserves the preceding HTTP 400 attempt. The repaired request uses supported automatic tool choice; it does not hide or replace the earlier failure. The original recorded Meta/Baseten workflow fixtures remain available for offline verification and the secondary `serve_submission_demo.py` view.
+- [Verification record](FLIP_VERIFICATION.json) and [implementation report](FLIP_IMPLEMENTATION_REPORT.md): actual events, tested behavior and outstanding human review.
+- [Demo script](docs/FLIP_DEMO_SCRIPT.md) and [submission draft](docs/FLIP_SUBMISSION.md): prepared materials, not a published Flip video or submitted entry.
+- [Handoff](FLIP_HANDOFF.md): continuation and exact current evidence.
 
-## Scope and limits
+Prior implementation verification passed 143 Python tests and eight focused MCP tests. A later isolated selection passed three review-safety tests in 4.165 seconds. Replay makes zero new model requests; the managed Switch agent uses its provider separately, with exact usage unmeasured. The backend is fictional local SQLite booking behavior, not a production booking system. Evidence hashes establish consistency, not independent provider attestation.
 
-- Execution and regression checks cover the included **local SQLite booking backend**. Arbitrary external agents, production booking systems, AZcall and voice quality are not validated here.
-- The fault is an injected worker defect. A proposal made before a withdrawal is not proof that Meta ignored a later customer instruction.
-- Factual accuracy remains **INCONCLUSIVE / unassessed**. Execution PASS is separate from overall-task success.
-- Saved captures are recorded evidence; hashes establish consistency, not an independent provider attestation. The packaged response excludes private reasoning content.
-- Free-form language evaluation and the historical-call review pilot are not submission validation claims. No workplace call records, private review packets, credentials or private ledgers are bundled.
+## Preserved Meta submission
 
-## Focused offline checks
+Flip starts from submitted commit `d074b160d7af890ce7d8d99c2f580c597684a95c`. The separate submitted checkout, archive, model captures, configuration and runner/evaluator contract remain preserved; see [baseline verification](FLIP_BASELINE_VERIFICATION.json).
 
-From `source`:
+The [original submitted README](https://github.com/elouahid/intent-replay/blob/d074b160d7af890ce7d8d99c2f580c597684a95c/README.md), [original verification notes](docs/VERIFICATION.md), and [prior Meta demonstration video](https://youtu.be/irrL2Acrs6E) describe the earlier submission. That video is not the Flip room demonstration. `PUBLIC_SOURCE_MANIFEST.json` describes the original submitted snapshot, not the extended Flip tree.
 
-```powershell
-.\.venv\Scripts\python.exe -B -m unittest discover -s tests -v
-node .\scripts\verify_submission_ui.cjs .
-```
-
-The backend checks mock provider calls; the UI checks mock HTTP. This focused distribution passed 57 Python tests and 58 UI scenarios. All six offered saved-case commands (the four original Meta/Baseten cases and both corrected Meta cases) exited 0 with their frozen expectations matched. The two corrected retained HTTP replays also returned the exact usable command. These checks made no new provider requests. Node.js is only needed for optional UI verification.
-
-## Provenance and reuse
-
-See [the focused verification record](docs/VERIFICATION.md) for actual passing commands and an intentionally unexpected worker outcome that correctly returned a failing exit code.
-
-Core execution/evaluation code and selected sealed evidence are copied unchanged from the repaired submission candidate. This distribution additionally exposes the corrected capture's existing regression command in the UI: the server matches the exact bundled artifact, and the browser checks its hash and an exact command allowlist. Two presentation files and their focused verification support this change; evaluator semantics are unchanged. `PUBLIC_SOURCE_MANIFEST.json` records their hashes and the generated documentation. This repository is a focused runnable distribution, not the full private development archive.
-
-The first-party Intent Replay application code and associated first-party documentation are licensed under the [MIT License](LICENSE), copyright 2026 Salah Eddine El Ouahid. This grant applies only to rights held by that copyright holder; it does not relicense third-party code, fonts, dependencies or provider-generated captures. Bundled IBM Plex fonts retain their SIL Open Font License notice; Lucide retains its ISC notice. See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). An older camera photograph with unverified exact provenance is omitted; it is not used by `/demo`.
+First-party code and documentation remain under the [MIT License](LICENSE). Third-party dependencies, fonts and provider captures retain their own terms; see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).

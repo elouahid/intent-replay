@@ -4,11 +4,13 @@
 
 The stopped services were restored. Docker initially failed to allocate its configured 2048 MB Hyper-V memory (`0x800705AA`); after the person freed memory, Engine 29.9.2 and the existing Mattermost container became healthy. A and all retained evidence were preserved.
 
-The next real verification request reached the room (sequence 13) but the managed Codex session returned expired-token refresh **401** before dispatch. A remains current/unreviewed; B does not exist. Console's cached “Signed in” status did not establish usable runtime authentication.
+The next real verification request reached the room (sequence 13) but the managed Codex session returned expired-token refresh **401** before dispatch. That failed attempt created no B. Console's cached “Signed in” status did not establish usable runtime authentication.
 
-Recovery was prepared with installed Codex 0.166.0 `login` and child-process-only `CODEX_HOME` set to the existing Mattermost SDK provider home. Global authentication/configuration was not changed, and credentials were not copied. Private login-process metadata is in `.local/qa-room/scoped-login-session.json`; never print its referenced OAuth logs or authentication file. The person must complete the browser login. [Official authentication documentation](https://learn.chatgpt.com/docs/auth) documents browser login and scoped credential storage.
+Recovery succeeded with installed Codex 0.166.0 `login` and child-process-only `CODEX_HOME` set to the existing Mattermost SDK provider home. The person completed the browser sign-in, and the private process log confirmed successful login. Global authentication/configuration was not changed, and credentials were not copied. Private login-process metadata is in `.local/qa-room/scoped-login-session.json`; never print its referenced OAuth logs or authentication file. [Official authentication documentation](https://learn.chatgpt.com/docs/auth) documents browser login and scoped credential storage.
 
-After confirmed login success, use the supported `agent.restart` management operation for the existing agent/controller, preserving its identity and conversations. This closes owned SDK provider processes; the next addressed room request starts/resumes the saved session with refreshed scoped authentication. Do not delete sessions, create a replacement agent, change providers, or manually dispatch the failed request and describe that as managed delivery. A fresh successful managed request/result must establish B.
+After login, supported `agent.restart` operation `4cf44b5d-c553-4544-ae57-4e9c7defb9cc` succeeded at 23:26:49 UTC, preserving the existing agent and conversations. Fresh original request `sw_2038d700ac6120ad2ddd84c04b7139ca` (sequence 15) then automatically invoked `qa_room.dispatch_original_message` and produced **B `a9ce6b8d4b9f4c1eb6d8cab94d24cd67`**, result `sw_1a434e896a694e1db3d5ae3399453cdd` (sequence 16). B is current/ready/unreviewed with valid evidence; A is historical/unreviewed. All 56 independent audit checks passed. Both HTML reports opened and all six artifacts returned HTTP 200.
+
+If the same authentication error recurs, diagnose the exact managed provider home and let the person complete its browser login before supported restart. Do not copy credentials, delete sessions, create a replacement agent, switch providers, or describe manual dispatch as managed delivery. A successful new request/result is the runtime authentication check; a cached provider badge is insufficient.
 
 The user authorized an assistant-reviewed continuation; actual human approval/completion still must not be fabricated. The following dated setup checkpoint describes the established run-A configuration.
 
@@ -35,7 +37,7 @@ Updated on 2026-11-05 after the first successful automatic Mattermost verificati
 
 Historical Console direct chat `95574125-421c-4810-bdc2-d47822117d2b` and its runs remain preserved under their original room scope. They do not count as the Mattermost demonstration. A successful gateway probe, running agent, or local test is not a substitute for a verified request and result in the current room.
 
-## Observed run A checkpoint
+## Historical run A checkpoint (November 5)
 
 | Evidence | Verified value |
 |---|---|
@@ -48,13 +50,7 @@ Historical Console direct chat `95574125-421c-4810-bdc2-d47822117d2b` and its ru
 
 The [exact run A page](http://127.0.0.1:8054/qa/runs/dd19c14126444bb79ef57882bfa48602) and both HTML reports were opened successfully in the browser. HTTP checks returned 200 for that page and all six artifacts, including both evidence bundles. The captured room events, managed-agent activity and workflow snapshot establish automatic request-to-result delivery; they do not constitute human approval. Replay used zero new model requests.
 
-After personally inspecting A's evidence, the next human room command is:
-
-```text
-@intent-replay-qa qa approve booking-withdrawal dd19c14126444bb79ef57882bfa48602
-```
-
-Then follow the remaining A/B steps in [QA_ROOM_COMMANDS.md](QA_ROOM_COMMANDS.md). Do not request B before recording the actual human review of A if continuing this walkthrough.
+This table records A's state at its original capture. A is now historical and cannot be approved for the current task. Review current B using [QA_ROOM_COMMANDS.md](QA_ROOM_COMMANDS.md). A later actual-person stale-approval demonstration can use reviewed B followed by new C; the original human A/B sequence was not completed.
 
 ## Start after reboot
 
@@ -72,7 +68,7 @@ The old-session `docker-users` token blocker is resolved. No further reinstall o
 4. Open the existing [Intent Replay QA channel](http://localhost:56742/switch/channels/intent-replay-qa). Keep the single room and agent identified above; do not recreate them.
 5. Run `probe` using the commands below and reuse the existing evidence listener on port 8054. Start `serve` only when that listener is absent; do not launch a duplicate. Restart its owning process deliberately after a connection-scope change because it holds the configured room in memory.
 6. Confirm the managed session exposes `qa_room.dispatch_original_message` from the existing project configuration. Inspect original request/delivery state before retrying an uncertain dispatch. Preserve the failed Node events listed below; do not claim a result without its receipt or invent an event to recover it.
-7. Open the exact current run and its evidence on this computer, then resume [QA_ROOM_COMMANDS.md](QA_ROOM_COMMANDS.md) at the captured checkpoint. Run A's page/reports and artifact delivery have been verified; actual human approval/completion and the live stale-A demonstration remain pending.
+7. Open the exact current run and its evidence on this computer, then resume [QA_ROOM_COMMANDS.md](QA_ROOM_COMMANDS.md). B is the current checkpoint; actual human approval/completion and the live stale-approval demonstration remain pending.
 
 Current log contents and listener ownership are better startup evidence than an old file modification timestamp: during recovery, native log tails showed fresh Gateway HTTP 200 entries while their reported modification times still reflected shutdown.
 
@@ -129,7 +125,7 @@ $qaPython = 'C:\Users\asus\OneDrive\Documents\ChatGPT\hackthons\.venv\Scripts\py
 & $qaPython -B .\source\scripts\run_qa_room.py probe
 ```
 
-The evidence listener is already running at this checkpoint. Open the exact A page above, or `http://127.0.0.1:8054/qa/current`, and reuse that listener. If it is absent after reboot, start one instance:
+The evidence listener is already running at this checkpoint. Open [current B](http://127.0.0.1:8054/qa/runs/a9ce6b8d4b9f4c1eb6d8cab94d24cd67), or `http://127.0.0.1:8054/qa/current`, and reuse that listener. If it is absent after reboot, start one instance:
 
 ```powershell
 & $qaPython -B .\source\scripts\run_qa_room.py serve
