@@ -1,6 +1,10 @@
 # QA Room setup and resume
 
-## 2026-11-06 continuation
+## Latest B/C review checkpoint
+
+The person's exact B approval was recorded from original Mattermost event `sw_cc26e2db23c2ff3d98607db46364da83` (sequence 18) and confirmed at 19. A fresh authorized assistant request produced C `5aa6bb5509734cb388537a63007d3087` at sequences 20/21. The authorized assistant negative test of completing old B at 22 was refused with `stale_run` at 23; no completion was granted. B remains historically approved; C is current/ready/unreviewed and requires the person's fresh review. The B/C read-only audit passed 76 checks. Use [the command guide](QA_ROOM_COMMANDS.md) for C; the following recovery details preserve the earlier A/B checkpoint.
+
+## 2026-11-06 recovery history
 
 The stopped services were restored. Docker initially failed to allocate its configured 2048 MB Hyper-V memory (`0x800705AA`); after the person freed memory, Engine 29.9.2 and the existing Mattermost container became healthy. A and all retained evidence were preserved.
 
@@ -50,7 +54,7 @@ Historical Console direct chat `95574125-421c-4810-bdc2-d47822117d2b` and its ru
 
 The [exact run A page](http://127.0.0.1:8054/qa/runs/dd19c14126444bb79ef57882bfa48602) and both HTML reports were opened successfully in the browser. HTTP checks returned 200 for that page and all six artifacts, including both evidence bundles. The captured room events, managed-agent activity and workflow snapshot establish automatic request-to-result delivery; they do not constitute human approval. Replay used zero new model requests.
 
-This table records A's state at its original capture. A is now historical and cannot be approved for the current task. Review current B using [QA_ROOM_COMMANDS.md](QA_ROOM_COMMANDS.md). A later actual-person stale-approval demonstration can use reviewed B followed by new C; the original human A/B sequence was not completed.
+This table records A's state at its original capture. A is historical and cannot be approved for the current task. B's later actual human approval and stale-B refusal after C are recorded above; C is the current review target in [QA_ROOM_COMMANDS.md](QA_ROOM_COMMANDS.md). The original human A/B sequence was not completed.
 
 ## Start after reboot
 
@@ -68,7 +72,7 @@ The old-session `docker-users` token blocker is resolved. No further reinstall o
 4. Open the existing [Intent Replay QA channel](http://localhost:56742/switch/channels/intent-replay-qa). Keep the single room and agent identified above; do not recreate them.
 5. Run `probe` using the commands below and reuse the existing evidence listener on port 8054. Start `serve` only when that listener is absent; do not launch a duplicate. Restart its owning process deliberately after a connection-scope change because it holds the configured room in memory.
 6. Confirm the managed session exposes `qa_room.dispatch_original_message` from the existing project configuration. Inspect original request/delivery state before retrying an uncertain dispatch. Preserve the failed Node events listed below; do not claim a result without its receipt or invent an event to recover it.
-7. Open the exact current run and its evidence on this computer, then resume [QA_ROOM_COMMANDS.md](QA_ROOM_COMMANDS.md). B is the current checkpoint; actual human approval/completion and the live stale-approval demonstration remain pending.
+7. Open the exact current run and its evidence on this computer, then resume [QA_ROOM_COMMANDS.md](QA_ROOM_COMMANDS.md). C is the current checkpoint. B's actual human approval and the live stale-B refusal are verified; C's fresh human approval/completion remain pending.
 
 Current log contents and listener ownership are better startup evidence than an old file modification timestamp: during recovery, native log tails showed fresh Gateway HTTP 200 entries while their reported modification times still reflected shutdown.
 
@@ -125,7 +129,7 @@ $qaPython = 'C:\Users\asus\OneDrive\Documents\ChatGPT\hackthons\.venv\Scripts\py
 & $qaPython -B .\source\scripts\run_qa_room.py probe
 ```
 
-The evidence listener is already running at this checkpoint. Open [current B](http://127.0.0.1:8054/qa/runs/a9ce6b8d4b9f4c1eb6d8cab94d24cd67), or `http://127.0.0.1:8054/qa/current`, and reuse that listener. If it is absent after reboot, start one instance:
+The evidence listener is already running at this checkpoint. Open [current C](http://127.0.0.1:8054/qa/runs/5aa6bb5509734cb388537a63007d3087), or `http://127.0.0.1:8054/qa/current`, and reuse that listener. If it is absent after reboot, start one instance:
 
 ```powershell
 & $qaPython -B .\source\scripts\run_qa_room.py serve

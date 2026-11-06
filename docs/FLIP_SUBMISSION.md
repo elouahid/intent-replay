@@ -20,7 +20,9 @@ Flip adds the persistent room/task/run workflow, original-event Switch adapter, 
 
 ## Demonstrated results and remaining limit
 
-Two actual Mattermost verification requests automatically produced agent results and accessible reports. A (`dd19c14126444bb79ef57882bfa48602`) became historical when B (`a9ce6b8d4b9f4c1eb6d8cab94d24cd67`) was accepted. B is current and ready; its page and both original HTML reports were opened in the browser. The requests were sent by Codex under the user's authorization, and the managed agent handled dispatch and result posting. An independent read-only audit passed 56 checks of original events, run bindings, seals and evidence artifacts, including all six B artifacts served over HTTP.
+Three actual Mattermost verification requests automatically produced agent results. A and B are historical; C (`5aa6bb5509734cb388537a63007d3087`) is current and ready. The person approved B (`a9ce6b8d4b9f4c1eb6d8cab94d24cd67`) through an exact original room command. The assistant then requested C under user authorization; B's approval remained historical and did not transfer to C. A user-authorized assistant negative probe attempted completion of old B. The real room returned `stale_run`, granted no completion, and left C unreviewed.
+
+B and C's exact pages and both original HTML reports were opened in the browser. The earlier independent A/B audit passed 56 checks; the final read-only B/C audit passed **76 checks** of original events, bound human approval, stale refusal, seals and evidence artifacts, including all six C artifacts returning HTTP 200. Verification requests and the negative completion probe were sent by Codex under authorization; the managed agent handled dispatch and result posting. B approval was an actual human action, distinct from those assistant-initiated checks.
 
 The matched pair demonstrates:
 
@@ -28,7 +30,7 @@ The matched pair demonstrates:
 - No-withdrawal control: both workers commit 15:00, execution PASS.
 - All four frozen regression expectations match. Factual accuracy remains INCONCLUSIVE/unassessed; overall task is FAIL for faulty withdrawal and INCONCLUSIVE for guarded/control.
 
-**B remains unreviewed and cannot be completed. No actual human approval or completion is recorded.** The user authorized assistant inspection of the technical evidence. Separately, three isolated tests passed stale completion, historical duplicate approval and concurrent-rerun checks using simulated reviewers and temporary databases. This supports the implementation; it is not a real human A/B stale-approval demonstration.
+**C remains unreviewed and cannot be completed. Actual human approval is recorded only for B; no completion is recorded.** C still needs its own human review. Separately, three isolated tests passed stale completion, historical duplicate approval and concurrent-rerun checks using simulated reviewers and temporary databases. Those tests remain distinct from the actual B approval and assistant-initiated room checks.
 
 Prior verification passed 143 Python tests and eight focused MCP tests. The later three-test selection passed in 4.165 seconds. See [FLIP_VERIFICATION.json](../FLIP_VERIFICATION.json) for precise evidence and [the implementation report](../FLIP_IMPLEMENTATION_REPORT.md) for scope and limitations.
 

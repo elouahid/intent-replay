@@ -6,14 +6,15 @@ One person, one Console-managed QA agent, and one local Mattermost room use the 
 
 ## Verified checkpoint
 
-Two real Mattermost verification requests were automatically handled by the managed agent through `qa_room.dispatch_original_message`. The requests were sent by Codex under the user's authorization; they were not human review actions.
+Three real Mattermost verification requests were automatically handled by the managed agent through `qa_room.dispatch_original_message`. The verification requests were sent by Codex under the user's authorization. The person sent the exact approval command for B before C was requested; that actual human review is recorded separately.
 
 | Run | ID | Observed state |
 |---|---|---|
 | A | `dd19c14126444bb79ef57882bfa48602` | Historical after B was accepted |
-| B | `a9ce6b8d4b9f4c1eb6d8cab94d24cd67` | Current, ready, unreviewed; completion unavailable |
+| B | `a9ce6b8d4b9f4c1eb6d8cab94d24cd67` | Historical; actual human approval retained only for B |
+| C | `5aa6bb5509734cb388537a63007d3087` | Current, ready, unreviewed; completion unavailable |
 
-B's exact page and both original HTML reports opened in the browser. A read-only audit passed 56 checks, including original events, report seals and all six B artifact hashes. The assistant inspected the technical evidence under the user's authorization. **No actual human approval or completion is recorded.** Three isolated tests with simulated reviewers passed the stale-approval, historical-duplicate and concurrent-rerun checks; those tests do not establish a real human A/B walkthrough.
+B and C's exact pages and both original HTML reports opened in the browser. The earlier A/B audit passed 56 checks; the final read-only B/C audit passed **76 checks**, including the actual B approval, stale refusal and all six sealed C artifacts served over HTTP. The person's exact B approval was recorded from the original Mattermost event and confirmed by the agent. Accepting C made B historical without transferring its approval. A user-authorized assistant attempt to complete old B was refused with **`stale_run` in the real room**. **C still requires fresh human review; no completion was granted.** Three separate tests with simulated reviewers cover stale approval, historical duplicates and concurrent reruns.
 
 | Case | Faulty worker | Guarded worker |
 |---|---|---|
@@ -45,7 +46,7 @@ Open the [QA room](http://localhost:56742/switch/channels/intent-replay-qa) and 
 @intent-replay-qa qa verify booking-withdrawal corrected-meta-withdrawal-control
 ```
 
-This requests a new current run. To inspect B without rerunning it, open [B's retained evidence](http://127.0.0.1:8054/qa/runs/a9ce6b8d4b9f4c1eb6d8cab94d24cd67). The full startup, private identity-reference setup and recovery record are in [QA_ROOM_SETUP.md](docs/QA_ROOM_SETUP.md); review commands are in [QA_ROOM_COMMANDS.md](docs/QA_ROOM_COMMANDS.md).
+This requests a new current run. To inspect C without rerunning it, open [C's retained evidence](http://127.0.0.1:8054/qa/runs/5aa6bb5509734cb388537a63007d3087). The full startup, private identity-reference setup and recovery record are in [QA_ROOM_SETUP.md](docs/QA_ROOM_SETUP.md); review commands are in [QA_ROOM_COMMANDS.md](docs/QA_ROOM_COMMANDS.md).
 
 ## Reproduce in a fresh checkout
 

@@ -1,6 +1,6 @@
 # Flip the Switch — Intent Replay handoff
 
-Updated 2026-11-06 UTC. **A and B completed through real Mattermost requests → the existing managed agent → saved replay → room results. B is current, evidence-valid and unreviewed; A is historical. Assistant review is complete for the included local execution evidence. Actual human-room approval/completion remains incomplete.**
+Updated 2026-11-06 UTC. **The person's exact B approval is verified. Fresh C completed through the real room and existing managed agent. An authorized assistant test of B's old completion command was refused with `stale_run`; no completion was granted. C is current, evidence-valid and unreviewed, awaiting fresh human review.**
 
 Recovery preserved A and its evidence. Docker's 2 GB Hyper-V allocation failure (`0x800705AA`) resolved after the person freed memory. Request sequence 13 then failed before dispatch with expired-token refresh 401; it created no B. The person completed browser sign-in for the existing Mattermost provider home, and supported agent restart succeeded. Fresh sequence 15 produced B automatically. Only the scoped login was refreshed; global authentication and provider credential configuration were unchanged. Baseline files and evaluator semantics were preserved. The user's chat approval authorizes this assistant-reviewed continuation; it is not a Mattermost review record.
 
@@ -33,9 +33,15 @@ Request `sw_b116d44a4e801a59d8f3cd30e64372dc` (sequence 11, November 5) produced
 
 **Run B: `a9ce6b8d4b9f4c1eb6d8cab94d24cd67`** — [open evidence](http://127.0.0.1:8054/qa/runs/a9ce6b8d4b9f4c1eb6d8cab94d24cd67).
 
-Request `sw_2038d700ac6120ad2ddd84c04b7139ca` (sequence 15, November 6, 23:30:20 UTC) produced result `sw_1a434e896a694e1db3d5ae3399453cdd` (sequence 16). Both requests were sent by Codex through the actual Mattermost UI for authorized verification; the managed agent automatically dispatched them, with no operator dispatch. B is ready/current/evidence-valid. Both HTML reports opened; all six artifacts were checked. [Verification records](FLIP_VERIFICATION.json) and [assistant technical review](docs/QA_ROOM_TECHNICAL_REVIEW.md) retain exact identities and evidence.
+Request `sw_2038d700ac6120ad2ddd84c04b7139ca` (sequence 15) produced result `sw_1a434e896a694e1db3d5ae3399453cdd` (16). The person then posted exact approval `sw_cc26e2db23c2ff3d98607db46364da83` (18), confirmed by the agent at sequence 19. Its pinned human identity, exact B run and evidence binding were verified before requesting C. B is now historical, with its original approval retained and completion unavailable. The earlier plain-text message at sequence 17 did not create approval.
 
-**Neither A nor B has human approval or completion.** The live demonstration establishes A historical/B current, not invalidation of an actual prior human approval. Three selected isolated tests passed the stale-review guards using simulated reviewers. To review B, personally inspect both reports, send `@intent-replay-qa qa approve booking-withdrawal a9ce6b8d4b9f4c1eb6d8cab94d24cd67`, wait for confirmation, then personally send the corresponding `qa complete` command. A full actual-human stale-approval demonstration can continue as B → human approval B → new C → stale B refused → human review C. See [commands](docs/QA_ROOM_COMMANDS.md).
+**Run C: `5aa6bb5509734cb388537a63007d3087`** — [open evidence](http://127.0.0.1:8054/qa/runs/5aa6bb5509734cb388537a63007d3087).
+
+Request `sw_1a5b66cff69446d841a207e674ac70de` (20) produced result `sw_46977430bfda4b8c8984486c32e0d397` (21). After confirming C was current, Codex sent the user-authorized negative test `qa complete ... <B>` as `sw_1e409655fe38cff2539ead5969f4ab89` (22). Agent refusal `sw_15092d01154649cb9e4c1c8ab8528fef` (23) returned **`stale_run`** and “No review completion was granted.” This is a real-room refusal against an actual prior human approval; C verification and the negative test were assistant-operated, not human review actions.
+
+The read-only B/C audit passed **76/76 checks**. All six C artifacts and both HTML reports were verified. B's approval remains bound only to B; C has no approval/completion, and no completion rows exist. Proof: `.local/qa-room-assistant-review/mattermost-b-c-stale-approval-audit.json`; preserved pre-C proof: `b-actual-approval-before-c.json` in that directory. [Verification records](FLIP_VERIFICATION.json) retain exact bindings and provenance.
+
+Next: personally inspect C's withdrawal and control reports, then post `@intent-replay-qa qa approve booking-withdrawal 5aa6bb5509734cb388537a63007d3087`. After confirmation, personally post the corresponding `qa complete` command. The assistant must not fabricate this fresh review. See [commands](docs/QA_ROOM_COMMANDS.md). The full walkthrough remains incomplete until C's actual fresh review/completion is observed.
 
 Prepared materials: [README](README.md), [concise demo script](docs/FLIP_DEMO_SCRIPT.md), and [submission draft](docs/FLIP_SUBMISSION.md). Nothing has been published or submitted for Flip.
 

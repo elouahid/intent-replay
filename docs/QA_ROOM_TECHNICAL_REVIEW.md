@@ -1,10 +1,22 @@
-# Runs A and B — assistant technical review
+# Retained runs — technical review and human-review provenance
 
 Reviewed by Codex on 2026-11-06 at the user's request. **This is an assistant review of retained evidence, not a human approval or completion record.**
 
-Task `booking-withdrawal`; Mattermost room `496e3d1b-8c14-4a6c-9bc5-1e164c0da362`. [A's preserved evidence](http://127.0.0.1:8054/qa/runs/dd19c14126444bb79ef57882bfa48602) is historical; [B's evidence](http://127.0.0.1:8054/qa/runs/a9ce6b8d4b9f4c1eb6d8cab94d24cd67) is current. Both remain unreviewed in the human workflow. Sections below retain A's initial inspection and then record the B continuation.
+Task `booking-withdrawal`; Mattermost room `496e3d1b-8c14-4a6c-9bc5-1e164c0da362`. [A's preserved evidence](http://127.0.0.1:8054/qa/runs/dd19c14126444bb79ef57882bfa48602) and [B's evidence](http://127.0.0.1:8054/qa/runs/a9ce6b8d4b9f4c1eb6d8cab94d24cd67) are historical. C is current. The latest B/C checkpoint supersedes the earlier workflow states without changing retained execution evidence.
 
-## Technical finding
+## Latest B/C human-review checkpoint
+
+The person posted exact B approval `sw_cc26e2db23c2ff3d98607db46364da83` (18), confirmed by the managed agent at 19. Before C, B was current/approved and eligible to complete, with binding `ba73f978df6da5f22bec1b5a9ee2b55b367a6cc4512e8aebd20bf1e71be79630`. The pre-C proof is preserved as `.local/qa-room-assistant-review/b-actual-approval-before-c.json`.
+
+The authorized assistant request at 20 produced C `5aa6bb5509734cb388537a63007d3087` at 21. After confirming C was current, the assistant sent the user's authorized negative test of old B completion at 22. Actual agent response at 23 and the core receipt both record `stale_run`; no completion was granted. This establishes the real-room guard against B's actual human approval. B approval was the person's action; C verification and the refused negative probe were assistant UI actions, not fresh human review.
+
+The independent read-only audit passed **76/76 checks**, including original-event hashes, the pre-C approval, retained B binding, C's distinct binding, report/prepared seals, all six HTTP artifacts, ZIP manifests and zero completion rows. C's exact page and both original HTML reports opened. All four frozen branch expectations match; factual accuracy remains INCONCLUSIVE/unassessed. Proof: `.local/qa-room-assistant-review/mattermost-b-c-stale-approval-audit.json`; managed tool activity: `b-c-managed-activity.json` in that directory. The approval, C request and stale probe each completed through `qa_room.dispatch_original_message`, with no operator dispatch.
+
+C binding: `89205c76d584013579812ed74a1965e5ac6534c5068ea17e9e29b2b31e085648`. Withdrawal execution `8679096357c94167887d91263db6c57a`, seal `a01431fa8fdfd21d023a62de7df361d6946b3ccf0a0520e7abb805a747f1da9f`; control execution `ba353c29e0fd45d99731d626177f7a7b`, seal `1fa22cc81f2d3e9aa65f61314a110a3f8d33648e28be3bb24277ff9f1ad91589`. Frozen prepared inputs and execution contract are unchanged.
+
+**B is historical/approved; C is current/unreviewed, with no approval or completion.** The person's fresh C review/completion is outstanding. The sections below retain earlier assistant reviews and states at their stated capture times; they are not current human-review records.
+
+## Historical A technical finding
 
 The evidence supports acceptance of the **included local SQLite execution behavior** for this saved withdrawal/control pair. All four branches match the frozen expectations. No material blocker was found within that scope.
 
@@ -40,7 +52,7 @@ The next real verification request reached Mattermost as `sw_ceb8c35e683bc85544b
 
 Three existing isolated tests were rerun successfully: simulated A/B stale completion, duplicate historical approval/completion against a new run, and atomic completion followed by a concurrent rerun. These use temporary databases and simulated reviewers only. Log: `.local/qa-room-assistant-review/simulated-review-tests-20261106T231812Z.log`; SHA-256 `a65d372104960ed2bb0db151b881ff1230240f03bd37c5b27002436bc15ab93c`. Failed-request proof: `.local/qa-room-assistant-review/failed-b-request-20261106.json`.
 
-## B continuation and technical finding
+## Historical B checkpoint before approval
 
 After the person completed scoped sign-in and the existing agent restarted successfully, Codex sent a fresh verification through the actual Mattermost UI: `sw_2038d700ac6120ad2ddd84c04b7139ca`, sequence 15, 23:30:20 UTC. The managed agent's activity records completed `qa_room.dispatch_original_message` and completed turn `b0294787-bfdf-5039-9362-1a41241514e9`. It returned B `a9ce6b8d4b9f4c1eb6d8cab94d24cd67` in result `sw_1a434e896a694e1db3d5ae3399453cdd`, sequence 16. No operator dispatch was used.
 
@@ -52,6 +64,6 @@ B supports the same scoped acceptance finding as A. The guarded withdrawal accep
 - Both prepared seals, the original capture and execution contract are unchanged. Executions and the run binding are distinct from A.
 - The read-only audit passed **56/56 checks** of original events, posted receipt, bindings, seals, six HTTP/disk artifacts and ZIP manifests. Both original HTML reports and B's index opened in the browser. Proof: `.local/qa-room-assistant-review/mattermost-a-b-evidence-audit.json`; managed activity: `.local/qa-room-assistant-review/run-b-managed-activity.json`.
 
-A is historical, cannot be approved/completed for the current task, and retains valid evidence. B is current and eligible for fresh approval, but cannot complete without that approval. Both have `approval=null`, `completion=null`, `review_status=unreviewed`; the live database has zero review/completion records. This demonstrates replacement of the current run, **not rejection of an actual historical human approval**, because none existed. That guard's evidence remains the three isolated simulated tests. Actual-person B review and a future B/C stale-approval walkthrough are documented in [QA_ROOM_COMMANDS.md](QA_ROOM_COMMANDS.md).
+At this pre-approval B capture, A was historical with valid evidence and B was current and eligible for approval, but could not complete. Both then had `approval=null`, `completion=null`, `review_status=unreviewed`; the database had zero review/completion records. That capture demonstrated current-run replacement, not rejection of a historical human approval, because none existed yet. The latest B/C checkpoint above separately records the person's subsequent B approval and the real stale-B refusal. Current C review instructions are in [QA_ROOM_COMMANDS.md](QA_ROOM_COMMANDS.md).
 
 Factual accuracy remains INCONCLUSIVE/unassessed and overall task remains FAIL for faulty withdrawal, INCONCLUSIVE for guarded/control. B used zero new replay-model calls; managed-agent inference occurred separately with exact usage unmeasured. The preserved local SQLite evidence establishes neither external booking success nor production readiness.

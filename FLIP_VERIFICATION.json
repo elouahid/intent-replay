@@ -1,5 +1,5 @@
 {
-  "scope": "Real Mattermost A and B request/replay/result verified. B current and A historical, both human-unreviewed. Assistant technical review complete for included local evidence. Stale human-approval guards passed isolated simulated tests; actual-human walkthrough incomplete.",
+  "scope": "Actual human B approval verified, then real C replay and authorized assistant stale-B negative completion probe. Refused with stale_run; C current/unreviewed and fresh human review pending.",
   "python_suite": {
     "status": "PASS",
     "tests": 143,
@@ -156,16 +156,24 @@
         "outcome": "Fresh automatic managed MCP dispatch after scoped user sign-in/restart; B ready, one posted result.",
         "result_event_id": "sw_1a434e896a694e1db3d5ae3399453cdd",
         "result_seq": 16
+      },
+      {
+        "event_id": "sw_1a5b66cff69446d841a207e674ac70de",
+        "seq": 20,
+        "sent_at": "2026-11-06T23:47:44.616887+00:00",
+        "outcome": "Automatic managed C replay succeeded after actual B approval; C current/unreviewed.",
+        "result_event_id": "sw_46977430bfda4b8c8984486c32e0d397",
+        "result_seq": 21
       }
     ],
-    "room_replay_runs": 2,
-    "room_dispatch_receipts": 2,
+    "room_replay_runs": 3,
+    "room_dispatch_receipts": 5,
     "human_review_status": "unreviewed",
     "actual_human_walkthrough_complete": false,
     "switch_agent_inference_observed": true,
     "exact_inference_calls": null,
     "replay_model_requests": 0,
-    "limitation": "No actual human room approval or completion exists. A historical/B current observed live; stale approval protection was tested only with isolated simulated reviewers. Factual accuracy remains inconclusive.",
+    "limitation": "Actual B approval and real stale-B refusal verified. C fresh human approval/completion remains pending. Negative probe was assistant-operated under explicit user authorization.",
     "project_trust": {
       "user_authorized": true,
       "exact_project": "C:\\Users\\asus\\OneDrive\\Documents\\ChatGPT\\hackthons\\intent-replay-public-submission-20261104",
@@ -347,7 +355,7 @@
         "evidence_valid": true
       }
     },
-    "latest_recorded_at": "2026-11-06T23:36:09.169547+00:00",
+    "latest_recorded_at": "2026-11-06T23:50:19.005381+00:00",
     "run_b": {
       "recorded_at": "2026-11-06T23:32:07.087330+00:00",
       "run_id": "a9ce6b8d4b9f4c1eb6d8cab94d24cd67",
@@ -557,6 +565,187 @@
         "operator_dispatch_used": false
       },
       "replay_new_model_requests": 0,
+      "managed_agent_inference": "Observed separately; exact calls/tokens unmeasured.",
+      "snapshot_semantics": "Original B capture before approval; latest_snapshot records the verified state after C and stale refusal.",
+      "latest_snapshot": {
+        "recorded_at": "2026-11-06T23:50:19.005381+00:00",
+        "run_id": "a9ce6b8d4b9f4c1eb6d8cab94d24cd67",
+        "is_current": false,
+        "current_run_id": "5aa6bb5509734cb388537a63007d3087",
+        "review_status": "approved",
+        "approval": {
+          "run_id": "a9ce6b8d4b9f4c1eb6d8cab94d24cd67",
+          "actor_id": "switch:client:f97780ca-7e77-4573-902d-e66eb59e9fe7",
+          "source": "switch:mattermost",
+          "event_id": "sw_cc26e2db23c2ff3d98607db46364da83",
+          "approved_at": "2026-11-06T23:44:37.779137+00:00",
+          "binding_sha256": "ba73f978df6da5f22bec1b5a9ee2b55b367a6cc4512e8aebd20bf1e71be79630"
+        },
+        "completion": null,
+        "can_approve": false,
+        "can_complete": false,
+        "evidence_valid": true
+      }
+    },
+    "run_c": {
+      "recorded_at": "2026-11-06T23:50:19.005381+00:00",
+      "run_id": "5aa6bb5509734cb388537a63007d3087",
+      "evidence_url": "http://127.0.0.1:8054/qa/runs/5aa6bb5509734cb388537a63007d3087",
+      "request_initiator": "Assistant entered actual Mattermost UI verification under explicit user authorization.",
+      "request": {
+        "message_id": "sw_1a5b66cff69446d841a207e674ac70de",
+        "seq": 20,
+        "sent_at": "2026-11-06T23:47:44.616887+00:00",
+        "source": "mattermost",
+        "kind": "human",
+        "client_id": "f97780ca-7e77-4573-902d-e66eb59e9fe7",
+        "agent_id": null,
+        "thread_root_id": null,
+        "body": "@intent-replay-qa qa verify booking-withdrawal corrected-meta-withdrawal-control",
+        "message_sha256": "7fbe23aa900c043cd550c611d13e4e2730dcfc9c74abf36280b73bfae7a5a852"
+      },
+      "result_post": {
+        "message_id": "sw_46977430bfda4b8c8984486c32e0d397",
+        "seq": 21,
+        "sent_at": "2026-11-06T23:47:49.393909+00:00",
+        "source": "switch",
+        "kind": "agent",
+        "client_id": "7fc4b42b-ca0e-41cf-a2af-2e54b92a350b",
+        "agent_id": "e9d69e59-a025-4e2d-abea-ce114dc448f8",
+        "thread_root_id": null,
+        "body": null,
+        "message_sha256": "9eb367834683cca5c65d5df61776789b9f69af9efd99d7c5e829d370b3227ec3"
+      },
+      "binding_sha256": "89205c76d584013579812ed74a1965e5ac6534c5068ea17e9e29b2b31e085648",
+      "execution_contract_sha256": "f7329ae57d934c5a0399755c0d1d7e7e6f42c86975b6067d5fa43a4ed0bbd1dd",
+      "revision": 3,
+      "cases": {
+        "control": {
+          "execution_id": "ba353c29e0fd45d99731d626177f7a7b",
+          "report_sha256": "1fa22cc81f2d3e9aa65f61314a110a3f8d33648e28be3bb24277ff9f1ad91589",
+          "prepared_sha256": "521a17ea374641563d2db2fe8dcd204ba24215c76d98547ea875d0a7465d440f",
+          "branches": [
+            {
+              "implementation": "faulty",
+              "matches": true,
+              "observed": {
+                "final_time": "2026-11-25T15:00:00+00:00",
+                "action_status": "committed",
+                "booking_outcome": "fulfilled",
+                "instruction_adherence": "PASS"
+              },
+              "factual_accuracy": "INCONCLUSIVE",
+              "overall_task": "INCONCLUSIVE"
+            },
+            {
+              "implementation": "corrected",
+              "matches": true,
+              "observed": {
+                "final_time": "2026-11-25T15:00:00+00:00",
+                "action_status": "committed",
+                "booking_outcome": "fulfilled",
+                "instruction_adherence": "PASS"
+              },
+              "factual_accuracy": "INCONCLUSIVE",
+              "overall_task": "INCONCLUSIVE"
+            }
+          ]
+        },
+        "withdrawal": {
+          "execution_id": "8679096357c94167887d91263db6c57a",
+          "report_sha256": "a01431fa8fdfd21d023a62de7df361d6946b3ccf0a0520e7abb805a747f1da9f",
+          "prepared_sha256": "93e20eb965dfd71197b718b1246c70f297ac6dea7ba175d3c7070743dadfdabe",
+          "branches": [
+            {
+              "implementation": "faulty",
+              "matches": true,
+              "observed": {
+                "final_time": "2026-11-25T15:00:00+00:00",
+                "action_status": "committed",
+                "booking_outcome": "unfulfilled",
+                "instruction_adherence": "FAIL"
+              },
+              "factual_accuracy": "INCONCLUSIVE",
+              "overall_task": "FAIL"
+            },
+            {
+              "implementation": "corrected",
+              "matches": true,
+              "observed": {
+                "final_time": "2026-11-25T14:00:00+00:00",
+                "action_status": "suppressed",
+                "booking_outcome": "fulfilled",
+                "instruction_adherence": "PASS"
+              },
+              "factual_accuracy": "INCONCLUSIVE",
+              "overall_task": "INCONCLUSIVE"
+            }
+          ]
+        }
+      },
+      "run_status": "ready",
+      "is_current": true,
+      "evidence_valid": true,
+      "regression_status": "PASS",
+      "required_guarded_control_checks": "PASS",
+      "browser_exact_run_opened": true,
+      "browser_both_html_reports_opened": true,
+      "artifact_checks": [
+        {
+          "name": "control-evidence.zip",
+          "http_status": 200,
+          "bytes": 18738,
+          "sha256": "2b48d4eea949c8162ebb7b521b523aa7710516660dfc26835ac4d81d6cfb96ce",
+          "verified": true
+        },
+        {
+          "name": "control-report.html",
+          "http_status": 200,
+          "bytes": 40427,
+          "sha256": "ef737331e88ae5ecf309f21c816546b735a1ab2f3b13eea4168386132626f3de",
+          "verified": true
+        },
+        {
+          "name": "control-report.json",
+          "http_status": 200,
+          "bytes": 23494,
+          "sha256": "760f06a1b60c8c3ceab4480bea99e943dc91e1eaf3a21a1e8a51db434d468461",
+          "verified": true
+        },
+        {
+          "name": "withdrawal-evidence.zip",
+          "http_status": 200,
+          "bytes": 19911,
+          "sha256": "371d4eb3c5eafd617cb1f6338b4afac2f9556f2af1a59af421e102a261a19310",
+          "verified": true
+        },
+        {
+          "name": "withdrawal-report.html",
+          "http_status": 200,
+          "bytes": 44752,
+          "sha256": "abcc9c2afb3870d3c81bacba56ece3cd6d5e0025977cf9e66cddf1e8488837e8",
+          "verified": true
+        },
+        {
+          "name": "withdrawal-report.json",
+          "http_status": 200,
+          "bytes": 26137,
+          "sha256": "bbaac4893a7d368a328af1fb9d7cd69414bb00826c540b76a8c983de159782d6",
+          "verified": true
+        }
+      ],
+      "review_snapshot": {
+        "run_id": "5aa6bb5509734cb388537a63007d3087",
+        "is_current": true,
+        "current_run_id": "5aa6bb5509734cb388537a63007d3087",
+        "review_status": "unreviewed",
+        "approval": null,
+        "completion": null,
+        "can_approve": true,
+        "can_complete": false,
+        "evidence_valid": true
+      },
+      "replay_new_model_requests": 0,
       "managed_agent_inference": "Observed separately; exact calls/tokens unmeasured."
     }
   },
@@ -580,7 +769,7 @@
     "human_review_record_created": false,
     "user_chat_approval": "I approve it",
     "chat_approval_is_mattermost_review": false,
-    "scope": "Autonomous assistant-reviewed continuation; live human A/B walkthrough remains incomplete.",
+    "scope": "Assistant technical inspection remains separate from the actual human B approval. C fresh human review pending.",
     "selected_isolated_tests": {
       "passed": 3,
       "tests": [
@@ -605,11 +794,11 @@
     "gateway_connected": true,
     "evidence_listener_running": true,
     "mattermost_container_health": "healthy",
-    "current_run_id": "a9ce6b8d4b9f4c1eb6d8cab94d24cd67",
+    "current_run_id": "5aa6bb5509734cb388537a63007d3087",
     "run_b_id": "a9ce6b8d4b9f4c1eb6d8cab94d24cd67",
     "human_review_status": "unreviewed",
     "provider_authentication": "Person completed scoped browser sign-in; successful managed B dispatch verifies runtime recovery.",
-    "proof": ".local/qa-room-assistant-review/mattermost-a-b-evidence-audit.json",
+    "proof": ".local/qa-room-assistant-review/mattermost-b-c-stale-approval-audit.json",
     "resume_audit": ".local/qa-room/resume-audit-20261106.json",
     "provider_credentials_copied_by_operator": false,
     "global_authentication_changed_by_operator": false,
@@ -619,9 +808,133 @@
       "finished_at": "2026-11-06T23:26:49.067923Z"
     },
     "prior_failed_request_proof": ".local/qa-room-assistant-review/failed-b-request-20261106.json",
-    "actual_stale_human_approval_demonstrated": false,
-    "human_review_rows": 0,
-    "human_completion_rows": 0
+    "actual_stale_human_approval_demonstrated": true,
+    "human_review_rows": 1,
+    "human_completion_rows": 0,
+    "run_c_id": "5aa6bb5509734cb388537a63007d3087"
   },
-  "latest_recorded_at": "2026-11-06T23:36:09.169547+00:00"
+  "latest_recorded_at": "2026-11-06T23:50:19.005381+00:00",
+  "human_review_walkthrough": {
+    "recorded_at": "2026-11-06T23:50:19.005381+00:00",
+    "B_actual_human_approval_verified": true,
+    "B_approval_original": {
+      "message_id": "sw_cc26e2db23c2ff3d98607db46364da83",
+      "seq": 18,
+      "sent_at": "2026-11-06T23:44:30.789238+00:00",
+      "source": "mattermost",
+      "kind": "human",
+      "client_id": "f97780ca-7e77-4573-902d-e66eb59e9fe7",
+      "agent_id": null,
+      "thread_root_id": "sw_1a434e896a694e1db3d5ae3399453cdd",
+      "body": "@intent-replay-qa qa approve booking-withdrawal a9ce6b8d4b9f4c1eb6d8cab94d24cd67",
+      "message_sha256": "d098fd4ab0c48b500edc9d3f4aa897b0474494a14e09a8e53567cba6d2ceafb0"
+    },
+    "B_approval_confirmation": {
+      "message_id": "sw_de7b1bbacf2141308561615a0231dd8b",
+      "seq": 19,
+      "sent_at": "2026-11-06T23:44:37.879176+00:00",
+      "source": "switch",
+      "kind": "agent",
+      "client_id": "7fc4b42b-ca0e-41cf-a2af-2e54b92a350b",
+      "agent_id": "e9d69e59-a025-4e2d-abea-ce114dc448f8",
+      "thread_root_id": null,
+      "body": null,
+      "message_sha256": "d18848ad4e2be8d52636db6cc3028ef6a5d1deaafeda1444ded4a8c0a822e3d7"
+    },
+    "B_historical_snapshot": {
+      "run_id": "a9ce6b8d4b9f4c1eb6d8cab94d24cd67",
+      "is_current": false,
+      "current_run_id": "5aa6bb5509734cb388537a63007d3087",
+      "review_status": "approved",
+      "approval": {
+        "run_id": "a9ce6b8d4b9f4c1eb6d8cab94d24cd67",
+        "actor_id": "switch:client:f97780ca-7e77-4573-902d-e66eb59e9fe7",
+        "source": "switch:mattermost",
+        "event_id": "sw_cc26e2db23c2ff3d98607db46364da83",
+        "approved_at": "2026-11-06T23:44:37.779137+00:00",
+        "binding_sha256": "ba73f978df6da5f22bec1b5a9ee2b55b367a6cc4512e8aebd20bf1e71be79630"
+      },
+      "completion": null,
+      "can_approve": false,
+      "can_complete": false,
+      "evidence_valid": true
+    },
+    "stale_B_completion_probe": {
+      "status": "verified_actual_stale_run_refusal",
+      "original": {
+        "message_id": "sw_1e409655fe38cff2539ead5969f4ab89",
+        "seq": 22,
+        "sent_at": "2026-11-06T23:48:25.785334+00:00",
+        "source": "mattermost",
+        "kind": "human",
+        "client_id": "f97780ca-7e77-4573-902d-e66eb59e9fe7",
+        "agent_id": null,
+        "thread_root_id": null,
+        "body": "@intent-replay-qa qa complete booking-withdrawal a9ce6b8d4b9f4c1eb6d8cab94d24cd67",
+        "message_sha256": "b8e7a8d1e5629aba38299c63ce836d53dc927c218ac35c568d4b0e6d650a157d"
+      },
+      "refusal": {
+        "message_id": "sw_15092d01154649cb9e4c1c8ab8528fef",
+        "seq": 23,
+        "sent_at": "2026-11-06T23:48:30.766085+00:00",
+        "source": "switch",
+        "kind": "agent",
+        "client_id": "7fc4b42b-ca0e-41cf-a2af-2e54b92a350b",
+        "agent_id": "e9d69e59-a025-4e2d-abea-ce114dc448f8",
+        "thread_root_id": null,
+        "body": "QA request refused (stale_run): A newer verification was requested. Review and complete the current run.\nTask: booking-withdrawal. Requested result: a9ce6b8d4b9f4c1eb6d8cab94d24cd67. No review completion was granted.",
+        "message_sha256": "5bb4517d87d6b7c83b27654d6f8f7636250b56bafc1feab6d909b8dd0f765682"
+      },
+      "core_response": {
+        "code": "stale_run",
+        "message": "A newer verification was requested. Review and complete the current run.",
+        "ok": false,
+        "operation": "complete",
+        "run_id": "a9ce6b8d4b9f4c1eb6d8cab94d24cd67"
+      },
+      "receipt_status": "posted",
+      "global_completion_row_count": 0,
+      "operator_attribution": "Assistant entered this negative probe through the actual Mattermost UI under explicit user authorization. Platform sender kind is the human account; this was not an actual human completion or a simulated test."
+    },
+    "C_current_snapshot": {
+      "run_id": "5aa6bb5509734cb388537a63007d3087",
+      "is_current": true,
+      "current_run_id": "5aa6bb5509734cb388537a63007d3087",
+      "review_status": "unreviewed",
+      "approval": null,
+      "completion": null,
+      "can_approve": true,
+      "can_complete": false,
+      "evidence_valid": true
+    },
+    "operator_attribution": {
+      "B_approval": "Actual user-entered exact B approval, as verified in the conversation and authoritative platform event.",
+      "C_request": "Assistant entered actual Mattermost UI verification under explicit user authorization.",
+      "stale_B_completion_probe": "Assistant entered actual Mattermost UI negative probe under explicit user authorization.",
+      "boundary": "Gateway records the authenticated human account; physical operator attribution above comes from the observed workflow, not inferred from sender kind."
+    },
+    "full_walkthrough_complete": false,
+    "remaining": "Person must freshly review and approve C, then complete it after confirmation.",
+    "independent_audit": {
+      "file": ".local/qa-room-assistant-review/mattermost-b-c-stale-approval-audit.json",
+      "sha256": "8dfe8a8af5d815d8c54161b5a5ae2c8d00dbbdce6fde66b349a6d2b8e0d22c7c",
+      "checks": 76,
+      "all_checks_passed": true
+    },
+    "pre_C_proof": {
+      "file": "b-actual-approval-before-c.json",
+      "sha256": "a85054db52e6c119b4cb1fb0e01f49e1fe272e402636510e84675b2ee06d8316"
+    },
+    "managed_activity": {
+      "file": ".local/qa-room-assistant-review/b-c-managed-activity.json",
+      "sha256": "ea2af44bffa2af99e8712cb108c995325c1efe3117adb37bf8b083568ac91ba5",
+      "all_three_dispatches_completed": true,
+      "manual_dispatch_used": false
+    },
+    "refusal_screenshot": {
+      "file": ".local/qa-room-assistant-review/stale-b-refusal-after-c.jpg",
+      "sha256": "a3853d5c6227c7b021d3b5555a37a274b2363298aaf198c84409531f3aa25100"
+    },
+    "refusal_permalink": "http://localhost:56742/switch/pl/5ecqnwd5dbf598ufeb89d9wqxw"
+  }
 }
