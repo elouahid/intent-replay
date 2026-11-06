@@ -1,5 +1,17 @@
 # QA Room setup and resume
 
+## 2026-11-06 continuation
+
+The stopped services were restored. Docker initially failed to allocate its configured 2048 MB Hyper-V memory (`0x800705AA`); after the person freed memory, Engine 29.9.2 and the existing Mattermost container became healthy. A and all retained evidence were preserved.
+
+The next real verification request reached the room (sequence 13) but the managed Codex session returned expired-token refresh **401** before dispatch. A remains current/unreviewed; B does not exist. Console's cached “Signed in” status did not establish usable runtime authentication.
+
+Recovery was prepared with installed Codex 0.166.0 `login` and child-process-only `CODEX_HOME` set to the existing Mattermost SDK provider home. Global authentication/configuration was not changed, and credentials were not copied. Private login-process metadata is in `.local/qa-room/scoped-login-session.json`; never print its referenced OAuth logs or authentication file. The person must complete the browser login. [Official authentication documentation](https://learn.chatgpt.com/docs/auth) documents browser login and scoped credential storage.
+
+After confirmed login success, use the supported `agent.restart` management operation for the existing agent/controller, preserving its identity and conversations. This closes owned SDK provider processes; the next addressed room request starts/resumes the saved session with refreshed scoped authentication. Do not delete sessions, create a replacement agent, change providers, or manually dispatch the failed request and describe that as managed delivery. A fresh successful managed request/result must establish B.
+
+The user authorized an assistant-reviewed continuation; actual human approval/completion still must not be fabricated. The following dated setup checkpoint describes the established run-A configuration.
+
 Updated on 2026-11-05 after the first successful automatic Mattermost verification. Agent revision 6 dispatched the original room request through its managed MCP tool and returned run A, `dd19c14126444bb79ef57882bfa48602`, to the room at 22:30:14 UTC. The run is ready with valid evidence and matching frozen expectations. Human review is still unreviewed at this checkpoint; the human A/B approval and stale-completion demonstration remain pending. No human review completion is claimed here.
 
 ## Installed components and current scope

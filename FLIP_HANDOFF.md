@@ -1,6 +1,8 @@
 # Flip the Switch — Intent Replay handoff
 
-Updated 2026-11-05. **The real Mattermost request → managed agent → saved replay → result works. Run A awaits the person's review; the live A/B stale-approval demonstration remains pending.**
+Updated 2026-11-06. **Run A's real Mattermost request → managed agent → saved replay → result is verified. The user now authorizes an assistant-reviewed continuation; actual human-room review remains incomplete. The next request stopped before dispatch because the managed Codex login expired.**
+
+2026-11-06 resume: Docker's 2 GB Hyper-V allocation initially failed with `0x800705AA`; after the person closed unused applications, Docker, the existing Switch server/Mattermost room and the evidence listener were restored. Run A and its evidence remained intact. [Codex's technical review](docs/QA_ROOM_TECHNICAL_REVIEW.md) supports the scoped local execution findings but creates no human review. The user's chat approval is separate from Mattermost review. New request `sw_ceb8c35e683bc85544b2f490c8ab56dd` (sequence 13) failed before dispatch with expired-token refresh 401; B does not exist and A remains current/unreviewed. A browser login has been launched for only the existing Mattermost provider home; await the person's successful sign-in, then resume the managed request path without claiming a completed human walkthrough.
 
 ## Baseline and isolation
 
@@ -29,13 +31,9 @@ The single project MCP tool `qa_room.dispatch_original_message` forwards only an
 
 Actual Mattermost request `sw_b116d44a4e801a59d8f3cd30e64372dc` (sequence 11, 22:30:05 UTC) was sent by Codex for the authorized verification. The managed agent dispatched automatically and posted result `sw_22b4f2385c01448297121bd1d46314ec` (sequence 12); no operator dispatch. A is ready/current/evidence-valid; regression and guarded/control checks PASS. Exact page and both original HTML reports opened in the browser; all six artifacts returned HTTP 200. Proof: `.local/qa-room/mattermost-run-a-verification.json` and [FLIP_VERIFICATION.json](FLIP_VERIFICATION.json).
 
-**Human review is unreviewed.** The person was asked to inspect both reports and personally send this standalone room message:
+**Human review remains unreviewed.** The user delegated the technical review and approved continuing with an assistant-reviewed demo in this chat. This does not create a Mattermost human record. After the scoped sign-in succeeds, request a new verification through the real room and managed agent, inspect B, and show A historical/B current with human review still unreviewed. Preserve the failed sequence-13 request as an authentication failure, not a completed B.
 
-```text
-@intent-replay-qa qa approve booking-withdrawal dd19c14126444bb79ef57882bfa48602
-```
-
-After observing actual approval A, request B. Verify B is current/unreviewed and A's approval historical. Guide the person to attempt completion A (`stale_run` expected), then inspect, approve and complete B with separate real messages. Never send human review commands on their behalf. Follow [the exact walkthrough](docs/QA_ROOM_COMMANDS.md).
+The original actual-human A/B walkthrough remains incomplete. Its stale-approval guard passed three selected isolated tests using explicitly simulated reviewers; logs are under `.local/qa-room-assistant-review/`. Never send human review commands on the person's behalf. [The human walkthrough](docs/QA_ROOM_COMMANDS.md) remains available for a later actual-person demonstration. Prepare concise demo/README/submission materials after the autonomous real-room continuation, clearly labeling the remaining human-review limitation.
 
 ## Result distinctions
 

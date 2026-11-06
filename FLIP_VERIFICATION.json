@@ -1,5 +1,5 @@
 {
-  "scope": "Real Mattermost request, automatic managed MCP dispatch, saved replay, result and accessible evidence verified. Actual human A review and the live A/B stale-approval walkthrough remain pending.",
+  "scope": "Run A real Mattermost replay and assistant technical review verified. User authorized assistant-reviewed continuation in chat; actual human-room review remains incomplete. Next real request failed before dispatch due to expired managed-provider authentication; B not created.",
   "python_suite": {
     "status": "PASS",
     "tests": 143,
@@ -138,6 +138,16 @@
         "event_id": "sw_b116d44a4e801a59d8f3cd30e64372dc",
         "seq": 11,
         "outcome": "Automatic managed MCP dispatch succeeded; run A ready, one result post."
+      },
+      {
+        "event_id": "sw_ceb8c35e683bc85544b2f490c8ab56dd",
+        "seq": 13,
+        "sent_at": "2026-11-06T23:18:18.192848+00:00",
+        "outcome": "Original real Mattermost verification reached managed agent, which failed to refresh expired ChatGPT token before dispatch; no B run or receipt.",
+        "failure_post": "sw_3fc8dcf784aa49608cb0c59e3ce6997c",
+        "failure_seq": 14,
+        "auth_http_status": 401,
+        "auth_error_code": "token_expired"
       }
     ],
     "room_replay_runs": 1,
@@ -147,7 +157,7 @@
     "switch_agent_inference_observed": true,
     "exact_inference_calls": null,
     "replay_model_requests": 0,
-    "limitation": "Awaiting actual human review A before requesting B; stale-A refusal and fresh B review are not yet demonstrated in the real room.",
+    "limitation": "Managed provider session needs browser sign-in after refresh 401. B has not been created. Current A remains unreviewed; chat approval and assistant technical review are not Mattermost human review.",
     "project_trust": {
       "user_authorized": true,
       "exact_project": "C:\\Users\\asus\\OneDrive\\Documents\\ChatGPT\\hackthons\\intent-replay-public-submission-20261104",
@@ -327,5 +337,44 @@
       ".local/qa-room-mcp-tests/baseline-python-test-output.txt": "124aa124751f20807749b0caa630d1a5cd3868611544b25189757452e06fd963",
       ".local/qa-room-mcp-tests/native-sdk-test-output.txt": "6c1444917b11c651aaf41344476102352fe818d07a8aaaa5dc79661cc7c5090c"
     }
+  },
+  "assistant_review": {
+    "date": "2026-11-06",
+    "run_id": "dd19c14126444bb79ef57882bfa48602",
+    "reviewer": "Codex assistant; not the human reviewer",
+    "finding": "No material blocker found in the included local SQLite withdrawal/control evidence.",
+    "document": "docs/QA_ROOM_TECHNICAL_REVIEW.md",
+    "human_review_record_created": false,
+    "user_chat_approval": "I approve it",
+    "chat_approval_is_mattermost_review": false,
+    "scope": "Autonomous assistant-reviewed continuation; live human A/B walkthrough remains incomplete.",
+    "selected_isolated_tests": {
+      "passed": 3,
+      "tests": [
+        "SwitchDispatcherTests.test_simulated_walkthrough_stale_A_then_review_and_complete_B",
+        "QaRoomTests.test_duplicate_historical_approval_and_completion_do_not_affect_new_run",
+        "QaRoomTests.test_atomic_completion_followed_by_concurrent_rerun_is_unreviewed"
+      ],
+      "reviewers": "simulated in temporary databases only",
+      "live_dispatch": false,
+      "log": ".local/qa-room-assistant-review/simulated-review-tests-20261106T231812Z.log",
+      "log_sha256": "a65d372104960ed2bb0db151b881ff1230240f03bd37c5b27002436bc15ab93c"
+    }
+  },
+  "latest_continuation": {
+    "date": "2026-11-06",
+    "docker_recovered_after_user_freed_memory": true,
+    "initial_docker_error": "Hyper-V failed to allocate 2048 MB; 0x800705AA",
+    "gateway_connected": true,
+    "evidence_listener_running": true,
+    "mattermost_container_health": "healthy",
+    "current_run_id": "dd19c14126444bb79ef57882bfa48602",
+    "run_b_id": null,
+    "human_review_status": "unreviewed",
+    "provider_authentication": "expired; scoped browser login started and awaiting user",
+    "proof": ".local/qa-room-assistant-review/failed-b-request-20261106.json",
+    "resume_audit": ".local/qa-room/resume-audit-20261106.json",
+    "provider_credentials_copied_by_operator": false,
+    "global_authentication_changed_by_operator": false
   }
 }
