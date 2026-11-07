@@ -1,8 +1,10 @@
 # QA Room setup and resume
 
-## Latest B/C review checkpoint
+## Completed B/C review checkpoint — 2026-11-07 UTC
 
-The person's exact B approval was recorded from original Mattermost event `sw_cc26e2db23c2ff3d98607db46364da83` (sequence 18) and confirmed at 19. A fresh authorized assistant request produced C `5aa6bb5509734cb388537a63007d3087` at sequences 20/21. The authorized assistant negative test of completing old B at 22 was refused with `stale_run` at 23; no completion was granted. B remains historically approved; C is current/ready/unreviewed and requires the person's fresh review. The B/C read-only audit passed 76 checks. Use [the command guide](QA_ROOM_COMMANDS.md) for C; the following recovery details preserve the earlier A/B checkpoint.
+The person's exact B approval was recorded at sequence 18 and confirmed at 19. An authorized assistant verification produced C `5aa6bb5509734cb388537a63007d3087` at 20/21. The authorized assistant negative test of completing old B at 22 was refused with `stale_run` at 23. The person then posted exact C approval `sw_64e554b42f2ff28f01d8822989a8d8c6` (24), confirmed at 25, followed by exact completion `sw_cc40b260975f872a9d47d332973d82f2` (26), confirmed at 27. C is current, evidence-valid and human-review completed; B remains historically approved and incomplete. No further review command is needed.
+
+The earlier stale-approval audit and the separate final completion audit each passed 76 checks. Final proof: `.local/qa-room-assistant-review/c-human-completion-audit.json`; SHA-256 `f49dd7ecd13ae256ec0ae8d8f7b21bbd4c459f1ac74cc844bd401451863407e6`. The full B/C walkthrough is complete; the original human A/B sequence was not performed. Use [the command guide](QA_ROOM_COMMANDS.md) to reopen C read-only or intentionally start a future manual run. The following recovery details preserve earlier checkpoints.
 
 ## 2026-11-06 recovery history
 
@@ -12,13 +14,13 @@ The next real verification request reached the room (sequence 13) but the manage
 
 Recovery succeeded with installed Codex 0.166.0 `login` and child-process-only `CODEX_HOME` set to the existing Mattermost SDK provider home. The person completed the browser sign-in, and the private process log confirmed successful login. Global authentication/configuration was not changed, and credentials were not copied. Private login-process metadata is in `.local/qa-room/scoped-login-session.json`; never print its referenced OAuth logs or authentication file. [Official authentication documentation](https://learn.chatgpt.com/docs/auth) documents browser login and scoped credential storage.
 
-After login, supported `agent.restart` operation `4cf44b5d-c553-4544-ae57-4e9c7defb9cc` succeeded at 23:26:49 UTC, preserving the existing agent and conversations. Fresh original request `sw_2038d700ac6120ad2ddd84c04b7139ca` (sequence 15) then automatically invoked `qa_room.dispatch_original_message` and produced **B `a9ce6b8d4b9f4c1eb6d8cab94d24cd67`**, result `sw_1a434e896a694e1db3d5ae3399453cdd` (sequence 16). B is current/ready/unreviewed with valid evidence; A is historical/unreviewed. All 56 independent audit checks passed. Both HTML reports opened and all six artifacts returned HTTP 200.
+After login, supported `agent.restart` operation `4cf44b5d-c553-4544-ae57-4e9c7defb9cc` succeeded at 23:26:49 UTC, preserving the existing agent and conversations. Fresh original request `sw_2038d700ac6120ad2ddd84c04b7139ca` (sequence 15) then automatically invoked `qa_room.dispatch_original_message` and produced **B `a9ce6b8d4b9f4c1eb6d8cab94d24cd67`**, result `sw_1a434e896a694e1db3d5ae3399453cdd` (sequence 16). B was then current/ready/unreviewed with valid evidence; A was historical/unreviewed. All 56 independent audit checks passed. Both HTML reports opened and all six artifacts returned HTTP 200.
 
 If the same authentication error recurs, diagnose the exact managed provider home and let the person complete its browser login before supported restart. Do not copy credentials, delete sessions, create a replacement agent, switch providers, or describe manual dispatch as managed delivery. A successful new request/result is the runtime authentication check; a cached provider badge is insufficient.
 
 The user authorized an assistant-reviewed continuation; actual human approval/completion still must not be fabricated. The following dated setup checkpoint describes the established run-A configuration.
 
-Updated on 2026-11-05 after the first successful automatic Mattermost verification. Agent revision 6 dispatched the original room request through its managed MCP tool and returned run A, `dd19c14126444bb79ef57882bfa48602`, to the room at 22:30:14 UTC. The run is ready with valid evidence and matching frozen expectations. Human review is still unreviewed at this checkpoint; the human A/B approval and stale-completion demonstration remain pending. No human review completion is claimed here.
+At the 2026-11-05 checkpoint, agent revision 6 dispatched the original room request through its managed MCP tool and returned run A, `dd19c14126444bb79ef57882bfa48602`, at 22:30:14 UTC. A was ready with valid evidence and matching frozen expectations. Human review was unreviewed; the approval and stale-completion demonstration were pending at that capture. The later B/C completion is recorded above.
 
 ## Installed components and current scope
 
@@ -54,7 +56,7 @@ Historical Console direct chat `95574125-421c-4810-bdc2-d47822117d2b` and its ru
 
 The [exact run A page](http://127.0.0.1:8054/qa/runs/dd19c14126444bb79ef57882bfa48602) and both HTML reports were opened successfully in the browser. HTTP checks returned 200 for that page and all six artifacts, including both evidence bundles. The captured room events, managed-agent activity and workflow snapshot establish automatic request-to-result delivery; they do not constitute human approval. Replay used zero new model requests.
 
-This table records A's state at its original capture. A is historical and cannot be approved for the current task. B's later actual human approval and stale-B refusal after C are recorded above; C is the current review target in [QA_ROOM_COMMANDS.md](QA_ROOM_COMMANDS.md). The original human A/B sequence was not completed.
+This table records A's state at its original capture. A is historical and cannot be approved for the current task. The completed B/C walkthrough is recorded above; [QA_ROOM_COMMANDS.md](QA_ROOM_COMMANDS.md) reopens C without rerunning it. The original human A/B sequence was not performed.
 
 ## Start after reboot
 
@@ -72,7 +74,7 @@ The old-session `docker-users` token blocker is resolved. No further reinstall o
 4. Open the existing [Intent Replay QA channel](http://localhost:56742/switch/channels/intent-replay-qa). Keep the single room and agent identified above; do not recreate them.
 5. Run `probe` using the commands below and reuse the existing evidence listener on port 8054. Start `serve` only when that listener is absent; do not launch a duplicate. Restart its owning process deliberately after a connection-scope change because it holds the configured room in memory.
 6. Confirm the managed session exposes `qa_room.dispatch_original_message` from the existing project configuration. Inspect original request/delivery state before retrying an uncertain dispatch. Preserve the failed Node events listed below; do not claim a result without its receipt or invent an event to recover it.
-7. Open the exact current run and its evidence on this computer, then resume [QA_ROOM_COMMANDS.md](QA_ROOM_COMMANDS.md). C is the current checkpoint. B's actual human approval and the live stale-B refusal are verified; C's fresh human approval/completion remain pending.
+7. Open the exact current run and its evidence on this computer. C is the completed checkpoint; no fresh review command is needed. [QA_ROOM_COMMANDS.md](QA_ROOM_COMMANDS.md) distinguishes read-only reopening from an intentional future rerun, which would require new review.
 
 Current log contents and listener ownership are better startup evidence than an old file modification timestamp: during recovery, native log tails showed fresh Gateway HTTP 200 entries while their reported modification times still reflected shutdown.
 
@@ -147,7 +149,7 @@ The existing `.codex/config.toml` registers one stdio server, `qa_room`, with on
 
 Before that approval, actual managed startup at 22:02:40 UTC disabled the project layer despite an earlier configuration-only probe appearing enabled. The inherited drive-root trust did not satisfy the worktree check. Preserve that distinction: `config/read` alone was insufficient evidence of tool availability.
 
-After applying the approved entry and refreshing the existing managed agent, the actual managed MCP handshake succeeded at **22:26:05 UTC on 2026-11-05**. The official SDK tool listing returned exactly `dispatch_original_message`. On future resume, confirm `qa_room` and that sole tool in the live catalog before sending a new room request. This preflight established transport availability; the separate run A checkpoint above establishes automatic room delivery. Actual human review remains outstanding.
+After applying the approved entry and refreshing the existing managed agent, the actual managed MCP handshake succeeded at **22:26:05 UTC on 2026-11-05**. The official SDK tool listing returned exactly `dispatch_original_message`. On future resume, confirm `qa_room` and that sole tool in the live catalog before sending a new room request. This preflight established transport availability; A established automatic room delivery, and the later B/C checkpoint established the complete human-review workflow.
 
 The configured executable uses the resolved physical path to the already-installed native Switch environment:
 
@@ -180,6 +182,6 @@ The Console-managed agent now uses official npm **`@openai/codex@0.166.0`** with
 
 The four temporary alpha executable hardlinks (`codex.exe`, `codex-code-mode-host.exe`, `codex-command-runner.exe`, `codex-windows-sandbox-setup.exe`) were removed from the npm PATH directory after stopping the managed agent. The original desktop installation under `C:\Users\asus\AppData\Local\OpenAI\Codex\bin\a159911ff70742e9` remains unchanged. Do not restore those temporary hardlinks or copy credentials to fix PATH.
 
-Python shell execution in the managed agent was denied or unreliable, and both actual Node dispatch attempts exited before reaching the bridge. The default is now the single project-local MCP tool, launched by the managed runtime and forwarding to the existing HTTP bridge. Run A verified this automatic request-to-result path while retaining the original-event and review guards. Human approval/completion and the live stale-run demonstration remain outstanding.
+Python shell execution in the managed agent was denied or unreliable, and both actual Node dispatch attempts exited before reaching the bridge. The default is now the single project-local MCP tool, launched by the managed runtime and forwarding to the existing HTTP bridge. A verified automatic request-to-result delivery; the later B/C walkthrough verified actual human approvals, stale-B refusal and C completion while retaining the original-event and review guards.
 
 This provider setup is independent of the retained Meta proposal captures. Replay adds zero model requests; any inference by the Console-managed Codex agent is separate, and its usage is reported only where observable.

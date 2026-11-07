@@ -4,24 +4,26 @@ A replay can pass its checks while its human approval belongs to an older run. I
 
 One person, one Console-managed QA agent, and one local Mattermost room use the retained booking withdrawal/control pair. The existing runner, evaluator, saved model captures and report exporter are reused unchanged.
 
-## Verified checkpoint
+## Verified checkpoint — 7 November 2026 UTC
 
-Three real Mattermost verification requests were automatically handled by the managed agent through `qa_room.dispatch_original_message`. The verification requests were sent by Codex under the user's authorization. The person sent the exact approval command for B before C was requested; that actual human review is recorded separately.
+The complete real-room review sequence is verified: **human approval B → request C → stale B completion refused → human approval C → human completion C**. Verification requests and the stale-B negative probe were sent by Codex under the user's authorization. The person personally sent B's approval and C's separate approval and completion commands. The managed agent handled the original messages through `qa_room.dispatch_original_message`.
 
 | Run | ID | Observed state |
 |---|---|---|
 | A | `dd19c14126444bb79ef57882bfa48602` | Historical after B was accepted |
 | B | `a9ce6b8d4b9f4c1eb6d8cab94d24cd67` | Historical; actual human approval retained only for B |
-| C | `5aa6bb5509734cb388537a63007d3087` | Current, ready, unreviewed; completion unavailable |
+| C | `5aa6bb5509734cb388537a63007d3087` | Current, ready, evidence-valid; human review completed |
 
-B and C's exact pages and both original HTML reports opened in the browser. The earlier A/B audit passed 56 checks; the final read-only B/C audit passed **76 checks**, including the actual B approval, stale refusal and all six sealed C artifacts served over HTTP. The person's exact B approval was recorded from the original Mattermost event and confirmed by the agent. Accepting C made B historical without transferring its approval. A user-authorized assistant attempt to complete old B was refused with **`stale_run` in the real room**. **C still requires fresh human review; no completion was granted.** Three separate tests with simulated reviewers cover stale approval, historical duplicates and concurrent reruns.
+B and C's exact pages and both original HTML reports opened in the browser. The earlier A/B audit passed 56 checks; the pre-completion B/C audit passed **76 checks**, including actual B approval, stale refusal and all six sealed C artifacts served over HTTP. Accepting C made B historical without transferring its approval. The old-B completion attempt returned **`stale_run`** and granted no completion. The person then approved C and, after confirmation, completed its review. C's stored approval and completion share the same evidence binding; completion was recorded at **2026-11-07 00:02:10.716142 UTC**. Three separate tests with simulated reviewers cover stale approval, historical duplicates and concurrent reruns.
+
+A separate final **C completion audit passed 76/76 checks** of the original human commands, both managed dispatches, receipts, timestamps and unchanged artifact hashes. The refreshed C page visibly confirms completed review. Earlier audits and evidence remain preserved.
 
 | Case | Faulty worker | Guarded worker |
 |---|---|---|
 | Withdrawal | Commits 15:00; expected execution FAIL | Suppresses; retains 14:00; execution PASS |
 | No-withdrawal control | Commits 15:00; execution PASS | Commits 15:00; execution PASS |
 
-All four frozen expectations match. Factual accuracy remains **INCONCLUSIVE / unassessed**; overall task remains FAIL for faulty withdrawal and INCONCLUSIVE for guarded/control. Any eventual completion means only: “Human review completed for the checked local execution behavior, using run <ID>.”
+All four frozen expectations match. Factual accuracy remains **INCONCLUSIVE / unassessed**; overall task remains FAIL for faulty withdrawal and INCONCLUSIVE for guarded/control. C's completion means only: “Human review completed for the checked local execution behavior, using run 5aa6bb5509734cb388537a63007d3087.”
 
 ## Resume the demonstrated Windows setup
 
@@ -46,7 +48,7 @@ Open the [QA room](http://localhost:56742/switch/channels/intent-replay-qa) and 
 @intent-replay-qa qa verify booking-withdrawal corrected-meta-withdrawal-control
 ```
 
-This requests a new current run. To inspect C without rerunning it, open [C's retained evidence](http://127.0.0.1:8054/qa/runs/5aa6bb5509734cb388537a63007d3087). The full startup, private identity-reference setup and recovery record are in [QA_ROOM_SETUP.md](docs/QA_ROOM_SETUP.md); review commands are in [QA_ROOM_COMMANDS.md](docs/QA_ROOM_COMMANDS.md).
+This requests a new current, unreviewed run; C's completed review would become historical. To inspect the completed C checkpoint without rerunning it, open [C's retained evidence](http://127.0.0.1:8054/qa/runs/5aa6bb5509734cb388537a63007d3087). The full startup, private identity-reference setup and recovery record are in [QA_ROOM_SETUP.md](docs/QA_ROOM_SETUP.md); review commands are in [QA_ROOM_COMMANDS.md](docs/QA_ROOM_COMMANDS.md).
 
 ## Reproduce in a fresh checkout
 
@@ -69,7 +71,7 @@ The Switch integration also needs a locally configured supported Switch/Mattermo
 
 ## Evidence, demo and limits
 
-- [Verification record](FLIP_VERIFICATION.json) and [implementation report](FLIP_IMPLEMENTATION_REPORT.md): actual events, tested behavior and outstanding human review.
+- [Verification record](FLIP_VERIFICATION.json) and [implementation report](FLIP_IMPLEMENTATION_REPORT.md): actual events, tested behavior and completed exact-run human review.
 - [Demo script](docs/FLIP_DEMO_SCRIPT.md) and [submission draft](docs/FLIP_SUBMISSION.md): prepared materials, not a published Flip video or submitted entry.
 - [Handoff](FLIP_HANDOFF.md): continuation and exact current evidence.
 

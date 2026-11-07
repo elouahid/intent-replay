@@ -1,6 +1,6 @@
 # Flip the Switch — Intent Replay handoff
 
-Updated 2026-11-06 UTC. **The person's exact B approval is verified. Fresh C completed through the real room and existing managed agent. An authorized assistant test of B's old completion command was refused with `stale_run`; no completion was granted. C is current, evidence-valid and unreviewed, awaiting fresh human review.**
+Updated 2026-11-07 UTC. **The real B/C walkthrough is complete: actual human B approval → fresh C → refused stale-B completion → actual human C approval and completion. C is current, evidence-valid and completed for the checked local execution behavior. No further review command is needed.**
 
 Recovery preserved A and its evidence. Docker's 2 GB Hyper-V allocation failure (`0x800705AA`) resolved after the person freed memory. Request sequence 13 then failed before dispatch with expired-token refresh 401; it created no B. The person completed browser sign-in for the existing Mattermost provider home, and supported agent restart succeeded. Fresh sequence 15 produced B automatically. Only the scoped login was refreshed; global authentication and provider credential configuration were unchanged. Baseline files and evaluator semantics were preserved. The user's chat approval authorizes this assistant-reviewed continuation; it is not a Mattermost review record.
 
@@ -25,7 +25,7 @@ One human, the existing managed Switch agent and one Mattermost QA room. Support
 
 The single project MCP tool `qa_room.dispatch_original_message` forwards only an original event ID to the existing HTTP bridge. The adapter fetches original authenticated author/body/time. New requests become current before execution; approval/completion bind exact run, evidence, sequence and contract, with atomic freshness checks.
 
-## Current evidence and next action
+## Current evidence and completed walkthrough
 
 **Run A: `dd19c14126444bb79ef57882bfa48602`** — [open evidence](http://127.0.0.1:8054/qa/runs/dd19c14126444bb79ef57882bfa48602).
 
@@ -39,9 +39,13 @@ Request `sw_2038d700ac6120ad2ddd84c04b7139ca` (sequence 15) produced result `sw_
 
 Request `sw_1a5b66cff69446d841a207e674ac70de` (20) produced result `sw_46977430bfda4b8c8984486c32e0d397` (21). After confirming C was current, Codex sent the user-authorized negative test `qa complete ... <B>` as `sw_1e409655fe38cff2539ead5969f4ab89` (22). Agent refusal `sw_15092d01154649cb9e4c1c8ab8528fef` (23) returned **`stale_run`** and “No review completion was granted.” This is a real-room refusal against an actual prior human approval; C verification and the negative test were assistant-operated, not human review actions.
 
-The read-only B/C audit passed **76/76 checks**. All six C artifacts and both HTML reports were verified. B's approval remains bound only to B; C has no approval/completion, and no completion rows exist. Proof: `.local/qa-room-assistant-review/mattermost-b-c-stale-approval-audit.json`; preserved pre-C proof: `b-actual-approval-before-c.json` in that directory. [Verification records](FLIP_VERIFICATION.json) retain exact bindings and provenance.
+The read-only B/C stale-approval audit passed **76/76 checks** before C's review. All six C artifacts and both HTML reports were verified. At that capture, B's approval remained bound only to B, C had no approval/completion and no completion rows existed. That proof is preserved as `.local/qa-room-assistant-review/mattermost-b-c-stale-approval-audit.json`; the pre-C proof is `b-actual-approval-before-c.json` in that directory.
 
-Next: personally inspect C's withdrawal and control reports, then post `@intent-replay-qa qa approve booking-withdrawal 5aa6bb5509734cb388537a63007d3087`. After confirmation, personally post the corresponding `qa complete` command. The assistant must not fabricate this fresh review. See [commands](docs/QA_ROOM_COMMANDS.md). The full walkthrough remains incomplete until C's actual fresh review/completion is observed.
+The person then posted exact C approval `sw_64e554b42f2ff28f01d8822989a8d8c6` (24), confirmed at 25, and exact completion `sw_cc40b260975f872a9d47d332973d82f2` (26), confirmed by `sw_4f9e4a8c72d74c6996eb12d27c05a456` (27). C completed at **2026-11-07 00:02:10.716142 UTC**. Both records bind C's evidence SHA-256 `89205c76d584013579812ed74a1965e5ac6534c5068ea17e9e29b2b31e085648`. Proofs: `c-actual-approval-before-completion.json` and `c-actual-completion.json` in the same private directory. [Verification records](FLIP_VERIFICATION.json) retain exact provenance.
+
+The separate final completion audit passed **76/76 checks** and the browser showed C completed. Proof: `.local/qa-room-assistant-review/c-human-completion-audit.json`, SHA-256 `f49dd7ecd13ae256ec0ae8d8f7b21bbd4c459f1ac74cc844bd401451863407e6`. It confirms two approvals, one completion and unchanged artifact hashes.
+
+The completed demonstration used B/C; the original human A/B sequence was not performed. Human approvals of B and C and completion of C came from the person's actual room actions. Verification requests and the refused stale-B probe were authorized assistant actions. Reopen [C's evidence](http://127.0.0.1:8054/qa/runs/5aa6bb5509734cb388537a63007d3087) read-only; no further command is required. See [commands](docs/QA_ROOM_COMMANDS.md) for future manual runs.
 
 Prepared materials: [README](README.md), [concise demo script](docs/FLIP_DEMO_SCRIPT.md), and [submission draft](docs/FLIP_SUBMISSION.md). Nothing has been published or submitted for Flip.
 
@@ -68,4 +72,4 @@ $qaPython = 'C:\Users\asus\OneDrive\Documents\ChatGPT\hackthons\.venv\Scripts\py
 & $qaPython -B .\source\scripts\run_qa_room.py serve
 ```
 
-Keep `serve` running. [Current evidence](http://127.0.0.1:8054/qa/current) is read-only. A false Console-user comparison in `probe` is expected with the Mattermost client pin; original room identity is checked separately. Never print/package dispatch tokens, credentials or runtime databases. Detailed paths/recovery: [setup](docs/QA_ROOM_SETUP.md). Implementation and limits: [report](FLIP_IMPLEMENTATION_REPORT.md). The remaining milestone is actual human review; preserve its incomplete status until original room actions are observed.
+Keep `serve` running. [Current evidence](http://127.0.0.1:8054/qa/current) is read-only. A false Console-user comparison in `probe` is expected with the Mattermost client pin; original room identity is checked separately. Never print/package dispatch tokens, credentials or runtime databases. Detailed paths/recovery: [setup](docs/QA_ROOM_SETUP.md). Implementation and limits: [report](FLIP_IMPLEMENTATION_REPORT.md). Preserve this completed C checkpoint; another accepted verification would require a fresh review.

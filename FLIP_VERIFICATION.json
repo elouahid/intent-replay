@@ -1,5 +1,5 @@
 {
-  "scope": "Actual human B approval verified, then real C replay and authorized assistant stale-B negative completion probe. Refused with stale_run; C current/unreviewed and fresh human review pending.",
+  "scope": "Completed real Mattermost B/C exact-run human-review walkthrough: actual B approval, automatic C replay, authorized assistant stale-B completion refusal, actual fresh C approval and completion. C remains current with valid evidence; factual uncertainty unchanged.",
   "python_suite": {
     "status": "PASS",
     "tests": 143,
@@ -103,7 +103,7 @@
     },
     "mattermost_room_verified": false
   },
-  "actual_human_walkthrough_complete": false,
+  "actual_human_walkthrough_complete": true,
   "real_switch_mattermost": {
     "recorded_at": "2026-11-05T22:41:33.045394+00:00",
     "room_id": "496e3d1b-8c14-4a6c-9bc5-1e164c0da362",
@@ -167,13 +167,13 @@
       }
     ],
     "room_replay_runs": 3,
-    "room_dispatch_receipts": 5,
-    "human_review_status": "unreviewed",
-    "actual_human_walkthrough_complete": false,
+    "room_dispatch_receipts": 7,
+    "human_review_status": "completed",
+    "actual_human_walkthrough_complete": true,
     "switch_agent_inference_observed": true,
     "exact_inference_calls": null,
     "replay_model_requests": 0,
-    "limitation": "Actual B approval and real stale-B refusal verified. C fresh human approval/completion remains pending. Negative probe was assistant-operated under explicit user authorization.",
+    "limitation": "Completion covers checked local SQLite execution behavior only. Factual accuracy remains INCONCLUSIVE; overall task remains FAIL for faulty withdrawal and INCONCLUSIVE for guarded/control. Managed-agent exact inference usage unmeasured; no Flip publication/submission claimed.",
     "project_trust": {
       "user_authorized": true,
       "exact_project": "C:\\Users\\asus\\OneDrive\\Documents\\ChatGPT\\hackthons\\intent-replay-public-submission-20261104",
@@ -355,7 +355,7 @@
         "evidence_valid": true
       }
     },
-    "latest_recorded_at": "2026-11-06T23:50:19.005381+00:00",
+    "latest_recorded_at": "2026-11-07T00:02:45.883654+00:00",
     "run_b": {
       "recorded_at": "2026-11-06T23:32:07.087330+00:00",
       "run_id": "a9ce6b8d4b9f4c1eb6d8cab94d24cd67",
@@ -746,7 +746,44 @@
         "evidence_valid": true
       },
       "replay_new_model_requests": 0,
-      "managed_agent_inference": "Observed separately; exact calls/tokens unmeasured."
+      "managed_agent_inference": "Observed separately; exact calls/tokens unmeasured.",
+      "snapshot_semantics": "Original run capture before human review; latest_snapshot records actual human completion.",
+      "latest_snapshot": {
+        "recorded_at": "2026-11-07T00:02:45.883654+00:00",
+        "run_id": "5aa6bb5509734cb388537a63007d3087",
+        "is_current": true,
+        "current_run_id": "5aa6bb5509734cb388537a63007d3087",
+        "review_status": "completed",
+        "approval": {
+          "run_id": "5aa6bb5509734cb388537a63007d3087",
+          "actor_id": "switch:client:f97780ca-7e77-4573-902d-e66eb59e9fe7",
+          "source": "switch:mattermost",
+          "event_id": "sw_64e554b42f2ff28f01d8822989a8d8c6",
+          "approved_at": "2026-11-06T23:59:34.550545+00:00",
+          "binding_sha256": "89205c76d584013579812ed74a1965e5ac6534c5068ea17e9e29b2b31e085648"
+        },
+        "completion": {
+          "run_id": "5aa6bb5509734cb388537a63007d3087",
+          "actor_id": "switch:client:f97780ca-7e77-4573-902d-e66eb59e9fe7",
+          "source": "switch:mattermost",
+          "event_id": "sw_cc40b260975f872a9d47d332973d82f2",
+          "completed_at": "2026-11-07T00:02:10.716142+00:00",
+          "binding_sha256": "89205c76d584013579812ed74a1965e5ac6534c5068ea17e9e29b2b31e085648",
+          "statement": "Human review completed for the checked local execution behavior, using run 5aa6bb5509734cb388537a63007d3087."
+        },
+        "can_approve": true,
+        "can_complete": true,
+        "evidence_valid": true
+      },
+      "browser_completed_status_verified": true,
+      "final_completion_audit": {
+        "file": ".local/qa-room-assistant-review/c-human-completion-audit.json",
+        "sha256": "f49dd7ecd13ae256ec0ae8d8f7b21bbd4c459f1ac74cc844bd401451863407e6",
+        "checks": 76,
+        "all_checks_passed": true,
+        "read_only": true,
+        "completed_at": "2026-11-07T00:04:59.975300+00:00"
+      }
     }
   },
   "mcp_transport_tests": {
@@ -764,12 +801,12 @@
     "date": "2026-11-06",
     "run_id": "dd19c14126444bb79ef57882bfa48602",
     "reviewer": "Codex assistant; not the human reviewer",
-    "finding": "No material blocker found in A or B for included local SQLite withdrawal/control evidence. Both runs remain human-unreviewed.",
+    "finding": "No material blocker found in retained local SQLite execution evidence. The original A/B inspection was assistant-only; later actual human review is recorded separately.",
     "document": "docs/QA_ROOM_TECHNICAL_REVIEW.md",
     "human_review_record_created": false,
     "user_chat_approval": "I approve it",
     "chat_approval_is_mattermost_review": false,
-    "scope": "Assistant technical inspection remains separate from the actual human B approval. C fresh human review pending.",
+    "scope": "Assistant technical inspection is separate from the actual human B approval and C approval/completion. The B/C walkthrough is complete.",
     "selected_isolated_tests": {
       "passed": 3,
       "tests": [
@@ -788,7 +825,7 @@
     ]
   },
   "latest_continuation": {
-    "date": "2026-11-06",
+    "date": "2026-11-07",
     "docker_recovered_after_user_freed_memory": true,
     "initial_docker_error": "Hyper-V failed to allocate 2048 MB; 0x800705AA",
     "gateway_connected": true,
@@ -796,9 +833,9 @@
     "mattermost_container_health": "healthy",
     "current_run_id": "5aa6bb5509734cb388537a63007d3087",
     "run_b_id": "a9ce6b8d4b9f4c1eb6d8cab94d24cd67",
-    "human_review_status": "unreviewed",
+    "human_review_status": "completed",
     "provider_authentication": "Person completed scoped browser sign-in; successful managed B dispatch verifies runtime recovery.",
-    "proof": ".local/qa-room-assistant-review/mattermost-b-c-stale-approval-audit.json",
+    "proof": ".local/qa-room-assistant-review/c-human-completion-audit.json",
     "resume_audit": ".local/qa-room/resume-audit-20261106.json",
     "provider_credentials_copied_by_operator": false,
     "global_authentication_changed_by_operator": false,
@@ -809,13 +846,14 @@
     },
     "prior_failed_request_proof": ".local/qa-room-assistant-review/failed-b-request-20261106.json",
     "actual_stale_human_approval_demonstrated": true,
-    "human_review_rows": 1,
-    "human_completion_rows": 0,
-    "run_c_id": "5aa6bb5509734cb388537a63007d3087"
+    "human_review_rows": 2,
+    "human_completion_rows": 1,
+    "run_c_id": "5aa6bb5509734cb388537a63007d3087",
+    "actual_human_walkthrough_complete": true
   },
-  "latest_recorded_at": "2026-11-06T23:50:19.005381+00:00",
+  "latest_recorded_at": "2026-11-07T00:04:59.975300+00:00",
   "human_review_walkthrough": {
-    "recorded_at": "2026-11-06T23:50:19.005381+00:00",
+    "recorded_at": "2026-11-07T00:02:45.883654+00:00",
     "B_actual_human_approval_verified": true,
     "B_approval_original": {
       "message_id": "sw_cc26e2db23c2ff3d98607db46364da83",
@@ -900,21 +938,38 @@
       "run_id": "5aa6bb5509734cb388537a63007d3087",
       "is_current": true,
       "current_run_id": "5aa6bb5509734cb388537a63007d3087",
-      "review_status": "unreviewed",
-      "approval": null,
-      "completion": null,
+      "review_status": "completed",
+      "approval": {
+        "run_id": "5aa6bb5509734cb388537a63007d3087",
+        "actor_id": "switch:client:f97780ca-7e77-4573-902d-e66eb59e9fe7",
+        "source": "switch:mattermost",
+        "event_id": "sw_64e554b42f2ff28f01d8822989a8d8c6",
+        "approved_at": "2026-11-06T23:59:34.550545+00:00",
+        "binding_sha256": "89205c76d584013579812ed74a1965e5ac6534c5068ea17e9e29b2b31e085648"
+      },
+      "completion": {
+        "run_id": "5aa6bb5509734cb388537a63007d3087",
+        "actor_id": "switch:client:f97780ca-7e77-4573-902d-e66eb59e9fe7",
+        "source": "switch:mattermost",
+        "event_id": "sw_cc40b260975f872a9d47d332973d82f2",
+        "completed_at": "2026-11-07T00:02:10.716142+00:00",
+        "binding_sha256": "89205c76d584013579812ed74a1965e5ac6534c5068ea17e9e29b2b31e085648",
+        "statement": "Human review completed for the checked local execution behavior, using run 5aa6bb5509734cb388537a63007d3087."
+      },
       "can_approve": true,
-      "can_complete": false,
+      "can_complete": true,
       "evidence_valid": true
     },
     "operator_attribution": {
       "B_approval": "Actual user-entered exact B approval, as verified in the conversation and authoritative platform event.",
       "C_request": "Assistant entered actual Mattermost UI verification under explicit user authorization.",
       "stale_B_completion_probe": "Assistant entered actual Mattermost UI negative probe under explicit user authorization.",
-      "boundary": "Gateway records the authenticated human account; physical operator attribution above comes from the observed workflow, not inferred from sender kind."
+      "boundary": "Gateway records the authenticated human account; physical operator attribution above comes from the observed workflow, not inferred from sender kind.",
+      "C_approval": "Actual user-entered exact approval command.",
+      "C_completion": "Actual user-entered exact completion command after approval confirmation."
     },
-    "full_walkthrough_complete": false,
-    "remaining": "Person must freshly review and approve C, then complete it after confirmation.",
+    "full_walkthrough_complete": true,
+    "remaining": "None for the demonstrated B/C review sequence. Flip publication/submission has not been performed.",
     "independent_audit": {
       "file": ".local/qa-room-assistant-review/mattermost-b-c-stale-approval-audit.json",
       "sha256": "8dfe8a8af5d815d8c54161b5a5ae2c8d00dbbdce6fde66b349a6d2b8e0d22c7c",
@@ -935,6 +990,127 @@
       "file": ".local/qa-room-assistant-review/stale-b-refusal-after-c.jpg",
       "sha256": "a3853d5c6227c7b021d3b5555a37a274b2363298aaf198c84409531f3aa25100"
     },
-    "refusal_permalink": "http://localhost:56742/switch/pl/5ecqnwd5dbf598ufeb89d9wqxw"
+    "refusal_permalink": "http://localhost:56742/switch/pl/5ecqnwd5dbf598ufeb89d9wqxw",
+    "before_fresh_C_review_snapshot": {
+      "run_id": "5aa6bb5509734cb388537a63007d3087",
+      "is_current": true,
+      "current_run_id": "5aa6bb5509734cb388537a63007d3087",
+      "review_status": "unreviewed",
+      "approval": null,
+      "completion": null,
+      "can_approve": true,
+      "can_complete": false,
+      "evidence_valid": true
+    },
+    "demonstrated_sequence": "Actual human B approval -> assistant-authorized C verification -> assistant-authorized stale-B negative completion refusal -> actual human C approval -> actual human C completion.",
+    "original_A_B_human_sequence_performed": false,
+    "C_actual_human_approval_verified": true,
+    "C_actual_human_completion_verified": true,
+    "C_approval_original": {
+      "event_id": "sw_64e554b42f2ff28f01d8822989a8d8c6",
+      "seq": 24,
+      "sent_at": "2026-11-06T23:59:29.600223+00:00",
+      "source": "mattermost",
+      "sender": {
+        "clientId": "f97780ca-7e77-4573-902d-e66eb59e9fe7",
+        "name": "user",
+        "kind": "human",
+        "agentId": null,
+        "userId": null
+      },
+      "body": "@intent-replay-qa qa approve booking-withdrawal 5aa6bb5509734cb388537a63007d3087"
+    },
+    "C_completion_original": {
+      "event_id": "sw_cc40b260975f872a9d47d332973d82f2",
+      "seq": 26,
+      "sent_at": "2026-11-07T00:02:06.428314+00:00",
+      "source": "mattermost",
+      "sender": {
+        "clientId": "f97780ca-7e77-4573-902d-e66eb59e9fe7",
+        "name": "user",
+        "kind": "human",
+        "agentId": null,
+        "userId": null
+      },
+      "body": "@intent-replay-qa qa complete booking-withdrawal 5aa6bb5509734cb388537a63007d3087"
+    },
+    "C_approval_confirmation": {
+      "event_id": "sw_bdae5cc9794f41498544ff0c3841559d",
+      "seq": 25,
+      "sent_at": "2026-11-06T23:59:34.699445+00:00",
+      "source": "switch",
+      "sender": {
+        "clientId": "7fc4b42b-ca0e-41cf-a2af-2e54b92a350b",
+        "name": "intent-replay-qa",
+        "kind": "agent",
+        "agentId": "e9d69e59-a025-4e2d-abea-ce114dc448f8",
+        "userId": null
+      },
+      "body": "Intent Replay QA | task booking-withdrawal | run 5aa6bb5509734cb388537a63007d3087\nRun: ready; current: yes. \nFrozen regression expectations: PASS.\nWithdrawal (fresh-withdrawal):\n- Faulty: expected committed at 2026-11-25T15:00:00+00:00; observed committed at 2026-11-25T15:00:00+00:00; execution FAIL.\n- Guarded: expected suppressed at 2026-11-25T14:00:00+00:00; observed suppressed at 2026-11-25T14:00:00+00:00; execution PASS.\nControl (fresh-control):\n- Faulty: expected committed at 2026-11-25T15:00:00+00:00; observed committed at 2026-11-25T15:00:00+00:00; execution PASS.\n- Guarded: expected committed at 2026-11-25T15:00:00+00:00; observed committed at 2026-11-25T15:00:00+00:00; execution PASS.\nExpected faulty withdrawal FAIL is a matching regression. Factual accuracy: INCONCLUSIVE / unassessed. Overall task: FAIL for faulty withdrawal; INCONCLUSIVE for guarded/control.\nHuman review: approved; reviewed run remains explicit in the report.\nOpen both reports and evidence bundles: http://127.0.0.1:8054/qa/runs/5aa6bb5509734cb388537a63007d3087\nHuman next action: @intent-replay-qa qa complete booking-withdrawal 5aa6bb5509734cb388537a63007d3087\nReplay inference: 0 new model calls. Switch-agent inference is separate and is not measured by the replay runner."
+    },
+    "C_completion_confirmation": {
+      "event_id": "sw_4f9e4a8c72d74c6996eb12d27c05a456",
+      "seq": 27,
+      "sent_at": "2026-11-07T00:02:10.844490+00:00",
+      "source": "switch",
+      "sender": {
+        "clientId": "7fc4b42b-ca0e-41cf-a2af-2e54b92a350b",
+        "name": "intent-replay-qa",
+        "kind": "agent",
+        "agentId": "e9d69e59-a025-4e2d-abea-ce114dc448f8",
+        "userId": null
+      },
+      "body": "Intent Replay QA | task booking-withdrawal | run 5aa6bb5509734cb388537a63007d3087\nRun: ready; current: yes. \nFrozen regression expectations: PASS.\nWithdrawal (fresh-withdrawal):\n- Faulty: expected committed at 2026-11-25T15:00:00+00:00; observed committed at 2026-11-25T15:00:00+00:00; execution FAIL.\n- Guarded: expected suppressed at 2026-11-25T14:00:00+00:00; observed suppressed at 2026-11-25T14:00:00+00:00; execution PASS.\nControl (fresh-control):\n- Faulty: expected committed at 2026-11-25T15:00:00+00:00; observed committed at 2026-11-25T15:00:00+00:00; execution PASS.\n- Guarded: expected committed at 2026-11-25T15:00:00+00:00; observed committed at 2026-11-25T15:00:00+00:00; execution PASS.\nExpected faulty withdrawal FAIL is a matching regression. Factual accuracy: INCONCLUSIVE / unassessed. Overall task: FAIL for faulty withdrawal; INCONCLUSIVE for guarded/control.\nHuman review: completed; reviewed run remains explicit in the report.\nOpen both reports and evidence bundles: http://127.0.0.1:8054/qa/runs/5aa6bb5509734cb388537a63007d3087\nHuman review completed for the checked local execution behavior, using run 5aa6bb5509734cb388537a63007d3087.\nReplay inference: 0 new model calls. Switch-agent inference is separate and is not measured by the replay runner."
+    },
+    "C_completion_proof": {
+      "file": ".local/qa-room-assistant-review/c-actual-completion.json",
+      "sha256": "5204de95c99f32e3669aebf8109de4fc441a914933bf7068a53f37c83e397a0b"
+    },
+    "final_completion_audit": {
+      "file": ".local/qa-room-assistant-review/c-human-completion-audit.json",
+      "sha256": "f49dd7ecd13ae256ec0ae8d8f7b21bbd4c459f1ac74cc844bd401451863407e6",
+      "checks": 76,
+      "all_checks_passed": true,
+      "read_only": true,
+      "completed_at": "2026-11-07T00:04:59.975300+00:00"
+    },
+    "authoritative_C_timeline": {
+      "C_finished": "2026-11-06T23:47:49.204037+00:00",
+      "C_approval_original_sent": "2026-11-06T23:59:29.600223+00:00",
+      "C_approved_at": "2026-11-06T23:59:34.550545+00:00",
+      "C_completion_original_sent": "2026-11-07T00:02:06.428314+00:00",
+      "C_completed_at": "2026-11-07T00:02:10.716142+00:00",
+      "C_completion_confirmation_sent": "2026-11-07T00:02:10.844490+00:00"
+    },
+    "final_database_counts": {
+      "reviews": 2,
+      "completions": 1
+    },
+    "C_approval_completion_managed_activity": {
+      "approve": [
+        {
+          "agentId": "e9d69e59-a025-4e2d-abea-ce114dc448f8",
+          "sessionId": "60559eab-141e-5548-a2bf-50916a216bf4",
+          "turnId": "dfe0f361-f476-598a-a3d6-963126d3c256",
+          "itemId": "[\"dfe0f361-f476-598a-a3d6-963126d3c256\",\"exec-936b9b5b-38a8-446d-baa2-19341fa54807\"]",
+          "status": "completed",
+          "title": "qa_room.dispatch_original_message",
+          "messageId": "sw_64e554b42f2ff28f01d8822989a8d8c6",
+          "updatedAt": "2026-11-06T23:59:35.026048Z"
+        }
+      ],
+      "complete": [
+        {
+          "agentId": "e9d69e59-a025-4e2d-abea-ce114dc448f8",
+          "sessionId": "60559eab-141e-5548-a2bf-50916a216bf4",
+          "turnId": "641d32d2-c795-5617-819d-b20ee3f16552",
+          "itemId": "[\"641d32d2-c795-5617-819d-b20ee3f16552\",\"exec-f58be84c-f5ca-41ae-ae3b-4e57a9cdfd21\"]",
+          "status": "completed",
+          "title": "qa_room.dispatch_original_message",
+          "messageId": "sw_cc40b260975f872a9d47d332973d82f2",
+          "updatedAt": "2026-11-07T00:02:11.242260Z"
+        }
+      ]
+    }
   }
 }

@@ -1,8 +1,8 @@
 # Intent Replay — QA Room commands
 
-One personal/local Switch room, agent `intent-replay-qa`, task `booking-withdrawal`, and case set `corrected-meta-withdrawal-control`, on Switch Console 0.40.1 / native Core 0.31.0. In the [Intent Replay QA Mattermost channel](http://localhost:56742/switch/channels/intent-replay-qa), current C `5aa6bb5509734cb388537a63007d3087` is ready/evidence-valid/unreviewed. B retains the person's actual approval historically; its old completion command was refused after C became current.
+One personal/local Switch room, agent `intent-replay-qa`, task `booking-withdrawal`, and case set `corrected-meta-withdrawal-control`, on Switch Console 0.40.1 / native Core 0.31.0. In the [Intent Replay QA Mattermost channel](http://localhost:56742/switch/channels/intent-replay-qa), C `5aa6bb5509734cb388537a63007d3087` is current, evidence-valid and **human-review completed**. No further review command is needed.
 
-A request/result: sequences 11/12. B request/result: 15/16. Actual human B approval at 18 was confirmed at 19. Authorized assistant C verification at 20 produced result at 21; the authorized assistant negative B-completion probe at 22 was refused with `stale_run` at 23. No completion was granted. The read-only B/C audit passed 76 checks; proof is `.local/qa-room-assistant-review/mattermost-b-c-stale-approval-audit.json`. The earlier A/B audit and failed sequence-13 request are preserved separately.
+Actual human B approval was followed by fresh C and a real `stale_run` refusal of the authorized assistant's old-B completion probe. The person then approved C and completed its review through separate original room messages. A and B remain historical. All execution evidence and the earlier unreviewed checkpoints are preserved.
 
 ## Start the configured local workflow
 
@@ -26,53 +26,57 @@ The Console-managed agent uses [QA_ROOM_AGENT_INSTRUCTIONS.md](QA_ROOM_AGENT_INS
 
 The official SDK `mcp==1.28.1` is already installed in the native Switch environment; no install is needed. The user authorized the exact common-repository trust entry for `C:\Users\asus\OneDrive\Documents\ChatGPT\hackthons\intent-replay-public-submission-20261104`; it was appended to the user Codex configuration after a private backup, with no other settings changed. Following the managed-agent refresh, the live SDK catalog returned exactly `dispatch_original_message`. The earlier configuration-only probe had not established runtime availability. On resume, check the live tool catalog before sending another request. Optional dependency pin, exact launcher and trust-resolution details are recorded in [QA_ROOM_SETUP.md](QA_ROOM_SETUP.md), alongside the [official MCP configuration reference](https://learn.chatgpt.com/docs/extend/mcp?surface=cli).
 
-## Review the current C
+## Reopen the completed result
 
-Send commands as **standalone room messages**, without quotation marks or code fences. A person must perform fresh approval/completion. Refresh [current evidence](http://127.0.0.1:8054/qa/current) first: if another run has superseded C, inspect and use that exact new ID.
+Open [C's exact evidence](http://127.0.0.1:8054/qa/runs/5aa6bb5509734cb388537a63007d3087) to inspect the reports and bound review record without executing anything. No room message is required. An optional read-only room command is:
 
-1. Open [C's exact evidence](http://127.0.0.1:8054/qa/runs/5aa6bb5509734cb388537a63007d3087). In both HTML reports, inspect final booking readback, accepted revisions, authorization/commit journal, and separate factual/overall verdicts. The guarded withdrawal retains 14:00; the control commits 15:00. If satisfied, personally send:
+```text
+@intent-replay-qa qa show booking-withdrawal 5aa6bb5509734cb388537a63007d3087
+```
 
-   ```text
-   @intent-replay-qa qa approve booking-withdrawal 5aa6bb5509734cb388537a63007d3087
-   ```
+## Observed human-review walkthrough
 
-2. Wait for the room's approval confirmation. To complete C's scoped human review, personally send a separate message:
+The full demonstration used **B/C**; the original human A/B sequence was not performed. Actual human actions and authorized assistant actions remain distinct:
 
-   ```text
-   @intent-replay-qa qa complete booking-withdrawal 5aa6bb5509734cb388537a63007d3087
-   ```
+| Room sequence | Observed action |
+|---|---|
+| 18 / 19 | The person approved B with exact original event `sw_cc26e2db23c2ff3d98607db46364da83`; the agent confirmed it. The earlier natural-language message at 17 created no approval. |
+| 20 / 21 | The assistant's authorized verification created C and the agent returned its result. B's approval stayed historical. |
+| 22 / 23 | The assistant's explicitly authorized negative probe attempted completion of old B. The agent returned `stale_run`; no completion was granted by that probe. |
+| 24 / 25 | The person approved C with exact original event `sw_64e554b42f2ff28f01d8822989a8d8c6`; the agent confirmed it. |
+| 26 / 27 | The person completed C with exact original event `sw_cc40b260975f872a9d47d332973d82f2`; the agent confirmed completion. |
 
-   Its original send time must follow the recorded approval. Expected statement: “Human review completed for the checked local execution behavior, using run 5aa6bb5509734cb388537a63007d3087.” This does not resolve factual uncertainty. These C review actions have not yet occurred.
+[Open the stale refusal](http://localhost:56742/switch/pl/5ecqnwd5dbf598ufeb89d9wqxw). The 76-check B/C audit captured C unreviewed immediately after that refusal. The later actual C approval was recorded at `2026-11-06T23:59:34.550545Z`; completion followed at `2026-11-07T00:02:10.716142Z`. Both records bind C's evidence SHA-256 `89205c76d584013579812ed74a1965e5ac6534c5068ea17e9e29b2b31e085648`.
 
-## Observed stale-approval demonstration
+The final scoped result is: “Human review completed for the checked local execution behavior, using run 5aa6bb5509734cb388537a63007d3087.” It does not resolve factual uncertainty or establish production readiness. Private proofs are `.local/qa-room-assistant-review/mattermost-b-c-stale-approval-audit.json`, `c-actual-approval-before-completion.json` and `c-actual-completion.json` in the same directory. The three isolated simulated-review tests remain separate evidence.
 
-The original human A/B sequence was not performed. The real B/C sequence below is now verified; C's fresh review remains outstanding. The earlier three isolated simulated tests remain separate evidence.
+The separate final `c-human-completion-audit.json` in that directory passed 76/76 checks, confirming both C original events and receipts, their exact evidence binding, two approvals, one completion and unchanged artifacts. C's completed status was also verified in the browser.
 
-1. The person posted exact B approval `sw_cc26e2db23c2ff3d98607db46364da83` (18), bound to B's sealed evidence. The earlier “I approve it looks good” message did not name a run and created no approval.
-2. The assistant sent the user-authorized fresh verification through the real room at sequence 20:
+## Future manual verification
+
+These steps are for an intentional **new** run, not required for completed C. Send each message separately as a standalone room message without quotation marks or code fences. A new accepted verification immediately supersedes C, including while pending or failed, and requires its own human review.
+
+1. Request a new verification:
 
    ```text
    @intent-replay-qa qa verify booking-withdrawal corrected-meta-withdrawal-control
    ```
 
-   C `5aa6bb5509734cb388537a63007d3087` became current and returned its result at 21. B's approval remained historical.
-3. After confirming C was current, the assistant sent the explicitly authorized negative test at sequence 22 using B's old ID:
+2. Wait for the result, open its exact evidence and inspect both withdrawal and control reports. Replace `RUN_ID` below with the returned full run ID. If satisfied, personally send:
 
    ```text
-   @intent-replay-qa qa complete booking-withdrawal a9ce6b8d4b9f4c1eb6d8cab94d24cd67
+   @intent-replay-qa qa approve booking-withdrawal RUN_ID
    ```
 
-   Actual agent refusal `sw_15092d01154649cb9e4c1c8ab8528fef` (23): **`stale_run`**, “No review completion was granted.” [Open the refusal](http://localhost:56742/switch/pl/5ecqnwd5dbf598ufeb89d9wqxw). The core receipt records the same refusal; no completion rows exist. This was an assistant-operated negative test through the human account under explicit authorization, not an actual human completion or a simulated unit test.
+3. Wait for the room's approval confirmation, then personally send a separate message:
 
-4. Remaining step: the person must freshly inspect and review C using the commands above. Completion requires current, valid evidence, the required guarded/control checks and approval of that exact run. Do not report fresh C review/completion until its actual events and records exist.
+   ```text
+   @intent-replay-qa qa complete booking-withdrawal RUN_ID
+   ```
 
-To reopen any retained result without executing it:
+The person must perform approval and completion; an assistant must not create those records on their behalf. Completion requires the exact current run, valid evidence, the required guarded/control checks and its recorded approval. Its original send time must follow approval.
 
-```text
-@intent-replay-qa qa show booking-withdrawal dd19c14126444bb79ef57882bfa48602
-```
-
-The `@intent-replay-qa ` prefix is optional in the parser; using it addresses the Console agent explicitly. Duplicate platform deliveries do not create duplicate runs, approvals, or result posts. Delayed older verification events cannot supersede a newer platform request. An approval originally sent before the result, or completion sent before its required approval, is refused even if delivery is delayed. Interrupted executions are not automatically retried; a new human `qa verify` request creates a new current run.
+The `@intent-replay-qa ` prefix is optional in the parser; using it addresses the Console agent explicitly. Duplicate deliveries do not create duplicate runs, approvals or result posts. Delayed older verification events cannot supersede a newer platform request. Approval sent before the result, or completion sent before its required approval, is refused even if delivery is delayed. Interrupted executions are not automatically retried; an intentional new `qa verify` request creates a new current run.
 
 ## Read the result correctly
 
