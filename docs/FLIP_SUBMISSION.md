@@ -2,6 +2,52 @@
 
 **Submission draft for user review, updated 7 November 2026 UTC. Not submitted or published.**
 
+## Submission preparation checkpoint — 7 November 2026
+
+Recommended track: **Best Business Workflow**. The [official cohost requirements](https://www.devtoolsacademy.com/hackathons/flip-the-switch) call for a public repository, a short workflow video, and a README explaining the connected agents, channel setup and reproduction. Our recording target is about 2 minutes 40 seconds; that is an editorial target, not a verified organizer limit. The [official schedule](https://www.wemakedevs.org/hackathons/switch/schedule) gives **7 November 2026, 11:59 PM IST (18:29 UTC)** as the submission deadline.
+
+The [submission page](https://www.wemakedevs.org/hackathons/switch/submit) loads and requires sign-in before its fields can be inspected. Field names, character limits and any additional video restrictions are not yet verified. The person should enter and submit their own final form: [official rule 3](https://www.wemakedevs.org/hackathons/switch/rules) prohibits automated registration/submission while permitting AI tools for development.
+
+Live preparation checks confirmed C is current, evidence-valid and completed. GitHub's branch listing contains only `main` at the preserved Meta baseline. The Flip checkpoint `dd78f5b9ac2c09ba9f9b57a188399d0c55508f92` is still local. Before submission, publish the reviewed Flip branch, verify its public README and source, record/upload the new video, then insert both verified public links. The loopback room and evidence URLs are recording surfaces, not judge-accessible URLs.
+
+## Copyable text for the person
+
+Use these values when the form asks for the corresponding information. Adapt only after inspecting the actual fields; do not paste placeholders as final links.
+
+Project title:
+
+```text
+Intent Replay — QA Room
+```
+
+Track:
+
+```text
+Best Business Workflow
+```
+
+Short pitch:
+
+```text
+A Switch QA room that replays an agent execution regression, exposes its evidence, and binds human review to the exact run so an older approval cannot complete a newer verification.
+```
+
+Video title:
+
+```text
+Intent Replay — QA Room | Flip the Switch Demo
+```
+
+Video description draft (add the verified public Flip source link before publishing):
+
+```text
+Intent Replay connects a managed Codex QA agent to a Mattermost room through Switch. This video walks through the preserved real workflow: saved-case replay, evidence inspection, human approval of B, a newer run C, refusal of stale B completion, and fresh human approval and completion of C.
+
+The Switch room, original-event adapter and exact-run review workflow were added for Flip. The earlier Intent Replay runner, evaluator, saved captures and frozen expectations are preserved.
+
+All four frozen regression expectations match. The deliberately faulty withdrawal execution fails as expected; the guarded execution and control pass. Factual accuracy remains inconclusive. Human completion covers checked local execution behavior only. Saved replay makes zero new model requests; managed-agent inference is separate and unmeasured.
+```
+
 ## Short description
 
 A Switch QA room that replays a supported agent execution regression, exposes the original evidence, and ties review to the exact run so an older approval cannot complete a newer verification.

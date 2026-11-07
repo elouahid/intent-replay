@@ -6,19 +6,53 @@ Draft for review; not a published video. The real B → C review sequence comple
 
 Use the existing room/agent and startup steps in [QA_ROOM_SETUP.md](QA_ROOM_SETUP.md). Reuse the evidence listener on port 8054. Open the room, B and C in separate tabs. Keep credential files, dispatch tokens, provider logins and runtime databases off screen. Show the retained events rather than replaying commands for the recording; do not fabricate human review.
 
-## Show and say
+## Numbered recording plan
 
-| Screen/action | Suggested narration |
-|---|---|
-| Actual Mattermost QA room | “Intent Replay helps a QA reviewer reproduce an agent execution defect and review the exact result. One managed agent handles a fixed supported replay request.” |
-| B's original request and deterministic result | “This real room request reached the existing runner through the managed MCP tool. The server returned the run ID and accessible evidence.” |
-| B's withdrawal report, then control report | “The faulty worker commits 15:00 after withdrawal. The guarded worker retains 14:00. Without withdrawal, both commit 15:00. The deliberately faulty FAIL is expected, so all frozen regression expectations match.” |
-| The person's exact B approval and agent confirmation | “The person approved this exact run. The original human event and evidence binding are recorded; a model's assertion would not grant approval.” |
-| C's original request/result and B's historical status | “The user authorized the assistant to request another verification. C became current without inheriting B's approval. B's review stayed attached to B.” |
-| Authorized stale-B completion probe and agent refusal | “The user authorized the assistant to test completion of old B. The real room returned stale_run: a newer verification was requested. That attempt granted no completion; C was still unreviewed at that point.” |
-| The person's C approval, confirmation, completion and confirmation | “The person inspected the new result and approved C. After its confirmation, they sent a separate completion command. Both records bind the same exact C evidence.” |
-| Clearly labeled isolated test result | “Three tests with simulated reviewers and temporary databases passed stale completion, historical duplicate approval, and concurrent rerun checks. These are separately labeled automated tests.” |
-| C's completed review status | “Human review is complete for this exact local execution. Factual accuracy stays inconclusive; completion does not establish production readiness or external booking success.” |
+Aim for **2:30–2:50** as an editorial target, not an asserted competition limit. The times below allow brief tab changes. Read the quoted narration; keep full run IDs visible without reading them aloud. Begin by opening the room, B and C tabs, then rehearse only segment 1 before recording the remaining segments one at a time. Do not type, stage or send commands.
+
+1. **Introduce the completed workflow — 0:00–0:20.**
+
+   Screen: the existing Mattermost QA room, with B's retained verification request/result visible (sequences 15/16).
+
+   > This is Intent Replay — QA Room, built with Switch. It connects my Codex QA agent to Mattermost, so I can request a replay, inspect the evidence, and approve the exact result. This is a walkthrough of our completed real-room workflow.
+
+2. **Show what the replay proves — 0:20–0:55.**
+
+   Screen: B's evidence page, its withdrawal HTML report, then its control HTML report. Show expected/observed outcomes and the independent booking read.
+
+   > The same saved proposal runs through two local workers. After the customer withdraws the change, the deliberately faulty worker commits three p.m. and fails its execution check. The guarded worker suppresses the change and keeps two p.m. In the no-withdrawal control, both correctly commit three p.m. All four frozen expectations match, including the expected failure. These reports retain the action journal and an independent booking read.
+
+3. **Show the person's B approval — 0:55–1:15.**
+
+   Screen: the exact B approval and the agent's confirmation (sequences 18/19). Keep the B run ID visible.
+
+   > I personally inspected the evidence and approved run B with this exact command. The server retrieved my original message and bound the review to B's run and evidence. An agent's assertion cannot grant that approval.
+
+4. **Show the rerun becoming current — 1:15–1:35.**
+
+   Screen: C's retained request/result (sequences 20/21), then B's historical page. Use the original C result message to show its state at creation; today's C page is already completed.
+
+   > Next, I authorized the assistant to request run C. As soon as C was accepted, it became current. B's approval stayed attached to historical B; it could not carry forward to the new result.
+
+5. **Show the actual stale refusal — 1:35–1:55.**
+
+   Screen: the retained old-B completion probe and the `stale_run` refusal (sequences 22/23). This is an assistant-initiated negative test authorized by the user.
+
+   > I also authorized this negative test: try to complete old B after C exists. The dispatcher refused with stale_run. No completion was granted by that attempt. This is the actual room response.
+
+6. **Show fresh human review and completion — 1:55–2:20.**
+
+   Screen: C approval/confirmation (sequences 24/25), then C completion/confirmation (26/27). Finish on C's completed evidence page.
+
+   > I then personally reviewed C. This is my approval and its confirmation, followed by my separate completion command and the agent's confirmation. Both records bind the same C evidence. The current page shows completed human review, while B remains historical and incomplete.
+
+7. **Close with contribution and scope — 2:20–2:45.**
+
+   Screen: C's completed-review statement and the visible INCONCLUSIVE verdicts. End on the exact run ID.
+
+   > Flip adds the persistent review workflow, original-message verification, and guarded completion around the preserved Meta submission. Replay makes no new model requests; the Switch agent's inference is separate. This completion covers checked local behavior only. Factual accuracy remains inconclusive; it does not establish production readiness.
+
+Keep the simulated tests in the appendix or an optional separately labeled supporting clip. The main video above shows retained real-room evidence only.
 
 B and C approvals and C completion were actual human actions. C's verification and the stale-B completion probe were assistant-initiated under authorization; the probe was a negative test, not a new human approval. The earlier natural-language approval message (sequence 17) was not accepted as an exact approval command. The real room refusal verified the stale-B guard; C subsequently received its own fresh approval and scoped completion.
 
