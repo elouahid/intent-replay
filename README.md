@@ -74,7 +74,7 @@ The Switch integration also needs a locally configured supported Switch/Mattermo
 ## Evidence, demo and limits
 
 - [Verification record](FLIP_VERIFICATION.json) and [implementation report](FLIP_IMPLEMENTATION_REPORT.md): actual events, tested behavior and completed exact-run human review.
-- [Published Flip video](https://youtu.be/sPFCppd1n1A), [demo script](docs/FLIP_DEMO_SCRIPT.md), and [submission materials](docs/FLIP_SUBMISSION.md). Video/source publication is separate from the entrant's final submission; an organizer receipt is required to confirm submission.
+- [Published Flip video](https://youtu.be/sPFCppd1n1A), [demo script](docs/FLIP_DEMO_SCRIPT.md), and [submission materials](docs/FLIP_SUBMISSION.md). The entrant personally submitted the solo Best Business Workflow entry; the organizer's page showed **Submitted**, verified at **2026-11-07 18:02:54 UTC**. Submitted source is pinned to [`79fa75e`](https://github.com/elouahid/intent-replay/tree/79fa75e10bf06ad6dd44acc3836e97ea71cd94f4). Private receipt files are retained locally; this post-submission documentation update is separate from that published checkpoint.
 - [Handoff](FLIP_HANDOFF.md): continuation and exact current evidence.
 
 Prior implementation verification passed 143 Python tests and eight focused MCP tests. A later isolated selection passed three review-safety tests in 4.165 seconds. Replay makes zero new model requests; the managed Switch agent uses its provider separately, with exact usage unmeasured. The backend is fictional local SQLite booking behavior, not a production booking system. Evidence hashes establish consistency, not independent provider attestation.

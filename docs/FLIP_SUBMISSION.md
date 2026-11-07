@@ -1,14 +1,18 @@
 # Intent Replay — QA Room
 
-**Submission materials updated 7 November 2026 UTC. The new Flip video is uploaded and unlisted; final organizer submission is pending the entrant's own action and receipt.**
+**Submitted by the entrant on 7 November 2026. The authenticated organizer confirmation showed “Submitted” for Intent Replay — QA Room, solo entry, Best Business Workflow; verified at 2026-11-07 18:02:54.856 UTC.**
 
-## Submission preparation checkpoint — 7 November 2026
+## Confirmed submission checkpoint — 7 November 2026
+
+Submitted source: [`79fa75e10bf06ad6dd44acc3836e97ea71cd94f4`](https://github.com/elouahid/intent-replay/tree/79fa75e10bf06ad6dd44acc3836e97ea71cd94f4). Submitted repository URL: https://github.com/elouahid/intent-replay/tree/flip-qa-room. Submitted video: https://youtu.be/sPFCppd1n1A. All three match the prepared publication checkpoint. The page displayed filed/last-edited time `7 nov. 2026, 18:01` without a timezone or separate receipt ID; the UTC time above is our observation time, not an invented server timestamp. Confirmation means receipt of the entry, not an eligibility or award decision.
+
+Receipt JSON, full-page screenshot, viewport screenshot, saved page text and DOM snapshot are in `.local/flip-submission-20261107/`. The submitted source archive and a hash manifest are retained there too. Raw receipt artifacts remain private and ignored. The remote Flip branch stays at the submitted commit; this closeout documentation is local only.
 
 Track: **Best Business Workflow**. The [official cohost requirements](https://www.devtoolsacademy.com/hackathons/flip-the-switch) call for a public repository, a short workflow video, and a README explaining the connected agents, channel setup and reproduction. The authenticated [submission form](https://www.wemakedevs.org/hackathons/switch/submit), inspected on 7 November, explicitly requires a video **under 3 minutes**, hosted on YouTube or Loom and public or unlisted. The approved final video is **174.788 seconds (2:55)** and meets that length requirement. The [official schedule](https://www.wemakedevs.org/hackathons/switch/schedule) gives **7 November 2026, 11:59 PM IST (18:29 UTC)** as the submission deadline.
 
-The entrant signed in and the actual seven required fields were inspected: title, track, description, GitHub source, demo video, how Switch was used, and feedback about Switch. No `maxlength` attributes were present on the observed text fields; server-side limits are not inferred. The person should enter and submit their own final form: [official rule 3](https://www.wemakedevs.org/hackathons/switch/rules) prohibits automated registration/submission while permitting AI tools for development.
+The entrant signed in and personally entered/submitted the seven required fields: title, track, description, GitHub source, demo video, how Switch was used, and feedback about Switch. Their saved values were read back from the confirmation page. No `maxlength` attributes were present on the observed text fields; server-side limits are not inferred. [Official rule 3](https://www.wemakedevs.org/hackathons/switch/rules) prohibits automated registration/submission while permitting AI tools for development; no automated submission, edit or withdrawal was performed.
 
-The prepared public source URL is https://github.com/elouahid/intent-replay/tree/flip-qa-room; publication must preserve `main` at the Meta baseline. The new Flip video is https://youtu.be/sPFCppd1n1A, uploaded to the existing lotis7 channel, saved as unlisted, with HD processing complete. The user watched the assembled video and confirmed its audio. The room's completed C checkpoint remains preserved. Loopback room/evidence URLs are local recording surfaces, not judge-accessible URLs.
+The verified public source URL is https://github.com/elouahid/intent-replay/tree/flip-qa-room at `79fa75e`; `main` remains at the Meta baseline. The new Flip video is https://youtu.be/sPFCppd1n1A, uploaded to the existing lotis7 channel, saved as unlisted, with HD processing complete and signed-out playback verified. The user watched the assembled video and confirmed its audio. The room's completed C checkpoint remains preserved. Loopback room/evidence URLs are local recording surfaces, not judge-accessible URLs.
 
 ## Copyable text for the person
 
@@ -130,8 +134,8 @@ Python, SQLite, FastAPI, the existing Intent Replay engine/exporter, Switch Cons
 
 - [README and reproduction](../README.md), [demo script](FLIP_DEMO_SCRIPT.md), [room setup](QA_ROOM_SETUP.md), [human commands](QA_ROOM_COMMANDS.md).
 - [Original submitted Meta source](https://github.com/elouahid/intent-replay/tree/d074b160d7af890ce7d8d99c2f580c597684a95c) and [prior Meta video](https://youtu.be/irrL2Acrs6E): historical baseline, not the Flip submission/demo.
-- [Flip source branch](https://github.com/elouahid/intent-replay/tree/flip-qa-room) and [new Flip video](https://youtu.be/sPFCppd1n1A). The source branch preserves the original `main`; publication does not establish that the final hackathon form was submitted.
+- [Flip source branch](https://github.com/elouahid/intent-replay/tree/flip-qa-room) and [new Flip video](https://youtu.be/sPFCppd1n1A) match the organizer's saved confirmation. The source branch preserves the original `main`; the actual organizer receipt separately confirms submission.
 
 Use the committed-source archive recipe in [the implementation report](../FLIP_IMPLEMENTATION_REPORT.md) when preparing the package. Exclude `.local/`, credentials, dispatch tokens, provider logins and runtime databases. The demonstration's loopback evidence URLs work on that computer only; they are not public judge links. Document machine-specific MCP path adaptation for a fresh checkout.
 
-The actual form and its under-three-minute video requirement were verified. Before the entrant submits, confirm that the Flip branch opens publicly and the video is accessible without the owner's login. Retain the local-behavior and factual-uncertainty limits. Save the organizer's actual receipt before recording final acceptance; these materials make no eligibility or acceptance guarantee.
+The actual form, its under-three-minute video requirement, public source and signed-out video playback were verified before submission. The organizer's actual confirmation and saved values were preserved after the entrant submitted. Local-behavior and factual-uncertainty limits remain unchanged; the receipt is not an eligibility or award guarantee.
