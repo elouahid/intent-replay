@@ -47,7 +47,9 @@ The separate final completion audit passed **76/76 checks** and the browser show
 
 The completed demonstration used B/C; the original human A/B sequence was not performed. Human approvals of B and C and completion of C came from the person's actual room actions. Verification requests and the refused stale-B probe were authorized assistant actions. Reopen [C's evidence](http://127.0.0.1:8054/qa/runs/5aa6bb5509734cb388537a63007d3087) read-only; no further command is required. See [commands](docs/QA_ROOM_COMMANDS.md) for future manual runs.
 
-Prepared materials: [README](README.md), [concise demo script](docs/FLIP_DEMO_SCRIPT.md), and [submission draft](docs/FLIP_SUBMISSION.md). Nothing has been published or submitted for Flip.
+Prepared materials: [README](README.md), [concise demo script](docs/FLIP_DEMO_SCRIPT.md), and [submission text](docs/FLIP_SUBMISSION.md). The approved 2:55 Flip video is uploaded as unlisted at https://youtu.be/sPFCppd1n1A with HD processing complete. Public source target: https://github.com/elouahid/intent-replay/tree/flip-qa-room; preserve `main`. The entrant is signed into the actual form and must personally submit it under organizer rule 3(b). Submission remains unconfirmed until an organizer receipt is observed.
+
+Video assembly source checkpoint: `d65c97514431ab4b80e1bd242333bb35eee66552`. Final MP4 SHA-256: `6f8c3853c68b8dbb9b953ab68570835461c6ef8f55356b3ad536a7509e3246f6`. Original clips and detailed technical/visual review remain under `.local/flip-demo-20261107`; upload proof is under `.local/flip-submission-20261107`. No human review record or original evidence was changed for filming or publication. The actual submission form requires under 3 minutes, YouTube/Loom public or unlisted, and seven required fields; copyable text is in the submission document. Deadline: 7 November 2026 18:29 UTC.
 
 ## Result distinctions
 

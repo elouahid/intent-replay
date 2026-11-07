@@ -4,6 +4,8 @@ A replay can pass its checks while its human approval belongs to an older run. I
 
 One person, one Console-managed QA agent, and one local Mattermost room use the retained booking withdrawal/control pair. The existing runner, evaluator, saved model captures and report exporter are reused unchanged.
 
+**[Watch the Flip demonstration (2:55)](https://youtu.be/sPFCppd1n1A)** · [Flip source branch](https://github.com/elouahid/intent-replay/tree/flip-qa-room). The video walks through retained real-room events and actual human review; it is separate from the earlier Meta demonstration.
+
 ## Verified checkpoint — 7 November 2026 UTC
 
 The complete real-room review sequence is verified: **human approval B → request C → stale B completion refused → human approval C → human completion C**. Verification requests and the stale-B negative probe were sent by Codex under the user's authorization. The person personally sent B's approval and C's separate approval and completion commands. The managed agent handled the original messages through `qa_room.dispatch_original_message`.
@@ -72,7 +74,7 @@ The Switch integration also needs a locally configured supported Switch/Mattermo
 ## Evidence, demo and limits
 
 - [Verification record](FLIP_VERIFICATION.json) and [implementation report](FLIP_IMPLEMENTATION_REPORT.md): actual events, tested behavior and completed exact-run human review.
-- [Demo script](docs/FLIP_DEMO_SCRIPT.md) and [submission draft](docs/FLIP_SUBMISSION.md): prepared materials, not a published Flip video or submitted entry.
+- [Published Flip video](https://youtu.be/sPFCppd1n1A), [demo script](docs/FLIP_DEMO_SCRIPT.md), and [submission materials](docs/FLIP_SUBMISSION.md). Video/source publication is separate from the entrant's final submission; an organizer receipt is required to confirm submission.
 - [Handoff](FLIP_HANDOFF.md): continuation and exact current evidence.
 
 Prior implementation verification passed 143 Python tests and eight focused MCP tests. A later isolated selection passed three review-safety tests in 4.165 seconds. Replay makes zero new model requests; the managed Switch agent uses its provider separately, with exact usage unmeasured. The backend is fictional local SQLite booking behavior, not a production booking system. Evidence hashes establish consistency, not independent provider attestation.

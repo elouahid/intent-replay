@@ -1,18 +1,18 @@
 # Intent Replay — QA Room
 
-**Submission draft for user review, updated 7 November 2026 UTC. Not submitted or published.**
+**Submission materials updated 7 November 2026 UTC. The new Flip video is uploaded and unlisted; final organizer submission is pending the entrant's own action and receipt.**
 
 ## Submission preparation checkpoint — 7 November 2026
 
-Recommended track: **Best Business Workflow**. The [official cohost requirements](https://www.devtoolsacademy.com/hackathons/flip-the-switch) call for a public repository, a short workflow video, and a README explaining the connected agents, channel setup and reproduction. Our recording target is about 2 minutes 40 seconds; that is an editorial target, not a verified organizer limit. The [official schedule](https://www.wemakedevs.org/hackathons/switch/schedule) gives **7 November 2026, 11:59 PM IST (18:29 UTC)** as the submission deadline.
+Track: **Best Business Workflow**. The [official cohost requirements](https://www.devtoolsacademy.com/hackathons/flip-the-switch) call for a public repository, a short workflow video, and a README explaining the connected agents, channel setup and reproduction. The authenticated [submission form](https://www.wemakedevs.org/hackathons/switch/submit), inspected on 7 November, explicitly requires a video **under 3 minutes**, hosted on YouTube or Loom and public or unlisted. The approved final video is **174.788 seconds (2:55)** and meets that length requirement. The [official schedule](https://www.wemakedevs.org/hackathons/switch/schedule) gives **7 November 2026, 11:59 PM IST (18:29 UTC)** as the submission deadline.
 
-The [submission page](https://www.wemakedevs.org/hackathons/switch/submit) loads and requires sign-in before its fields can be inspected. Field names, character limits and any additional video restrictions are not yet verified. The person should enter and submit their own final form: [official rule 3](https://www.wemakedevs.org/hackathons/switch/rules) prohibits automated registration/submission while permitting AI tools for development.
+The entrant signed in and the actual seven required fields were inspected: title, track, description, GitHub source, demo video, how Switch was used, and feedback about Switch. No `maxlength` attributes were present on the observed text fields; server-side limits are not inferred. The person should enter and submit their own final form: [official rule 3](https://www.wemakedevs.org/hackathons/switch/rules) prohibits automated registration/submission while permitting AI tools for development.
 
-Live preparation checks confirmed C is current, evidence-valid and completed. GitHub's branch listing contains only `main` at the preserved Meta baseline. The Flip checkpoint `dd78f5b9ac2c09ba9f9b57a188399d0c55508f92` is still local. Before submission, publish the reviewed Flip branch, verify its public README and source, record/upload the new video, then insert both verified public links. The loopback room and evidence URLs are recording surfaces, not judge-accessible URLs.
+The prepared public source URL is https://github.com/elouahid/intent-replay/tree/flip-qa-room; publication must preserve `main` at the Meta baseline. The new Flip video is https://youtu.be/sPFCppd1n1A, uploaded to the existing lotis7 channel, saved as unlisted, with HD processing complete. The user watched the assembled video and confirmed its audio. The room's completed C checkpoint remains preserved. Loopback room/evidence URLs are local recording surfaces, not judge-accessible URLs.
 
 ## Copyable text for the person
 
-Use these values when the form asks for the corresponding information. Adapt only after inspecting the actual fields; do not paste placeholders as final links.
+Use these values for the observed form fields. The entrant should read and personally submit them; the feedback paragraph is suggested wording for the entrant to confirm.
 
 Project title:
 
@@ -38,15 +38,55 @@ Video title:
 Intent Replay — QA Room | Flip the Switch Demo
 ```
 
-Video description draft (add the verified public Flip source link before publishing):
+Published video description (followed by chapter timestamps in YouTube):
 
 ```text
 Intent Replay connects a managed Codex QA agent to a Mattermost room through Switch. This video walks through the preserved real workflow: saved-case replay, evidence inspection, human approval of B, a newer run C, refusal of stale B completion, and fresh human approval and completion of C.
+
+Flip source and setup: https://github.com/elouahid/intent-replay/tree/flip-qa-room
 
 The Switch room, original-event adapter and exact-run review workflow were added for Flip. The earlier Intent Replay runner, evaluator, saved captures and frozen expectations are preserved.
 
 All four frozen regression expectations match. The deliberately faulty withdrawal execution fails as expected; the guarded execution and control pass. Factual accuracy remains inconclusive. Human completion covers checked local execution behavior only. Saved replay makes zero new model requests; managed-agent inference is separate and unmeasured.
 ```
+
+Project description:
+
+```text
+Intent Replay helps developers and QA teams review agent-driven changes without letting an old approval authorize a newer result. In a Switch-connected Mattermost room, a person requests a supported replay, inspects its evidence, and approves the exact run.
+
+The demo checks a booking change after the customer withdraws consent, alongside a no-withdrawal control. It preserves the earlier Meta runner and evaluator while adding the Switch room workflow, evidence validation, and exact-run human review. All four frozen expectations match, including the deliberately faulty execution's expected failure. Review covers checked local behavior only; factual accuracy remains INCONCLUSIVE.
+```
+
+GitHub Repository or contribution:
+
+```text
+https://github.com/elouahid/intent-replay/tree/flip-qa-room
+```
+
+Demo video:
+
+```text
+https://youtu.be/sPFCppd1n1A
+```
+
+How did you use Switch in your project?
+
+```text
+I worked solo with a managed Codex QA agent connected to Mattermost through Switch. A narrow MCP tool dispatches original room messages; the server verifies their source and binds human review to the exact run and evidence.
+
+In the recorded workflow, I personally approved B, authorized the assistant to request C and attempt completion of old B, and observed that stale completion being refused. I then personally approved and completed C. Saved replay uses no new model inference; the Switch agent's inference is separate.
+```
+
+What did you like about Switch, and what would you improve?
+
+```text
+I liked having human requests, the managed agent, evidence links, and review confirmations together in one room. It made the workflow visible and reviewable.
+
+I would improve diagnostics for MCP project trust and tool availability, room membership permissions, and service recovery after restart. Clearer Windows setup guidance and Mattermost memory requirements would also help. These were concrete setup issues I encountered while getting the real workflow running.
+```
+
+Leave live deployment and the optional track-detail fields blank: this demonstration has no public live service, Core Contribution PR, published build blog, Wispr usage card, or social-post entry. The demonstrated team is one person and a managed agent; do not imply additional human teammates.
 
 ## Short description
 
@@ -90,8 +130,8 @@ Python, SQLite, FastAPI, the existing Intent Replay engine/exporter, Switch Cons
 
 - [README and reproduction](../README.md), [demo script](FLIP_DEMO_SCRIPT.md), [room setup](QA_ROOM_SETUP.md), [human commands](QA_ROOM_COMMANDS.md).
 - [Original submitted Meta source](https://github.com/elouahid/intent-replay/tree/d074b160d7af890ce7d8d99c2f580c597684a95c) and [prior Meta video](https://youtu.be/irrL2Acrs6E): historical baseline, not the Flip submission/demo.
-- Flip source currently resides in the isolated `flip-qa-room` branch. This draft provides no new public Flip source URL or published Flip video URL.
+- [Flip source branch](https://github.com/elouahid/intent-replay/tree/flip-qa-room) and [new Flip video](https://youtu.be/sPFCppd1n1A). The source branch preserves the original `main`; publication does not establish that the final hackathon form was submitted.
 
 Use the committed-source archive recipe in [the implementation report](../FLIP_IMPLEMENTATION_REPORT.md) when preparing the package. Exclude `.local/`, credentials, dispatch tokens, provider logins and runtime databases. The demonstration's loopback evidence URLs work on that computer only; they are not public judge links. Document machine-specific MCP path adaptation for a fresh checkout.
 
-Before publication, confirm the actual submission form and its requirements, select the final source checkpoint and recording, and retain the local-behavior and factual-uncertainty limits. This draft makes no claim about eligibility, required video duration, or final submission acceptance.
+The actual form and its under-three-minute video requirement were verified. Before the entrant submits, confirm that the Flip branch opens publicly and the video is accessible without the owner's login. Retain the local-behavior and factual-uncertainty limits. Save the organizer's actual receipt before recording final acceptance; these materials make no eligibility or acceptance guarantee.
