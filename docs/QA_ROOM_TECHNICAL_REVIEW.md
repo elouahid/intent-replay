@@ -2,7 +2,7 @@
 
 Technical evidence inspected by Codex on 2026-11-06; updated 2026-11-07 with verified actual human room records. **The assistant's inspection is distinct from the person's B/C approvals and C completion.**
 
-Task `booking-withdrawal`; Mattermost room `496e3d1b-8c14-4a6c-9bc5-1e164c0da362`. [A's preserved evidence](http://127.0.0.1:8054/qa/runs/dd19c14126444bb79ef57882bfa48602) and [B's evidence](http://127.0.0.1:8054/qa/runs/a9ce6b8d4b9f4c1eb6d8cab94d24cd67) are historical. [C](http://127.0.0.1:8054/qa/runs/5aa6bb5509734cb388537a63007d3087) is current, evidence-valid and human-review completed. The latest B/C checkpoint supersedes earlier workflow states without changing retained execution evidence.
+Task `booking-withdrawal`, in the retained private Mattermost room. This public historical summary omits deployment identities; original records remain preserved privately and in unchanged submission history. [A's preserved evidence](http://127.0.0.1:8054/qa/runs/dd19c14126444bb79ef57882bfa48602) and [B's evidence](http://127.0.0.1:8054/qa/runs/a9ce6b8d4b9f4c1eb6d8cab94d24cd67) are historical. [C](http://127.0.0.1:8054/qa/runs/5aa6bb5509734cb388537a63007d3087) is current, evidence-valid and human-review completed at the retained checkpoint. The latest B/C checkpoint supersedes earlier workflow states without changing retained execution evidence.
 
 ## Latest B/C human-review checkpoint
 
@@ -58,7 +58,7 @@ Three existing isolated tests were rerun successfully: simulated A/B stale compl
 
 ## Historical B checkpoint before approval
 
-After the person completed scoped sign-in and the existing agent restarted successfully, Codex sent a fresh verification through the actual Mattermost UI: `sw_2038d700ac6120ad2ddd84c04b7139ca`, sequence 15, 23:30:20 UTC. The managed agent's activity records completed `qa_room.dispatch_original_message` and completed turn `b0294787-bfdf-5039-9362-1a41241514e9`. It returned B `a9ce6b8d4b9f4c1eb6d8cab94d24cd67` in result `sw_1a434e896a694e1db3d5ae3399453cdd`, sequence 16. No operator dispatch was used.
+After the person completed scoped sign-in and the existing agent restarted successfully, Codex sent a fresh verification through the actual Mattermost UI: `sw_2038d700ac6120ad2ddd84c04b7139ca`, sequence 15, 23:30:20 UTC. The managed agent's activity records completed `qa_room.dispatch_original_message` and completed turn `<redacted-turn-id-1>`. It returned B `a9ce6b8d4b9f4c1eb6d8cab94d24cd67` in result `sw_1a434e896a694e1db3d5ae3399453cdd`, sequence 16. No operator dispatch was used.
 
 B supports the same scoped acceptance finding as A. The guarded withdrawal accepts revision 2 at journal sequence 7, denies authorization at 8 and suppresses at 9 in shared transaction `70aad15c973a4a0a82bf83591fcd050c`; the independent read after 9 retains 14:00. The guarded control authorizes revision 1 at sequence 6 and commits at 7 in shared transaction `7fadfba6617d4721a796e846608013d3`; its independent read after 7 is 15:00. The faulty withdrawal's expected execution FAIL and the other three execution PASS outcomes all match their frozen expectations.
 

@@ -1,4 +1,11 @@
 {
+  "publication_redactions": {
+    "redacted_on": "2026-11-15",
+    "source_commit": "fa5ef91159d2783813caf2043dd57542afbcfc94",
+    "scope": "Public historical summary; local machine paths and deployment identity values are replaced with explicit placeholders.",
+    "original_records": "Unmodified records remain in the submitted snapshot and private local evidence. This file is not a runtime configuration or original authenticated event payload.",
+    "hash_interpretation": "Retained hashes identify the original unredacted artifacts and events, not this redacted summary. Run IDs, event IDs, timestamps, verdicts and human-review outcomes are unchanged."
+  },
   "scope": "Completed real Mattermost B/C exact-run human-review walkthrough: actual B approval, automatic C replay, authorized assistant stale-B completion refusal, actual fresh C approval and completion. C remains current with valid evidence; factual uncertainty unchanged.",
   "python_suite": {
     "status": "PASS",
@@ -43,8 +50,8 @@
     "channel_type": "direct",
     "request_initiator": "Codex on user-authorized verification task; not a human review",
     "request_event": "sw_f36a2b41b84b4269a0cf9ba88ed728c2",
-    "room_id": "95574125-421c-4810-bdc2-d47822117d2b",
-    "agent_id": "e9d69e59-a025-4e2d-abea-ce114dc448f8",
+    "room_id": "<redacted-direct-room-id>",
+    "agent_id": "<redacted-agent-id>",
     "provider": "standalone codex-cli0.166.0, existing login and provider-default model",
     "dispatch": "automatic Console-managed agent Node HTTP call; operator did not dispatch this event",
     "run_id": "50ed6e0dcc144da0adc9409cf9ada895",
@@ -106,12 +113,12 @@
   "actual_human_walkthrough_complete": true,
   "real_switch_mattermost": {
     "recorded_at": "2026-11-05T22:41:33.045394+00:00",
-    "room_id": "496e3d1b-8c14-4a6c-9bc5-1e164c0da362",
+    "room_id": "<redacted-mattermost-room-id>",
     "room_url": "http://localhost:56742/switch/channels/intent-replay-qa",
-    "bridge_id": "7b6daa01-6bf8-43e0-b4f2-71d30a21e9e3",
-    "agent_id": "e9d69e59-a025-4e2d-abea-ce114dc448f8",
+    "bridge_id": "<redacted-bridge-id>",
+    "agent_id": "<redacted-agent-id>",
     "agent_revision": 6,
-    "reviewer_client_id": "f97780ca-7e77-4573-902d-e66eb59e9fe7",
+    "reviewer_client_id": "<redacted-reviewer-client-id>",
     "docker_engine": "29.9.2",
     "mattermost_container": "switchdash-local-mattermost-mattermost-1",
     "container_health": "healthy",
@@ -176,7 +183,7 @@
     "limitation": "Completion covers checked local SQLite execution behavior only. Factual accuracy remains INCONCLUSIVE; overall task remains FAIL for faulty withdrawal and INCONCLUSIVE for guarded/control. Managed-agent exact inference usage unmeasured; no Flip publication/submission claimed.",
     "project_trust": {
       "user_authorized": true,
-      "exact_project": "C:\\Users\\asus\\OneDrive\\Documents\\ChatGPT\\hackthons\\intent-replay-public-submission-20261104",
+      "exact_project": "<meta-submitted-checkout>",
       "only_that_entry_changed": true,
       "private_backup_retained": true,
       "managed_mcp_handshake_utc": "2026-11-05T22:26:05Z",
@@ -191,7 +198,7 @@
         "sent_at": "2026-11-05T22:30:05.392369+00:00",
         "source": "mattermost",
         "sender_kind": "human",
-        "pinned_client_id": "f97780ca-7e77-4573-902d-e66eb59e9fe7",
+        "pinned_client_id": "<redacted-reviewer-client-id>",
         "parsed_command": [
           "verify",
           "booking-withdrawal",
@@ -202,7 +209,7 @@
         "event_id": "sw_22b4f2385c01448297121bd1d46314ec",
         "source": "switch",
         "sender_kind": "agent",
-        "agent_id": "e9d69e59-a025-4e2d-abea-ce114dc448f8"
+        "agent_id": "<redacted-agent-id>"
       },
       "binding_sha256": "14e259887a131272446d32aec9216eeadfb889b54a6d765f077bbccd48ec91cb",
       "execution_contract_sha256": "f7329ae57d934c5a0399755c0d1d7e7e6f42c86975b6067d5fa43a4ed0bbd1dd",
@@ -367,7 +374,7 @@
         "sent_at": "2026-11-06T23:30:20.436952+00:00",
         "source": "mattermost",
         "sender_kind": "human",
-        "pinned_client_id": "f97780ca-7e77-4573-902d-e66eb59e9fe7"
+        "pinned_client_id": "<redacted-reviewer-client-id>"
       },
       "result_post": {
         "event_id": "sw_1a434e896a694e1db3d5ae3399453cdd",
@@ -375,7 +382,7 @@
         "sent_at": "2026-11-06T23:30:32.263720+00:00",
         "source": "switch",
         "sender_kind": "agent",
-        "agent_id": "e9d69e59-a025-4e2d-abea-ce114dc448f8"
+        "agent_id": "<redacted-agent-id>"
       },
       "binding_sha256": "ba73f978df6da5f22bec1b5a9ee2b55b367a6cc4512e8aebd20bf1e71be79630",
       "execution_contract_sha256": "f7329ae57d934c5a0399755c0d1d7e7e6f42c86975b6067d5fa43a4ed0bbd1dd",
@@ -541,7 +548,7 @@
             "kind": "turn",
             "title": "",
             "status": "completed",
-            "turnId": "b0294787-bfdf-5039-9362-1a41241514e9",
+            "turnId": "<redacted-turn-id-1>",
             "messageId": "sw_2038d700ac6120ad2ddd84c04b7139ca",
             "occurredAt": "2026-11-06T23:30:34.515000Z"
           },
@@ -549,7 +556,7 @@
             "kind": "tool-activity",
             "title": "switch.read_context",
             "status": "completed",
-            "turnId": "b0294787-bfdf-5039-9362-1a41241514e9",
+            "turnId": "<redacted-turn-id-1>",
             "messageId": "sw_2038d700ac6120ad2ddd84c04b7139ca",
             "occurredAt": "2026-11-06T23:30:27.004000Z"
           },
@@ -557,7 +564,7 @@
             "kind": "tool-activity",
             "title": "qa_room.dispatch_original_message",
             "status": "completed",
-            "turnId": "b0294787-bfdf-5039-9362-1a41241514e9",
+            "turnId": "<redacted-turn-id-1>",
             "messageId": "sw_2038d700ac6120ad2ddd84c04b7139ca",
             "occurredAt": "2026-11-06T23:30:32.339000Z"
           }
@@ -575,7 +582,7 @@
         "review_status": "approved",
         "approval": {
           "run_id": "a9ce6b8d4b9f4c1eb6d8cab94d24cd67",
-          "actor_id": "switch:client:f97780ca-7e77-4573-902d-e66eb59e9fe7",
+          "actor_id": "switch:client:<redacted-reviewer-client-id>",
           "source": "switch:mattermost",
           "event_id": "sw_cc26e2db23c2ff3d98607db46364da83",
           "approved_at": "2026-11-06T23:44:37.779137+00:00",
@@ -598,7 +605,7 @@
         "sent_at": "2026-11-06T23:47:44.616887+00:00",
         "source": "mattermost",
         "kind": "human",
-        "client_id": "f97780ca-7e77-4573-902d-e66eb59e9fe7",
+        "client_id": "<redacted-reviewer-client-id>",
         "agent_id": null,
         "thread_root_id": null,
         "body": "@intent-replay-qa qa verify booking-withdrawal corrected-meta-withdrawal-control",
@@ -610,8 +617,8 @@
         "sent_at": "2026-11-06T23:47:49.393909+00:00",
         "source": "switch",
         "kind": "agent",
-        "client_id": "7fc4b42b-ca0e-41cf-a2af-2e54b92a350b",
-        "agent_id": "e9d69e59-a025-4e2d-abea-ce114dc448f8",
+        "client_id": "<redacted-agent-client-id>",
+        "agent_id": "<redacted-agent-id>",
         "thread_root_id": null,
         "body": null,
         "message_sha256": "9eb367834683cca5c65d5df61776789b9f69af9efd99d7c5e829d370b3227ec3"
@@ -756,7 +763,7 @@
         "review_status": "completed",
         "approval": {
           "run_id": "5aa6bb5509734cb388537a63007d3087",
-          "actor_id": "switch:client:f97780ca-7e77-4573-902d-e66eb59e9fe7",
+          "actor_id": "switch:client:<redacted-reviewer-client-id>",
           "source": "switch:mattermost",
           "event_id": "sw_64e554b42f2ff28f01d8822989a8d8c6",
           "approved_at": "2026-11-06T23:59:34.550545+00:00",
@@ -764,7 +771,7 @@
         },
         "completion": {
           "run_id": "5aa6bb5509734cb388537a63007d3087",
-          "actor_id": "switch:client:f97780ca-7e77-4573-902d-e66eb59e9fe7",
+          "actor_id": "switch:client:<redacted-reviewer-client-id>",
           "source": "switch:mattermost",
           "event_id": "sw_cc40b260975f872a9d47d332973d82f2",
           "completed_at": "2026-11-07T00:02:10.716142+00:00",
@@ -840,7 +847,7 @@
     "provider_credentials_copied_by_operator": false,
     "global_authentication_changed_by_operator": false,
     "supported_agent_restart": {
-      "operation_id": "4cf44b5d-c553-4544-ae57-4e9c7defb9cc",
+      "operation_id": "<redacted-restart-operation-id-1>",
       "status": "succeeded",
       "finished_at": "2026-11-06T23:26:49.067923Z"
     },
@@ -861,7 +868,7 @@
       "sent_at": "2026-11-06T23:44:30.789238+00:00",
       "source": "mattermost",
       "kind": "human",
-      "client_id": "f97780ca-7e77-4573-902d-e66eb59e9fe7",
+      "client_id": "<redacted-reviewer-client-id>",
       "agent_id": null,
       "thread_root_id": "sw_1a434e896a694e1db3d5ae3399453cdd",
       "body": "@intent-replay-qa qa approve booking-withdrawal a9ce6b8d4b9f4c1eb6d8cab94d24cd67",
@@ -873,8 +880,8 @@
       "sent_at": "2026-11-06T23:44:37.879176+00:00",
       "source": "switch",
       "kind": "agent",
-      "client_id": "7fc4b42b-ca0e-41cf-a2af-2e54b92a350b",
-      "agent_id": "e9d69e59-a025-4e2d-abea-ce114dc448f8",
+      "client_id": "<redacted-agent-client-id>",
+      "agent_id": "<redacted-agent-id>",
       "thread_root_id": null,
       "body": null,
       "message_sha256": "d18848ad4e2be8d52636db6cc3028ef6a5d1deaafeda1444ded4a8c0a822e3d7"
@@ -886,7 +893,7 @@
       "review_status": "approved",
       "approval": {
         "run_id": "a9ce6b8d4b9f4c1eb6d8cab94d24cd67",
-        "actor_id": "switch:client:f97780ca-7e77-4573-902d-e66eb59e9fe7",
+        "actor_id": "switch:client:<redacted-reviewer-client-id>",
         "source": "switch:mattermost",
         "event_id": "sw_cc26e2db23c2ff3d98607db46364da83",
         "approved_at": "2026-11-06T23:44:37.779137+00:00",
@@ -905,7 +912,7 @@
         "sent_at": "2026-11-06T23:48:25.785334+00:00",
         "source": "mattermost",
         "kind": "human",
-        "client_id": "f97780ca-7e77-4573-902d-e66eb59e9fe7",
+        "client_id": "<redacted-reviewer-client-id>",
         "agent_id": null,
         "thread_root_id": null,
         "body": "@intent-replay-qa qa complete booking-withdrawal a9ce6b8d4b9f4c1eb6d8cab94d24cd67",
@@ -917,8 +924,8 @@
         "sent_at": "2026-11-06T23:48:30.766085+00:00",
         "source": "switch",
         "kind": "agent",
-        "client_id": "7fc4b42b-ca0e-41cf-a2af-2e54b92a350b",
-        "agent_id": "e9d69e59-a025-4e2d-abea-ce114dc448f8",
+        "client_id": "<redacted-agent-client-id>",
+        "agent_id": "<redacted-agent-id>",
         "thread_root_id": null,
         "body": "QA request refused (stale_run): A newer verification was requested. Review and complete the current run.\nTask: booking-withdrawal. Requested result: a9ce6b8d4b9f4c1eb6d8cab94d24cd67. No review completion was granted.",
         "message_sha256": "5bb4517d87d6b7c83b27654d6f8f7636250b56bafc1feab6d909b8dd0f765682"
@@ -941,7 +948,7 @@
       "review_status": "completed",
       "approval": {
         "run_id": "5aa6bb5509734cb388537a63007d3087",
-        "actor_id": "switch:client:f97780ca-7e77-4573-902d-e66eb59e9fe7",
+        "actor_id": "switch:client:<redacted-reviewer-client-id>",
         "source": "switch:mattermost",
         "event_id": "sw_64e554b42f2ff28f01d8822989a8d8c6",
         "approved_at": "2026-11-06T23:59:34.550545+00:00",
@@ -949,7 +956,7 @@
       },
       "completion": {
         "run_id": "5aa6bb5509734cb388537a63007d3087",
-        "actor_id": "switch:client:f97780ca-7e77-4573-902d-e66eb59e9fe7",
+        "actor_id": "switch:client:<redacted-reviewer-client-id>",
         "source": "switch:mattermost",
         "event_id": "sw_cc40b260975f872a9d47d332973d82f2",
         "completed_at": "2026-11-07T00:02:10.716142+00:00",
@@ -1012,7 +1019,7 @@
       "sent_at": "2026-11-06T23:59:29.600223+00:00",
       "source": "mattermost",
       "sender": {
-        "clientId": "f97780ca-7e77-4573-902d-e66eb59e9fe7",
+        "clientId": "<redacted-reviewer-client-id>",
         "name": "user",
         "kind": "human",
         "agentId": null,
@@ -1026,7 +1033,7 @@
       "sent_at": "2026-11-07T00:02:06.428314+00:00",
       "source": "mattermost",
       "sender": {
-        "clientId": "f97780ca-7e77-4573-902d-e66eb59e9fe7",
+        "clientId": "<redacted-reviewer-client-id>",
         "name": "user",
         "kind": "human",
         "agentId": null,
@@ -1040,10 +1047,10 @@
       "sent_at": "2026-11-06T23:59:34.699445+00:00",
       "source": "switch",
       "sender": {
-        "clientId": "7fc4b42b-ca0e-41cf-a2af-2e54b92a350b",
+        "clientId": "<redacted-agent-client-id>",
         "name": "intent-replay-qa",
         "kind": "agent",
-        "agentId": "e9d69e59-a025-4e2d-abea-ce114dc448f8",
+        "agentId": "<redacted-agent-id>",
         "userId": null
       },
       "body": "Intent Replay QA | task booking-withdrawal | run 5aa6bb5509734cb388537a63007d3087\nRun: ready; current: yes. \nFrozen regression expectations: PASS.\nWithdrawal (fresh-withdrawal):\n- Faulty: expected committed at 2026-11-25T15:00:00+00:00; observed committed at 2026-11-25T15:00:00+00:00; execution FAIL.\n- Guarded: expected suppressed at 2026-11-25T14:00:00+00:00; observed suppressed at 2026-11-25T14:00:00+00:00; execution PASS.\nControl (fresh-control):\n- Faulty: expected committed at 2026-11-25T15:00:00+00:00; observed committed at 2026-11-25T15:00:00+00:00; execution PASS.\n- Guarded: expected committed at 2026-11-25T15:00:00+00:00; observed committed at 2026-11-25T15:00:00+00:00; execution PASS.\nExpected faulty withdrawal FAIL is a matching regression. Factual accuracy: INCONCLUSIVE / unassessed. Overall task: FAIL for faulty withdrawal; INCONCLUSIVE for guarded/control.\nHuman review: approved; reviewed run remains explicit in the report.\nOpen both reports and evidence bundles: http://127.0.0.1:8054/qa/runs/5aa6bb5509734cb388537a63007d3087\nHuman next action: @intent-replay-qa qa complete booking-withdrawal 5aa6bb5509734cb388537a63007d3087\nReplay inference: 0 new model calls. Switch-agent inference is separate and is not measured by the replay runner."
@@ -1054,10 +1061,10 @@
       "sent_at": "2026-11-07T00:02:10.844490+00:00",
       "source": "switch",
       "sender": {
-        "clientId": "7fc4b42b-ca0e-41cf-a2af-2e54b92a350b",
+        "clientId": "<redacted-agent-client-id>",
         "name": "intent-replay-qa",
         "kind": "agent",
-        "agentId": "e9d69e59-a025-4e2d-abea-ce114dc448f8",
+        "agentId": "<redacted-agent-id>",
         "userId": null
       },
       "body": "Intent Replay QA | task booking-withdrawal | run 5aa6bb5509734cb388537a63007d3087\nRun: ready; current: yes. \nFrozen regression expectations: PASS.\nWithdrawal (fresh-withdrawal):\n- Faulty: expected committed at 2026-11-25T15:00:00+00:00; observed committed at 2026-11-25T15:00:00+00:00; execution FAIL.\n- Guarded: expected suppressed at 2026-11-25T14:00:00+00:00; observed suppressed at 2026-11-25T14:00:00+00:00; execution PASS.\nControl (fresh-control):\n- Faulty: expected committed at 2026-11-25T15:00:00+00:00; observed committed at 2026-11-25T15:00:00+00:00; execution PASS.\n- Guarded: expected committed at 2026-11-25T15:00:00+00:00; observed committed at 2026-11-25T15:00:00+00:00; execution PASS.\nExpected faulty withdrawal FAIL is a matching regression. Factual accuracy: INCONCLUSIVE / unassessed. Overall task: FAIL for faulty withdrawal; INCONCLUSIVE for guarded/control.\nHuman review: completed; reviewed run remains explicit in the report.\nOpen both reports and evidence bundles: http://127.0.0.1:8054/qa/runs/5aa6bb5509734cb388537a63007d3087\nHuman review completed for the checked local execution behavior, using run 5aa6bb5509734cb388537a63007d3087.\nReplay inference: 0 new model calls. Switch-agent inference is separate and is not measured by the replay runner."
@@ -1089,10 +1096,10 @@
     "C_approval_completion_managed_activity": {
       "approve": [
         {
-          "agentId": "e9d69e59-a025-4e2d-abea-ce114dc448f8",
-          "sessionId": "60559eab-141e-5548-a2bf-50916a216bf4",
-          "turnId": "dfe0f361-f476-598a-a3d6-963126d3c256",
-          "itemId": "[\"dfe0f361-f476-598a-a3d6-963126d3c256\",\"exec-936b9b5b-38a8-446d-baa2-19341fa54807\"]",
+          "agentId": "<redacted-agent-id>",
+          "sessionId": "<redacted-managed-session-id>",
+          "turnId": "<redacted-turn-id-2>",
+          "itemId": "<redacted-activity-item-id-1>",
           "status": "completed",
           "title": "qa_room.dispatch_original_message",
           "messageId": "sw_64e554b42f2ff28f01d8822989a8d8c6",
@@ -1101,10 +1108,10 @@
       ],
       "complete": [
         {
-          "agentId": "e9d69e59-a025-4e2d-abea-ce114dc448f8",
-          "sessionId": "60559eab-141e-5548-a2bf-50916a216bf4",
-          "turnId": "641d32d2-c795-5617-819d-b20ee3f16552",
-          "itemId": "[\"641d32d2-c795-5617-819d-b20ee3f16552\",\"exec-f58be84c-f5ca-41ae-ae3b-4e57a9cdfd21\"]",
+          "agentId": "<redacted-agent-id>",
+          "sessionId": "<redacted-managed-session-id>",
+          "turnId": "<redacted-turn-id-3>",
+          "itemId": "<redacted-activity-item-id-2>",
           "status": "completed",
           "title": "qa_room.dispatch_original_message",
           "messageId": "sw_cc40b260975f872a9d47d332973d82f2",

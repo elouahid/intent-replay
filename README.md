@@ -10,7 +10,9 @@ Intent Replay helps QA engineers reproduce the gap between an agent's proposed a
 | Meta submission, 4 November 2026 | [`d074b16`](https://github.com/elouahid/intent-replay/tree/d074b160d7af890ce7d8d99c2f580c597684a95c) | `meta-submitted-2026-11-04` | [Meta video, 2:46](https://youtu.be/irrL2Acrs6E) |
 | Flip submission, 7 November 2026 | [`79fa75e`](https://github.com/elouahid/intent-replay/tree/79fa75e10bf06ad6dd44acc3836e97ea71cd94f4) | `flip-submitted-2026-11-07` | [QA Room video, 2:55](https://youtu.be/sPFCppd1n1A) |
 
-The submitted Flip branch link remains fixed at its submitted commit. Meta originally linked to the repository root; use its immutable source link above for the submitted version as `main` advances. The later receipt closeout `c58d563` is included in maintained `main`, separately from both submissions. [Promotion record](docs/MAIN_PROMOTION.md) documents the verified archives, local worktrees and pending publication.
+The submitted Flip branch link remains fixed at its submitted commit. Meta originally linked to the repository root; use its immutable source link above for the submitted version as `main` advances. The later receipt closeout `c58d563` is included in maintained `main`, separately from both submissions. [Promotion record](docs/MAIN_PROMOTION.md) documents the verified archives and the completed 15 November publication of maintained `main` and both submission tags.
+
+Current-tree documentation and the public `FLIP_BASELINE_VERIFICATION.json` / `FLIP_VERIFICATION.json` summaries omit personal machine paths and deployment identities. Run/event IDs, evidence hashes and results remain recorded; historical hashes identify original evidence, not the edited summary bytes. This cleanup does not rewrite Git history: the [Meta submission tag](https://github.com/elouahid/intent-replay/tree/meta-submitted-2026-11-04) and [Flip submission tag](https://github.com/elouahid/intent-replay/tree/flip-submitted-2026-11-07) preserve the original public snapshots, including earlier paths, as requested. Original private artifacts also remain unchanged.
 
 ## Run the saved-replay demonstration
 
@@ -59,24 +61,21 @@ A separate final **C completion audit passed 76/76 checks** of the original huma
 
 All four frozen expectations match. Factual accuracy remains **INCONCLUSIVE / unassessed**; overall task remains FAIL for faulty withdrawal and INCONCLUSIVE for guarded/control. C's completion means only: “Human review completed for the checked local execution behavior, using run 5aa6bb5509734cb388537a63007d3087.”
 
-## Resume the demonstrated Windows setup
+## Resume a configured Windows installation
 
-The installed setup uses Switch Console **0.40.1**, native Core **0.31.0**, Docker-backed Mattermost, and the existing managed agent `intent-replay-qa`. Start Docker and the existing native server/Mattermost only if stopped. Use the preserved Console profile:
+The demonstrated setup used Switch Console **0.40.1**, native Core **0.31.0**, Docker-backed Mattermost, and managed agent `intent-replay-qa`. Start Docker and your existing Switch Console profile from the installed application. Start its native server/Mattermost only if stopped. From the repository root of the configured deployment, using its isolated environment:
 
 ```powershell
-Start-Process -FilePath 'C:\Users\asus\AppData\Local\Programs\Switch Console\Switch Console.exe' -ArgumentList 'switchdash://focus'
-Set-Location 'C:\Users\asus\OneDrive\Documents\ChatGPT\intent-replay-flip'
-$qaPython = 'C:\Users\asus\OneDrive\Documents\ChatGPT\hackthons\.venv\Scripts\python.exe'
-& $qaPython -B .\source\scripts\run_qa_room.py probe
+& .\.venv\Scripts\python.exe -B .\source\scripts\run_qa_room.py probe
 ```
 
 Reuse the evidence listener on port 8054. **Only if it is absent**, start one instance and keep it running:
 
 ```powershell
-& $qaPython -B .\source\scripts\run_qa_room.py serve
+& .\.venv\Scripts\python.exe -B .\source\scripts\run_qa_room.py serve
 ```
 
-Open the [QA room](http://localhost:56742/switch/channels/intent-replay-qa) and [current evidence](http://127.0.0.1:8054/qa/current) on this computer. Confirm the native server and live single-tool MCP catalog before sending a fresh standalone room request:
+Open your QA room through Console and [current evidence](http://127.0.0.1:8054/qa/current) on the service's computer. These commands assume the default evidence port and a completed local configuration. They do not migrate the historical installation or make its retained runs available in a fresh store. Machine-specific paths and deployment identities are retained privately and in the unchanged submission snapshot. Confirm the native server and live single-tool MCP catalog before sending a fresh standalone room request:
 
 ```text
 @intent-replay-qa qa verify booking-withdrawal corrected-meta-withdrawal-control

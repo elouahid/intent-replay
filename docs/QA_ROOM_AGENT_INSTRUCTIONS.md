@@ -5,7 +5,7 @@ Workspace: the **absolute path of the intended configured checkout**, matching i
 Verification task: `booking-withdrawal`.
 Supported case set: `corrected-meta-withdrawal-control`.
 
-For maintained development on the original machine, the new source worktree is `C:\Users\asus\OneDrive\Documents\ChatGPT\intent-replay-main`. The preserved demonstrated agent remains rooted in `C:\Users\asus\OneDrive\Documents\ChatGPT\intent-replay-flip`; source promotion does not retarget it. Select and configure the intended deployment explicitly before installing these instructions. See [setup](QA_ROOM_SETUP.md).
+Maintained development uses the `intent-replay-main` checkout. The preserved demonstrated agent remains rooted in its separately configured `intent-replay-flip` checkout; source promotion does not retarget it. Select and configure the intended deployment explicitly before installing these instructions. Personal absolute paths remain in private configuration and unchanged submission history. See [setup](QA_ROOM_SETUP.md).
 
 This agent connects a real Switch room message to the fixed Intent Replay dispatcher. The targeted local integration is Switch Console 0.40.1 with native Switch Core 0.31.0. Console manages the agent; a supported messaging app supplies its actual room. Console setup or a gateway probe alone is not proof of real-room behavior. Connection setup and the real-room walkthrough must be verified separately.
 
@@ -23,7 +23,7 @@ This agent connects a real Switch room message to the fixed Intent Replay dispat
 3. The dispatcher retrieves the original authenticated message from Switch and validates its room, pinned human reviewer, complete command, event identity, and authoritative send time. The core compares that original time with the finished run and actual approval inside its completion transaction. Never pass a message body, actor name, timestamp, consent flag, or assertion that somebody approved. Those are not bridge inputs.
 4. The server posts the deterministic result as the QA agent through its bearer-authenticated Switch route. **Do not post acknowledgements, progress updates, or a second model-written result or summary for supported QA commands.** After dispatch, wait for another real human message. Duplicate events are idempotent. If posting is uncertain or a run is interrupted, preserve the returned status; do not invent success, resend the post, or create a replacement event.
 
-The managed provider is the official npm `@openai/codex@0.166.0`, using the existing ChatGPT login/model. Two actual Mattermost requests encountered a trusted Node-process exit before dispatch; no replay or receipt was created. The project-local MCP tool replaces that unreliable transport while retaining the same HTTP dispatcher and original-event checks. It uses the already-installed MCP SDK and does not change sandbox, trust, or approval policy. Human review still requires the person's actual room action.
+The demonstrated managed provider was the official npm `@openai/codex@0.166.0`, using the existing ChatGPT login/model. Two actual Mattermost requests encountered a trusted Node-process exit before dispatch; no replay or receipt was created. The project-local MCP tool replaces that unreliable transport while retaining the same HTTP dispatcher and original-event checks. It requires the optional MCP SDK in the configured launcher environment and does not change sandbox, trust, or approval policy. Human review still requires the person's actual room action.
 
 ## Operator diagnostic fallback
 

@@ -1,6 +1,6 @@
 # Flip the Switch — Intent Replay handoff
 
-**Maintenance update, 15 November 2026:** `main` now includes the Flip history in `C:\Users\asus\OneDrive\Documents\ChatGPT\intent-replay-main`. The original submitted checkout is preserved detached at Meta commit `d074b16`; the local Flip branch and its runtime remain unchanged. Submission tags identify Meta `d074b16` and Flip `79fa75e`. Remote publication is still pending, and remote `flip-qa-room` remains frozen at `79fa75e`. See [MAIN_PROMOTION.md](docs/MAIN_PROMOTION.md). Statements below about `main` remaining at the baseline or closeout documentation staying local describe the 7 November checkpoint, superseded for maintained `main` by the user's promotion request. The actual review/evidence records are unchanged.
+**Maintenance update, 15 November 2026:** maintained `main` and both submission tags were published and verified at main checkpoint `fa5ef91159d2783813caf2043dd57542afbcfc94`. The original submitted checkout is preserved detached at Meta commit `d074b16`; the local Flip branch and its runtime remain unchanged. Submission tags identify Meta `d074b16` and Flip `79fa75e`; remote `flip-qa-room` remains frozen at `79fa75e`. See [MAIN_PROMOTION.md](docs/MAIN_PROMOTION.md). Statements below about `main` remaining at the baseline or closeout documentation staying local describe the 7 November checkpoint. Public documentation and historical JSON summaries now omit machine paths and deployment identities; their unredacted originals remain private and in submission history. The actual run/event identities, evidence hashes, results and human-review records are preserved.
 
 Updated 2026-11-07 UTC. **The real B/C walkthrough is complete: actual human B approval → fresh C → refused stale-B completion → actual human C approval and completion. C is current, evidence-valid and completed for the checked local execution behavior. No further review command is needed.**
 
@@ -9,21 +9,19 @@ Recovery preserved A and its evidence. Docker's 2 GB Hyper-V allocation failure 
 ## Baseline and isolation
 
 - Submitted baseline: **`d074b160d7af890ce7d8d99c2f580c597684a95c`**, identified from submission/review evidence, not assumed from HEAD.
-- Worktree: **`C:\Users\asus\OneDrive\Documents\ChatGPT\intent-replay-flip`**, branch **`flip-qa-room`**. Application: `source`. Setup commit: `15a3839933d7add8500fdbefd1c70a009e50f772`.
-- Keep shared Git/submitted checkout `C:\Users\asus\OneDrive\Documents\ChatGPT\hackthons\intent-replay-public-submission-20261104`; its `main` is the submitted baseline and this worktree uses its Git metadata.
-- Submitted archive `C:\Users\asus\OneDrive\Documents\ChatGPT\hackthons\intent-replay-submitted-source-20261104.zip`; SHA-256 `675c58efe37004833d99f051512dabe44209e8e89481303f9c9e469139732292`.
+- Original deployment worktree: **`intent-replay-flip`**, branch **`flip-qa-room`**; find its location in private installation records or `git worktree list`. Application: `source`. Setup commit: `15a3839933d7add8500fdbefd1c70a009e50f772`.
+- Keep the original shared Git/submitted checkout. It is now detached at the Meta baseline and still owns the common Git metadata used by the other worktrees.
+- Submitted archive `intent-replay-submitted-source-20261104.zip` (retained privately); SHA-256 `675c58efe37004833d99f051512dabe44209e8e89481303f9c9e469139732292`.
 - [Baseline verification](FLIP_BASELINE_VERIFICATION.json): 107 archive/Git matches, 106 manifest payload hashes and 28,486 original files preserved. All ten runner/evaluator contract files remain unchanged; contract SHA-256 `f7329ae57d934c5a0399755c0d1d7e7e6f42c86975b6067d5fa43a4ed0bbd1dd`. Preserve submitted source, reports, captures, configuration and frozen expectations.
 
 ## Scope and operating room
 
 One human, the existing managed Switch agent and one Mattermost QA room. Supported task `booking-withdrawal`; saved case set `corrected-meta-withdrawal-control`. Request, inspect, approve an exact run and complete its review. Reuse existing runner/evaluator/exporter semantics.
 
-- [Intent Replay QA room](http://localhost:56742/switch/channels/intent-replay-qa): `496e3d1b-8c14-4a6c-9bc5-1e164c0da362`.
-- Agent `intent-replay-qa`: `e9d69e59-a025-4e2d-abea-ce114dc448f8`, revision **6**, correct worktree, existing login/model and sandbox/approval settings.
-- Switch Console 0.40.1 / Core 0.31.0; gateway `http://127.0.0.1:56741`; existing server `b82ac60d-6645-491f-aafa-21de5f2e6ee9`.
-- Docker Desktop 4.98.0 / Engine 29.9.2 and dedicated Mattermost container are healthy after restart. Exact stale owner records were preserved before supported Switch restart; see [setup](docs/QA_ROOM_SETUP.md).
-- `.local/qa-room/connection.json` pins actual Mattermost human client `f97780ca-7e77-4573-902d-e66eb59e9fe7`. Previous direct-room configuration/history is retained.
-- The user approved the exact common Git project trust entry in `C:\Users\asus\.codex\config.toml`; it was added with a private backup and no other settings changed. Managed MCP startup and actual dispatch now succeed.
+- The demonstrated room, agent and verified human identity are recorded in the preserved deployment's private `.local/qa-room/connection.json`. They are not defaults for a new checkout.
+- Historical setup: managed agent `intent-replay-qa`, revision **6**, Switch Console 0.40.1 / Core 0.31.0, Docker Desktop 4.98.0 / Engine 29.9.2, and a dedicated Mattermost container. The existing login/model and sandbox/approval settings were preserved.
+- The person authorized trust for the exact common Git repository after a private configuration backup. Managed MCP startup and actual dispatch subsequently succeeded.
+- Personal paths, deployment identities and runtime session paths are omitted from this public handoff. Original recovery records remain private and in the unchanged submitted snapshot. Source promotion does not retarget those services.
 
 The single project MCP tool `qa_room.dispatch_original_message` forwards only an original event ID to the existing HTTP bridge. The adapter fetches original authenticated author/body/time. New requests become current before execution; approval/completion bind exact run, evidence, sequence and contract, with atomic freshness checks.
 
@@ -61,21 +59,18 @@ Withdrawal: faulty commits 15:00 (expected execution FAIL), guarded suppresses a
 
 Prior checks: **143 Python tests PASS**, corrected regression 2 cases / 4 matched expectations, **8 focused MCP tests PASS** including real SDK stdio initialization. Historical direct-chat runs and three failed Mattermost attempts remain separate. Saved replay makes zero new model requests; managed-agent inference is separate and exact usage unmeasured. Meta/Baseten tokens/free credits remain permitted; preserve their configuration.
 
-## Exact startup
+## Resume a configured deployment
 
-Open Docker Desktop and check `docker info`. From this resumed Codex environment, focus the preserved Console/profile:
-
-```powershell
-Start-Process -FilePath 'C:\Users\asus\AppData\Local\Programs\Switch Console\Switch Console.exe' -ArgumentList 'switchdash://focus'
-```
-
-Start the existing native server/Mattermost only if stopped. Open **Your Rooms → Intent Replay QA** for the signed-in room. Start the evidence listener only if this QA service is not already listening on 8054:
+Use the existing installation's private connection records to select its Console profile, native server, managed agent and Mattermost room. Start Docker and those services only if stopped. Do not initialize a replacement profile or retarget the retained deployment merely because source `main` advanced. For a newly configured checkout, run from its repository root with the isolated environment in the [setup guide](docs/QA_ROOM_SETUP.md):
 
 ```powershell
-Set-Location 'C:\Users\asus\OneDrive\Documents\ChatGPT\intent-replay-flip'
-$qaPython = 'C:\Users\asus\OneDrive\Documents\ChatGPT\hackthons\.venv\Scripts\python.exe'
-& $qaPython -B .\source\scripts\run_qa_room.py probe
-& $qaPython -B .\source\scripts\run_qa_room.py serve
+& .\.venv\Scripts\python.exe -B .\source\scripts\run_qa_room.py probe
 ```
 
-Keep `serve` running. [Current evidence](http://127.0.0.1:8054/qa/current) is read-only. A false Console-user comparison in `probe` is expected with the Mattermost client pin; original room identity is checked separately. Never print/package dispatch tokens, credentials or runtime databases. Detailed paths/recovery: [setup](docs/QA_ROOM_SETUP.md). Implementation and limits: [report](FLIP_IMPLEMENTATION_REPORT.md). Preserve this completed C checkpoint; another accepted verification would require a fresh review.
+Start the listener only if the intended QA service is not already listening on port 8054:
+
+```powershell
+& .\.venv\Scripts\python.exe -B .\source\scripts\run_qa_room.py serve
+```
+
+Keep `serve` running. [Current evidence](http://127.0.0.1:8054/qa/current) is read-only and belongs to the configured local store. A fresh store does not contain C or inherit its review. A false Console-user comparison in `probe` is expected with a Mattermost client pin; original room identity is checked separately. Never print/package dispatch tokens, credentials or runtime databases. Exact historical launch paths remain private. Preserve the completed C checkpoint; another accepted verification would require a fresh review.

@@ -2,6 +2,8 @@
 
 2026-11-05 · branch `flip-qa-room` · submitted baseline `d074b160d7af890ce7d8d99c2f580c597684a95c` · isolation/setup commit `15a3839933d7add8500fdbefd1c70a009e50f772`.
 
+This historical implementation record omits personal paths and deployment identities from the current public tree. Original records remain preserved privately and in unchanged submission history. The later [submission receipt](docs/FLIP_SUBMISSION.md) and [15 November main publication](docs/MAIN_PROMOTION.md) are separate from this implementation checkpoint; existing services remain in their configured deployment.
+
 ## Result and current limit
 
 Latest 2026-11-07 UTC checkpoint: **the full real-room B/C walkthrough is complete: actual human approval B → fresh C → stale-B refusal → actual human approval and completion C.** B approval `sw_cc26e2db23c2ff3d98607db46364da83` (18) stayed bound to B. Authorized assistant verification at 20 produced C `5aa6bb5509734cb388537a63007d3087` at 21. The assistant's explicitly authorized negative completion probe against old B at 22 received `stale_run` refusal `sw_15092d01154649cb9e4c1c8ab8528fef` (23), with no completion granted by that probe.
@@ -22,9 +24,9 @@ At that checkpoint, room request/replay/result and A → B replacement were esta
 
 ## What existed before Flip
 
-The submitted project already supplied sealed prepared cases, recorded Meta/Baseten model captures, the local SQLite booking runner, independent final reads, faulty/guarded workers, frozen regression expectations, evidence validation and HTML/ZIP exports. Those sources, captures and expectations remain unchanged. The original submitted checkout is clean on `main` at the exact submitted commit. All ten execution-contract files byte-match that commit; contract SHA-256 remains `f7329ae57d934c5a0399755c0d1d7e7e6f42c86975b6067d5fa43a4ed0bbd1dd`.
+The submitted project already supplied sealed prepared cases, recorded Meta/Baseten model captures, the local SQLite booking runner, independent final reads, faulty/guarded workers, frozen regression expectations, evidence validation and HTML/ZIP exports. Those sources, captures and expectations remain unchanged. At implementation verification, the original submitted checkout was clean on `main` at the exact submitted commit; it is now preserved detached at that same commit. All ten execution-contract files byte-match that commit; contract SHA-256 remains `f7329ae57d934c5a0399755c0d1d7e7e6f42c86975b6067d5fa43a4ed0bbd1dd`.
 
-Baseline preparation evidence is retained in `FLIP_BASELINE_VERIFICATION.json`; its original full preservation inventory was reused instead of regenerating it.
+Baseline preparation evidence is summarized in the publicly redacted `FLIP_BASELINE_VERIFICATION.json`; its original full preservation inventory remains retained separately.
 
 ## Added for Flip
 
@@ -33,7 +35,7 @@ Baseline preparation evidence is retained in `FLIP_BASELINE_VERIFICATION.json`; 
 - `source/intent_replay/qa_room_http.py`: a loopback evidence index, original exporter artifact delivery, and an opt-in authenticated dispatch bridge. Its only mutation input is an original Switch message ID; it rejects browser-origin requests, oversized/extra fields and caller-supplied review claims. It has no browser approval action.
 - `source/scripts/run_qa_room.py`: fixed `configure`, `probe`, `serve`, `show` and original-message `dispatch` operations.
 - Three focused test modules and the setup, agent-instruction and human-walkthrough documents under `docs/QA_ROOM_*.md`.
-- `qa_room_mcp.py`, `run_qa_room_mcp.py` and project `.codex/config.toml`: a single strict original-message-ID MCP transport to the existing authenticated HTTP bridge. Optional dependency pin: `source/requirements-qa-mcp.txt`. No evaluator or workflow semantics change.
+- `qa_room_mcp.py`, `run_qa_room_mcp.py` and the historical project MCP configuration: a single strict original-message-ID MCP transport to the existing authenticated HTTP bridge. Maintained main provides the opt-in template `docs/QA_ROOM_CODEX.example.toml`; deployment configuration stays local. Optional dependency pin: `source/requirements-qa-mcp.txt`. No evaluator or workflow semantics change.
 
 Supported task: `booking-withdrawal`. Supported case set: `corrected-meta-withdrawal-control`, using only the two retained corrected Meta prepared files. Room text is never interpreted as a shell command.
 
@@ -73,7 +75,7 @@ Replays made **zero new model requests**. Earlier failed requests remain preserv
 
 ## Installed integration and remaining work
 
-Installed official Switch Console **0.40.1**, native Core **0.31.0**, PostgreSQL **16.14**, and the original managed agent `intent-replay-qa`, rooted in this worktree. The personal native server is `http://127.0.0.1:56741`. After the Windows restart, the connection was backed up and moved to the real private [Mattermost QA room](http://localhost:56742/switch/channels/intent-replay-qa), ID `496e3d1b-8c14-4a6c-9bc5-1e164c0da362`. The adapter administrator joined using the supported membership API; actual Mattermost human client `f97780ca-7e77-4573-902d-e66eb59e9fe7` is pinned.
+The demonstrated installation used official Switch Console **0.40.1**, native Core **0.31.0**, PostgreSQL **16.14**, and managed agent `intent-replay-qa`, rooted in the preserved Flip worktree. After the Windows restart, the connection was backed up and moved to the real private Mattermost QA room. The adapter administrator joined using the supported membership API, and the actual authenticated Mattermost human client was pinned. Personal endpoints and deployment identities remain in private configuration and unchanged submission history; source promotion does not migrate the service or transfer human review.
 
 Docker Desktop **4.98.0**, Engine **29.9.2**, and the dedicated Mattermost container now run successfully. The restart refreshed group membership. A transient Hyper-V memory-allocation error recovered. Exact stale Switch runtime ownership records were preserved and quarantined after their saved PID was confirmed to belong to a different post-reboot Windows process; supported restart recovered the existing agent without deleting session history. Details are in the setup document.
 
@@ -81,9 +83,9 @@ The official standalone `@openai/codex@0.166.0` retains the existing ChatGPT log
 
 The replacement stdio MCP tool forwards only the original event ID to that same HTTP bridge. **Eight focused tests pass** with installed SDK 1.28.1, including stdio initialization, exact single-tool schema, extra-field rejection, bounded transport, safe errors and receipt binding. Baseline Python ran six transport checks and skipped the two optional-SDK tests; no baseline dependency environment was modified. Logs: `.local/qa-room-mcp-tests/`.
 
-The third real-room request correctly stopped because the tool was unavailable: Codex disabled project tools until the worktree's common Git repository was explicitly trusted. The user then approved exactly `C:\Users\asus\OneDrive\Documents\ChatGPT\hackthons\intent-replay-public-submission-20261104`. Only that project trust entry was added to `C:\Users\asus\.codex\config.toml`, with a private backup; no submitted files or other configuration settings changed. Managed MCP startup succeeded at 22:26:05 UTC. Agent instructions revision 6 preserve model, sandbox and approval settings and tell the agent to handle newly addressed messages without replaying failed history. The next real request produced A successfully. The three earlier attempts remain preserved as failures; none is human review.
+The third real-room request correctly stopped because the tool was unavailable: Codex disabled project tools until the worktree's common Git repository was explicitly trusted. The user then approved that exact common repository. Only its project trust entry was added to the user's Codex configuration, with a private backup; no submitted files or other configuration settings changed. Machine-specific trust paths remain in the preserved records. Managed MCP startup succeeded at 22:26:05 UTC. Agent instructions revision 6 preserve model, sandbox and approval settings and tell the agent to handle newly addressed messages without replaying failed history. The next real request produced A successfully. The three earlier attempts remain preserved as failures; none is human review.
 
-Follow [QA_ROOM_SETUP.md](docs/QA_ROOM_SETUP.md) for exact startup/configuration and [QA_ROOM_COMMANDS.md](docs/QA_ROOM_COMMANDS.md) to reopen completed C read-only or intentionally start a future manual run. The real B approval, stale-B refusal and fresh C approval/completion are verified; no further review action is required. [Demo script](docs/FLIP_DEMO_SCRIPT.md), [README](README.md), and [submission draft](docs/FLIP_SUBMISSION.md) are prepared; no Flip publication/submission is claimed.
+Follow [QA_ROOM_SETUP.md](docs/QA_ROOM_SETUP.md) for portable startup/configuration guidance and [QA_ROOM_COMMANDS.md](docs/QA_ROOM_COMMANDS.md) to reopen retained completed C read-only or intentionally start a future manual run. The real B approval, stale-B refusal and fresh C approval/completion are verified; no further review action is required. The [demo script](docs/FLIP_DEMO_SCRIPT.md) and [README](README.md) were prepared at this checkpoint; the subsequent publication and entrant's actual submission are recorded in the [submission receipt](docs/FLIP_SUBMISSION.md).
 
 Official sources used: [Switch resources](https://www.wemakedevs.org/hackathons/switch/resources), [getting started](https://docs.switchagents.ai/switch-rooms/getting-started), [managed agents](https://docs.switchagents.ai/switch-rooms/getting-started/add-a-second-agent), the released Switch Console/Core sources, [Docker Windows installation](https://docs.docker.com/desktop/setup/install/windows-install/), and [Codex CLI](https://learn.chatgpt.com/docs/codex/cli). Released source and observed server metadata take precedence over assumptions about an SDK.
 

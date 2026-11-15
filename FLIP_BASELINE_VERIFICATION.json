@@ -1,14 +1,21 @@
 {
+  "publication_redactions": {
+    "redacted_on": "2026-11-15",
+    "source_commit": "fa5ef91159d2783813caf2043dd57542afbcfc94",
+    "scope": "Public historical summary; local machine paths and deployment identity values are replaced with explicit placeholders.",
+    "original_records": "Unmodified records remain in the submitted snapshot and private local evidence. This file is not a runtime configuration or original authenticated event payload.",
+    "hash_interpretation": "Retained hashes identify the original unredacted artifacts and events, not this redacted summary. Run IDs, event IDs, timestamps, verdicts and human-review outcomes are unchanged."
+  },
   "checked_on": "2026-11-05",
   "status": "PASS",
   "submitted_baseline": {
     "repository": "https://github.com/elouahid/intent-replay",
     "commit": "d074b160d7af890ce7d8d99c2f580c597684a95c",
     "git_tree": "edc6bef0c7f30b69a12d7f6bde417865d0179549",
-    "source_archive": "C:\\Users\\asus\\OneDrive\\Documents\\ChatGPT\\hackthons\\intent-replay-submitted-source-20261104.zip",
+    "source_archive": "<private-submission-records>/intent-replay-submitted-source-20261104.zip",
     "source_archive_sha256": "675c58efe37004833d99f051512dabe44209e8e89481303f9c9e469139732292",
-    "submission_confirmation": "C:\\Users\\asus\\OneDrive\\Documents\\ChatGPT\\hackthons\\intent-replay-submission-confirmation-20261104.json",
-    "archive_verification_record": "C:\\Users\\asus\\OneDrive\\Documents\\ChatGPT\\hackthons\\intent-replay-submitted-source-20261104.verification.json",
+    "submission_confirmation": "<private-submission-records>/intent-replay-submission-confirmation-20261104.json",
+    "archive_verification_record": "<private-submission-records>/intent-replay-submitted-source-20261104.verification.json",
     "public_manifest_version": "focused-public-submission-v4-video",
     "execution_contract_sha256": "f7329ae57d934c5a0399755c0d1d7e7e6f42c86975b6067d5fa43a4ed0bbd1dd"
   },
@@ -21,13 +28,13 @@
   },
   "earlier_review_baseline": {
     "commit": "17743c7fc26bc8c00ce8873e2b57a92889f38604",
-    "archive": "C:\\Users\\asus\\OneDrive\\Documents\\ChatGPT\\hackthons\\intent-replay-public-submission-review-20261104.zip",
+    "archive": "<private-submission-records>/intent-replay-public-submission-review-20261104.zip",
     "note": "Precedes final licensing and video-link documentation; not the submitted source identity."
   },
   "isolation": {
-    "worktree": "C:\\Users\\asus\\OneDrive\\Documents\\ChatGPT\\intent-replay-flip",
+    "worktree": "<flip-worktree>",
     "branch": "flip-qa-room",
-    "original_submitted_checkout": "C:\\Users\\asus\\OneDrive\\Documents\\ChatGPT\\hackthons\\intent-replay-public-submission-20261104",
+    "original_submitted_checkout": "<meta-submitted-checkout>",
     "outer_repository_has_no_commits": true,
     "initial_head": "d074b160d7af890ce7d8d99c2f580c597684a95c"
   },

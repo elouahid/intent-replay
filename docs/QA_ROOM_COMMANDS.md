@@ -1,30 +1,28 @@
 # Intent Replay — QA Room commands
 
-One personal/local Switch room, agent `intent-replay-qa`, task `booking-withdrawal`, and case set `corrected-meta-withdrawal-control`, on Switch Console 0.40.1 / native Core 0.31.0. In the [Intent Replay QA Mattermost channel](http://localhost:56742/switch/channels/intent-replay-qa), C `5aa6bb5509734cb388537a63007d3087` is current, evidence-valid and **human-review completed**. No further review command is needed.
+The retained demonstration used one personal/local Switch room, agent `intent-replay-qa`, task `booking-withdrawal`, and case set `corrected-meta-withdrawal-control`, on Switch Console 0.40.1 / native Core 0.31.0. At that checkpoint in the private Mattermost channel, C `5aa6bb5509734cb388537a63007d3087` was current, evidence-valid and **human-review completed**. No further review command is needed for that checkpoint. A fresh configured store does not inherit these runs or reviews.
 
 Actual human B approval was followed by fresh C and a real `stale_run` refusal of the authorized assistant's old-B completion probe. The person then approved C and completed its review through separate original room messages. A and B remain historical. All execution evidence and the earlier unreviewed checkpoints are preserved.
 
 ## Start the configured local workflow
 
-After reboot, start Docker and use Console's native server **Start** button if needed. Select the existing server `b82ac60d-6645-491f-aafa-21de5f2e6ee9` at `http://127.0.0.1:56741` and the existing Mattermost room; see [QA_ROOM_SETUP.md](QA_ROOM_SETUP.md). With the preserved private connection references:
+After reboot, start Docker and use Console's native server **Start** button if needed. Select your existing configured server and Mattermost room; see [QA_ROOM_SETUP.md](QA_ROOM_SETUP.md). Personal endpoints and identity references remain in private configuration and unchanged submission history. From the configured deployment's repository root, using its isolated environment:
 
 ```powershell
-Set-Location 'C:\Users\asus\OneDrive\Documents\ChatGPT\intent-replay-flip'
-$qaPython = 'C:\Users\asus\OneDrive\Documents\ChatGPT\hackthons\.venv\Scripts\python.exe'
-& $qaPython -B .\source\scripts\run_qa_room.py probe
+& .\.venv\Scripts\python.exe -B .\source\scripts\run_qa_room.py probe
 ```
 
 `probe` verifies the configured gateway connection and identity, not the complete real-room flow. The evidence listener is already running at this checkpoint; reuse it at `http://127.0.0.1:8054/qa/current`. Only if the listener is absent after reboot, start one instance:
 
 ```powershell
-& $qaPython -B .\source\scripts\run_qa_room.py serve
+& .\.venv\Scripts\python.exe -B .\source\scripts\run_qa_room.py serve
 ```
 
 Do not start a duplicate while port 8054 is listening. Keep the existing instance running: it serves evidence and the bounded dispatch bridge, creating the private `.local/qa-room/dispatch-token` if absent. Do not print that token. Open the evidence on this same computer, confirm its room/task and exact run ID, and inspect both reports and bundles before reviewing.
 
 The Console-managed agent uses [QA_ROOM_AGENT_INSTRUCTIONS.md](QA_ROOM_AGENT_INSTRUCTIONS.md). Its sole `qa_room.dispatch_original_message` MCP tool accepts `{"original_message_id":"<exact original incoming ID>"}`. The wrapper reads the local token internally and forwards only that ID to authenticated `POST /api/qa/dispatch`; the server fetches the original human event and posts its own deterministic result. No shell command, message body, actor, or human-approval assertion is accepted. The agent must not duplicate the server's result or improvise a Node/shell fallback. The fixed CLI dispatch remains an operator diagnostic fallback.
 
-The official SDK `mcp==1.28.1` is already installed in the native Switch environment; no install is needed. The user authorized the exact common-repository trust entry for `C:\Users\asus\OneDrive\Documents\ChatGPT\hackthons\intent-replay-public-submission-20261104`; it was appended to the user Codex configuration after a private backup, with no other settings changed. Following the managed-agent refresh, the live SDK catalog returned exactly `dispatch_original_message`. The earlier configuration-only probe had not established runtime availability. On resume, check the live tool catalog before sending another request. Optional dependency pin, exact launcher and trust-resolution details are recorded in [QA_ROOM_SETUP.md](QA_ROOM_SETUP.md), alongside the [official MCP configuration reference](https://learn.chatgpt.com/docs/extend/mcp?surface=cli).
+The demonstrated installation had the official SDK `mcp==1.28.1` installed and an explicitly authorized trust entry for the worktree's exact common repository, backed up privately with no other settings changed. For a new installation, install the optional pinned dependency into the isolated environment selected by the [MCP template](QA_ROOM_CODEX.example.toml), and explicitly authorize the intended project trust. Following the demonstrated managed-agent refresh, the live SDK catalog returned exactly `dispatch_original_message`; an earlier configuration-only probe had not established runtime availability. Check the live tool catalog before sending another request. Dependency and trust-resolution details are in [QA_ROOM_SETUP.md](QA_ROOM_SETUP.md), alongside the [official MCP configuration reference](https://learn.chatgpt.com/docs/extend/mcp?surface=cli).
 
 ## Reopen the completed result
 
@@ -46,7 +44,7 @@ The full demonstration used **B/C**; the original human A/B sequence was not per
 | 24 / 25 | The person approved C with exact original event `sw_64e554b42f2ff28f01d8822989a8d8c6`; the agent confirmed it. |
 | 26 / 27 | The person completed C with exact original event `sw_cc40b260975f872a9d47d332973d82f2`; the agent confirmed completion. |
 
-[Open the stale refusal](http://localhost:56742/switch/pl/5ecqnwd5dbf598ufeb89d9wqxw). The 76-check B/C audit captured C unreviewed immediately after that refusal. The later actual C approval was recorded at `2026-11-06T23:59:34.550545Z`; completion followed at `2026-11-07T00:02:10.716142Z`. Both records bind C's evidence SHA-256 `89205c76d584013579812ed74a1965e5ac6534c5068ea17e9e29b2b31e085648`.
+The original Mattermost stale-refusal post is `5ecqnwd5dbf598ufeb89d9wqxw` in the retained private room. The 76-check B/C audit captured C unreviewed immediately after that refusal. The later actual C approval was recorded at `2026-11-06T23:59:34.550545Z`; completion followed at `2026-11-07T00:02:10.716142Z`. Both records bind C's evidence SHA-256 `89205c76d584013579812ed74a1965e5ac6534c5068ea17e9e29b2b31e085648`.
 
 The final scoped result is: “Human review completed for the checked local execution behavior, using run 5aa6bb5509734cb388537a63007d3087.” It does not resolve factual uncertainty or establish production readiness. Private proofs are `.local/qa-room-assistant-review/mattermost-b-c-stale-approval-audit.json`, `c-actual-approval-before-completion.json` and `c-actual-completion.json` in the same directory. The three isolated simulated-review tests remain separate evidence.
 

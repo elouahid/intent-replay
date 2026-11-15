@@ -1,6 +1,6 @@
 # Intent Replay — QA Room
 
-**Maintenance note, 15 November 2026:** this document retains the submission/closeout record. Its statements that `main` stays at Meta and closeout documentation stays local describe 7 November. The user's later promotion request now places maintained development and this receipt documentation on local `main`; the submitted remote Flip branch remains fixed at `79fa75e`. See [MAIN_PROMOTION.md](MAIN_PROMOTION.md) for submission tags and pending publication. Submission fields and receipt artifacts are unchanged.
+**Maintenance note, 15 November 2026:** this document retains the submission/closeout record. Its statements that `main` stays at Meta and closeout documentation stays local describe 7 November. The user's authorized promotion was published and verified: maintained `main` at `fa5ef91159d2783813caf2043dd57542afbcfc94` and both annotated submission tags; the submitted remote Flip branch remained fixed at `79fa75e`. See [MAIN_PROMOTION.md](MAIN_PROMOTION.md) for the completed publication record. Submission fields and receipt artifacts are unchanged.
 
 **Submitted by the entrant on 7 November 2026. The authenticated organizer confirmation showed “Submitted” for Intent Replay — QA Room, solo entry, Best Business Workflow; verified at 2026-11-07 18:02:54.856 UTC.**
 

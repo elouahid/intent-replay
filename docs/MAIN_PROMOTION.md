@@ -1,6 +1,8 @@
 # Maintained main promotion — 15 November 2026
 
-The user requested that `main` become the maintained Intent Replay version, incorporating the stable Flip QA room while preserving both submissions. This promotion is prepared locally; **no remote reference has been changed**.
+**Publication completed and verified, 15 November 2026:** after explicit user authorization, an atomic non-force push published maintained `main` at `fa5ef91159d2783813caf2043dd57542afbcfc94` and the two annotated submission tags below. Remote `flip-qa-room` remained at `79fa75e10bf06ad6dd44acc3836e97ea71cd94f4`. This records that publication checkpoint; subsequent maintenance may advance `main`.
+
+The user requested that `main` become the maintained Intent Replay version, incorporating the stable Flip QA room while preserving both submissions. The following preparation and verification record preceded that authorized push. Public documentation omits personal machine paths and deployment identities; the original records remain private and in the preserved submission snapshots.
 
 ## Branch comparison and integration
 
@@ -17,17 +19,17 @@ The promoted code adds the persistent QA workflow, original authenticated room-m
 | Meta, 4 November | `d074b160d7af890ce7d8d99c2f580c597684a95c` | `meta-submitted-2026-11-04` | 107/107 archived files match Git; 106/106 manifest payload hashes match |
 | Flip, 7 November | `79fa75e10bf06ad6dd44acc3836e97ea71cd94f4` | `flip-submitted-2026-11-07` | ZIP comment names this commit; 129/129 archived files match Git |
 
-No tags existed locally or remotely before this preparation. These two annotated tags were created locally at the verified commits; neither points at the later receipt closeout or maintained HEAD.
+No tags existed locally or remotely before this preparation. These two annotated tags were created locally at the verified commits and then published in the authorized atomic push; neither points at the later receipt closeout or maintained HEAD.
 
 Meta archive SHA-256: `675c58efe37004833d99f051512dabe44209e8e89481303f9c9e469139732292`.
 
 Flip source archive SHA-256: `37a07a3ddcdf5e42f08f2e02d25bfe7d57a189cbda48286e78a8e959c07c082d`. All nine Flip receipt-manifest payloads and all ten receipt ZIP members match their retained files.
 
-The original ten execution-contract files remain byte-identical to Meta. Contract SHA-256: `f7329ae57d934c5a0399755c0d1d7e7e6f42c86975b6067d5fa43a4ed0bbd1dd`. `PUBLIC_SOURCE_MANIFEST.json` remains the **historical Meta manifest**, not an inventory of the extended current tree. Original archive/receipt artifacts and verification JSON are not rewritten.
+The original ten execution-contract files remain byte-identical to Meta. Contract SHA-256: `f7329ae57d934c5a0399755c0d1d7e7e6f42c86975b6067d5fa43a4ed0bbd1dd`. `PUBLIC_SOURCE_MANIFEST.json` remains the **historical Meta manifest**, not an inventory of the extended current tree. Original archive/receipt artifacts and unredacted verification records remain preserved privately and in unchanged submission history. Current-tree `FLIP_BASELINE_VERIFICATION.json` and `FLIP_VERIFICATION.json` are explicitly marked public redacted summaries; historical hashes identify the original evidence, not those edited summaries.
 
 ## Submitted links and freeze scope
 
-Meta actually submitted `https://github.com/elouahid/intent-replay`, a mutable default-branch URL. Publishing maintained `main` will change the version displayed at that original link. The README now prominently links Meta's immutable submitted commit and names its submission tag.
+Meta actually submitted `https://github.com/elouahid/intent-replay`, a mutable default-branch URL. Publishing maintained `main` changed the version displayed at that original link. The README prominently links Meta's immutable submitted commit and names its submission tag.
 
 Flip actually submitted `https://github.com/elouahid/intent-replay/tree/flip-qa-room`. **Keep that remote branch at `79fa75e`.** The recorded closeout instructions explicitly preserved the remote checkpoints and kept later receipt documentation local. Those are project safeguards; the inspected saved organizer confirmation does not establish a permanent organizer rule freezing every branch. The user's later instruction authorizes preparing maintained `main`, with the original source preserved by commit, tag, archive and checkout. It does not require moving the submitted Flip branch.
 
@@ -35,9 +37,9 @@ The older documentation statements that `main` remains at Meta and receipt close
 
 ## Local worktrees and runtime
 
-- Maintained `main`: `C:\Users\asus\OneDrive\Documents\ChatGPT\intent-replay-main`.
-- Meta submitted checkout: `C:\Users\asus\OneDrive\Documents\ChatGPT\hackthons\intent-replay-public-submission-20261104`, now detached at `d074b16`, with its submitted files unchanged. It still holds the shared Git metadata; retain this directory.
-- Existing Flip worktree: `C:\Users\asus\OneDrive\Documents\ChatGPT\intent-replay-flip`, still local branch `flip-qa-room` at `c58d563`. Its private configuration, retained runs, human-review records and submitted receipt remain in place.
+- Maintained `main`: a separate development worktree, named `intent-replay-main` in the original installation.
+- Meta submitted checkout: the original shared-repository worktree, detached at `d074b16`, with submitted files unchanged. It still holds the common Git metadata; retain it. Use `git worktree list` to find its local location.
+- Existing Flip worktree: the preserved `intent-replay-flip` deployment, local branch `flip-qa-room` at `c58d563` at promotion. Its private configuration, retained runs, human-review records and submitted receipt remain in place.
 
 Main's former auto-loaded `.codex/config.toml` pointed to the historical Flip worktree and installed Switch interpreter. Maintained main instead provides `docs/QA_ROOM_CODEX.example.toml` with placeholder paths and ignores the local configured copy. Configure it explicitly for this checkout before managed dispatch. The preserved Flip configuration and installed agent are unchanged; there is no live deployment migration as part of this source promotion.
 
@@ -58,12 +60,12 @@ Local audit material is in `.local/main-promotion-20261115/`: `submission-preser
 
 Saved replay makes no new model request. Regression matching, execution PASS/FAIL, factual uncertainty and human review remain separate. The intentionally faulty withdrawal is an expected execution FAIL; factual accuracy remains INCONCLUSIVE/unassessed. Automated test reviewers are simulated. The retained actual B/C walkthrough remains historical evidence, not a fresh integration test of the maintained checkout.
 
-## Remaining remote update
+## Completed remote update
 
-After reviewing the local result, publish **only** maintained `main` and the two submission tags together, using a normal non-force push:
+The authorized publication included **only** maintained `main` and the two submission tags together. The equivalent command from the maintained repository root was:
 
 ```powershell
-git -C 'C:\Users\asus\OneDrive\Documents\ChatGPT\intent-replay-main' push --atomic origin main:main refs/tags/meta-submitted-2026-11-04:refs/tags/meta-submitted-2026-11-04 refs/tags/flip-submitted-2026-11-07:refs/tags/flip-submitted-2026-11-07
+git push --atomic origin main:main refs/tags/meta-submitted-2026-11-04:refs/tags/meta-submitted-2026-11-04 refs/tags/flip-submitted-2026-11-07:refs/tags/flip-submitted-2026-11-07
 ```
 
-No Flip branch ref is included. If the remote advances or a tag conflicts, stop and compare it rather than forcing or replacing it. The command above has **not** been run.
+Post-push verification confirmed `main` at `fa5ef91159d2783813caf2043dd57542afbcfc94`, both annotated tags peeling to their exact submitted commits, and the unchanged remote Flip branch. No Flip branch ref was included. This is a completed publication record, not a request to repeat the push. Future maintenance must preserve the submitted branch and tags without forcing or replacing them.
