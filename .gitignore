@@ -25,3 +25,6 @@ private-provider-error.json
 
 # Console-managed local agent credentials and runtime metadata
 .switch/
+
+# Per-checkout managed QA tool configuration; use docs/QA_ROOM_CODEX.example.toml
+/.codex/config.toml

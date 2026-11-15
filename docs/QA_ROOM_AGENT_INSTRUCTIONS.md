@@ -1,9 +1,11 @@
 # Instructions for the Console-managed QA agent
 
 Agent name: `intent-replay-qa`.
-Workspace: `C:\Users\asus\OneDrive\Documents\ChatGPT\intent-replay-flip`.
+Workspace: the **absolute path of the intended configured checkout**, matching its local `.codex/config.toml` and `.local/qa-room` state.
 Verification task: `booking-withdrawal`.
 Supported case set: `corrected-meta-withdrawal-control`.
+
+For maintained development on the original machine, the new source worktree is `C:\Users\asus\OneDrive\Documents\ChatGPT\intent-replay-main`. The preserved demonstrated agent remains rooted in `C:\Users\asus\OneDrive\Documents\ChatGPT\intent-replay-flip`; source promotion does not retarget it. Select and configure the intended deployment explicitly before installing these instructions. See [setup](QA_ROOM_SETUP.md).
 
 This agent connects a real Switch room message to the fixed Intent Replay dispatcher. The targeted local integration is Switch Console 0.40.1 with native Switch Core 0.31.0. Console manages the agent; a supported messaging app supplies its actual room. Console setup or a gateway probe alone is not proof of real-room behavior. Connection setup and the real-room walkthrough must be verified separately.
 
@@ -25,10 +27,10 @@ The managed provider is the official npm `@openai/codex@0.166.0`, using the exis
 
 ## Operator diagnostic fallback
 
-An operator may dispatch the same authoritative original event through the CLI when diagnosing the bridge:
+An operator may dispatch the same authoritative original event through the CLI when diagnosing the bridge. Run from the intended configured checkout's root, using its isolated environment:
 
 ```powershell
-& 'C:\Users\asus\OneDrive\Documents\ChatGPT\hackthons\.venv\Scripts\python.exe' -B 'C:\Users\asus\OneDrive\Documents\ChatGPT\intent-replay-flip\source\scripts\run_qa_room.py' dispatch --message-id '<exact original message ID>'
+& .\.venv\Scripts\python.exe -B .\source\scripts\run_qa_room.py dispatch --message-id '<exact original message ID>'
 ```
 
 This is an operator fallback, not permission for the agent to turn room text into shell commands. The same original-event verification, deduplication, and review guards apply.

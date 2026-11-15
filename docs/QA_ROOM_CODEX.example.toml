@@ -1,0 +1,10 @@
+# Replace all C:\path\to\intent-replay paths before copying to .codex/config.toml.
+# Install source/requirements-qa-mcp.txt in this isolated Python environment.
+# Private connection/state belong to this checkout; no credential values go here.
+[mcp_servers.qa_room]
+command = 'C:\path\to\intent-replay\.venv\Scripts\python.exe'
+args = ['-B', 'C:\path\to\intent-replay\source\scripts\run_qa_room_mcp.py']
+cwd = 'C:\path\to\intent-replay'
+enabled_tools = ['dispatch_original_message']
+startup_timeout_sec = 30
+tool_timeout_sec = 90

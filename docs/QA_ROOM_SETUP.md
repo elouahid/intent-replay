@@ -1,5 +1,20 @@
 # QA Room setup and resume
 
+## Maintained main setup — 15 November 2026
+
+The records below describe the existing Flip installation. Its paths, identities and completed reviews are historical deployment evidence, not defaults to copy into another installation. Maintained `main` has the same application code and an opt-in [MCP template](QA_ROOM_CODEX.example.toml), replacing the automatically loaded demonstration-machine configuration.
+
+For a new checkout:
+
+1. Use the isolated Python environment in the [README](../README.md). From the repository root in PowerShell, install the optional managed-dispatch SDK with `& .\.venv\Scripts\python.exe -m pip install -r .\source\requirements-qa-mcp.txt`.
+2. Configure your supported local Switch/Mattermost server, managed agent and room. From that same root, run `& .\.venv\Scripts\python.exe -B .\source\scripts\run_qa_room.py configure --help` for the required gateway, room, agent and credential-file reference arguments. The adapter supports the demonstrated Core 0.31.0 contract; a different server version needs compatibility verification. Keep its private connection and state under this checkout's `.local/qa-room/`.
+3. Confirm adapter room membership and pin the actual reviewer's original authenticated identity. `configure` initially pins the Console login user; for Mattermost, verify the original event and explicitly configure `reviewer_client_ids` as described below. Do not copy the demonstration's identities or weaken this check.
+4. Adapt **all three paths** in `QA_ROOM_CODEX.example.toml`, then save it as this checkout's `.codex/config.toml` (ignored by Git). The Python executable must contain the optional MCP SDK. The script and working directory must point to this checkout. Do not overwrite an existing local configuration; merge the one server entry deliberately if needed.
+5. Run `& .\.venv\Scripts\python.exe -B .\source\scripts\run_qa_room.py probe`. This is a partial authentication/version check. Start `& .\.venv\Scripts\python.exe -B .\source\scripts\run_qa_room.py serve` only when port 8054 is unused, then verify its evidence page, the managed agent's live single-tool catalog and actual original-message dispatch before claiming the room works. The MCP transport uses port 8054; independent simultaneous deployments need deliberate port configuration changes.
+6. Use the [command guide](QA_ROOM_COMMANDS.md) for a new exact-run review. A new store has no completed human review; the historical B/C records below do not approve its runs.
+
+The preserved installation in `intent-replay-flip` is not migrated or restarted by the `main` promotion. Reopening its evidence does not require a rerun. [Promotion record](MAIN_PROMOTION.md) separates fresh isolated startup/regression checks from the historical live-room walkthrough.
+
 ## Completed B/C review checkpoint — 2026-11-07 UTC
 
 The person's exact B approval was recorded at sequence 18 and confirmed at 19. An authorized assistant verification produced C `5aa6bb5509734cb388537a63007d3087` at 20/21. The authorized assistant negative test of completing old B at 22 was refused with `stale_run` at 23. The person then posted exact C approval `sw_64e554b42f2ff28f01d8822989a8d8c6` (24), confirmed at 25, followed by exact completion `sw_cc40b260975f872a9d47d332973d82f2` (26), confirmed at 27. C is current, evidence-valid and human-review completed; B remains historically approved and incomplete. No further review command is needed.
@@ -143,7 +158,7 @@ Do not run a second `serve` while port 8054 is already listening. Confirm the ex
 
 ## Project-local MCP transport
 
-The existing `.codex/config.toml` registers one stdio server, `qa_room`, with only `dispatch_original_message` enabled. Agent revision 6 instructs it to pass only the authoritative original message ID; sandbox and automatic-approval settings were not changed.
+The preserved Flip checkout's `.codex/config.toml` registers one stdio server, `qa_room`, with only `dispatch_original_message` enabled. Maintained `main` uses the explicit template described above. Agent revision 6 instructs it to pass only the authoritative original message ID; sandbox and automatic-approval settings were not changed.
 
 **Resolved project-trust blocker:** the user explicitly authorized the `trust_level = "trusted"` entry for `C:\Users\asus\OneDrive\Documents\ChatGPT\hackthons\intent-replay-public-submission-20261104` in the user Codex configuration, `C:\Users\asus\.codex\config.toml`. This is the common Git repository verified by `git rev-parse --git-common-dir`, not a drive-wide trust change. The prior private configuration was backed up before appending this exact entry; no other user-configuration settings changed. Submitted repository files, credentials, sandbox and automatic-approval policy were unchanged.
 

@@ -1,12 +1,44 @@
-# Intent Replay — QA Room
+# Intent Replay
+
+Intent Replay helps QA engineers reproduce the gap between an agent's proposed action and its actual execution. Maintained development is on **`main`**, combining the original saved-replay demonstration with the stable Flip **QA Room** workflow. The local SQLite runner, evaluator, frozen expectations, recorded model captures and evidence exporter are unchanged.
+
+## Current and submitted versions
+
+| Version | Source | Submission tag | Demonstration |
+|---|---|---|---|
+| Maintained version | [`main`](https://github.com/elouahid/intent-replay/tree/main) | Ongoing development | Both workflows below |
+| Meta submission, 4 November 2026 | [`d074b16`](https://github.com/elouahid/intent-replay/tree/d074b160d7af890ce7d8d99c2f580c597684a95c) | `meta-submitted-2026-11-04` | [Meta video, 2:46](https://youtu.be/irrL2Acrs6E) |
+| Flip submission, 7 November 2026 | [`79fa75e`](https://github.com/elouahid/intent-replay/tree/79fa75e10bf06ad6dd44acc3836e97ea71cd94f4) | `flip-submitted-2026-11-07` | [QA Room video, 2:55](https://youtu.be/sPFCppd1n1A) |
+
+The submitted Flip branch link remains fixed at its submitted commit. Meta originally linked to the repository root; use its immutable source link above for the submitted version as `main` advances. The later receipt closeout `c58d563` is included in maintained `main`, separately from both submissions. [Promotion record](docs/MAIN_PROMOTION.md) documents the verified archives, local worktrees and pending publication.
+
+## Run the saved-replay demonstration
+
+From the repository root in PowerShell, create an isolated environment:
+
+```powershell
+py -3 -m venv .venv
+& .\.venv\Scripts\python.exe -m pip install -r .\source\requirements.txt
+& .\.venv\Scripts\python.exe -B .\source\scripts\serve_live_proposal_demo.py --port 8052 --profile auto-direct-v2 --retained-capture .\source\repaired_live_proposal_evidence --output .\.local\retained-demo
+```
+
+Open **http://127.0.0.1:8052/demo** and keep the terminal running. The retained capture needs no API key and makes no new model request. Inspect the saved Meta proposal, replay withdrawal and its no-withdrawal control, inspect the action journal and independent booking read, then open or export the saved evidence. Generation stays disabled in retained mode.
+
+For the original four Meta/Baseten fixtures, the secondary view remains available through `source/scripts/serve_submission_demo.py`. [Original verification notes](docs/VERIFICATION.md) and the [submitted Meta README](https://github.com/elouahid/intent-replay/blob/d074b160d7af890ce7d8d99c2f580c597684a95c/README.md) retain their historical scope.
+
+## Add the optional Switch QA room
 
 A replay can pass its checks while its human approval belongs to an older run. Intent Replay brings a supported execution regression into a Switch room, exposes its original evidence, and binds review to the exact result. Accepting a rerun immediately makes the new run current, including while it is pending or fails.
 
-One person, one Console-managed QA agent, and one local Mattermost room use the retained booking withdrawal/control pair. The existing runner, evaluator, saved model captures and report exporter are reused unchanged.
+One person, one Console-managed QA agent, and one local Mattermost room use the retained booking withdrawal/control pair. Configure your own room, authenticated membership and verified reviewer identity using [QA setup](docs/QA_ROOM_SETUP.md) and [agent instructions](docs/QA_ROOM_AGENT_INSTRUCTIONS.md). Then use the [room commands](docs/QA_ROOM_COMMANDS.md) to request, inspect, approve and complete the exact run.
+
+Managed dispatch is opt-in: adapt [the MCP configuration template](docs/QA_ROOM_CODEX.example.toml) to this checkout before creating local `.codex/config.toml`. Maintained `main` does not automatically launch the historical Flip checkout. The existing demonstrated installation and its private evidence remain in `intent-replay-flip`; moving the Git branch does not migrate that running service or transfer its human approvals.
 
 **[Watch the Flip demonstration (2:55)](https://youtu.be/sPFCppd1n1A)** · [Flip source branch](https://github.com/elouahid/intent-replay/tree/flip-qa-room). The video walks through retained real-room events and actual human review; it is separate from the earlier Meta demonstration.
 
-## Verified checkpoint — 7 November 2026 UTC
+## Historical real-room checkpoint — 7 November 2026 UTC
+
+The following describes the retained demonstration, not the live state of a fresh checkout. A fresh QA store starts without runs or human reviews.
 
 The complete real-room review sequence is verified: **human approval B → request C → stale B completion refused → human approval C → human completion C**. Verification requests and the stale-B negative probe were sent by Codex under the user's authorization. The person personally sent B's approval and C's separate approval and completion commands. The managed agent handled the original messages through `qa_room.dispatch_original_message`.
 
@@ -54,12 +86,7 @@ This requests a new current, unreviewed run; C's completed review would become h
 
 ## Reproduce in a fresh checkout
 
-Create an isolated Python environment; do not reinstall into the preserved submitted environment:
-
-```powershell
-py -3 -m venv .venv
-& .\.venv\Scripts\python.exe -m pip install -r .\source\requirements.txt
-```
+Use the isolated environment created above; do not reinstall into the preserved submitted environment.
 
 The saved replay needs no provider key. Run the same two prepared cases from the repository root:
 
@@ -69,7 +96,16 @@ The saved replay needs no provider key. Run the same two prepared cases from the
 
 Exit 0 means frozen expectations matched, including the deliberately faulty withdrawal's expected FAIL. Exit 1 means a mismatch; exit 2 means invalid evidence or an execution error.
 
-The Switch integration also needs a locally configured supported Switch/Mattermost installation, authenticated room membership, a pinned reviewer identity and an agent provider login. These private settings are not bundled. The tracked `.codex/config.toml` contains **demonstration-machine absolute paths**: adapt its Python command, script argument and working directory to your checkout. Its optional SDK pin is `source/requirements-qa-mcp.txt` (`mcp==1.28.1`); install it only into an isolated MCP environment if needed. The demonstrated host already had that SDK. Authorize project trust explicitly and verify the live tool catalog; a configuration-only read is insufficient. Follow [setup](docs/QA_ROOM_SETUP.md) and [agent instructions](docs/QA_ROOM_AGENT_INSTRUCTIONS.md), using your own verified identities and credential-file references.
+The Switch integration also needs a locally configured supported Switch/Mattermost installation, authenticated room membership, a pinned reviewer identity and an agent provider login. These private settings are not bundled. The optional SDK pin is `source/requirements-qa-mcp.txt` (`mcp==1.28.1`); install it into the isolated environment used by your MCP template. Authorize project trust explicitly and verify the live tool catalog; a configuration-only read is insufficient. Follow [setup](docs/QA_ROOM_SETUP.md) and [agent instructions](docs/QA_ROOM_AGENT_INSTRUCTIONS.md), using your own verified identities and credential-file references.
+
+For regression checks, run from `source` with that environment:
+
+```powershell
+& ..\.venv\Scripts\python.exe -B -m unittest discover -s tests -v
+node .\scripts\verify_submission_ui.cjs .
+```
+
+The two optional SDK integration tests require `requirements-qa-mcp.txt`; other tests mock providers and platform interactions. Automated test reviewers are simulated and create no real human-review record. Current promotion results are in [MAIN_PROMOTION.md](docs/MAIN_PROMOTION.md); the earlier counts below remain historical.
 
 ## Evidence, demo and limits
 
