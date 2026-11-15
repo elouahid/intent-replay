@@ -10,7 +10,7 @@ Intent Replay helps QA engineers reproduce the gap between an agent's proposed a
 | Meta submission, 4 November 2026 | [`d074b16`](https://github.com/elouahid/intent-replay/tree/d074b160d7af890ce7d8d99c2f580c597684a95c) | `meta-submitted-2026-11-04` | [Meta video, 2:46](https://youtu.be/irrL2Acrs6E) |
 | Flip submission, 7 November 2026 | [`79fa75e`](https://github.com/elouahid/intent-replay/tree/79fa75e10bf06ad6dd44acc3836e97ea71cd94f4) | `flip-submitted-2026-11-07` | [QA Room video, 2:55](https://youtu.be/sPFCppd1n1A) |
 
-The submitted Flip branch link remains fixed at its submitted commit. Meta originally linked to the repository root; use its immutable source link above for the submitted version as `main` advances. The later receipt closeout `c58d563` is included in maintained `main`, separately from both submissions. [Promotion record](docs/MAIN_PROMOTION.md) documents the verified archives and the completed 15 November publication of maintained `main` and both submission tags.
+`main` is the maintained version. The user has also authorized the mutable `flip-qa-room` branch to follow the privacy-cleaned source; use the immutable Flip commit or submission tag above for the exact submitted version. Meta originally linked to the repository root, so its immutable source link likewise identifies its submission as `main` advances. The later receipt closeout `c58d563` is included in maintained `main`, separately from both submissions. [Promotion record](docs/MAIN_PROMOTION.md) documents the verified archives, the completed initial 15 November publication, and the later branch-cleanup authorization.
 
 Current-tree documentation and the public `FLIP_BASELINE_VERIFICATION.json` / `FLIP_VERIFICATION.json` summaries omit personal machine paths and deployment identities. Run/event IDs, evidence hashes and results remain recorded; historical hashes identify original evidence, not the edited summary bytes. This cleanup does not rewrite Git history: the [Meta submission tag](https://github.com/elouahid/intent-replay/tree/meta-submitted-2026-11-04) and [Flip submission tag](https://github.com/elouahid/intent-replay/tree/flip-submitted-2026-11-07) preserve the original public snapshots, including earlier paths, as requested. Original private artifacts also remain unchanged.
 
@@ -36,7 +36,7 @@ One person, one Console-managed QA agent, and one local Mattermost room use the 
 
 Managed dispatch is opt-in: adapt [the MCP configuration template](docs/QA_ROOM_CODEX.example.toml) to this checkout before creating local `.codex/config.toml`. Maintained `main` does not automatically launch the historical Flip checkout. The existing demonstrated installation and its private evidence remain in `intent-replay-flip`; moving the Git branch does not migrate that running service or transfer its human approvals.
 
-**[Watch the Flip demonstration (2:55)](https://youtu.be/sPFCppd1n1A)** · [Flip source branch](https://github.com/elouahid/intent-replay/tree/flip-qa-room). The video walks through retained real-room events and actual human review; it is separate from the earlier Meta demonstration.
+**[Watch the Flip demonstration (2:55)](https://youtu.be/sPFCppd1n1A)** · [Exact submitted Flip source](https://github.com/elouahid/intent-replay/tree/flip-submitted-2026-11-07) · [Mutable Flip branch](https://github.com/elouahid/intent-replay/tree/flip-qa-room). The video walks through retained real-room events and actual human review; it is separate from the earlier Meta demonstration.
 
 ## Historical real-room checkpoint — 7 November 2026 UTC
 

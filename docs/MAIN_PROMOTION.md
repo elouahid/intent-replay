@@ -31,7 +31,7 @@ The original ten execution-contract files remain byte-identical to Meta. Contrac
 
 Meta actually submitted `https://github.com/elouahid/intent-replay`, a mutable default-branch URL. Publishing maintained `main` changed the version displayed at that original link. The README prominently links Meta's immutable submitted commit and names its submission tag.
 
-Flip actually submitted `https://github.com/elouahid/intent-replay/tree/flip-qa-room`. **Keep that remote branch at `79fa75e`.** The recorded closeout instructions explicitly preserved the remote checkpoints and kept later receipt documentation local. Those are project safeguards; the inspected saved organizer confirmation does not establish a permanent organizer rule freezing every branch. The user's later instruction authorizes preparing maintained `main`, with the original source preserved by commit, tag, archive and checkout. It does not require moving the submitted Flip branch.
+Flip actually submitted `https://github.com/elouahid/intent-replay/tree/flip-qa-room`. The recorded closeout instructions preserved that branch at `79fa75e` and kept later receipt documentation local; the initial main publication also left it unchanged. These were project safeguards, not an established permanent organizer rule freezing every branch. The user's subsequent explicit authorization to clean `flip-qa-room` supersedes that branch freeze. Exact submitted source remains preserved by commit, unchanged submission tag and archive.
 
 The older documentation statements that `main` remains at Meta and receipt closeout stays local describe the November 7 state. Their dated maintenance notes explain the new branch purpose without changing the submission fields or historical proof.
 
@@ -68,4 +68,10 @@ The authorized publication included **only** maintained `main` and the two submi
 git push --atomic origin main:main refs/tags/meta-submitted-2026-11-04:refs/tags/meta-submitted-2026-11-04 refs/tags/flip-submitted-2026-11-07:refs/tags/flip-submitted-2026-11-07
 ```
 
-Post-push verification confirmed `main` at `fa5ef91159d2783813caf2043dd57542afbcfc94`, both annotated tags peeling to their exact submitted commits, and the unchanged remote Flip branch. No Flip branch ref was included. This is a completed publication record, not a request to repeat the push. Future maintenance must preserve the submitted branch and tags without forcing or replacing them.
+Post-push verification confirmed `main` at `fa5ef91159d2783813caf2043dd57542afbcfc94`, both annotated tags peeling to their exact submitted commits, and the unchanged remote Flip branch. No Flip branch ref was included. This is the completed initial publication record, not a request to repeat that push. Both submission tags must remain unchanged.
+
+## Privacy-cleanup continuation — 15 November 2026
+
+After the main cleanup, the user explicitly authorized the same cleanup for `flip-qa-room`. `main` remains the maintained branch; `flip-qa-room` is now designated a privacy-cleaned public view of that source. The authorized update fast-forwards it to the cleaned main commit and publishes both branches with a normal atomic push, without rewriting history or updating tags. This paragraph records the authorization and intended update, not a completed second-push verification.
+
+Retain the existing Flip deployment detached at `c58d563`, preserving its files, local configuration, service and private evidence. Use a separate public worktree for the branch update. The exact Flip submission remains at unchanged tag `flip-submitted-2026-11-07` (`79fa75e`), and the Meta tag remains at `d074b16`. Historical commits and submission snapshots still contain their original paths; cleanup applies to the current branch trees only.
